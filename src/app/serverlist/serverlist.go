@@ -9,7 +9,7 @@ import (
 
 func init() {
 	//默认不提供首页访问
-	router.GET("/", Index)
+	//router.GET("/", Index)
 	//提供列表以及Diffhash表
 	router.ServeFiles("/serverinfo/*filepath", http.Dir("config/ServerInfo"))
 	//提供资源热更新文件强制下载
