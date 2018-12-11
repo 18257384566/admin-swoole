@@ -36,8 +36,8 @@ func NewSearch(t1 int64, t2 int64, zones []string) (*elastic.SearchService, erro
 	if err != nil {
 		return nil, err
 	}
-	time1 := time.Unix(t1/1000, 0).UTC()
-	time2 := time.Unix(t2/1000, 0).UTC()
+	time1 := time.Unix(t1, 0).UTC()
+	time2 := time.Unix(t2, 0).UTC()
 
 	days := make([]string, 0, 10)
 	startDay := time.Date(time1.Year(), time1.Month(), time1.Day(), 0, 0, 0, 0, time.UTC)
@@ -104,7 +104,7 @@ func BuildCommonSerach(t string, t1 int64, t2 int64, zones []string, channel []s
 
 	boolQuery := elastic.NewBoolQuery()
 	boolQuery.Must(
-		elastic.NewRangeQuery("@timestamp").Gte(t1).Lte(t2).Format("epoch_millis"),
+		elastic.NewRangeQuery("@timestamp").Gte(t1*1000).Lte(t2*1000).Format("epoch_millis"),
 		elastic.NewTermQuery("type.keyword", t),
 		elastic.NewTermsQuery("channel.keyword", channels...),
 	)

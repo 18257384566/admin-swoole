@@ -469,7 +469,7 @@ func FilterRepeatedZones(zones []string) (distinctZones []string) {
 		}
 	}
 
-	for zone, _ := range noRepeated {
+	for zone := range noRepeated {
 		distinctZones = append(distinctZones, zone)
 	}
 
@@ -488,4 +488,21 @@ func GetReplaysManagerConn() *grpc.ClientConn {
 		return warshipService.replaysManager.conn[0]
 	}
 	return nil
+}
+
+type ZoneInfo struct {
+	ServerName   string //服务名称
+	ServerStatus uint8  //服务状态
+}
+
+func GetZoneInfo() map[string]*ZoneInfo {
+	zoneMap := make(map[string]*ZoneInfo)
+	for k, v := range warshipService.Agent {
+		zone := &ZoneInfo{
+			ServerName:   v.ServerName,
+			ServerStatus: v.ServerStatus,
+		}
+		zoneMap[k] = zone
+	}
+	return zoneMap
 }

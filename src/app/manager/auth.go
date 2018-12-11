@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"app/etcd"
 	"app/router"
 	"net/http"
 	"os"
@@ -26,6 +27,7 @@ func init() {
 	router.GET("/gm/setauth/:username/*auth", SetAuth)
 	router.GET("/gm/adduser/:username/:password", AddUser)
 	router.GET("/gm/deluser/:username", DelUser)
+	router.GET("/gm/getzonelist", GetZoneList)
 
 	cf := &session.ManagerConfig{CookieName: "sessionid", EnableSetCookie: true, Gclifetime: 3600, Maxlifetime: 3600, Secure: false, CookieLifeTime: 3600}
 	globalSessions, _ = session.NewManager("memory", cf)
@@ -247,4 +249,23 @@ func DelUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 	SendSuccess(w, nil)
+}
+
+func GetZoneList(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	sess, _ := globalSessions.SessionStart(w, r)
+	defer sess.SessionRelease(w)
+
+	// if !checkAuth(sess, "super") {
+	// 	SendErr(w, 255, "Not obtained permission")
+	// 	return
+	// }
+
+	message := make(Message)
+	zoneMap := etcd.GetZoneInfo()
+	for k, v := range zoneMap {
+		message[k] = v
+	}
+
+	SendSuccess(w, message)
 }

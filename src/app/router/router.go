@@ -10,9 +10,6 @@ var router *httprouter.Router
 
 func init() {
 	router = httprouter.New()
-	router.POST("/", func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-	})
 }
 
 func GET(path string, handle httprouter.Handle) {

@@ -16,13 +16,14 @@ func init() {
 }
 
 func Analyze(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	sess, _ := globalSessions.SessionStart(w, r)
 	defer sess.SessionRelease(w)
 
-	if !checkAuth(sess, "analysis") {
-		SendErr(w, 255, "Not obtained permission")
-		return
-	}
+	// if !checkAuth(sess, "analysis") {
+	// 	SendErr(w, 255, "Not obtained permission")
+	// 	return
+	// }
 
 	var data interface{}
 	var err error
@@ -85,6 +86,10 @@ func Analyze(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	case "DailyPlayTime": //每日时长
 		data, err = analytics.F_DailyPlayTime(t1, t2, zone, channel, timezone)
+	case "DailyLogin": //每日登录数
+		data, err = analytics.F_DailyLogin(t1, t2, zone, channel, timezone)
+	case "DailyLoginT": //每日登录数
+		data, err = analytics.F_DailyLoginT(t1, t2, zone, channel, timezone)
 	default:
 		SendErr(w, 21, "no support about:"+r.FormValue("type"))
 		return
