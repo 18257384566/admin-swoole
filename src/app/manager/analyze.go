@@ -3,6 +3,7 @@ package manager
 import (
 	"app/analytics"
 	"app/router"
+	// "fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -41,12 +42,12 @@ func Analyze(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	t1, err := strconv.ParseInt(r.FormValue("t1"), 10, 64)
 	if err != nil {
-		SendErr(w, 18, "Time is error")
+		SendErr(w, 18, "Time1 is error")
 		return
 	}
 	t2, err := strconv.ParseInt(r.FormValue("t2"), 10, 64)
 	if err != nil {
-		SendErr(w, 18, "Time is error")
+		SendErr(w, 18, "Time2 is error")
 		return
 	}
 
@@ -88,8 +89,12 @@ func Analyze(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		data, err = analytics.F_DailyPlayTime(t1, t2, zone, channel, timezone)
 	case "DailyLogin": //每日登录数
 		data, err = analytics.F_DailyLogin(t1, t2, zone, channel, timezone)
-	case "DailyLoginT": //每日登录数
-		data, err = analytics.F_DailyLoginT(t1, t2, zone, channel, timezone)
+	case "UserOnline": //实时登录
+		data, err = analytics.F_UserOnline(t1, t2, zone, channel, timezone)
+	case "UserLeave": //玩家留存
+		data, err = analytics.F_UserLeave(t1, t2, zone, channel, timezone)
+	case "OnlineStatistics": //登录统计
+		data, err = analytics.F_OnlineStatistics(t1, t2, zone, channel, timezone)
 	default:
 		SendErr(w, 21, "no support about:"+r.FormValue("type"))
 		return
