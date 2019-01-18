@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>我的战舰养成计划运营后台-玩家留存</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/dataTableNew/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="css/plugins/dataTableNew/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>玩家留存</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_basic.html#">选项1</a>
+                                </li>
+                                <li><a href="form_basic.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal m-t">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">游戏区服：</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control zone" name="zone"  multiple="multiple">
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 zoneList"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">渠道：</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control channel" name="channel" multiple="multiple">
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 channelList"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">开始日期：</label>
+                                <div class="col-sm-10">
+                                    <input readonly name="sDate" class="form-control layer-date" id="start" placeholder="请选择开始日期">
+                                    <!-- <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#start'});"></label> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">结束日期：</label>
+                                <div class="col-sm-10">
+                                    <input readonly name="eDate" class="form-control layer-date" id="end" placeholder="请选择结束日期">
+                                    <!-- <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#end'});"></label> -->
+                                </div>
+                            </div>
+                            <div class="form-group" style="text-align: right; margin-right: 15px;">
+                                <button type="button" class="btn btn-w-m btn-white submit">查询</button>
+                            </div>
+                        </form>
+
+                         <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>新增玩家</th>
+                                        <th>次日留存</th>
+                                        <th>三日</th>
+                                        <th>四日</th>
+                                        <th>五日</th>
+                                        <th>六日</th>
+                                        <th>七日</th>
+                                        <th>十四日</th>
+                                        <th>三十日</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+
+    <!-- layDate -->
+    <script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript">
+        var start={elem:"#start",format:"YYYY-MM-DD",min:"1999-06-16",max:"2099-06-16",istime:false,istoday:false,choose:function(a){end.min=a;end.start=a}};var end={elem:"#end",format:"YYYY-MM-DD",min:"1999-06-16",max:"2099-06-16",istime:false,istoday:false,choose:function(a){start.max=a}};laydate(start);laydate(end);
+    </script>
+
+    <!-- datatable -->
+   <!--  <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script> -->
+
+    <script type="text/javascript" language="javascript" src="js/plugins/dataTableNew/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/plugins/dataTableNew/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/plugins/dataTableNew/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/plugins/dataTableNew/buttons.html5.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+
+            var zoneValList = [];
+            var chanValList = [];
+            // 默认日期
+            nowTime = new Date();
+            date = nowTime.getFullYear() + "-" + (nowTime.getMonth()+1) + "-" + nowTime.getDate();
+            $("input[name='sDate']").val(date);
+            $("input[name='eDate']").val(date);
+
+            // submit
+            $(".submit").click(function(){
+                if(!$("input[name='sDate']").val() || !$("input[name='eDate']").val()){
+                    //tips层
+                    layer.tips('亲，请选择查询日期哦~', "button");
+                    return;
+                }
+                $(".table").dataTable().fnDestroy();
+                $(".tbody").empty();
+                url = "http://" + RemoteAddr + ":" + Port + "/manager/analyze";
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: getParams(),
+                    dataType:"json",
+                    success: function(data){
+                        //On ajax success do this
+                        console.info("success.");
+                        if (data["success"]){
+                            tableStr = "";
+                            if (data.message != null){
+                                $.each(data.message,function(idx,val){
+                                    tableStr += "<tr><td>"+idx+"</td><td>"+val.NewNum+"</td>"
+                                    $.each(val.LeaveRate,function(i,v){
+                                        tableStr += "<td>" + v + "</td>";
+                                    });
+                                    tableStr += "</tr>";
+                                });
+                            }
+                            $(".tbody").html(tableStr);
+                            $(".table").DataTable({
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'excelHtml5',
+                                ]
+                            });
+
+                        }else{
+                            console.log("fail");
+                            return;
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        //On error do this
+                        console.info("error.");
+                        console.log(xhr);
+                        if (xhr.status == 200) {
+                            alert(ajaxOptions);
+                        } else {
+                            alert(xhr.status);
+                            alert(thrownError);
+                        }
+                    }
+                });
+            });
+
+            $(".zone").change(function(){
+                showZone();
+            });
+
+            function showZone(){
+                zoneValList = [];
+                var zoneNameList = [];
+                $(".zone option:selected").each(function(){
+                    zoneNameList.push($(this).text());
+                    zoneValList.push($(this).val());
+                });
+                $(".zoneList").text(zoneNameList.join(","));
+            }
+
+            $(".channel").change(function(){
+                showChan();
+            });
+
+            function showChan(){
+                chanValList = [];
+                var chanNameList = [];
+                $(".channel option:selected").each(function(){
+                    chanNameList.push($(this).text());
+                    chanValList.push($(this).val());
+                });
+                $(".channelList").text(chanNameList.join(","));
+            }
+
+            // 获取参数
+            function getParams(){
+                date1 = new Date($("input[name='sDate']").val() + " 00:00:00");
+                ts1 = Math.round(date1.getTime()/1000)
+
+                date2 = new Date($("input[name='eDate']").val() + " 23:59:59");
+                ts2 = Math.round(date2.getTime()/1000)
+
+                // date.setDate(date.getDate()+1);
+                // ts2 = Math.round(date.getTime()/1000)
+                return {
+                    type: "UserLeave",
+                    zones: zoneValList.join("|"),
+                    channels: chanValList.join("|"),
+                    t1: ts1,
+                    t2: ts2
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
