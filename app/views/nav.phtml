@@ -1,0 +1,47 @@
+<nav>
+    <div class="walletadmin-sidebar">
+        <div class="sider-container">
+            <div class="sidebar-logo">
+                <img src="/static/images/logo.png" alt="logo">
+            </div>
+
+            <div class="sidebar-nav">
+                <ul class="nav" id="sidebarnav">
+
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/$pro_no/admin/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><i class="icon icon-admin"></i><span>管理员管理</span></div>
+                        <ul>
+                            <a href="/admin/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/list") !== false){echo 'active';}else{echo '';} ?>">管理员列表</li></a>
+                            <a href="/admin/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/add") !== false){echo 'active';}else{echo '';} ?>">添加管理员</li></a>
+                            <a href="/admin/log"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/log") !== false){echo 'active';}else{echo '';} ?>">日志管理</li></a>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="header">
+    <?php if(isset($EOSAddress) && $enough_resource == 0){ ?>
+        <div class="notice">
+            <a href="/<?php echo $pro_no; ?>/eosResourceManage"><span>EOS资源不足,将影响正常使用,请立即购买>></span></a>
+        </div>
+    <?php }elseif (isset($EOSAddress) && $enough_resource == -1){ ?>
+        <div class="notice">
+           <span><?php echo $enough_resource_msg; ?></span>
+        </div>
+    <?php } ?>
+    <div>
+        <ul>
+            <li><i class="icon icon-home"></i><span><?php if(isset($adminName)) echo $adminName ?></span></li>
+            <?php if(isset($EOSAddress)){ ?>
+                <li><span><a href="/<?php echo $pro_no; ?>/eosResourceManage">EOS资源管理</a></span</li>
+            <?php } ?>
+            <li ><span><a href="/<?php echo $pro_no; ?>/logout">退出</a></span></li>
+        </ul>
+    </div>
+
+    <div class="cl"></div>
+</div>

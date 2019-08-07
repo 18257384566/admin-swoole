@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>新贝区块链支付解决方案</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/datepicker.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+              <div class="container">
+                  <div class="log">
+                    <div class="log-sort">
+                        <form action="/<?php echo $pro_no; ?>/admin/log" method="get" enctype="multipart/form-data" >
+                              <div>
+                                  <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+                                      <input type="text" autocomplete="off" name="begin_date" placeholder="开始时间" class="c-datepicker-data-input only-date" <?php if(isset($data['begin_date'])){ if($data['begin_date'] == ''){ echo  "value=''";  }else{ echo "value='".date('Y-m-d H:i:s',$data['begin_date'])."'"; }} ?>>
+                                  </div>
+                                  <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+                                      <input type="text" autocomplete="off" name="end_date" placeholder="结束时间" class="c-datepicker-data-input only-date" <?php if(isset($data['end_date'])){ if($data['end_date'] == ''){ echo  "value=''";  }else{ echo "value='".date('Y-m-d H:i:s',$data['end_date'])."'"; }} ?>>
+                                  </div>
+                                  <select name="admin_no" id="" class="admin-select">
+                                      <option value="" name="admin_no" <?php if($data['admin_no'] == ""){echo "selected";} ?>>全部</option>
+                                    <?php foreach($data['admin'] as $item){ ?>
+                                        <option name="admin_no" value ="<?php echo $item['admin_no'] ?>" <?php if($data['admin_no'] == $item['admin_no']){echo "selected";} ?>><?php echo $item['admin_name'] ?></option>
+                                    <?php } ?>
+                                  </select>
+                              </div>
+                              <div class="log-search">
+                                <div>
+                                  <input type="text" placeholder="IP" name="ip">
+                                </div>
+                                <div>
+                                  <button class="btn btn-primary">搜索</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="log-table">
+                      <div class="page-title">日志管理</div>
+                      <div class="table">
+                          <table>
+                              <thead>
+                              <tr>
+                                  <th>操作员</th>
+                                  <th>日志标题</th>
+                                  <th>IP</th>
+                                  <th>操作时间</th>
+                                  <th>操作</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <?php foreach($list as $v){ ?>
+                                  <tr>
+                                      <td><?php echo $v['admin_name'];?></td>
+                                      <td><?php echo $v['log_title'];?></td>
+                                      <td><?php echo $v['ip'];?></td>
+                                      <td><?php echo date('Y-m-d,H:i:s',$v['created_at'])?></td>
+                                      <td>
+                                          <a href='/<?php echo $pro_no; ?>/admin/logInfo?id=<?php echo $v['id'];?>'><button class="action-btn" >详情</button></a>
+                                      </td>
+                                  </tr>
+                              <?php } ?>
+                              </tbody>
+                          </table>
+                          <div class="pagination-box">
+                              <?php
+                              if($list){
+                                  //存储页码字符串
+                                  $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                                  //当前页码数，默认当前页码为1
+                                  $curPage = isset($_GET['page'])?$_GET['page']:1;
+                                  if($curPage <=5){
+                                      $begin =1;
+                                      $end = $data['totalpage']>=10?10:$data['totalpage'];
+                                  }else{
+                                      $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                                      $begin =$end -9<=1?1:$end -9;
+                                  }
+                                  //实现上一页
+                                  $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                                  //根据起始页与终止页将当前页面的页码显示出来
+                                  for($i=$begin;$i<=$end;$i++){
+                                      //使用if实现高亮显示当前点击的页码
+                                      if($data['page'] == $i){
+                                          $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                      }else{
+                                          $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                      }
+                                  }
+
+
+                                  //实现下一页
+                                  $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                                  $pageNumString .='</div>';
+                                  echo $pageNumString;
+                              }
+
+                              ?>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/moment.min.js"></script>
+<script type="text/javascript" src="/static/js/datepicker.all.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script>
+    $(document).ready(function(){
+        chooseTime()
+    })
+</script>
+</body>
+</html>

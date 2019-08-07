@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>新贝区块链支付解决方案</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+</head>
+
+<body>
+<?php $this->view->partial("nav");?>
+    <div class="walletadmin-content" id="out-history-detail">
+        <div class="walletadmin-box">
+            <div class="box">
+                <div class="container">
+                    <form action="" method="get">
+                    <div class="search-ui">
+                        <div>
+                            <select name="coin_id" id="" class="admin-select">
+                                <?php foreach($data['coins'] as $item){ ?>
+                                    <option name="coin_id" value="<?php echo explode(',',$item)[0]; ?>"  <?php if($data['coin_id'] == explode(',',$item)[0]){echo "selected";} ?>><?php echo explode(',',$item)[1];?></option>
+                                <?php } ?>
+                            </select>
+                            <select name="status" id="" class="admin-select">
+                                <option value="" <?php if($data['status'] == ''){ echo "selected";}  ?>>全部</option>
+                                <option value="1" <?php if($data['status'] == '1'){ echo "selected";}  ?>>成功</option>
+                                <option value="-1" <?php if($data['status'] == '-1'){ echo "selected";}  ?>>失败</option>
+                                <option value="0" <?php if($data['status'] == '0'){ echo "selected";}  ?>>处理中</option>
+                                <option value="2" <?php if($data['status'] == '2'){ echo "selected";}  ?>>重转完成</option>
+                            </select>
+                        </div>
+                        <div class="search-ui-input">
+                            <div>
+                                <input type="text" class="input-primary" placeholder="钱包地址" name="address" value="<?php echo $data['address']; ?>">
+                                <input type="text" class="input-primary" placeholder="hash" name="hash" value="<?php echo $data['hash']; ?>">
+                                <input type="hidden" name="transaction_no" value="<?php echo $data['transaction_no']; ?>">
+                                <input type="hidden" name="batch_no" value="<?php echo $data['batch_no']; ?>">
+                            </div>
+                            <div>
+                                <button class='btn btn-primary'>搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+            </div>
+            <div class="container out-history-details-content">
+               <div class="details-content-title">
+                    <div class="page-title sub-title">
+                        <a href="/<?php echo $pro_no; ?>/walletaddressbatch/list">钱包列表</a> >> <a href="/<?php echo $pro_no; ?>/walletaddress/transferList">转出历史</a>
+                        <span> >> <?php echo $data['batch_no']; ?> 历史详情</span>
+                    </div>
+                    <div class="coin-total"><?php echo $data['coin']['coin_symbol']  ?>约合：<?php echo $data['allamount']; ?></div>
+                    <div class="coin-total">矿工费约合(<?php echo $data['coin']['chain_symbol']; ?>)：<?php echo $data['fee']; ?></div>
+               </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="10%">金额</th>
+                                <th width="6%">矿工费</th>
+                                <th>钱包地址</th>
+                                <th width="200px">Hash</th>
+                                <th width="200px">失败原因</th>
+                                <th width="5%">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($list as $item){?>
+                            <tr>
+                                <td><?php echo $item['id']; ?></td>
+                                <td><?php echo $item['amount']; ?></td>
+                                <td><?php echo $item['fee']; ?></td>
+                                <td><?php echo $item['wallet_address']; ?></td>
+                                <td> <p style="word-wrap: break-word;width: 200px;"><?php echo $item['hash']; ?></p></td>
+                                <td>
+                                    <?php
+                                        if($item['status']==-1){
+                                            echo $item['remark'];
+                                        }else{
+                                            echo "";
+                                        }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if($item['status'] == 1) {
+                                        echo '成功';
+                                    }elseif($item['status'] == 2) {
+                                        echo '重转完成';
+                                    }elseif($item['status'] == 0) {
+                                        echo '处理中';
+                                    }else{
+                                    ?>
+                                    <span style="color: red;"><?php echo "失败"; ?></span>
+                                    <?php  } ?>
+
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                    <div class="pagination-box">
+                        <?php
+                        if($list){
+                            //存储页码字符串
+                            $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                            //当前页码数，默认当前页码为1
+                            $curPage = isset($_GET['page'])?$_GET['page']:1;
+                            if($curPage <=5){
+                                $begin =1;
+                                $end = $data['totalpage']>=10?10:$data['totalpage'];
+                            }else{
+                                $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                                $begin =$end -9<=1?1:$end -9;
+                            }
+                            //实现上一页
+                            $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                            //根据起始页与终止页将当前页面的页码显示出来
+                            for($i=$begin;$i<=$end;$i++){
+                                //使用if实现高亮显示当前点击的页码
+                                if($data['page'] == $i){
+                                    $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                }else{
+                                    $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                }
+                            }
+
+
+                            //实现下一页
+                            $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                            $pageNumString .='</div>';
+                            echo $pageNumString;
+                        }
+
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+</body>
+
+</html>

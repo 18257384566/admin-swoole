@@ -1,0 +1,604 @@
+/* reset style*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+body{
+  font-size: 14px;
+ 
+  color: #3E4B5E;
+}
+a{
+    color: inherit;
+    text-decoration:none;
+}
+ul,li{
+    list-style: none;
+}
+button{
+  border: none;
+  border-radius: 4px;  
+}
+select::-ms-expand { display: none; }
+/*public style*/
+.cl{clear: both;}
+span.red{color: #DE4A4A;}
+i.icon{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: transparent no-repeat;
+  vertical-align: middle;
+  background-position: center center;
+}
+i.icon-home{
+  background-image: url(../images/icon-homepage.png);
+}
+i.icon-ok{
+  background-image: url(../images/icon-ok.png);
+}
+i.icon-edit{
+    background-image: url(../images/icon-edit.png);
+}
+i.icon-admin{
+  background-image: url(../images/icon-admin.png);
+}
+i.icon-copy{
+  background-image: url(../images/icon-copy.png);
+}
+/*图标*/
+i.icon-carry{
+    background-image: url(../images/icon-carry.png);
+}
+i.icon-mark{
+    background-image: url(../images/icon-mark.png);
+}
+i.icon-project-details{
+    background-image: url(../images/icon-project-details.png);
+}
+i.icon-running-water{
+    background-image: url(../images/icon-running-water.png);
+}
+i.icon-site{
+    background-image: url(../images/icon-site.png);
+}
+.table{
+  padding-top: 27px;
+  padding-bottom: 50px;
+    font-size: 14px;
+}
+
+table{width: 100%;border-spacing:0px;border-collapse: collapse;border: 1px solid #DCDCDC;}
+thead{background: #D2ECF7;}
+thead tr{height: 46px;}
+tr{border-bottom: 1px solid #DCDCDC;}
+tbody tr{height: 55px; text-align: center;}
+input{
+  font-size: 16px;
+  outline: none;
+  padding: 0px 5px;
+}
+input[type="radio"]{
+  opacity: 0;
+}
+input[type='radio']+label{
+  position: relative;
+  cursor: pointer;
+}
+input[type='radio']+label:before{
+  margin-top: -2px;
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  border-radius: 100%;
+  vertical-align: middle;
+  border: 1px solid #E4E4E4;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+ 
+input[type='radio']:checked+label:after{content: '';position: absolute;left: 2px;top: 2px; display: inline-block; width:14px;height:14px;border-radius: 50%; background:#26A38F; background-position: center center;}
+
+input[type="checkbox"]{
+  opacity: 0;
+}
+input[type='checkbox']+label{
+  position: relative;
+  cursor: pointer;
+}
+input[type='checkbox']+label:before{
+  margin-top: -2px;
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  border-radius: 2px;
+  vertical-align: middle;
+  border: 1px solid #E4E4E4;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+ 
+input[type='checkbox']:checked+label:after{content: '';position: absolute;left: 2px;top: 3px; display: inline-block; width:26px;height:14px;border-radius: 50%; background:url(../images/icon-ok.png); background-position: center center;}
+
+input[type='text'].input-primary{width: 288px;height: 42px;border:1px solid #DCDCDC;background: #ECECEC;vertical-align: middle;}
+input[type='password'].input-primary{width: 288px;height: 40px;border:1px solid #DCDCDC;background: #ECECEC;border-radius: 4px;padding: 0px 5px;}
+.message{display: none; position: fixed; top: 250px; left: 50%;transform: translateX(-50%);  padding: 12px 25px; text-align: center; z-index: 9999;background: #26A38F;color: #fff;font-size: 18px;
+  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;}
+
+/* search-input */
+.search-ui{}
+.search-ui .search-ui-input{display: flex;justify-content: space-between;padding-top: 25px;}
+.search-ui .search-ui-input .btn{width:191px; }
+/* input[type='text'].search-input{width: } */
+.page-title{color: #3E4B5E;position: relative;padding-left: 15px;font-size: 16px;}
+.page-title.sub-title{color:#08967F;}
+.page-title.sub-title span{color: #3E4B5E;}
+.page-title:before{background:#3E4B5E;content:'';position: absolute;left: 0px;top: 0px;width: 4px;height: 100%;}
+/* login page */
+.login{width: 100vw;height: 100vh;background:#fff no-repeat;background-size: cover;background-position: center center;position: relative;}
+  .login .login-container{width: 100%;max-width: 510px;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);padding: 0px 15px;}
+    .login-content{border-radius: 8px;}
+      .login-content h1{text-align: center;font-size: 20px;padding: 26px 0px 26px 0px;}
+        .login-input{width: 100%;max-width: 320px;margin: 0 auto;padding-bottom: 25px;}
+         .login-input li{padding:8px 15px;}
+          .login-input input{width: 100%;height: 42px;border-radius: 8px;border:1px solid #DDDDDD;padding: 0px 12px;outline: none;}
+          .login-input input::placeholder{color: #DDDDDD;}
+          .login-input .phone{display: flex;justify-content:space-between;}
+          .login-input .phone input{flex: 6;}
+          .login-input .phone button{flex: 4;margin-left: 12px;font-size: 14px;outline: none;cursor: pointer;}
+
+/*侧边栏*/
+nav{width: 200px;height: 100vh;position:fixed;left: 0px;top: 0px;background: #2A303E;overflow-x: hidden;overflow-y: auto;z-index: 101;}
+.sidebar-logo{text-align: center;padding:25px 0px 10px 0px;}
+.sidebar-title{font-size: 18px;text-align: center;padding:10px 0px 24px 0px;color: #fff;}
+ .sidebar-nav .nav li{width: 100%;color: #fff;text-align: left;font-size: 14px;cursor: pointer;}
+ .sidebar-nav .nav li span{vertical-align: middle;}
+   .sidebar-nav .nav li ul{display: none;}
+   .sidebar-nav .nav li>div{height: 46px;line-height: 46px;padding-left: 29px;}
+   .sidebar-nav .nav li li{padding-left:85px;height: 46px;line-height: 46px;}
+   /*激活样式*/
+   .sidebar-nav .nav li.active ul{display: block;}
+   .sidebar-nav .nav li.active>div{background: #3B3E4D;}
+   .sidebar-nav .nav li.active li.active{color: #09E4C0;background: #3B3E4D;}
+
+/*header*/
+.header{z-index: 100; position: fixed;left: 0;top: 0px;height: 60px;color: #fff;width: 100vw; background-color: #3E4B5E;}
+ .header ul{float: right;height: 60px;padding-right: 30px;}
+ .header ul li{float: left;height: 60px;font-size: 16px;line-height: 60px;padding:0px 18px;}
+ .header ul li span{vertical-align: middle;}
+  /*.header .exit{color: #08E9C4;}*/
+
+  .header .notice{float:left;width:600px;height: 50px;line-height: 50px;  background-color: red;text-align: center;margin-left: 430px;}
+/* walletadmin-content */
+.walletadmin-content{padding:60px 0px 0px 200px;}
+ .walletadmin-box{background: #E1E1EB;padding:8px 8px 0px 8px;}
+ .box{border-radius: 10px;}
+ .container{padding:25px 16px;background: #fff;border-radius: 4px;}
+
+/* add admin*/
+.addadmin{}
+ .addadmin-pwd,.addadmin-account,.addadmin-phone,.addadmin-root{display: flex;align-items: center;margin-top:18px;}
+ .addadmin-pwd .addadmin-left,.addadmin-account .addadmin-left,.addadmin-phone .addadmin-left{width: 80px;}
+ .addadmin-account{margin-top: 38px;}
+ .addadmin-left span:nth-child(1){color: red;}
+ .addadmin-left span:nth-child(2){padding-left:4px;}
+ .addadmin-right{padding-left: 25px;}
+ .addadmin-right input{width: 370px;height: 50px;border:1px solid #979797;border-radius: 4px;background: #ECECEC;}
+ .addadmin-root .addadmin-right input{display: none;}
+ .addadmin-permissions{padding-top: 38px;}
+  .choose-permissions .per-item{padding-top: 15px;}
+                      .per-item thead tr th:nth-child(1){color: #0A957F;}
+                      .per-item thead tr th:nth-child(2),.per-item tbody tr td:nth-child(2){text-align: left;padding-left: 40px;}
+                      .per-item tbody tr td:nth-child(1){border-right: 1px solid #DCDCDC;}
+/* log */
+.log{}
+.log-sort input{height: 42px;border:1px solid #DCDCDC;background: #ECECEC;outline: none;border-radius: 4px;padding:0px 16px; width: 505px;}
+.log-sort .log-search{display: flex;justify-content: space-between;align-items: center;padding-top: 24px;}
+          .log-search button{width: 191px;}
+
+/*项目详情*/
+.log-detail-desc{border:1px solid #DCDCDC;margin-top:20px;}
+.log-detail-desc p{padding:12px;}
+
+
+
+/* 项目详情 */
+/*#project-detail .box{background: none;}*/
+/*#project-detail .box .container{background: #fff;}*/
+#project-detail .box>div:not(first-child){margin-top: 15px;}
+.project-detail{}
+ .detail-desc ul{float: left;width: 50%;padding-top: 20px;}
+ .detail-desc ul li{padding: 10px 0px;}
+ .detail-desc ul li span:nth-child(1){color: rgba(65,75,94,0.6);display: inline-block; width: 130px;}
+ .wallet-address>div{padding: 8px;}
+ .wallet-address .lian-name{display: inline-block;width: 50px;}
+ .wallet-address button{font-size: 16px;border-radius: 4px;border:1px solid #DCDCDC;padding:2px 5px; outline: none;cursor: pointer;margin-left: 15px;}
+ .wallet-address input{border:none;border-bottom: 1px solid #979797;height: 42px;vertical-align: bottom;min-width: 608px;outline: none;margin-left: 15px;padding-top: 10px;font-size: 16px;}
+ .wallet-address select.admin-select{width: 198px;background-position-x:165px;}
+ .wallet-address .copy{display: none;}
+ .wallet-address .copy.active{display: block;}
+ .wallet-address .copy>i{margin-left: 20px;}
+  .out-wallet-address,.formalities-wallet-address{padding-top: 20px;}
+
+
+#wallet-type-detail  .page-title{color:#08967F;}
+#wallet-type-detail  .page-title span{color: #3E4B5E;}
+  .type-detail-desc{border:1px solid #DCDCDC;border-top: none;}
+  /*.type-detail-desc*/
+  .type-detail-desc>div{display: flex;padding:10px 0px;}
+  .type-detail-desc>div>div:first-child{width: 120px;padding-left: 20px;}
+  .type-detail-desc .detail-desc-min-edit{display: none;}
+                    .detail-desc-min-edit input{width: 250px;height: 22px;border:none;border-bottom: 1px solid #979797;}
+  .detail-desc-min-edit button{font-size: 16px;border-radius: 4px;border: 1px solid #DCDCDC;padding: 2px 5px;outline: none;cursor: pointer;margin-left: 15px;color: #08967F;}
+
+
+/*出账钱包地址提示密码*/
+#password-copy-confirm .wrapper{
+    width: 500px;
+    height: 270px;
+}
+#password-copy-confirm .generate-suc-padding{
+    padding: 40px;
+    font-size: 16px;
+}
+#password-copy-confirm .generate-suc-padding p{
+    text-align: center;
+}
+
+#password-copy-confirm .generate-suc-padding button{
+    margin:20px 105px;
+}
+
+/*验证密码*/
+#password-confirm-form .pwd-input{
+    text-align: center;
+    padding:0px 0px 20px 0px;
+}
+#password-confirm-form .pwd-input input{
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+}
+#password-confirm-form .login-pwd-confirm{
+    text-align: center;
+    padding: 10px;
+}
+
+/*添加钱包类型管理*/
+#add-wallet-type  .page-title{color:#08967F;}
+#add-wallet-type  .page-title span{color: #3E4B5E;}
+  .add-wallet-type>div{display: flex;padding: 10px 0px;align-items: center;}
+  .add-wallet-type>div>div:nth-child(1){width: 100px;}
+  .add-wallet-type>div span{color: #DE4A4A;}
+  .add-wallet-type>div input{width: 487px;height: 50px;border:1px solid #DCDCDC;background:#ECECEC;border-radius: 4px;outline: none;}
+   .add-wallet-type  .wallet-type-abi{align-items: flex-start;}
+   .add-wallet-type  .wallet-type-abi>div:nth-child(1){padding-top: 15px;}
+   .add-wallet-type  .wallet-type-abi textarea{width:487px;height: 319px;border:1px solid #DCDCDC;background:#ECECEC;border-radius: 4px;resize: none;outline: none;}
+    .wallet-type-btn .btn{width:247px;margin-left:180px; }
+#add-wallet-type .min-prompt{padding:15px 0px 50px 0px;}
+
+/*生成钱包地址*/
+.generation-wallet-content div{padding:17px 0px;}
+.generation-wallet-content div:nth-child(1){margin-top: 17px;}
+.generation-wallet-content div:nth-child(1) input{border:none;border-bottom: 2px solid #979797;height: 42px;width:  608px;margin-left: 15px;}
+.generation-wallet-content div:nth-child(2){display:flex;}
+.generation-wallet-content div:nth-child(2) input{width: 198px;height: 50px;border:1px solid #979797;border-radius: 4px;background: #ECECEC;margin-left: 20px;}
+.generation-wallet-content div:nth-child(2) input:first-child{margin-left: 0px;}
+  .pwd-warn input{border:none;border-bottom: 2px solid #979797;height: 42px;width:  608px;}
+  .generation-wallet-submit button{width: 247px;margin: 132px 0px 0px 170px;}
+
+/* 钱包流水记录 */
+#wallet-record{}
+#wallet-record .wallet-record-table th{width: 10%;}
+#wallet-record .wallet-record-report{margin-top: -32px;padding-left: 165px;display: flex;justify-content: space-between;align-items: center;position: relative;z-index: 2;}
+               .wallet-record-report button{width: 191px;float: right;}
+#wallet-record .record-term{display: flex;justify-content: space-between;padding-top: 24px;}
+#wallet-record .record-term button{width: 191px;}
+#wallet-record .record-term input{width: 308px;}
+
+/* 钱包列表 */
+#wallet-list .list-table-content{margin-top: 15px;}
+
+/* 钱包列表详情 */
+#wallet-list-detail .list-detail-sort{display: flex;justify-content: space-between;}
+ .list-detail-sort .input-primary.sort-wallet-address{margin-left: 15px;width: 541px;}
+  .list-detail-sort .btn{width: 191px;}
+  .list-detail-table{margin-top: 15px;}
+#wallet-list-detail .list-detail-title{display: flex;align-items: center;justify-content: space-between;} 
+#wallet-list-detail .list-detail-all{margin-left: -150px;}
+#wallet-list-detail .list-detail-report .btn{width: 191px;}
+
+/* 转出历史 */
+#out-history .out-history-list{}
+#out-history .out-history-content{margin-top: 7px;}
+  .out-history-list .out-history-item{/*padding-top: 24px;*/}
+  .out-history-list .out-history-item .table{padding-top: 10px;}
+  .out-history-list .out-history-item .history-item-title{display: flex;justify-content: space-between;align-items: center; padding-top:25px; }
+  .out-history-list .out-history-item .history-item-title .title-btn{z-index: 0;}
+       .history-item-title .title-text span:nth-child(2){padding: 0px 25px;}
+       .history-item-title .title-btn .action-btn{padding: 4px 18px;border-radius: 4px;}
+
+/* 转出历史详情 */
+.out-history-details-content .details-content-title{display: flex;justify-content: flex-start;}
+ .details-content-title .coin-total{padding: 0px 20px; font-size: 20px;}
+
+/* 提现中 */
+.withdrawal-content{margin-top: 10px;}
+.withdrawal-content-title{display: flex;justify-content: space-between;align-items: center;}
+ .withdrawal-content-title button{width: 191px;}
+ .withdrawal-content-title .coin-total span{padding: 0px 15px;font-size: 20px;}
+
+ /* 钱包管理公用样式 */
+#out-manage .out-manage-sort{display: flex;align-items: center;justify-content: space-between;}
+         .out-manage-sort .manage-sort-right .btn{width: 191px;}
+#out-manage .out-manage-total-box,#out-manage .out-manage-content{margin-top: 10px;}
+ .out-manage-title,.out-manage-total{display: flex;justify-content: space-between;align-items: center}
+ .out-manage-title .total{font-size: 20px;}
+ .out-manage-title button{width: 191px;margin: 0px 10px;}
+ .manage-select-all{padding: 10px 10px 0px 10px;}
+ .manage-select-all .all-text{color: #22A18D;}
+ .manage-select-all .select-all-total{padding-left: 20px;}
+/*提币管理右侧*/
+.pagr-title-right{position: relative;height: 40px;margin-top: -30px;}
+.pagr-title-right .out-coin-total{font-size: 20px;position: absolute;left: 50%;top:50%;transform: translate(-50%,-50%);}
+.pagr-title-right .out-coin-action{position: absolute;right: 0px;}
+.pagr-title-right .out-coin-action button{width: 191px;}
+.search-btn{
+    width: 191px;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background: #22A18D;
+    border-radius: 4px;
+    font-size: 16px;
+    float: right;
+}
+
+ /*button*/
+.w-btn{
+    width: 191px;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background: #22A18D;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top:20px;
+}
+
+.dialog{
+    position: fixed;
+    width: 100vw;
+    left: 0px;
+    top:0px;
+    z-index: 99;
+    height: 100vh;
+    background: rgba(79,79,79,0.4);
+    display: none;
+}
+.dialog.show{
+    display: block;
+}
+.dialog .wrapper{
+    width: 436px;
+    margin: 0 auto;
+    margin-top: 260px;
+    background: #fff;
+    border-radius: 4px;
+}
+.dialog .dialog-title{
+    font-size: 16px;
+    color: #3E4B5E;
+    padding:32px;
+    text-align: center;
+}
+#pwd-confirm .pwd-warn{
+    text-align: center;
+    color: #DD2525;
+    font-size: 20px;
+    padding:10px;
+}
+#pwd-confirm .pwd-confirm-btn{
+    padding:30px 0px 28px 0px;
+    text-align: center;
+}
+#pwd-confirm .pwd-confirm-btn .cancel{
+    display: inline-block;
+    width: 130px;
+    vertical-align: bottom;
+    text-align: center;
+    line-height: 40px;
+}
+#pwd-confirm .pwd-confirm-btn .confirm{
+    margin-left: 40px;
+}
+#pwd-confirm .pwd-confirm-btn button{
+    width: 130px;
+}
+#walletd-login-pwd .pwd-input{
+    text-align: center;
+    padding:0px 0px 50px 0px;
+}
+#walletd-login-pwd .pwd-input input{
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+}
+#walletd-login-pwd .login-pwd-confirm{
+    text-align: center;
+    padding: 10px;
+}
+.add-w-t-btn{
+    text-align: right;
+    margin-top: -30px;
+}
+
+/*生成钱包地址*/
+#wallet-generate-suc .wrapper{
+    width: 350px;
+}
+#wallet-generate-suc .generate-suc-padding{
+    padding: 40px;
+    font-size: 16px;
+}
+#wallet-generate-suc .generate-suc-padding span{
+    color: #26A38F;
+}
+#wallet-generate-suc .generate-suc-padding button{
+    margin-top: 30px;
+}
+
+/*转出冷钱包*/
+#roll-out-cold .wrapper{
+    width: 716px;
+    padding:0px 34px;
+}
+#roll-out-cold .out-cold-pwd input{
+    float: left;
+    width: 198px;
+}
+#roll-out-cold .out-cold-pwd input.ui-margin{
+    margin: 0px calc((100% - 594px)/2)
+}
+#roll-out-cold .out-cold-prompt{
+    font-size: 18px;
+    padding:18px 0px 42px 0px;
+}
+#roll-out-cold .out-cold-confirm{
+    text-align: center;
+    padding-bottom: 28px;
+}
+/*失败重转*/
+#transfer-history-pwd-dialog .wrapper{
+    width: 716px;
+    padding:0px 34px;
+}
+#transfer-history-pwd-dialog .out-cold-pwd input{
+    float: left;
+    width: 198px;
+}
+#transfer-history-pwd-dialog .out-cold-pwd input.ui-margin{
+    margin: 0px calc((100% - 594px)/2)
+}
+#transfer-history-pwd-dialog .out-cold-prompt{
+    font-size: 18px;
+    padding:18px 0px 42px 0px;
+}
+#transfer-history-pwd-dialog .out-cold-confirm{
+    text-align: center;
+    padding-bottom: 28px;
+}
+/*提现通过*/
+#out-wallet-pwd-dialog p,#buyRam p,#buyCpuNet p{
+    font-size: 18px;
+    color: #3E4B5E;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#out-wallet-pwd-dialog .out-wallet-pwd-dialog-input,#buyRam .out-wallet-pwd-dialog-input,#buyCpuNet .out-wallet-pwd-dialog-input{
+    text-align: center;
+}
+#out-wallet-pwd-dialog .out-wallet-pwd-dialog-input input,#buyRam .out-wallet-pwd-dialog-input input,#buyCpuNet .out-wallet-pwd-dialog-input input{
+    width: 260px;
+}
+#out-wallet-pwd-dialog .out-wallet-pwd-dialog-btn,#buyRam .out-wallet-pwd-dialog-btn,#buyCpuNet .out-wallet-pwd-dialog-btn{
+    text-align: center;
+    padding:37px 0px 46px 0px;
+}
+/*提现通过*/
+#out-wallet-pwd-dialog-select p{
+    font-size: 18px;
+    color: #3E4B5E;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#out-wallet-pwd-dialog-select .out-wallet-pwd-dialog-input{
+    text-align: center;
+}
+#out-wallet-pwd-dialog-select .out-wallet-pwd-dialog-input input{
+    width: 198px;
+}
+#out-wallet-pwd-dialog-select .out-wallet-pwd-dialog-btn{
+    text-align: center;
+    padding:37px 0px 46px 0px;
+}
+
+
+
+/*提现拒绝*/
+.dialog .dialog-large{
+    width: 716px;
+}
+#out-refused .refused-input{
+    text-align: center;
+    padding-bottom: 72px;
+}
+#out-refused .refused-input input{
+    width: 546px;
+}
+#out-refused .refused-btn{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/*提现重转*/
+#fail-out-wallet-pwd-dialog p{
+    font-size: 18px;
+    color: #3E4B5E;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#fail-out-wallet-pwd-dialog .out-wallet-pwd-dialog-input{
+    text-align: center;
+}
+#fail-out-wallet-pwd-dialog .out-wallet-pwd-dialog-input input{
+    width: 198px;
+}
+#fail-out-wallet-pwd-dialog .out-wallet-pwd-dialog-btn{
+    text-align: center;
+    padding:37px 0px 46px 0px;
+}
+
+/*资源购买*/
+.eos_resource_buy input{
+    border: none;
+    border-bottom: 1px solid black;
+    margin-top: 15px;
+    text-align: center;
+    width: 300px;
+}
+.eos_resource_buy button{font-size: 16px;border-radius: 4px;border:1px solid #DCDCDC;padding:2px 5px; outline: none;cursor: pointer;margin-left: 15px;color: green;}
+
+/*未添加的币种转出冷钱包*/
+#show-unknowncoin-transfer .wrapper{
+    width: 716px;
+    padding:0px 34px;
+}
+#show-unknowncoin-transfer .out-cold-pwd input{
+    float: left;
+    width: 198px;
+}
+#show-unknowncoin-transfer .out-cold-pwd input.ui-margin{
+    margin: 0px calc((100% - 594px)/2)
+}
+#show-unknowncoin-transfer .out-cold-prompt{
+    font-size: 16px;
+    padding:18px 0px 25px 0px;
+}
+#show-unknowncoin-transfer .out-cold-confirm{
+    text-align: center;
+    padding-bottom: 28px;
+}

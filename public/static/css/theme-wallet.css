@@ -1,0 +1,128 @@
+/* 登录页背景图片 */
+.login-bg-image{
+    background-image: url('../images/login-bg.jpg')
+}
+/* 登录框背景颜色 */
+.login-card-bg{
+  background-color: #fff;
+}
+/* 按钮 */
+.btn{
+    color: #fff;
+    font-size: 16px;
+    height: 40px;
+}
+input.btn[disabled],button.btn[disabled]{
+  background: #dddddd;
+}
+.btn.btn-primary{
+    background: #22A18D;
+}
+.action-btn{
+	padding: 6px 10px;
+	outline: none;
+	font-size: 16px;
+	border:1px solid #DCDCDC;
+	color: #08967F;
+	cursor: pointer;
+    position: relative;
+    z-index: 99;
+}
+.action-btn:before{
+	content: '';
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url(../images/icon-edit.png) no-repeat;
+	margin-bottom: -2px;
+	/*vertical-align: middle;*/
+}
+.action-btn.noicon:before{
+    display: none;
+}
+.action-btn.disabled{
+	color: #DE4A4A;
+}
+.action-btn.disabled:before{
+	background-image: url(../images/icon-disabled.png);
+}
+.action-btn.open{
+    /*color: #DE4A4A;*/
+}
+.action-btn.open:before{
+    background-image: url(../images/icon-open.png);
+}
+.action-btn.toenable:before{
+	background-image: url(../images/icon-to-enable.png);
+}
+.action-btn.add:before{
+    background-image: url(../images/icon-add.png);
+}
+/*分页*/
+.pagination-box{
+	padding-top: 14px;
+}
+.pagination{
+	float: right;
+}
+.pagination li{
+	cursor: pointer;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-width: 32px;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    list-style: none;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    margin-right: 8px;
+    font-family: Arial;
+    outline: 0;
+}
+.pagination li.active{
+	border-color: #08967F;
+	color: #08967F;
+    font-weight: 500;
+}
+.pagination li.more{
+	border: none;
+	color: #d9d9d9;
+}
+.pagination li.prev,.pagination li.next{
+	padding-top: 3px;
+}
+.pagination li.prev.disabled,.pagination li.next.disabled{
+	color: #ccc;
+	border-color: #ccc;
+	cursor: not-allowed;
+}
+select.admin-select{
+
+  /*很关键：将默认的select选择框样式清除*/  
+  appearance:none;  
+  -moz-appearance:none;  
+  -webkit-appearance:none;  
+	width: 108px;
+    height: 42px;
+    border: 1px solid #DCDCDC;
+    outline: none;
+    padding:0px 14px;
+    font-size: 18px;
+     background: url(../images/icon-arrow.png) no-repeat scroll 80px center #ECECEC;
+    vertical-align: bottom;
+}
+select.admin-select option{
+	background: #ECECEC;
+	padding:30px;
+	font-size: 16px;
+}
+.walletadmin-content .container:nth-child(2){
+    margin-top: 20px;
+}
+
