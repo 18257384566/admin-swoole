@@ -42,7 +42,7 @@ try {
     include APP_PATH . '/config/loader.php';
 
     //引入以太坊开发工具包
-    include APP_PATH . '/../vendor/autoload.php';
+    //include APP_PATH . '/../vendor/autoload.php';
 
     /**
      * Handle the request
