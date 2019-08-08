@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>新贝区块链支付解决方案</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/datepicker.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+</head>
+
+<body>
+<?php $this->view->partial("nav");?>
+    <div class="walletadmin-content" id="out-history">
+        <div class="walletadmin-box">
+            <div class="box">
+                <div class="container">
+                    <div class="search-ui">
+                        <form action="" method="get">
+                            <div>
+                                <select name="admin_no" id="" class="admin-select">
+                                    <option name="admin_no" value="" <?php if($data['admin_no'] == ""){echo "selected";} ?> >操作员</option>
+                                    <?php foreach($data['admin'] as $item){ ?>
+                                        <option name="admin_no" value ="<?php echo $item['admin_no'] ?>" <?php if($data['admin_no'] == $item['admin_no']){echo "selected";} ?>><?php echo $item['admin_name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                                <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+                                    <input type="text" autocomplete="off" name="begin_date" placeholder="开始时间" class="c-datepicker-data-input only-date" <?php if(isset($data['begin_date'])){ if($data['begin_date'] == ''){ echo  "value=''";  }else{ echo "value='".date('Y-m-d H:i:s',$data['begin_date'])."'"; }} ?>>
+                                </div>
+                                <div class="c-datepicker-date-editor c-datepicker-single-editor J-datepicker-day">
+                                    <input type="text" autocomplete="off" name="end_date" placeholder="结束时间" class="c-datepicker-data-input only-date" <?php if(isset($data['end_date'])){ if($data['end_date'] == ''){ echo  "value=''";  }else{ echo "value='".date('Y-m-d H:i:s',$data['end_date'])."'"; }} ?>>
+                                </div>
+                            </div>
+                            <div class="search-ui-input">
+                                <div>
+                                    <input type="text" class="input-primary" placeholder="批次号" name="batch_no" value="<?php echo $data['batch_no']; ?>">
+                                </div>
+                                <div>
+                                    <button class='btn btn-primary'>搜索</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <div class="container out-history-content">
+                    <div class="page-title sub-title">
+                        <a href="/<?php echo $pro_no; ?>/walletaddressbatch/list">钱包列表</a><span> >> 转出历史</span>
+                    </div>
+                    <div class="out-history-list">
+
+                        <div class="out-history-item">
+
+                            <?php if($list){foreach ($list as $v){ ?>
+                            <div>
+                                <div class="history-item-title">
+                                    <div class="title-text">
+                                        <span>批次号：<?php echo $v['batch_no']; ?></span>
+                                        <span>操作员：<?php echo $v['admin_name']; ?></span>
+                                        <span>操作时间：<?php echo date('Y-m-d H:i:s',$v['created_at']); ?></span>
+                                    </div>
+                                    <div class="title-btn">
+                                        <a href="/<?php echo $pro_no; ?>/walletaddress/transferInfo?transaction_no=<?php echo $v['transaction_no']; ?>&batch_no=<?php echo $v['batch_no']; ?>"><button class="action-btn noicon">详情</button></a>
+                                        <!--要判断全部完成但有错误的再显示-->
+                                        <?php if(strpos($data['permission'],',wallet_list_do,') != false || $data['is_super'] == 1 || $data['is_power'] == 1){ ?>
+
+                                            <?php if($v['status'] == 1 && $v['fail'] != 0){ ?>
+                                                <button class="action-btn noicon transfer-failed-enew-btn" value="<?php echo $v['transaction_no'].','.$v['batch_no']; ?>"><span style="display: none;"><?php echo $v['password_prompt']; ?></span>失败重转</button>
+                                            <?php }} ?>
+                                    </div>
+                                </div>
+                                <div class="table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>类型</th>
+                                            <th>数量</th>
+                                            <th>转出金额</th>
+                                            <th>成功</th>
+                                            <th>失败</th>
+                                            <th>状态</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach ($v["data"] as $item){?>
+                                            <tr>
+                                                <td class="coin_symbol"><?php echo $item['coin_symbol']; ?></td>
+                                                <td><?php echo $item['count']; ?></td>
+                                                <td><?php echo $item['amount']; ?></td>
+                                                <td><?php echo $item['success']; ?></td>
+                                                <td>
+                                                    <?php if($item['fail']==0){ echo $item['fail'];}?>
+                                                    <?php if($item['fail']!=0){ ?>
+                                                        <span style="color: red"><?php echo $item['fail']; ?></span>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    if($item['status'] == 0) {
+                                                        echo '进行中';
+                                                    }elseif($item['status'] == 1){
+                                                        echo '已完成';
+                                                    }
+                                                    ?>
+
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <?php }} ?>
+
+                        </div>
+                    </div>
+
+
+                <div class="pagination-box">
+                    <?php
+                    if($list){
+                        //存储页码字符串
+                        $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                        //当前页码数，默认当前页码为1
+                        $curPage = isset($_GET['page'])?$_GET['page']:1;
+                        if($curPage <=5){
+                            $begin =1;
+                            $end = $data['totalpage']>=10?10:$data['totalpage'];
+                        }else{
+                            $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                            $begin =$end -9<=1?1:$end -9;
+                        }
+                        //实现上一页
+                        $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                        $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                        $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                        //根据起始页与终止页将当前页面的页码显示出来
+                        for($i=$begin;$i<=$end;$i++){
+                            //使用if实现高亮显示当前点击的页码
+                            if($data['page'] == $i){
+                                $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                            }else{
+                                $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                            }
+                        }
+
+
+                        //实现下一页
+                        $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                        $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                        $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                        $pageNumString .='</div>';
+                        echo $pageNumString;
+                    }
+
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog" id="transfer-history-pwd-dialog">
+        <div class="wrapper">
+            <form action="/<?php echo $pro_no; ?>/walletaddress/transferSecondColdWallet" method="post" enctype="multipart/form-data">
+                <div class="dialog-title">
+                    请输入密码
+                </div>
+                <div class="out-cold-pwd">
+                    <input type="hidden" id="second-current-out-transaction_no" name="transaction_no">
+                    <input type="hidden" id="coin_symbol" name="coin_symbol">
+                    <input type="password" class="input-primary" placeholder="密码一" name="password1">
+                    <input type="password" class="input-primary ui-margin" placeholder="密码二" name="password2">
+                    <input type="password" class="input-primary" placeholder="密码三" name="password3">
+                    <div class="cl"></div>
+                </div>
+                <div class="out-cold-prompt">
+                    密码提示:
+                    <span id="out-cold-prompt-text"></span>
+                </div>
+                <div id="eos_show" style="display: none">
+                    <div class="dialog-title" >
+                        请输入出账钱包密码
+                    </div>
+                    <div class="out-cold-pwd">
+                        <input type="password" style="width: 650px;" class="input-primary" placeholder="请输入出账钱包密码" name="transferwallet_password">
+                        <div class="cl"></div>
+                    </div>
+                </div>
+                <div class="out-cold-confirm">
+                    <button class="w-btn">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="dialog">
+        <span id="pro_no"><?php echo $pro_no; ?></span>
+        <span id="eos_address"><?php if(isset($EOSAddress)){echo $EOSAddress;} ?></span>
+        <span id="enough_resource"><?php echo $enough_resource; ?></span>
+    </div>
+
+    <div class="message">
+        <div class="message_title"></div>
+    </div>
+
+    <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/moment.min.js"></script>
+    <script type="text/javascript" src="/static/js/datepicker.all.js"></script>
+    <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+    <script>
+        $(document).ready(function(){
+            chooseTime()
+        })
+    </script>
+</body>
+
+</html>

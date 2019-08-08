@@ -3,10 +3,12 @@
 /.idea
 /.vagrant
 .DS_Store
+/app/config/config.php
 /.phalcon
 /app/cache
 *.log
-*.text
-/app/config/config.php
-.idea
-.env
+/ide
+/public/id_rsa.pub
+/public/id_rsa
+phinx.yml
+.idea/workspace.xml

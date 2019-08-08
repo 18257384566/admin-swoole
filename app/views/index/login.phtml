@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" />
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>新贝区块链支付解决方案</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+
+</head>
+<body>
+<div class="login login-bg-image">
+    <div class="login-container">
+        <div class="login-content login-card-bg">
+            <h1>欢迎登录</h1>
+            <form action=""  onsubmit="return false" method="post" enctype="multipart/form-data">
+                <ul class="login-input">
+                    <li>
+                        <input type="text" placeholder="请输入账户名" name="name" id="name">
+                    </li>
+                    <li>
+                        <input type="password" placeholder="请输入密码" name="password" id="password">
+                        <a id="eye" title="点击隐藏或显示密码" style="position:relative;right:-255px;top:-30px;opacity: 1;">
+                            <span class="iconfont icon-yanjing_bi"></span>
+                        </a>
+                    </li>
+<!--                    <li class="phone">-->
+<!--                        <input type="text" placeholder="请输入手机号" name="phone" id="phone">-->
+<!--                        <button id="getcode" type="button" href="/--><?php //echo $pro_no; ?><!--/login/sendMessage" class="btn btn-primary">发送验证码</button>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <input type="text" placeholder="请输入验证码"  name="code" id="code">-->
+<!--                    </li>-->
+                    <li>
+<!--                        <input type="hidden" name="pro_no" id="pro_no" value="--><?php //echo $pro_no; ?><!--">-->
+                        <input type="submit" class="btn btn-primary" id="doLogin" value="登录">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="//cstaticdun.126.net/load.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+
+<script>
+    $("#eye").click(function() {
+        if($("#password").attr("type") == "text") {
+            $("#password").attr("type", "password");
+            $("#eye span").removeClass("icon-yanjing_kai");
+            $("#eye span").addClass("icon-yanjing_bi");
+        } else {
+            $("#password").attr("type", "text");
+            $("#eye span").removeClass("icon-yanjing_bi");
+            $("#eye span").addClass("icon-yanjing_kai");
+
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
+
+
