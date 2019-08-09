@@ -72,14 +72,12 @@ class AdminController extends ControllerBase
     }
 
     public function addAdminAction(){
-//        $admin = $this->dispatcher->getParam('admin');
-
         $reqData['admin_name'] = $this->request->getPost('admin_name');
         $reqData['real_name'] = $this->request->getPost('real_name');
         $reqData['password'] = strtolower($this->request->getPost('password'));
         $reqData['phone'] = $this->request->getPost('phone');
         $reqData['is_super'] = $this->request->getPost('is_super');
-        $reqData['permissions'] = $this->request->getPost('permissions');
+        //$reqData['permissions'] = $this->request->getPost('permissions');
         //校验数据
         $validation = $this->paValidation;
         $validation->addAdmin();
@@ -87,7 +85,7 @@ class AdminController extends ControllerBase
         if(count($messages)){
             $message = $messages[0]->getMessage();
             $this->functions->alert($message);
-        }   var_dump($reqData);exit;
+        }
 
         $add = $this->getBussiness('Admin')->add($reqData);
         if($add['status']!=1){
@@ -95,6 +93,37 @@ class AdminController extends ControllerBase
         }
 
         $this->functions->alert($add['msg'],'/admin/list');
+    }
+
+    public function adminLogAction(){
+        $limit = 10;
+        $page = $this->request->get('page');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_admin_login_log';
+        //获取总条数
+        $allcount = $this->db->query("select count(id) as allcount from $table");
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        $sql = "select admin_name,admin_no,created_at,ip from $table order by created_at desc limit $page,$limit";
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page']=$page;
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = '';
+
+        $this->view->list = $list;
+        $this->view->data = $data;
+        $this->view->pick('admin/log');
     }
 
 

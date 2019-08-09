@@ -66,7 +66,7 @@ class Admin extends BaseBussiness
         return $this->result;
     }
 
-    public function add($admin,$reqData){
+    public function add($reqData){
         //判断管理员账户是否重复
         $filed = 'id';
         $adminFromSql = $this->getModel('Admin')->getByAdmin($reqData['admin_name'],$filed);

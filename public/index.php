@@ -49,7 +49,9 @@ try {
      */
     $application = new \Phalcon\Mvc\Application($di);
 
-    echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
+    //echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
+
+    echo $application->handle()->getContent();
 
 } catch (\Exception $e) {
     if($__APP_IN_DEBUG){

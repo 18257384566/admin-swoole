@@ -114,7 +114,7 @@ class Admin extends BaseModel
         $this->password = $data['password'];
         $this->phone = $data['phone'];
         $this->is_super = $data['is_super'];
-        $this->permissions = $data['permissions'];
+        //$this->permissions = $data['permissions'];
         $this->created_at = $this->updated_at = time();
         if ($this->create() === false) {
             return false;
