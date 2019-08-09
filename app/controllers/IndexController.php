@@ -63,6 +63,16 @@ class IndexController extends ControllerBase
         $this->view->pick('index/index');
     }
 
+    //退出登录
+    public function signOutAction(){
+        $this->session->remove("backend");
+        return $this->dispatcher->forward(array(
+            "controller" => "index",
+            "action" => "login",
+        ));
+    }
+
+
 
 
 
@@ -123,31 +133,6 @@ class IndexController extends ControllerBase
         $this->result['msg'] = $sendMessage['msg'];
         return json_encode($this->result);
     }
-
-
-
-    public function logoutAction(){
-        $adminSession = $this->session->get('backend');
-        $sqlData['pro_no'] = $adminSession['pro_no'];
-        $sqlData['pro_name'] = $adminSession['pro_name'];
-        $sqlData['table'] = '';
-        $sqlData['ip'] = $_SERVER['REMOTE_ADDR'];
-        $sqlData['admin_no'] = $adminSession['admin_no'];
-        $sqlData['admin_name'] = $adminSession['account'];
-        $sqlData['created_at'] = $sqlData['updated_at'] = time();
-        $sqlData['sql_type'] = '';
-        $sqlData['log_title'] = $adminSession['account'].'退出';
-        $sqlData['sql'] = '';
-        $this->getBussiness('AdminLog')->add($sqlData);
-
-        $this->session->remove("backend");
-//        return $this->response->redirect("/backend/login");
-        return $this->dispatcher->forward(array(
-            "controller" => "index",
-            "action" => "login",
-        ));
-    }
-
 
     public function notFoundAction(){
         $this->result = [

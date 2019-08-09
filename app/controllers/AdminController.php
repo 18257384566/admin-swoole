@@ -71,6 +71,36 @@ class AdminController extends ControllerBase
         $this->view->pick('admin/add');
     }
 
+    public function addAdminAction(){
+//        $admin = $this->dispatcher->getParam('admin');
+
+        $reqData['admin_name'] = $this->request->getPost('admin_name');
+        $reqData['real_name'] = $this->request->getPost('real_name');
+        $reqData['password'] = strtolower($this->request->getPost('password'));
+        $reqData['phone'] = $this->request->getPost('phone');
+        $reqData['is_super'] = $this->request->getPost('is_super');
+        $reqData['permissions'] = $this->request->getPost('permissions');
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->addAdmin();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }   var_dump($reqData);exit;
+
+        $add = $this->getBussiness('Admin')->add($reqData);
+        if($add['status']!=1){
+            $this->functions->alert($add['msg']);
+        }
+
+        $this->functions->alert($add['msg'],'/admin/list');
+    }
+
+
+
+
+
     public function addAction(){
         $admin = $this->dispatcher->getParam('admin');
 

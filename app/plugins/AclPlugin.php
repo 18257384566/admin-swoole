@@ -11,19 +11,33 @@ class AclPlugin extends Injectable
 {
     public function beforeExecuteRoute(Event $event , Dispatcher $dispatcher)
     {
-        //获取resource名称
+        $role = 'visitor';
+
+        //判断管理员是否过期
+        $checkLogin = $this->checkLogin();
+        if($checkLogin){
+            $role = 'auth';
+        }
+
+        //对此控制器方法是否有访问权限
         $controller = $dispatcher->getControllerName();
         $action = $dispatcher->getActionName();
         $resource = $controller."::".$action;
-        if($this->aclAuth($resource)){
+
+        if($this->allow($role,$resource)){
             return true;
         }
-//        exit('router error');
+
+        return $this->dispatcher->forward(array(
+                "controller" => "index",
+                "action" => "login",
+            ));
+        exit;
     }
 
-    public function aclAuth($resource)
+    public function allow($role = "visitor",$resource)
     {
-        $rights = array(
+        $acl = array(
             'visitor' => array(
                 'index::login',
                 'index::doLogin',
@@ -38,53 +52,14 @@ class AclPlugin extends Injectable
                 'admin::updateStatus',
                 'admin::add',
                 'admin::addView',
+                'index::signOut'
+//                'admin::addAdmin'
 
             ),
-//            'backendapi'  => array(
-//                'walletflow::addFee',
-//                'walletaddress::transferToPurse',
-//                'walletaddress::finishTransferToPurse',
-//                'withdraw::dealOrder',
-//                'walletaddress::addUserWallet',
-//                'walletaddress::addFeeNotice',
-//                //test
-//                'admin::add',
-//                'test::notice',
-//                'test::addproject',
-//                'test::addadmin',
-//                'test::addchain',
-//                'test::addDepositOrder',
-////                'test::editPowerAdmin',
-//                'test::updatePowerAdmin',
-//            ),
-//            'api'  => array(
-//                'api::createUserApi',
-//                'api::withdrawAes',
-//                'api::withdraw',
-//                'api::getSign',
-//                'api::encryptTest',
-//                'api::decryptTest',
-//                'api::decryptAes',
-//            ),
+
         );
-        if(in_array($resource,$rights['visitor'])){
-            return true;
-        }
 
-        if(in_array($resource,$rights['auth'])){
-            return $this->checkLogin();
-        }
-
-        if(in_array($resource,$rights['backendapi'])){
-            //设置数据表前缀
-            $pro_no = $this->dispatcher->getParam('pro_no');
-            $this->config->database['prefix'] = $this->config->database['prefix'].$pro_no.'_';
-
-            return $this->checkBackendApi();
-        }
-
-        if(in_array($resource,$rights['api'])){
-//            return $this->checkLogin();
+        if(in_array($resource,$acl[$role])){
             return true;
         }
         return false;
@@ -92,14 +67,19 @@ class AclPlugin extends Injectable
 
     public function checkLogin()
     {
+        //判断管理员是否退出
+        $adminSession = $this->session->get('backend');
+        if(!$adminSession){
+            return false;
+        }
+
+        //判断管理员是否过期
         if(isset($_SESSION['expiretime'])) {
             if($_SESSION['expiretime'] < time()) {
-                $this->session->remove("backend");
-                $this->functions->alert('请重新登陆','/admin/login');
-                exit;
-            } else {
-                $_SESSION['expiretime'] = time() + $this->config->lifetime['login'];
+                return false;
             }
+            //更新过期时间
+            $_SESSION['expiretime'] = time() + $this->config->lifetime['login'];
         }
 
         $adminSession = $this->session->get('backend');
@@ -107,10 +87,6 @@ class AclPlugin extends Injectable
 
         return true;
 
-    }
-
-    public function checkBackendApi(){
-        return true;
     }
 
 }

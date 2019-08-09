@@ -19,11 +19,15 @@ class Route extends RouterGroup
         //登陆
         $this->add('/','index::login');
         $this->addPost('/admin/doLogin','index::doLogin');  //登录
+        $this->add('/admin/signOut','index::signOut');  //退出登录
         $this->add('/admin/index','index::index');  //首页
+
 
         //管理员列表
         $this->add('/admin/list','admin::getList');
         $this->add('/admin/updateStatus','admin::updateStatus');
+        $this->add('/admin/add','admin::addView');  //添加用户（页面）
+        $this->addPost('/admin/add','admin::addAdmin');  //添加用户
 
 
 
