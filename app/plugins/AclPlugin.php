@@ -28,10 +28,22 @@ class AclPlugin extends Injectable
             return true;
         }
 
-        return $this->dispatcher->forward(array(
+        if($checkLogin){
+            $this->functions->alert('无此权限，请联系管理员','/admin/index'); //exit;
+
+            return $this->dispatcher->forward(array(
                 "controller" => "index",
-                "action" => "login",
+                "action" => "index",
             ));
+
+            exit;
+        }
+
+        return $this->dispatcher->forward(array(
+            "controller" => "index",
+            "action" => "login",
+        ));
+
         exit;
     }
 
@@ -54,7 +66,10 @@ class AclPlugin extends Injectable
                 'admin::addView',
                 'index::signOut',
                 'admin::addAdmin',
-                'admin::adminLog'
+                'admin::adminLog',
+                'exchange::addView',
+                'exchange::addExchange',
+                'exchange::list',
 
             ),
 

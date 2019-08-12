@@ -113,7 +113,8 @@ class Admin extends BaseModel
         $this->real_name = $data['real_name'];
         $this->password = $data['password'];
         $this->phone = $data['phone'];
-        $this->is_super = $data['is_super'];
+        $this->role = $data['role'];
+        //$this->is_super = $data['is_super'];
         //$this->permissions = $data['permissions'];
         $this->created_at = $this->updated_at = time();
         if ($this->create() === false) {

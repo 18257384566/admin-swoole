@@ -336,4 +336,17 @@ class Functions implements InjectionAwareInterface
         return number_format($num,$decimail,'.','');
     }
 
+    function input_csv($handle) {
+        $out = array ();
+        $n = 0;
+        while ($data = fgetcsv($handle, 1000,",")) {
+            $num = count($data);
+            for ($i = 0; $i < $num; $i++) {
+                $out[$n][$i] = $data[$i];
+            }
+            $n++;
+        }
+        return $out;
+    }
+
 }

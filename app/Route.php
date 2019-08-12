@@ -31,6 +31,12 @@ class Route extends RouterGroup
         $this->add('/admin/log','admin::adminLog');  //管理员日志
 
 
+        //兑换券管理
+        $this->add('/exchange/add','exchange::addView');  //添加兑换券（页面）
+        $this->addPost('/exchange/addExchange','exchange::addExchange');  //添加兑换券
+        $this->add('/exchange/list','exchange::list');  //兑换券列表
+
+
 
 
 

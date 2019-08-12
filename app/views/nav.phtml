@@ -8,12 +8,20 @@
             <div class="sidebar-nav">
                 <ul class="nav" id="sidebarnav">
 
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/$pro_no/admin/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><i class="icon icon-admin"></i><span>管理员管理</span></div>
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><!-- <i class="icon icon-admin"></i><span> -->管理员管理</span></div>
                         <ul>
                             <a href="/admin/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/list") !== false){echo 'active';}else{echo '';} ?>">管理员列表</li></a>
                             <a href="/admin/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/add") !== false){echo 'active';}else{echo '';} ?>">添加管理员</li></a>
                             <a href="/admin/log"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/log") !== false){echo 'active';}else{echo '';} ?>">日志管理</li></a>
+                        </ul>
+                    </li>
+
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><span>兑换券管理</span></div>
+                        <ul>
+                            <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表列表</li></a>
+                            <a href="/exchange/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/add") !== false){echo 'active';}else{echo '';} ?>">添加兑换券</li></a>
                         </ul>
                     </li>
 

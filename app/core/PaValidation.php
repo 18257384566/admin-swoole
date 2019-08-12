@@ -67,8 +67,8 @@ class PaValidation extends Validation
             'message' => '手机号格式不正确',                 //手机号非法
             'cancelOnFail' => true
         )));
-        $this->add('is_super', new PresenceOf(array(
-            'message' => '请选择是否是超级管理员',
+        $this->add('role', new PresenceOf(array(
+            'message' => '请选择角色',
             'cancelOnFail' => true
         )));
     }

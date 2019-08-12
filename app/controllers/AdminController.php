@@ -33,14 +33,14 @@ class AdminController extends ControllerBase
         $allcount = $allcount->fetch();
 
         //获取当页
-        $sql = "select id,admin_name,real_name,phone,status,created_at,updated_at from $table order by created_at desc limit $page,$limit";
+        $sql = "select id,admin_name,real_name,phone,status,created_at,updated_at,role from $table order by created_at desc limit $page,$limit";
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();
 
         //返回数据
-        $data['allcount']=$allcount['allcount'];
-        $data['page']=$page;
+        $data['allcount'] = $allcount['allcount'];
+        $data['page'] = $page;
         $data['totalpage'] = ceil($data['allcount']/$limit);
         $data['search'] = '';
 
@@ -76,7 +76,7 @@ class AdminController extends ControllerBase
         $reqData['real_name'] = $this->request->getPost('real_name');
         $reqData['password'] = strtolower($this->request->getPost('password'));
         $reqData['phone'] = $this->request->getPost('phone');
-        $reqData['is_super'] = $this->request->getPost('is_super');
+        $reqData['role'] = $this->request->getPost('role');
         //$reqData['permissions'] = $this->request->getPost('permissions');
         //校验数据
         $validation = $this->paValidation;

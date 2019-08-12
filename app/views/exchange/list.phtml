@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title></title>
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
     <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
     <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/datepicker.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
 </head>
 <body>
     <?php $this->view->partial("nav");?>
@@ -14,62 +16,66 @@
       <div class="walletadmin-box walletadmin-list">
           <div class="box">
               <div class="container">
-                  <div class="page-title">管理员列表</div>
+                  <div class="search-ui">
+                      <form action="/exchange/list" method="get">
+
+                          <div class="search-ui-input">
+                              <div>
+                                  <input type="text" class="input-primary" placeholder="兑换券编号/用户编号/昵称" name="search" value="">
+                              </div>
+                              <div>
+                                  <button class='btn btn-primary'>搜索</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="page-title">兑换券列表</div>
                   <div class="table">
                       <table>
                         <thead>
                             <tr>
-                                <th width="15%">账户名</th>
-                                <th width="15%">真实姓名</th>
-                                <th width="15%">角色</th>
-                                <th width="30%">电话号码</th>
-                                <th width="10%">状态</th>
-                                <th width="15%">操作</th>
+                                <th width="15%">ID</th>
+                                <th width="15%">兑换券编码</th>
+                                <th width="15%">道具编号</th>
+                                <th width="10%">是否使用</th>
+                                <th width="15%">用户编号</th>
+                                <th width="15%">用户昵称</th>
+                                <th width="15%">使用时间</th>
                             </tr>
                         </thead>
                         <tbody>
 
                         <?php foreach($list as $v){ ?>
                                 <tr>
-                                    <td><?php echo $v['admin_name'];?></td>
-                                    <td><?php echo $v['real_name'];?></td>
-                                    <td>
-                                        <?php
-                                            switch ($v['role']){
-                                                case 'developers':
-                                                    echo '开发商';
-                                                    break;
-                                                case 'operators':
-                                                    echo '运营商';
-                                                    break;
-                                                case 'service':
-                                                    echo '客服经理';
-                                                    break;
-                                                case 'commissioner':
-                                                    echo '专员';
-                                                    break;
-                                                default:
-                                                    echo '';
-                                                    break;
-                                            }
-                                        ?>
-                                    </td>
-                                    <td><?php echo $v['phone'];?></td>
+                                    <td><?php echo $v['id'];?></td>
+                                    <td><?php echo $v['exchange_code'];?></td>
+                                    <td><?php echo $v['card_no'];?></td>
                                     <td>
                                         <span>
                                             <?php
-                                            if($v['status']==1) {
-                                               echo  "正常";
-                                            }elseif($v['status'] == 0){
-                                                echo "已禁用";
+                                            if($v['is_used'] == 0) {
+                                               echo  "未使用";
+                                            }elseif($v['status'] == 1){
+                                                echo "已使用";
                                             }
                                             ?>
                                         <span>
                                     </td>
                                     <td>
-                                        <a href="/admin/updateStatus?id=<?php echo $v['id']; ?>&status=0" onclick="javascript:return confirm('是否禁用？');"><button class="action-btn disabled">禁用</button></a>
-                                        <a href="/admin/updateStatus?id=<?php echo $v['id']; ?>&status=1" onclick="javascript:return confirm('是否启用？');"><button class="action-btn open">启用</button></a>
+                                        <span>
+                                            <?php
+                                            if($v['uid'] == 0) {
+                                                echo  "";
+                                            }else{
+                                                echo $v['uid'];
+                                            }
+                                            ?>
+                                            <span>
                                     </td>
+                                    <td><?php echo $v['user_name'];?></td>
+                                    <td><?php $v['used_time'] == 0 ? $time = '未使用' : $time = date('Y-m-d H:i:s',$v['used_time']); echo $time; ?></td>
                                 </tr>
                         <?php } ?>
 
@@ -125,7 +131,14 @@
       </div>
   </div>
 
-<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/moment.min.js"></script>
+    <script type="text/javascript" src="/static/js/datepicker.all.js"></script>
+    <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+    <script>
+        $(document).ready(function(){
+            chooseTime()
+        })
+    </script>
 </body>
 </html>
