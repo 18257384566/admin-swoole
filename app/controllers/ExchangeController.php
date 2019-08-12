@@ -20,17 +20,17 @@ class ExchangeController extends ControllerBase
         header("Content-type: text/html; charset=utf-8");
         //判断是否上传文件
         if(!isset($_FILES['file'])){
-            $this->alert('请上传文件');
+            $this->functions->alert('请上传文件');
         }
 
         //判断上传文件是否合法
         $filename = $_FILES['file']['tmp_name'];
         $name = strstr( $_FILES['file']['name'], '.');
         if($name != '.csv'){
-            $this->alert('导入文件格式只能为csv');
+            $this->functions->alert('导入文件格式只能为csv');
         }
         if (empty ($filename)) {
-            $this->alert('请选择要导入的CSV文件');
+            $this->functions->alert('请选择要导入的CSV文件');
         }
 
         //打开上传文件
@@ -38,7 +38,7 @@ class ExchangeController extends ControllerBase
         $result = $this->functions->input_csv($handle); //解析csv
         $len_result = count($result);
         if($len_result == 0){
-            $this->alert('没有任何数据');
+            $this->functions->alert('没有任何数据');
         }
 
         //遍历表格数据
