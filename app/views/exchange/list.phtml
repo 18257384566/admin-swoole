@@ -40,7 +40,6 @@
                                 <th width="15%">兑换券编码</th>
                                 <th width="15%">道具编号</th>
                                 <th width="10%">是否使用</th>
-                                <th width="15%">用户编号</th>
                                 <th width="15%">用户昵称</th>
                                 <th width="15%">使用时间</th>
                             </tr>
@@ -62,17 +61,6 @@
                                             }
                                             ?>
                                         <span>
-                                    </td>
-                                    <td>
-                                        <span>
-                                            <?php
-                                            if($v['uid'] == 0) {
-                                                echo  "";
-                                            }else{
-                                                echo $v['uid'];
-                                            }
-                                            ?>
-                                            <span>
                                     </td>
                                     <td><?php echo $v['user_name'];?></td>
                                     <td><?php $v['used_time'] == 0 ? $time = '未使用' : $time = date('Y-m-d H:i:s',$v['used_time']); echo $time; ?></td>
