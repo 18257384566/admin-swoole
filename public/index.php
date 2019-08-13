@@ -10,6 +10,16 @@ error_reporting(E_ALL);
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 $__APP_IN_DEBUG = true;
+
+
+//跨域
+header('Access-Control-Allow-Origin:*');
+header('Access-Control-Allow-Headers:token,lang,tokenpassword,Origin, Content-Type, Cookie, Accept, application/json');
+//header('Access-Control-Allow-Methods:GET,POST,PUT,DELETE');
+header('Access-Control-Allow-Methods:GET,POST,OPTIONS');
+header('Access-Control-Allow-Credentials:true');
+header('Access-Control-Expose-Headers:token,lang,tokenpassword');
+
 //ini_set('session.gc_maxlifetime', 86400);
 try {
 

@@ -53,6 +53,7 @@ class AclPlugin extends Injectable
             'visitor' => array(
                 'index::login',
                 'index::doLogin',
+                'exchange::exchange',
 
 
                 //test

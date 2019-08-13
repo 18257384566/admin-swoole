@@ -349,4 +349,167 @@ class Functions implements InjectionAwareInterface
         return $out;
     }
 
+    function httpPost($url,  $keys = [], $headers = [],$cookie = '')
+    {
+        $headers = array('Content-Type: application/x-www-form-urlencoded');
+        $ch = curl_init();
+        if (stripos($url, "https://") !== false) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_SSLVERSION, 1);
+        }
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $keys);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch , CURLOPT_COOKIE , $cookie);
+        var_dump(curl_error($ch));
+        $output = curl_exec($ch);
+        $status = curl_getinfo($ch);
+        curl_close($ch);
+        if ($output === false) { echo '11';
+            return false;
+        }
+        if (intval($status["http_code"]) != 200) { echo '22';
+            return false;
+        }
+        return $output;
+    }
+
+    function httpGet($url,$keys = [],$headers = [],$cookies = '')
+    {
+        $url = $this->combineURL($url,$keys);
+        $ch = curl_init();
+        if (stripos($url, "https://") !== false) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_SSLVERSION, 1);
+        }
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch , CURLOPT_COOKIE , $cookies);
+        $output = curl_exec($ch);
+        $status = curl_getinfo($ch); //var_dump($status);//var_dump($output);
+        curl_close($ch);
+        if ($output === false) {
+            return false;
+        }
+        if (intval($status["http_code"]) != 200) {
+            return false;
+        }
+        return $output;
+    }
+
+    function combineURL($baseURL, $keysArr)
+    {
+        if (empty($keysArr) || !is_array($keysArr)) return $baseURL;
+        $combined = $baseURL . "?";
+        $valueArr = array();
+        foreach ($keysArr as $key => $val) {
+            $valueArr[] = "$key=" . urlencode($val);
+        }
+        $keyStr = implode("&", $valueArr);
+        $combined .= ($keyStr);
+        return $combined;
+    }
+
+    function http_request_code($url,$type = "POST", $keysArr = array(), $headersArr = array(),$cookie = '',$timeOut = 30){
+        if($type == "POST"){
+            $ch = curl_init();
+            if (stripos($url, "https://") !== false) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_SSLVERSION, 1); //CURL_SSLVERSION_TLSv1
+            }
+
+            $aPOST = array();
+            foreach ($keysArr as $key => $val) {
+                $aPOST[] = $key . "=" . urlencode($val);
+            }
+            $strPOST = implode("&", $aPOST);
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, true);
+            //带上headers
+            if($headersArr){
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headersArr);
+            }
+
+
+            curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+            curl_setopt($ch, CURLOPT_DNS_CACHE_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $strPOST);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeOut);
+            curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+
+            $sContent = curl_exec($ch);
+            $aStatus = curl_getinfo($ch);
+
+            curl_close($ch);
+            if (intval($aStatus["http_code"]) == 200) {
+                if($sContent){
+                    return json_decode($sContent,true) ;
+                }
+                return $sContent;
+            }else{
+                return false;
+            }
+        }else{
+            $url = $this->combineURL($url, $keysArr);
+            $ch = curl_init();
+            if (stripos($url, "https://") !== FALSE) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+                curl_setopt($ch, CURLOPT_SSLVERSION, 1); //CURL_SSLVERSION_TLSv1
+            }
+            curl_setopt($ch, CURLOPT_URL, $url);
+            if($headersArr){
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headersArr);
+            }
+
+            curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+            curl_setopt($ch, CURLOPT_DNS_CACHE_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeOut);
+            curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+
+            $sContent = curl_exec($ch);
+
+            $aStatus = curl_getinfo($ch); //var_dump($sContent);var_dump($aStatus);
+
+            curl_close($ch);
+            if (intval($aStatus["http_code"]) == 200) {
+                if($sContent){
+                    return json_decode($sContent,true) ;
+                }
+                return $sContent;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 创建文件夹
+     * $param string $dir /apps/cache/logs
+     * $param int $mode 0777
+     * return boolean
+     */
+    function mkdirs($dir, $mode)
+    {
+        if (is_dir($dir) || @mkdir($dir, $mode)) return TRUE;
+        if (!self::mkdirs(dirname($dir), $mode)) return FALSE;
+        return @mkdir($dir, $mode);
+    }
+
 }

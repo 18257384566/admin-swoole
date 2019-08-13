@@ -20,6 +20,7 @@ use Phalcon\Mvc\Model\Transaction\Manager as TransactionManager;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Profiler as ProfilerDb;
 use Common\Common;
+use App\Core\AppBaseLogger;
 
 //use App\Libs\MyRedis;
 //use Phalcon\Di\FactoryDefault\Cli as CliDI;
@@ -243,6 +244,11 @@ $di->setShared('redis',function(){
 $di -> setShared('PHPExcel', function() {
     require_once APP_PATH.'/plugins/PHPExcel.php';
     return new PHPExcel();
+});
+
+//注册日志
+$di->setShared('logger',function(){
+    return AppBaseLogger::getInstance();
 });
 
 

@@ -108,4 +108,24 @@ class ExchangeController extends ControllerBase
         $this->view->pick('exchange/list');
     }
 
+    public function exchangeAction(){
+        $reqData['exchange_code'] = $this->request->getPost('exchange_code');
+        $reqData['zones'] = $this->request->getPost('zones');
+        $reqData['user_name'] = $this->request->getPost('nickname');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->exchange();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $this->result['status'] = -1;
+            $this->result['msg'] = $message = $messages[0]->getMessage();
+            return json_encode($this->result);
+        }
+
+        $exchange = $this->getBussiness('Exchange')->exchange($reqData); //var_dump('');
+        //var_dump(json_encode($exchange));
+        return json_encode($exchange);
+    }
+
 }

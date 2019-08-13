@@ -73,6 +73,23 @@ class PaValidation extends Validation
         )));
     }
 
+    public function exchange(){
+        $this->add('exchange_code', new PresenceOf(array(
+            'exchange_code' => '兑换券编号不能唯空',
+            'cancelOnFail' => true
+        )));
+        $this->add('zones', new PresenceOf(array(
+            'message' => 'zones不能为空',
+            'cancelOnFail' => true
+        )));
+        $this->add('user_name', new PresenceOf(array(
+            'message' => '用户昵称不能为空',
+            'cancelOnFail' => true
+        )));
+    }
+
+
+
 
 
 

@@ -15,6 +15,9 @@ class Route extends RouterGroup
             'namespace' => 'App\Controllers'
         ]);
 
+        //api
+        $this->addPost('/exchange/exchange','exchange::exchange');  //登录
+
 
         //登陆
         $this->add('/','index::login');
