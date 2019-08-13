@@ -77,7 +77,7 @@ class Exchange extends BaseBussiness
         $requestData['mailcontent'] = '1';
         $url = $this->config['gameUrl'].'/manager/senditem';
         try{
-            $senditem = $this->functions->http_request_code($url, 'POST',$requestData);var_dump($senditem);
+            $senditem = $this->functions->http_request_code($url, 'POST',$requestData);
             if(!$senditem){
                 return false;
             }
