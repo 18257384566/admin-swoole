@@ -75,7 +75,7 @@ class Exchange extends BaseBussiness
         $requestData['itemstr'] = $card->item.','.$card->num;
         $requestData['mailtitle'] = '1';
         $requestData['mailcontent'] = '1';
-        $url = $this->config['gameUrl'].'/manager/senditem1';
+        $url = $this->config['gameUrl'].'/manager/senditem';
         try{
             $senditem = $this->functions->http_request_code($url, 'POST',$requestData);
             if(!$senditem){
