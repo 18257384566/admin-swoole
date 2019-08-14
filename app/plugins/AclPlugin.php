@@ -16,7 +16,7 @@ class AclPlugin extends Injectable
         //判断管理员是否过期
         $checkLogin = $this->checkLogin();
         if($checkLogin){
-            $role = 'auth';
+            $role = $checkLogin['role'];
         }
 
         //对此控制器方法是否有访问权限
@@ -59,7 +59,7 @@ class AclPlugin extends Injectable
                 //test
                 'test::addtable',
             ),
-            'auth' => array(
+            'supper' => array(
                 'index::index',
                 'admin::getList',
                 'admin::updateStatus',
@@ -71,7 +71,16 @@ class AclPlugin extends Injectable
                 'exchange::addView',
                 'exchange::addExchange',
                 'exchange::list',
+                'zone::list',
+            ),
 
+            'developers' => array(
+                'index::index',
+                'admin::getList',
+                'admin::updateStatus',
+                'admin::add',
+                'admin::addView',
+                'index::signOut',
             ),
 
         );
@@ -102,7 +111,7 @@ class AclPlugin extends Injectable
         $adminSession = $this->session->get('backend');
         $this->dispatcher->setParam('admin',$adminSession);
 
-        return true;
+        return $adminSession;
 
     }
 

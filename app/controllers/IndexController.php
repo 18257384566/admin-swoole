@@ -40,7 +40,7 @@ class IndexController extends ControllerBase
             'admin_no' => $result['data']['admin_no'],
             'account' => $result['data']['admin_name'],
             'password' => $result['data']['password'],
-            'is_super' => $result['data']['is_super'],
+            'role' => $result['data']['role'],
             // bn 'expiretime' => time() + $this->config->lifetime['login'],
             'ip' => $this->functions->get_client_ip(),
         ];

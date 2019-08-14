@@ -39,6 +39,9 @@ class Route extends RouterGroup
         $this->addPost('/exchange/addExchange','exchange::addExchange');  //添加兑换券
         $this->add('/exchange/list','exchange::list');  //兑换券列表
 
+        //区服管理
+        $this->add('/zone/list','zone::list');  //添加兑换券（页面）
+
 
 
 

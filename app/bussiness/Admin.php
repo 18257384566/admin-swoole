@@ -8,7 +8,7 @@ class Admin extends BaseBussiness
 {
     public function doLogin($reqData){
         //判断有没有账户信息 key=pro_no:admin_account（账户，手机号，密码，状态，错误次数）
-        $filed = 'password,admin_no,admin_name,real_name,status,is_super,permissions';
+        $filed = 'password,admin_no,admin_name,real_name,status,is_super,permissions,role';
         $admin = $this->getModel('Admin')->getByAdmin($reqData['name'],$filed);
         if(!$admin){
             $this->result['status'] = -1;

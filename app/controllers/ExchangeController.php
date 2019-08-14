@@ -75,12 +75,12 @@ class ExchangeController extends ControllerBase
         $search = $this->request->get('search');
         if(isset($search) && $search != ''){
             //获取总条数
-            $allcount = $this->db->query("select count(id) as allcount from $table  where exchange_code like '$search%' or uid like '$search%' or user_name like '$search%'");
+            $allcount = $this->db->query("select count(id) as allcount from $table  where exchange_code like '$search%' or uid like '$search%' or user_name like '$search%' order by id desc");
             $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
             $allcount = $allcount->fetch();
 
             //获取当页
-            $sql = "select id,exchange_code,card_no,is_used,uid,used_time,user_name from $table where exchange_code like '$search%' or uid like '$search%' or user_name like '$search%' order by created_at desc limit $page,$limit";
+            $sql = "select id,exchange_code,card_no,is_used,uid,used_time,user_name from $table where exchange_code like '$search%' or uid like '$search%' or user_name like '$search%' order by id desc limit $page,$limit";
             $list=$this->db->query($sql);
             $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
             $list = $list->fetchAll();
@@ -91,7 +91,7 @@ class ExchangeController extends ControllerBase
             $allcount = $allcount->fetch();
 
             //获取当页
-            $sql = "select id,exchange_code,card_no,is_used,uid,used_time,user_name from $table order by created_at desc limit $page,$limit";
+            $sql = "select id,exchange_code,card_no,is_used,uid,used_time,user_name from $table order by id desc limit $page,$limit";
             $list=$this->db->query($sql);
             $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
             $list = $list->fetchAll();

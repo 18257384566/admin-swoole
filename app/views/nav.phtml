@@ -20,8 +20,15 @@
                     <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/") !== false){echo 'active';}else{echo '';} ?>">
                         <div><span>兑换券管理</span></div>
                         <ul>
-                            <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表列表</li></a>
+                            <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表</li></a>
                             <a href="/exchange/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/add") !== false){echo 'active';}else{echo '';} ?>">添加兑换券</li></a>
+                        </ul>
+                    </li>
+
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/zone/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><span> 区服管理</span></div>
+                        <ul>
+                            <a href="/zone/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">区服列表</li></a>
                         </ul>
                     </li>
 
