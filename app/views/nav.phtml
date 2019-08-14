@@ -28,7 +28,14 @@
                     <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/zone/") !== false){echo 'active';}else{echo '';} ?>">
                         <div><span> 区服管理</span></div>
                         <ul>
-                            <a href="/zone/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">区服列表</li></a>
+                            <a href="/zone/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/zone/list") !== false){echo 'active';}else{echo '';} ?>">区服列表</li></a>
+                        </ul>
+                    </li>
+
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><span> 道具管理</span></div>
+                        <ul>
+                            <a href="/prop/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/send") !== false){echo 'active';}else{echo '';} ?>">发送道具</li></a>
                         </ul>
                     </li>
 

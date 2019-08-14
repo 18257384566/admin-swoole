@@ -12,3 +12,4 @@
 /public/id_rsa
 phinx.yml
 .idea/workspace.xml
+/public/static/js/config.js

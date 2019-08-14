@@ -42,6 +42,9 @@ class Route extends RouterGroup
         //区服管理
         $this->add('/zone/list','zone::list');  //添加兑换券（页面）
 
+        //道具管理
+        $this->add('/prop/send','prop::sendView');  //发送道具（页面）
+
 
 
 

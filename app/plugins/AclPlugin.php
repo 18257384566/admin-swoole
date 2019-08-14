@@ -72,6 +72,7 @@ class AclPlugin extends Injectable
                 'exchange::addExchange',
                 'exchange::list',
                 'zone::list',
+                'prop::sendView'
             ),
 
             'developers' => array(
@@ -82,6 +83,34 @@ class AclPlugin extends Injectable
                 'admin::addView',
                 'index::signOut',
             ),
+
+            'operators' => array(
+                'index::index',
+                'admin::getList',
+                'admin::updateStatus',
+                'admin::add',
+                'admin::addView',
+                'index::signOut',
+            ),
+
+            'service' => array(
+                'index::index',
+                'admin::getList',
+                'admin::updateStatus',
+                'admin::add',
+                'admin::addView',
+                'index::signOut',
+            ),
+
+            'commissioner' => array(
+                'index::index',
+                'admin::getList',
+                'admin::updateStatus',
+                'admin::add',
+                'admin::addView',
+                'index::signOut',
+            ),
+
 
         );
 
