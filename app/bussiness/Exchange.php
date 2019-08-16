@@ -35,6 +35,15 @@ class Exchange extends BaseBussiness
             return $this->result;
         }
 
+        //判断该用户是否已经使用过该批次的兑换券
+        $filed = 'id';
+        $user = $this->getModel('Exchange')->getByUserCardNo($reqData['user_name'],$exchange_code['card_no'],$filed);
+        if($user){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '亲，同批次的兑换券每人只能使用一次';
+            return $this->result;
+        }
+
         //兑换成功修改数据
         $exchange['user_name'] = $reqData['user_name'];
         $exchange['is_used'] = 1;
@@ -72,9 +81,9 @@ class Exchange extends BaseBussiness
         $requestData = [];
         $requestData['zones'] = $reqData['zones'];
         $requestData['nickname'] = $reqData['user_name'];
-        $requestData['itemstr'] = $card->item.','.$card->num;
-        $requestData['mailtitle'] = '1';
-        $requestData['mailcontent'] = '1';
+        $requestData['itemstr'] = $card->item;
+        $requestData['mailtitle'] = '您的礼包已经兑换成功';
+        $requestData['mailcontent'] = '您的礼包已经兑换成功，请查收';
         $url = $this->config['gameUrl'].'/manager/senditem';
         try{
             $senditem = $this->functions->http_request_code($url, 'POST',$requestData);

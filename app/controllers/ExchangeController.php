@@ -128,4 +128,8 @@ class ExchangeController extends ControllerBase
         return json_encode($exchange);
     }
 
+    public function cardAddViewAction(){
+        return $this->view->pick('exchange/addCard');
+    }
+
 }

@@ -22,20 +22,32 @@
                         <ul>
                             <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表</li></a>
                             <a href="/exchange/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/add") !== false){echo 'active';}else{echo '';} ?>">添加兑换券</li></a>
+<!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
                         </ul>
                     </li>
 
                     <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/zone/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span> 区服管理</span></div>
+                        <div><span> 区服管理 </span></div>
                         <ul>
                             <a href="/zone/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/zone/list") !== false){echo 'active';}else{echo '';} ?>">区服列表</li></a>
                         </ul>
                     </li>
 
                     <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span> 道具管理</span></div>
+                        <div><span> 管理工具 </span></div>
                         <ul>
                             <a href="/prop/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/send") !== false){echo 'active';}else{echo '';} ?>">发送道具</li></a>
+                            <a href="/notice/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/notice/send") !== false){echo 'active';}else{echo '';} ?>">推送消息</li></a>
+                        </ul>
+                    </li>
+
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><span> 用户管理 </span></div>
+                        <ul>
+                            <a href="/user/daily/login"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/daily/login") !== false){echo 'active';}else{echo '';} ?>">每日登录</li></a>
+                            <a href="/user/retain"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/retain") !== false){echo 'active';}else{echo '';} ?>">玩家留存</li></a>
+                            <a href="/user/login/count"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/login/count") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
+                            <a href="/user/online"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/online") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
                         </ul>
                     </li>
 

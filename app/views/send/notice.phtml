@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+
+    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+              <div class="container">
+                  <div class="page-title">推送消息</div>
+                  <div class="addadmin">
+
+                      <div class="wrapper wrapper-content animated fadeInRight">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <div class="ibox float-e-margins">
+                                      <div class="ibox-tools">
+                                          <a class="collapse-link">
+                                              <i class="fa fa-chevron-up"></i>
+                                          </a>
+                                          <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                              <i class="fa fa-wrench"></i>
+                                          </a>
+                                          <ul class="dropdown-menu dropdown-user">
+                                              <li><a href="form_basic.html#">选项1</a>
+                                              </li>
+                                              <li><a href="form_basic.html#">选项2</a>
+                                              </li>
+                                          </ul>
+                                          <a class="close-link">
+                                              <i class="fa fa-times"></i>
+                                          </a>
+                                      </div>
+                                      <div class="ibox-content">
+                                          <form class="form-horizontal m-t">
+                                              <div class="form-group">
+                                                  <label class="col-sm-1 control-label">游戏区服：</label>
+                                                  <div class="col-sm-2">
+                                                      <select class="form-control zone" name="zone"  multiple="multiple">
+                                                      </select>
+                                                  </div>
+                                                  <div class="col-sm-6 zoneList"></div>
+                                              </div>
+
+                                              <div class="form-group">
+                                                  <label class="col-sm-1 control-label">间隔:</label>
+                                                  <div class="col-sm-1">
+                                                      <input class="form-control" name="minute" placeholder="请填写分钟数">
+                                                      </input>
+                                                  </div>
+                                                  <label class="col-sm-1 control-label">分钟内滚动</label>
+                                                  <div class="col-sm-1">
+                                                      <input class="form-control" name="times" placeholder="请填写次数">
+                                                      </input>
+                                                  </div>
+                                                  <label class="col-sm-1 control-label">次</label>
+                                              </div>
+
+                                              <div class="form-group">
+                                                  <label class="col-sm-1 control-label">推送内容：</label>
+                                                  <div class="col-sm-5">
+                                                      <textarea class="form-control notice" name="notice"></textarea>
+                                                  </div>
+                                              </div>
+
+                                              <div class="form-group" style="text-align: right; margin-right: 15px;">
+                                                  <button type="button" class="btn btn-w-m send w-btn">发送</button>
+                                              </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script type="text/javascript" src="/static/js/fenziofficial_admin.js"></script>
+
+<script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/content.js?v=1.0.0"></script>
+<script src="/static/js/config.js"></script>
+<script src="/static/js/common.js"></script>
+
+<script type="text/javascript">
+              $(function(){
+                  var zoneValList = [];
+
+                  // submit
+                  $(".send").click(function(){
+
+                      if(!$("textarea[name='notice']").val()){
+                          //tips层
+                          layer.tips('亲，有必填参数未填写哦~', ".send");
+                          return;
+                      }
+                      url = "http://" + RemoteAddr + ":" + Port + "/manager/sendnotice";
+                      $.ajax({
+                          url: url,
+                          type: "POST",
+                          data: getParams(),
+                          dataType:"json",
+                          success: function(data){
+                              //On ajax success do this
+                              console.info("success.");
+                              if (data["success"]){
+                                  alert("发送成功");
+                              }else{
+                                  alert("发送失败");
+                                  console.log("fail");
+                                  return;
+                              }
+                          },
+                          error: function(xhr, ajaxOptions, thrownError) {
+                              //On error do this
+                              console.info("error.");
+                              console.log(xhr);
+                              if (xhr.status == 200) {
+                                  alert(ajaxOptions);
+                              } else {
+                                  alert(xhr.status);
+                                  alert(thrownError);
+                              }
+                          }
+                      });
+                  });
+
+                  $(".zone").change(function(){
+                      showZone();
+                  });
+
+                  function showZone(){
+                      zoneValList = [];
+                      var zoneNameList = [];
+                      $(".zone option:selected").each(function(){
+                          zoneNameList.push($(this).text());
+                          zoneValList.push($(this).val());
+                      });
+                      $(".zoneList").text(zoneNameList.join(","));
+                  }
+
+                  // 获取参数
+                  function getParams(){
+                      return {
+                          zones: zoneValList.join("|"),
+                          minute: $("input[name='minute']").val(),
+                          times: $("input[name='times']").val(),
+                          notice: $("textarea[name='notice']").val()
+                      }
+                  }
+              })
+          </script>
+
+<!--<script>-->
+<!--  $(document).ready(function(){-->
+<!--    $.fn.adminAdd({})-->
+<!--  });-->
+<!---->
+<!--  $("#eye").click(function() {-->
+<!--      if($(".password").attr("type") == "text") {-->
+<!--          $(".password").attr("type", "password");-->
+<!--          $("#eye span").removeClass("icon-yanjing_kai");-->
+<!--          $("#eye span").addClass("icon-yanjing_bi");-->
+<!--      } else {-->
+<!--          $(".password").attr("type", "text");-->
+<!--          $("#eye span").removeClass("icon-yanjing_bi");-->
+<!--          $("#eye span").addClass("icon-yanjing_kai");-->
+<!---->
+<!--      }-->
+<!--  });-->
+<!--</script>-->
+</body>
+</html>

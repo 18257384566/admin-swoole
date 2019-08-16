@@ -10,14 +10,18 @@ namespace App\Controllers;
 
 
 
-class PropController extends ControllerBase
+class SendController extends ControllerBase
 {
-    public function sendViewAction(){
+    public function propViewAction(){
 //        $admin = $this->dispatcher->getParam('admin');
 //        $this->view->adminName = $admin['account'];
 //
 //        $this->view->permission = '1';
-        $this->view->pick('prop/send');
+        $this->view->pick('send/prop');
+    }
+
+    public function noticeViewAction(){
+        $this->view->pick('send/notice');
     }
 
 }

@@ -72,7 +72,13 @@ class AclPlugin extends Injectable
                 'exchange::addExchange',
                 'exchange::list',
                 'zone::list',
-                'prop::sendView'
+                'send::propView',
+                'send::noticeView',
+                'user::dailyLogin',
+                'user::retain',
+                'user::loginCount',
+                'user::online',
+                'exchange::cardAddView',
             ),
 
             'developers' => array(

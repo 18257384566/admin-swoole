@@ -50,5 +50,21 @@ class Exchange extends BaseModel
         return true;
     }
 
+    public function getByUserCardNo($user_name,$card_no,$filed='*'){
+        $result = $this->findFirst([
+            'columns' => $filed,
+            'conditions' => 'user_name = ?1 and card_no = ?2',
+            'bind' => array(
+                1 => $user_name,
+                2 => $card_no,
+            ),
+
+        ]);
+        if($result){
+            return $result->toArray();
+        }
+        return $result;
+    }
+
 
 }

@@ -38,12 +38,20 @@ class Route extends RouterGroup
         $this->add('/exchange/add','exchange::addView');  //添加兑换券（页面）
         $this->addPost('/exchange/addExchange','exchange::addExchange');  //添加兑换券
         $this->add('/exchange/list','exchange::list');  //兑换券列表
+        $this->add('/exchange/card/add','exchange::cardAddView');  //添加道具批次号（页面）
 
         //区服管理
         $this->add('/zone/list','zone::list');  //添加兑换券（页面）
 
-        //道具管理
-        $this->add('/prop/send','prop::sendView');  //发送道具（页面）
+        //管理工具
+        $this->add('/prop/send','send::propView');  //发送道具（页面）
+        $this->add('/notice/send','send::noticeView');  //发送道具（页面）
+
+        //用户管理
+        $this->add('/user/daily/login','user::dailyLogin');  //每日登录（页面）
+        $this->add('/user/retain','user::retain');  //每日留存（页面）
+        $this->add('/user/login/count','user::loginCount');  //登录统计（页面）
+        $this->add('/user/online','user::online');  //实时在线（页面）
 
 
 
