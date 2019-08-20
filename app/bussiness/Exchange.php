@@ -94,7 +94,7 @@ class Exchange extends BaseBussiness
             return false;
         }
 
-        if($senditem['success'] != 'true'){
+        if(!isset($senditem['success']) || $senditem['success'] != 'true'){
             return false;
         }
 

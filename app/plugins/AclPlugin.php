@@ -79,6 +79,9 @@ class AclPlugin extends Injectable
                 'user::loginCount',
                 'user::online',
                 'exchange::cardAddView',
+                'user::getShipInfo',
+                'user::getShipInfoView',
+                'user::propList'
             ),
 
             'developers' => array(

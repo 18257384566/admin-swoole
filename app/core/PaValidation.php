@@ -88,6 +88,13 @@ class PaValidation extends Validation
         )));
     }
 
+    public function getShipInfo(){
+        $this->add('nickname', new PresenceOf(array(
+            'exchange_code' => '请输入昵称',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 

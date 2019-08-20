@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/datepicker.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+</head>
+<body>
+    <?php $this->view->partial("nav");?>
+    <div class="walletadmin-content">
+      <div class="walletadmin-box walletadmin-list">
+          <div class="box">
+              <div class="container">
+                  <div class="search-ui">
+                      <form action="/user/shipInfo" method="post">
+
+                          <div class="search-ui-input">
+                              <div>
+                                  <input type="text" class="input-primary" placeholder="昵称" name="nickname" value="">
+                              </div>
+                              <div>
+                                  <button class='btn btn-primary'>搜索</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="page-title">船只列表</div>
+                  <div class="table">
+
+
+                        <?php if(isset($list)){ ?>
+
+                            <?php foreach($list as $v){ ?>
+                                <b>昵称:<?php echo $data['nickname']; ?></b> &nbsp;
+                                船只ID:<?php echo $v['Id']; ?> &nbsp;
+                                配置表id:<?php echo $v['Tid']; ?> &nbsp;
+                                耐久度:<?php echo $v['Durability']; ?> &nbsp;
+                                对应经验:<?php echo $v['Exp']; ?> &nbsp;
+                                装甲强化:<?php echo $v['EvolutionArmor']; ?> &nbsp;
+                                鱼雷装甲强化:<?php echo $v['EvolutionTorpedo']; ?> &nbsp;
+                                闪避强化id:<?php echo $v['EvolutionDodge']; ?> &nbsp;
+                                补给消耗:<?php echo $v['Supply']; ?> &nbsp;
+                                进化耐久性:<?php echo $v['EvolutionDurability']; ?> &nbsp;
+                                进化类型:<?php echo $v['EvolutionType']; ?> &nbsp;
+                                改造时间:<?php echo $v['EvolutionTime']; ?> &nbsp;
+                                是否解锁该船:<?php echo $v['Lock']; ?> &nbsp;
+                                修复时间:<?php echo $v['RepairTime']; ?> &nbsp;
+                                建造时间:<?php echo $v['BuildingTime']; ?> &nbsp;
+                                船皮肤id:<?php echo $v['Skin']; ?> &nbsp;
+                                武器:<?php echo $v['Weapons']; ?> &nbsp;
+                                配件:<?php echo $v['Accessories']; ?> &nbsp;
+                                装甲:<?php echo $v['Armor']; ?> &nbsp;
+                                鱼雷装甲:<?php echo $v['Torpedo']; ?> &nbsp;
+                                所需经验:<?php echo $v['ArenaNeedExp']; ?> &nbsp;
+                                奖励武器倒计时:<?php echo $v['ArenaRewardCd']; ?> &nbsp;
+                                最大耐久度:<?php echo $v['MaxHP']; ?> &nbsp;
+                                好感度:<?php echo $v['GoodFeel']; ?> &nbsp;
+                                异步pvp经验:<?php echo $v['ArenaExp']; ?> &nbsp;
+                                技能:<?php echo $v['Skill']; ?> &nbsp;
+                                编队:<?php echo $v['TeamNo']; ?> &nbsp;
+                                cur阶段:<?php echo $v['CurStage']; ?> &nbsp;
+                                突破:<?php echo $v['Breakthrough']; ?> &nbsp;
+                                异步pvp奖励次数:<?php echo $v['ArenaRewardTimes']; ?> &nbsp;
+                                pvp奖励武器:<?php echo $v['ArenaWeapon']; ?> &nbsp;
+
+                                <hr>
+
+                                <br>
+
+                            <?php } ?>
+
+                        <?php } ?>
+
+                        
+                        </tbody>
+                      </table>
+                      <div class="pagination-box">
+
+                          
+                      </div>
+                          
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/moment.min.js"></script>
+    <script type="text/javascript" src="/static/js/datepicker.all.js"></script>
+    <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+    <script>
+        $(document).ready(function(){
+            chooseTime()
+        })
+    </script>
+</body>
+</html>
