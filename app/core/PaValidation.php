@@ -95,6 +95,32 @@ class PaValidation extends Validation
         )));
     }
 
+    public function disable(){
+        $this->add('zones', new PresenceOf(array(
+            'exchange_code' => '请选择区服',
+            'cancelOnFail' => true
+        )));
+        $this->add('user', new PresenceOf(array(
+            'exchange_code' => '请填写昵称',
+            'cancelOnFail' => true
+        )));
+        $this->add('t', new PresenceOf(array(
+            'exchange_code' => '请选择封禁结束时间',
+            'cancelOnFail' => true
+        )));
+    }
+
+    public function userInfo(){
+        $this->add('nickname', new PresenceOf(array(
+            'exchange_code' => '请输入昵称',
+            'cancelOnFail' => true
+        )));
+        $this->add('type', new PresenceOf(array(
+            'exchange_code' => '请选择查询类型',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 

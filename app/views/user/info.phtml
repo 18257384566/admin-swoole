@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+              <div class="container">
+                  <div class="page-title">用户信息</div>
+                  <div class="addadmin">
+
+                      <form action="/user/info"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>昵称:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="nickname">
+                              </div>
+                          </div>
+                          <div class="addadmin-root">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>类型:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="radio" name="type" value="ship" id="ship" checked><label for="ship">船信息</label> &nbsp;&nbsp;
+                                  <input type="radio" name="type" value="res" id="res"><label for="res">资源</label> &nbsp;&nbsp;
+                                  <input type="radio" name="type" value="construction" id="construction"  ><label for="construction">建筑</label> &nbsp;&nbsp;
+                              </div>
+                          </div>
+
+                          </div>
+                          <input type="submit" value="提交" class="w-btn">
+                      </form>
+
+                  </div>
+
+              <div class="container">
+                  <div class="page-title">列表</div>
+                  <div class="table">
+
+
+                      <?php if(isset($data['type'])){ ?>
+
+                          <?php switch ($data['type']){
+                              case "ship":
+
+                                  foreach ($data['list'] as $v){
+                                      echo '昵称'.$data['nickname'].'&nbsp;&nbsp;';
+                                      echo '船只ID:'.$v['Id'].'&nbsp;&nbsp;';
+                                      echo '配置表id:'.$v['Tid'].'&nbsp;&nbsp;';
+                                      echo '耐久度:'.$v['Durability'].'&nbsp;&nbsp;';
+                                      echo '对应经验:'.$v['Exp'].'&nbsp;&nbsp;';
+                                      echo '装甲强化:'.$v['EvolutionArmor'].'&nbsp;&nbsp;';
+                                      echo '鱼雷装甲强化:'.$v['EvolutionTorpedo'].'&nbsp;&nbsp;';
+                                      echo '闪避强化id:'.$v['EvolutionDodge'].'&nbsp;&nbsp;';
+                                      echo '补给消耗:'.$v['Supply'].'&nbsp;&nbsp;';
+                                      echo '进化耐久性:'.$v['EvolutionDurability'].'&nbsp;&nbsp;';
+                                      echo '进化类型:'.$v['EvolutionType'].'&nbsp;&nbsp;';
+                                      echo '改造时间:'.$v['EvolutionTime'].'&nbsp;&nbsp;';
+                                      echo '是否解锁该船:'.$v['Lock'].'&nbsp;&nbsp;';
+                                      echo '修复时间:'.$v['RepairTime'].'&nbsp;&nbsp;';
+                                      echo '建造时间:'.$v['BuildingTime'].'&nbsp;&nbsp;';
+                                      echo '船皮肤id:'.$v['Skin'].'&nbsp;&nbsp;';
+                                      echo '武器:'.$v['Weapons'].'&nbsp;&nbsp;';
+                                      echo '配件:'.$v['Accessories'].'&nbsp;&nbsp;';
+                                      echo '装甲:'.$v['Armor'].'&nbsp;&nbsp;';
+                                      echo '鱼雷装甲:'.$v['Torpedo'].'&nbsp;&nbsp;';
+                                      echo '所需经验:'.$v['ArenaNeedExp'].'&nbsp;&nbsp;';
+                                      echo '奖励武器倒计时:'.$v['ArenaRewardCd'].'&nbsp;&nbsp;';
+                                      echo '最大耐久度:'.$v['MaxHP'].'&nbsp;&nbsp;';
+                                      echo '好感度:'.$v['GoodFeel'].'&nbsp;&nbsp;';
+                                      echo '异步pvp经验:'.$v['ArenaExp'].'&nbsp;&nbsp;';
+                                      echo '技能:'.$v['Skill'].'&nbsp;&nbsp;';
+                                      echo '编队:'.$v['TeamNo'].'&nbsp;&nbsp;';
+                                      echo 'cur阶段:'.$v['CurStage'].'&nbsp;&nbsp;';
+                                      echo '突破:'.$v['Breakthrough'].'&nbsp;&nbsp;';
+                                      echo '异步pvp奖励次数:'.$v['ArenaRewardTimes'].'&nbsp;&nbsp;';
+                                      echo 'pvp奖励武器:'.$v['ArenaWeapon'].'&nbsp;&nbsp;';
+
+                                      echo '<hr><br>';
+                                  }
+
+                                  break;
+
+                              case "res":
+                                  echo '零件:'.$data['list']['Parts'].'&nbsp;&nbsp;';
+                                  echo '技能点:'.$data['list']['SkillPoint'].'&nbsp;&nbsp;';
+                                  echo '武器点:'.$data['list']['WeaponPoint'].'&nbsp;&nbsp;';
+                                  echo '配件强化点:'.$data['list']['AcsEvolutionPoint'].'&nbsp;&nbsp;';
+                                  echo '物资:'.$data['list']['Gold'].'&nbsp;&nbsp;';
+                                  echo '燃油:'.$data['list']['Fuel'].'&nbsp;&nbsp;';
+                                  echo '门票:'.$data['list']['Ticket'].'&nbsp;&nbsp;';
+                                  echo '军需券:'.$data['list']['ArmyTick'].'&nbsp;&nbsp;';
+                                  echo '钢材:'.$data['list']['Material'].'&nbsp;&nbsp;';
+                                  echo '钻石:'.$data['list']['Diamond'].'&nbsp;&nbsp;';
+                                  echo '友情点:'.$data['list']['Friendship'].'&nbsp;&nbsp;';
+                                  echo '活动积分:'.$data['list']['ActivePoints'].'&nbsp;&nbsp;';
+                                  
+                                  break;
+
+                              case "construction":
+                                  foreach ($data['list'] as $v){
+                                      echo '昵称:'.$data['nickname'].'&nbsp;&nbsp;';
+                                      echo '建筑名称:'.$v['name'].'&nbsp;&nbsp;';
+                                      echo '等级:'.$v['Lv'].'&nbsp;&nbsp;';
+
+                                      echo '<hr><br>';
+                                  }
+
+                                  break;
+
+                          }?>
+
+
+
+
+
+                      <?php } ?>
+
+
+                      </tbody>
+                      </table>
+                      <div class="pagination-box">
+
+
+                      </div>
+
+                  </div>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script type="text/javascript" src="/static/js/fenziofficial_admin.js"></script>
+<script>
+  $(document).ready(function(){
+    $.fn.adminAdd({})
+  });
+
+  $("#eye").click(function() {
+      if($(".password").attr("type") == "text") {
+          $(".password").attr("type", "password");
+          $("#eye span").removeClass("icon-yanjing_kai");
+          $("#eye span").addClass("icon-yanjing_bi");
+      } else {
+          $(".password").attr("type", "text");
+          $("#eye span").removeClass("icon-yanjing_bi");
+          $("#eye span").addClass("icon-yanjing_kai");
+
+      }
+  });
+</script>
+</body>
+</html>

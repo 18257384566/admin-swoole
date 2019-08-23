@@ -16,78 +16,92 @@
       <div class="walletadmin-box walletadmin-list">
           <div class="box">
               <div class="container">
-                  <div class="search-ui">
-                      <form action="/user/shipInfo" method="post">
+                  <div class="page-title">用户信息</div>
+                  <div class="addadmin">
 
-                          <div class="search-ui-input">
-                              <div>
-                                  <input type="text" class="input-primary" placeholder="昵称" name="nickname" value="">
+                      <form action="/user/info"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>昵称:</span>
                               </div>
-                              <div>
-                                  <button class='btn btn-primary'>搜索</button>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="nickname">
                               </div>
                           </div>
-                      </form>
+                          <div class="addadmin-root">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>类型:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="radio" name="type" value="ship" id="ship" checked><label for="ship">船信息</label> &nbsp;&nbsp;
+                                  <input type="radio" name="type" value="res" id="res"><label for="res">资源</label> &nbsp;&nbsp;
+                                  <input type="radio" name="type" value="construction" id="construction"  ><label for="construction">建筑</label> &nbsp;&nbsp;
+                              </div>
+                          </div>
+
                   </div>
+                  <input type="submit" value="提交" class="w-btn">
+                  </form>
+
               </div>
-              <div class="container">
-                  <div class="page-title">船只列表</div>
-                  <div class="table">
-
-
-                        <?php if(isset($list)){ ?>
-
-                            <?php foreach($list as $v){ ?>
-                                <b>昵称:<?php echo $data['nickname']; ?></b> &nbsp;
-                                船只ID:<?php echo $v['Id']; ?> &nbsp;
-                                配置表id:<?php echo $v['Tid']; ?> &nbsp;
-                                耐久度:<?php echo $v['Durability']; ?> &nbsp;
-                                对应经验:<?php echo $v['Exp']; ?> &nbsp;
-                                装甲强化:<?php echo $v['EvolutionArmor']; ?> &nbsp;
-                                鱼雷装甲强化:<?php echo $v['EvolutionTorpedo']; ?> &nbsp;
-                                闪避强化id:<?php echo $v['EvolutionDodge']; ?> &nbsp;
-                                补给消耗:<?php echo $v['Supply']; ?> &nbsp;
-                                进化耐久性:<?php echo $v['EvolutionDurability']; ?> &nbsp;
-                                进化类型:<?php echo $v['EvolutionType']; ?> &nbsp;
-                                改造时间:<?php echo $v['EvolutionTime']; ?> &nbsp;
-                                是否解锁该船:<?php echo $v['Lock']; ?> &nbsp;
-                                修复时间:<?php echo $v['RepairTime']; ?> &nbsp;
-                                建造时间:<?php echo $v['BuildingTime']; ?> &nbsp;
-                                船皮肤id:<?php echo $v['Skin']; ?> &nbsp;
-                                武器:<?php echo $v['Weapons']; ?> &nbsp;
-                                配件:<?php echo $v['Accessories']; ?> &nbsp;
-                                装甲:<?php echo $v['Armor']; ?> &nbsp;
-                                鱼雷装甲:<?php echo $v['Torpedo']; ?> &nbsp;
-                                所需经验:<?php echo $v['ArenaNeedExp']; ?> &nbsp;
-                                奖励武器倒计时:<?php echo $v['ArenaRewardCd']; ?> &nbsp;
-                                最大耐久度:<?php echo $v['MaxHP']; ?> &nbsp;
-                                好感度:<?php echo $v['GoodFeel']; ?> &nbsp;
-                                异步pvp经验:<?php echo $v['ArenaExp']; ?> &nbsp;
-                                技能:<?php echo $v['Skill']; ?> &nbsp;
-                                编队:<?php echo $v['TeamNo']; ?> &nbsp;
-                                cur阶段:<?php echo $v['CurStage']; ?> &nbsp;
-                                突破:<?php echo $v['Breakthrough']; ?> &nbsp;
-                                异步pvp奖励次数:<?php echo $v['ArenaRewardTimes']; ?> &nbsp;
-                                pvp奖励武器:<?php echo $v['ArenaWeapon']; ?> &nbsp;
-
-                                <hr>
-
-                                <br>
-
-                            <?php } ?>
-
-                        <?php } ?>
-
-                        
-                        </tbody>
-                      </table>
-                      <div class="pagination-box">
-
-                          
-                      </div>
-                          
-                  </div>
-              </div>
+<!--              <div class="container">-->
+<!--                  <div class="page-title">船只列表</div>-->
+<!--                  <div class="table">-->
+<!---->
+<!---->
+<!--                        --><?php //if(isset($list)){ ?>
+<!---->
+<!--                            --><?php //foreach($list as $v){ ?>
+<!--                                <b>昵称:--><?php //echo $data['nickname']; ?><!--</b> &nbsp;-->
+<!--                                船只ID:--><?php //echo $v['Id']; ?><!-- &nbsp;-->
+<!--                                配置表id:--><?php //echo $v['Tid']; ?><!-- &nbsp;-->
+<!--                                耐久度:--><?php //echo $v['Durability']; ?><!-- &nbsp;-->
+<!--                                对应经验:--><?php //echo $v['Exp']; ?><!-- &nbsp;-->
+<!--                                装甲强化:--><?php //echo $v['EvolutionArmor']; ?><!-- &nbsp;-->
+<!--                                鱼雷装甲强化:--><?php //echo $v['EvolutionTorpedo']; ?><!-- &nbsp;-->
+<!--                                闪避强化id:--><?php //echo $v['EvolutionDodge']; ?><!-- &nbsp;-->
+<!--                                补给消耗:--><?php //echo $v['Supply']; ?><!-- &nbsp;-->
+<!--                                进化耐久性:--><?php //echo $v['EvolutionDurability']; ?><!-- &nbsp;-->
+<!--                                进化类型:--><?php //echo $v['EvolutionType']; ?><!-- &nbsp;-->
+<!--                                改造时间:--><?php //echo $v['EvolutionTime']; ?><!-- &nbsp;-->
+<!--                                是否解锁该船:--><?php //echo $v['Lock']; ?><!-- &nbsp;-->
+<!--                                修复时间:--><?php //echo $v['RepairTime']; ?><!-- &nbsp;-->
+<!--                                建造时间:--><?php //echo $v['BuildingTime']; ?><!-- &nbsp;-->
+<!--                                船皮肤id:--><?php //echo $v['Skin']; ?><!-- &nbsp;-->
+<!--                                武器:--><?php //echo $v['Weapons']; ?><!-- &nbsp;-->
+<!--                                配件:--><?php //echo $v['Accessories']; ?><!-- &nbsp;-->
+<!--                                装甲:--><?php //echo $v['Armor']; ?><!-- &nbsp;-->
+<!--                                鱼雷装甲:--><?php //echo $v['Torpedo']; ?><!-- &nbsp;-->
+<!--                                所需经验:--><?php //echo $v['ArenaNeedExp']; ?><!-- &nbsp;-->
+<!--                                奖励武器倒计时:--><?php //echo $v['ArenaRewardCd']; ?><!-- &nbsp;-->
+<!--                                最大耐久度:--><?php //echo $v['MaxHP']; ?><!-- &nbsp;-->
+<!--                                好感度:--><?php //echo $v['GoodFeel']; ?><!-- &nbsp;-->
+<!--                                异步pvp经验:--><?php //echo $v['ArenaExp']; ?><!-- &nbsp;-->
+<!--                                技能:--><?php //echo $v['Skill']; ?><!-- &nbsp;-->
+<!--                                编队:--><?php //echo $v['TeamNo']; ?><!-- &nbsp;-->
+<!--                                cur阶段:--><?php //echo $v['CurStage']; ?><!-- &nbsp;-->
+<!--                                突破:--><?php //echo $v['Breakthrough']; ?><!-- &nbsp;-->
+<!--                                异步pvp奖励次数:--><?php //echo $v['ArenaRewardTimes']; ?><!-- &nbsp;-->
+<!--                                pvp奖励武器:--><?php //echo $v['ArenaWeapon']; ?><!-- &nbsp;-->
+<!---->
+<!--                                <hr>-->
+<!---->
+<!--                                <br>-->
+<!---->
+<!--                            --><?php //} ?>
+<!---->
+<!--                        --><?php //} ?>
+<!---->
+<!--                        -->
+<!--                        </tbody>-->
+<!--                      </table>-->
+<!--                      <div class="pagination-box">-->
+<!---->
+<!--                          -->
+<!--                      </div>-->
+<!--                          -->
+<!--                  </div>-->
+<!--              </div>-->
           </div>
       </div>
   </div>

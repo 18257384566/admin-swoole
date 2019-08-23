@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+              <div class="container">
+                  <div class="page-title">用户封号</div>
+                  <div class="addadmin">
+
+                      <form action="/user/disable"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-root">
+                            <div class="addadmin-left">
+                                <span>*</span><span>区服:</span>
+                            </div>
+                              <div class="addadmin-right">
+                                  <?php foreach ($data['zonelist'] as $k => $zone){  ?>
+                                      <input type="radio" name="zones" value="<?php echo $k ?>" id="<?php echo $k ?>" <?php if($k == 1){ echo 'checked'; } ?> ><label for="<?php echo $k ?>"><?php echo $zone['ServerName'] ?></label> &nbsp;&nbsp;
+                                  <?php } ?>
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>昵称:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="user">
+                              </div>
+                          </div>
+                          <div class="addadmin-phone">
+                              <div class="addadmin-left">
+                                <span>*</span><span>封禁结束时间:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="date" name="t">
+                              </div>
+                          </div>
+
+                          </div>
+                          <input type="submit" value="提交" class="w-btn">
+                      </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script type="text/javascript" src="/static/js/fenziofficial_admin.js"></script>
+<script>
+  $(document).ready(function(){
+    $.fn.adminAdd({})
+  });
+
+  $("#eye").click(function() {
+      if($(".password").attr("type") == "text") {
+          $(".password").attr("type", "password");
+          $("#eye span").removeClass("icon-yanjing_kai");
+          $("#eye span").addClass("icon-yanjing_bi");
+      } else {
+          $(".password").attr("type", "text");
+          $("#eye span").removeClass("icon-yanjing_bi");
+          $("#eye span").addClass("icon-yanjing_kai");
+
+      }
+  });
+</script>
+</body>
+</html>

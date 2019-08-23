@@ -512,4 +512,23 @@ class Functions implements InjectionAwareInterface
         return @mkdir($dir, $mode);
     }
 
+    //替换键值
+    function arraykey($arr,$val){
+
+        $newarr=array();
+
+        if($arr){
+
+            foreach($arr as $rs){
+
+                $newarr[$rs[$val]]=$rs;
+
+            }
+
+        }
+
+        return $newarr;
+
+    }
+
 }

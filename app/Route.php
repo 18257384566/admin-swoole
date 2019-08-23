@@ -16,46 +16,51 @@ class Route extends RouterGroup
         ]);
 
         //api
-        $this->addPost('/exchange/exchange','exchange::exchange');  //登录
+        $this->addPost('/exchange/exchange','exchange::exchange');  //兑换券（兑换）
 
 
         //登陆
         $this->add('/','index::login');
-        $this->addPost('/admin/doLogin','index::doLogin');  //登录
-        $this->add('/admin/signOut','index::signOut');  //退出登录
-        $this->add('/admin/index','index::index');  //首页
+        $this->addPost('/admin/doLogin','index::doLogin');      //登录
+        $this->add('/admin/signOut','index::signOut');          //退出登录
+        $this->add('/admin/index','index::index');              //首页
 
 
         //管理员列表
         $this->add('/admin/list','admin::getList');
         $this->add('/admin/updateStatus','admin::updateStatus');
-        $this->add('/admin/add','admin::addView');  //添加用户（页面）
-        $this->add('/admin/addAdmin','admin::addAdmin');  //添加用户
-        $this->add('/admin/log','admin::adminLog');  //管理员日志
+        $this->add('/admin/add','admin::addView');              //添加用户（页面）
+        $this->add('/admin/addAdmin','admin::addAdmin');        //添加用户
+        $this->add('/admin/log','admin::adminLog');             //管理员日志
 
 
         //兑换券管理
-        $this->add('/exchange/add','exchange::addView');  //添加兑换券（页面）
+        $this->add('/exchange/add','exchange::addView');        //添加兑换券（页面）
         $this->addPost('/exchange/addExchange','exchange::addExchange');  //添加兑换券
-        $this->add('/exchange/list','exchange::list');  //兑换券列表
+        $this->add('/exchange/list','exchange::list');          //兑换券列表
         $this->add('/exchange/card/add','exchange::cardAddView');  //添加道具批次号（页面）
 
         //区服管理
-        $this->add('/zone/list','zone::list');  //添加兑换券（页面）
+        $this->add('/zone/list','zone::list');                  //区服列表（页面）
 
         //管理工具
-        $this->add('/prop/send','send::propView');  //发送道具（页面）
-        $this->add('/notice/send','send::noticeView');  //发送道具（页面）
+        $this->add('/prop/send','send::propView');              //发送道具（页面）
+        $this->add('/notice/send','send::noticeView');          //发送道具（页面）
 
         //用户管理
-        $this->add('/user/daily/login','user::dailyLogin');  //每日登录（页面）
-        $this->add('/user/retain','user::retain');  //每日留存（页面）
-        $this->add('/user/login/count','user::loginCount');  //登录统计（页面）
-        $this->add('/user/online','user::online');  //实时在线（页面）
-        $this->add('/user/shipInfo','user::getShipInfo');  //获取用户船队信息（页面）
-        $this->add('/user/shipInfo','user::getShipInfoView');  //获取用户船队信息（页面）
-        $this->addPost('/user/shipInfo','user::getShipInfo');  //获取用户船队信息
-        $this->add('/prop/list','user::propList');  //发送道具（页面）
+        $this->add('/user/daily/login','user::dailyLogin');     //每日登录（页面）
+        $this->add('/user/retain','user::retain');              //每日留存（页面）
+        $this->add('/user/login/count','user::loginCount');     //登录统计（页面）
+        $this->add('/user/online','user::online');              //实时在线（页面）
+        $this->addPost('/user/shipInfo','user::getShipInfo');   //获取用户船队信息
+        $this->add('/prop/list','user::propList');              //发送道具（页面）
+        $this->add('/prop/excel','user::propListExcel');        //导出道具列表
+        $this->add('/user/disableView','user::disableView');    //用户封号（页面）
+        $this->addPost('/user/disable','user::disable');        //用户封号
+        $this->add('/user/info','user::infoView');              //获取用户信息（页面）
+        $this->addPost('/user/info','user::info');              //获取用户信息
+//        $this->add('/user/shipInfo','user::getShipInfo');       //获取用户船队信息
+        $this->add('/user/shipInfo','user::getShipInfoView');   //获取用户船队信息（页面）
 
 
 

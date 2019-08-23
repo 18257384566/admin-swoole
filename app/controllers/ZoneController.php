@@ -13,62 +13,12 @@ namespace App\Controllers;
 class ZoneController extends ControllerBase
 {
     public function listAction(){
-        $url = $this->config['gameUrl'].'/gm/getzonelist';
-        try{
-            $zonelist = $this->functions->http_request_code($url, 'GET');
-            if(!$zonelist){
-                $this->functions->alert('获取失败','/admin/index');
-                exit;
-            }
-        }catch (\Exception $e){
-            $this->functions->alert('获取失败','/admin/index');
-            exit;
+        $zonelist = $this->getBussiness('GameApi')->getZoneList();
+        if(!$zonelist){
+            $zonelist = [];
         }
 
-        if(!$zonelist['success']){
-            $this->functions->alert('获取失败','/admin/index');
-            exit;
-        }
-
-        unset($zonelist['success']);
-
-//
-//        $limit = 10;
-//        $page = $this->request->get('page');
-//
-//        if(!$page){
-//            $page=1;
-//        }
-//        $page = ($page - 1) * $limit;
-//
-//        $table = 'homepage_exchange';
-//
-//        $search = $this->request->get('search');
-//        if(isset($search) && $search != ''){
-//            //获取总条数
-//            $allcount = $this->db->query("select count(id) as allcount from $table  where exchange_code like '$search%' or uid like '$search%' or user_name like '$search%'");
-//            $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
-//            $allcount = $allcount->fetch();
-//
-//            //获取当页
-//            $sql = "select id,exchange_code,card_no,is_used,uid,used_time,user_name from $table where exchange_code like '$search%' or uid like '$search%' or user_name like '$search%' order by created_at desc limit $page,$limit";
-//            $list=$this->db->query($sql);
-//            $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
-//            $list = $list->fetchAll();
-//        }else{
-//            //获取总条数
-//            $allcount = $this->db->query("select count(id) as allcount from $table");
-//            $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
-//            $allcount = $allcount->fetch();
-//
-//            //获取当页
-//            $sql = "select id,exchange_code,card_no,is_used,uid,used_time,user_name from $table order by created_at desc limit $page,$limit";
-//            $list=$this->db->query($sql);
-//            $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
-//            $list = $list->fetchAll();
-//        }
-//
-//        //返回数据
+        //返回数据
         $data['allcount'] = sizeof($zonelist);  //总条数
         $data['page'] = '';
         $data['totalpage'] = '';

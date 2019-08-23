@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Bussiness\BussinessFactory;
+use App\Models\ModelFactory;
 use Phalcon\Mvc\Controller;
 
 class ControllerBase extends Controller
@@ -62,5 +63,10 @@ class ControllerBase extends Controller
     protected function getBussiness($bussinessName)
     {
         return BussinessFactory::getBussiness($bussinessName);
+    }
+
+    protected function getModel($modelName)
+    {
+        return ModelFactory::getModel($modelName);
     }
 }
