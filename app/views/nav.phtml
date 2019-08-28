@@ -37,7 +37,7 @@
                         <div><span> 管理工具 </span></div>
                         <ul>
                             <a href="/prop/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/send") !== false){echo 'active';}else{echo '';} ?>">发送道具</li></a>
-                            <a href="/notice/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/notice/send") !== false){echo 'active';}else{echo '';} ?>">推送消息</li></a>
+                            <a href="/notice/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/send") !== false){echo 'active';}else{echo '';} ?>">推送消息</li></a>
                         </ul>
                     </li>
 
@@ -49,8 +49,8 @@
                             <a href="/user/login/count"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/login/count") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
                             <a href="/user/online"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/online") !== false){echo 'active';}else{echo '';} ?>">实时在线</li></a>
                             <a href="/user/shipInfo"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/shipInfo") !== false){echo 'active';}else{echo '';} ?>">船舰详情</li></a>
-                            <a href="/prop/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/prop/list") !== false){echo 'active';}else{echo '';} ?>">道具列表</li></a>
-                            <a href="/user/disableView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/disable") !== false){echo 'active';}else{echo '';} ?>">用户封号</li></a>
+                            <a href="/prop/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">道具列表</li></a>
+                            <a href="/user/disableView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/disable") !== false){echo 'active';}else{echo '';} ?>">用户封号/禁言</li></a>
                             <a href="/user/info"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">用户信息</li></a>
                         </ul>
                     </li>

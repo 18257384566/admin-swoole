@@ -57,6 +57,7 @@ class Route extends RouterGroup
         $this->add('/prop/excel','user::propListExcel');        //导出道具列表
         $this->add('/user/disableView','user::disableView');    //用户封号（页面）
         $this->addPost('/user/disable','user::disable');        //用户封号
+        $this->addPost('/user/notalk','user::notalk');          //用户禁言
         $this->add('/user/info','user::infoView');              //获取用户信息（页面）
         $this->addPost('/user/info','user::info');              //获取用户信息
 //        $this->add('/user/shipInfo','user::getShipInfo');       //获取用户船队信息

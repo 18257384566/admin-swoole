@@ -64,10 +64,10 @@ class GameApi extends BaseBussiness
         return $result;
     }
 
-    public function ban($reqData){
+    public function ban($data){
         $url = $this->config['leeonUrl'].'/manager/ban';
         try{
-            $result = $this->functions->http_request_code($url, 'POST',$reqData);
+            $result = $this->functions->http_request_code($url, 'POST',$data);
             if(!$result){
                 return false;
             }
@@ -97,6 +97,23 @@ class GameApi extends BaseBussiness
             return false;
         }
         return $result['message'];
+    }
+
+    public function talkban($data){
+        $url = $this->config['leeonUrl'].'/manager/talkban';
+        try{
+            $result = $this->functions->http_request_code($url, 'POST',$data);
+            if(!$result){
+                return false;
+            }
+        }catch (\Exception $e){
+            return false;
+        }
+
+        if(!isset($result['success']) || $result['success'] != 'true'){
+            return false;
+        }
+        return $result;
     }
 
 

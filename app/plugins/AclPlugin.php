@@ -86,6 +86,7 @@ class AclPlugin extends Injectable
                 'user::infoView',
                 'user::info',
                 'user::getShipInfoView',
+                'user::notalk',
             ),
 
             'developers' => array(

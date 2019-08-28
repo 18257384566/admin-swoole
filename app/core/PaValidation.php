@@ -121,6 +121,20 @@ class PaValidation extends Validation
         )));
     }
 
+    public function notalk(){
+        $this->add('zone', new PresenceOf(array(
+            'exchange_code' => '请选择区服',
+            'cancelOnFail' => true
+        )));
+        $this->add('nickname', new PresenceOf(array(
+            'exchange_code' => '请填写昵称',
+            'cancelOnFail' => true
+        )));
+        $this->add('t', new PresenceOf(array(
+            'exchange_code' => '请选择封禁结束时间',
+            'cancelOnFail' => true
+        )));
+    }
 
 
 

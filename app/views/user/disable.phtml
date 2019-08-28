@@ -53,6 +53,44 @@
                       </form>
 
                   </div>
+
+              <div class="container">
+                  <div class="page-title">用户禁言</div>
+                  <div class="addadmin">
+
+                      <form action="/user/notalk"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-root">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <?php foreach ($data['zonelist'] as $k => $zone){  ?>
+                                      <input type="radio" name="zone" value="<?php echo $k ?>" id="<?php echo $k ?>" <?php if($k == 1){ echo 'checked'; } ?> ><label for="<?php echo $k ?>"><?php echo $zone['ServerName'] ?></label> &nbsp;&nbsp;
+                                  <?php } ?>
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>昵称:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="nickname">
+                              </div>
+                          </div>
+                          <div class="addadmin-phone">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>禁言结束时间:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="date" name="t">
+                              </div>
+                          </div>
+
+                  </div>
+                  <input type="submit" value="提交" class="w-btn">
+                  </form>
+
+              </div>
               </div>
           </div>
       </div>

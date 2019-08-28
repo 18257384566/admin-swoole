@@ -180,4 +180,34 @@ class UserController extends ControllerBase
         $this->view->pick('user/info');
     }
 
+    public function notalkAction(){
+        $reqData['zone'] = $this->request->getPost('zone');
+        $reqData['nickname'] = $this->request->getPost('nickname');
+        $reqData['t'] = $this->request->getPost('t');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->notalk();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }
+
+        $reqData['t'] = strtotime($reqData['t']);
+
+        //发送封号请求
+        $disable = $this->getBussiness('GameApi')->talkban($reqData);
+        if(!$disable){
+            $this->functions->alert('禁言失败');
+        }
+
+        $this->functions->alert('禁言成功');
+
+        return $this->dispatcher->forward(array(
+            "controller" => "user",
+            "action" => "disableView",
+        ));
+    }
+
 }
