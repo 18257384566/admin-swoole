@@ -71,6 +71,8 @@ class ManagerController extends ControllerBase
             $reqData['channel'] = 'default';
         }
 
+        $reqData['channel'] = strtolower($reqData['channel']);
+
         //校验数据
         $validation = $this->paValidation;
         $validation->noticeApi();
