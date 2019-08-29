@@ -17,6 +17,8 @@ class Route extends RouterGroup
 
         //api
         $this->addPost('/exchange/exchange','exchange::exchange');  //兑换券（兑换）
+        $this->add('/api/notice/get','manager::noticeApi');             //获取公告
+
 
 
         //登陆
@@ -44,8 +46,10 @@ class Route extends RouterGroup
         $this->add('/zone/list','zone::list');                  //区服列表（页面）
 
         //管理工具
-        $this->add('/prop/send','send::propView');              //发送道具（页面）
-        $this->add('/notice/send','send::noticeView');          //发送道具（页面）
+        $this->add('/manager/prop/send','send::propView');      //发送道具（页面）
+        $this->add('/manager/notice/send','send::noticeView');  //推送消息（页面）
+        $this->add('/manager/notice/list','manager::noticeList');   //公告列表（页面）
+        $this->add('/manager/notice/add','manager::noticeAdd');     //公告添加
 
         //用户管理
         $this->add('/user/daily/login','user::dailyLogin');     //每日登录（页面）

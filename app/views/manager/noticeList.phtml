@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/datepicker.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+
+              <div class="container">
+                  <div class="page-title">添加公告</div>
+                  <div class="addadmin">
+
+                      <form action="/manager/notice/add"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-root">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>渠道:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="radio" name="channel" value="lv" id="lv" checked><label for="lv">sdk融合</label> &nbsp;&nbsp;
+                                  <input type="radio" name="channel" value="default" id="default"><label for="default">默认</label> &nbsp;&nbsp;
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>公告:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <textarea name="notice" rows="8" cols="80" id="text"></textarea>
+                              </div>
+                          </div>
+
+                  </div>
+                  <input type="submit" value="提交" class="w-btn">
+                  </form>
+
+              </div>
+
+              <div class="container">
+                  <div class="log-table">
+                      <div class="page-title">公告管理</div>
+                      <div class="table">
+                          <table>
+                              <thead>
+                              <tr>
+                                  <th>编号</th>
+                                  <th>渠道</th>
+                                  <th style="width: 50%">公告内容</th>
+                                  <th>创建时间</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <?php foreach($list as $v){ ?>
+                                  <tr>
+                                      <td><?php echo $v['id'];?></td>
+                                      <td><?php
+                                          switch ($v['channel']){
+                                              case 'lv':
+                                                  echo 'sdk融合';
+                                                  break;
+
+                                              case 'default':
+                                                  echo '默认';
+                                                  break;
+
+                                              default:
+                                                  echo '默认';
+                                                  break;
+                                          }
+                                          ?></td>
+                                      <td><?php echo $v['notice'];?></td>
+                                      <td><?php echo date('Y-m-d H:i:s',$v['created_at'])?></td>
+                                  </tr>
+                              <?php } ?>
+                              </tbody>
+                          </table>
+                          <div class="pagination-box">
+                              <?php
+                              if($list){
+                                  //存储页码字符串
+                                  $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                                  //当前页码数，默认当前页码为1
+                                  $curPage = isset($_GET['page'])?$_GET['page']:1;
+                                  if($curPage <=5){
+                                      $begin =1;
+                                      $end = $data['totalpage']>=10?10:$data['totalpage'];
+                                  }else{
+                                      $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                                      $begin =$end -9<=1?1:$end -9;
+                                  }
+                                  //实现上一页
+                                  $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                                  //根据起始页与终止页将当前页面的页码显示出来
+                                  for($i=$begin;$i<=$end;$i++){
+                                      //使用if实现高亮显示当前点击的页码
+                                      if($data['page'] == $i){
+                                          $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                      }else{
+                                          $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                      }
+                                  }
+
+
+                                  //实现下一页
+                                  $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                                  $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                                  $pageNumString .='</div>';
+                                  echo $pageNumString;
+                              }
+
+                              ?>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/moment.min.js"></script>
+<script type="text/javascript" src="/static/js/datepicker.all.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script>
+    $(document).ready(function(){
+        chooseTime()
+    })
+</script>
+</body>
+</html>

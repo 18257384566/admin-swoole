@@ -136,6 +136,24 @@ class PaValidation extends Validation
         )));
     }
 
+    public function noticeAdd(){
+        $this->add('channel', new PresenceOf(array(
+            'exchange_code' => '请选择渠道',
+            'cancelOnFail' => true
+        )));
+        $this->add('notice', new PresenceOf(array(
+            'exchange_code' => '请填写公告',
+            'cancelOnFail' => true
+        )));
+    }
+
+    public function noticeApi(){
+        $this->add('channel', new PresenceOf(array(
+            'exchange_code' => '请选择渠道',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 

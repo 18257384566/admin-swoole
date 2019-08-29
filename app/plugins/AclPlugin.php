@@ -24,6 +24,11 @@ class AclPlugin extends Injectable
         $action = $dispatcher->getActionName();
         $resource = $controller."::".$action;
 
+        //过滤api接口
+        if ($resource == 'manager::noticeApi'){
+            return true;
+        }
+
         if($this->allow($role,$resource)){
             return true;
         }
@@ -56,8 +61,6 @@ class AclPlugin extends Injectable
                 'exchange::exchange',
 
 
-                //test
-                'test::addtable',
             ),
             'supper' => array(
                 'index::index',
@@ -87,6 +90,8 @@ class AclPlugin extends Injectable
                 'user::info',
                 'user::getShipInfoView',
                 'user::notalk',
+                'manager::noticeList',
+                'manager::noticeAdd',
             ),
 
             'developers' => array(
