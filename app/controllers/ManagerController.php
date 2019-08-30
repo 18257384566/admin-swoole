@@ -96,8 +96,8 @@ class ManagerController extends ControllerBase
 
         $this->result['status'] = 1;
         $this->result['msg'] = '';
-        $this->result['data']['notice'] =stripslashes($notice['notice']);
-        return json_encode($this->result,true);
+        $this->result['data']['notice'] = $notice['notice'].PHP_EOL;
+        return json_encode($this->result,JSON_UNESCAPED_UNICODE);
     }
 
 }
