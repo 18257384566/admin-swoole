@@ -35,7 +35,7 @@ class ManagerController extends ControllerBase
 
         //返回数据
         $data['allcount']=$allcount['allcount'];
-        $data['page']=$page;
+        $data['page']=$this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
         $data['search'] = '';
 
@@ -68,7 +68,7 @@ class ManagerController extends ControllerBase
     public function noticeApiAction(){
         $reqData['channel'] = $this->request->getQuery('channel');
         if(!isset($reqData['channel']) || $reqData['channel'] == ''){
-            $reqData['channel'] = 'default';
+            $reqData['channel'] = 'pt';
         }
 
         $reqData['channel'] = strtolower($reqData['channel']);

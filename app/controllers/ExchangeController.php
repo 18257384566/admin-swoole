@@ -99,7 +99,7 @@ class ExchangeController extends ControllerBase
 
         //返回数据
         $data['allcount'] = $allcount['allcount'];
-        $data['page'] = $page;
+        $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
         $data['search'] = '';
 
