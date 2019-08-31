@@ -13,7 +13,8 @@ class IndexController extends ControllerBase
         $filed = 'server_name,url';
         $server_list = $this->getModel('Server')->getList($filed);
         if(!$server_list){
-            $server_list[0] = 'http://47.96.81.238:8008';
+            $server_list[0]['url'] = 'http://47.96.81.238:8008';
+            $server_list[0]['server_name'] = '47.96.81.238:8008';
         }
 
         $data['server_list'] = $server_list;
