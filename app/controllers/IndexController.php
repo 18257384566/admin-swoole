@@ -9,6 +9,16 @@ class IndexController extends ControllerBase
 {
 
     public function loginAction(){
+        //获取服务器列表
+        $filed = 'server_name,url';
+        $server_list = $this->getModel('Server')->getList($filed);
+        if(!$server_list){
+            $server_list[0] = 'http://47.96.81.238:8008';
+        }
+
+        $data['server_list'] = $server_list;
+
+        $this->view->data = $data;
         return $this->view->pick('index/login');
     }
 
@@ -17,6 +27,12 @@ class IndexController extends ControllerBase
     {
         $reqData['name'] = $this->request->get('name');
         $reqData['password'] = strtolower($this->request->get('password'));
+        $server = strtolower($this->request->get('server'));
+
+        $server = explode(',',$server);
+        $reqData['server_url'] = $server[0];
+        $reqData['server_name'] = $server[1];
+
         //校验数据
         $validation = $this->paValidation;
         $validation->doLogin();
@@ -41,8 +57,9 @@ class IndexController extends ControllerBase
             'account' => $result['data']['admin_name'],
             'password' => $result['data']['password'],
             'role' => $result['data']['role'],
-            // bn 'expiretime' => time() + $this->config->lifetime['login'],
             'ip' => $this->functions->get_client_ip(),
+            'server_url' => $reqData['server_url'],
+            'server_name' => $reqData['server_name'],
         ];
         $this->session->set('backend',$data);
         $_SESSION['expiretime'] = time() + $this->config->lifetime['login'];

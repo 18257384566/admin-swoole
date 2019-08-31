@@ -1,5 +1,6 @@
 $(function(){
-	url = "http://" + RemoteAddr + ":" + Port + "/gm/getzonelist";
+	// url = "http://" + RemoteAddr + ":" + Port + "/gm/getzonelist";
+	url = $('#serverUrl').text() + "/gm/getzonelist";
 	var zoneStr, channelStr;
     $.ajax({
         url: url,

@@ -9,10 +9,18 @@ namespace App\Bussiness;
 
 class GameApi extends BaseBussiness
 {
+    public $server_url = '';
+
+    public function __construct()
+    {
+        $admin = $this->dispatcher->getParam('admin');
+        $this->server_url = $admin['server_url'];
+    }
+
     public function getusershipinfo($reqData){
         $data = [];
         $data['nickname'] = $reqData['nickname'];
-        $url = $this->config['leeonUrl'].'/manager/getusershipinfo';
+        $url = $this->server_url.'/manager/getusershipinfo';
         try{
             $result = $this->functions->http_request_code($url, 'POST',$data);
             if(!$result){
@@ -29,7 +37,7 @@ class GameApi extends BaseBussiness
     }
 
     public function getItemList(){
-        $url = $this->config['gameUrl'].'/gm/getitemlist';
+        $url = $this->server_url.'/gm/getitemlist';
         try{
             $result = $this->functions->http_request_code($url, 'GET');
             if(!$result){
@@ -47,7 +55,7 @@ class GameApi extends BaseBussiness
     }
 
     public function getZoneList(){
-        $url = $this->config['gameUrl'].'/gm/getzonelist';
+        $url = $this->server_url.'/gm/getzonelist';
         try{
             $result = $this->functions->http_request_code($url, 'GET');
             if(!$result){
@@ -65,7 +73,7 @@ class GameApi extends BaseBussiness
     }
 
     public function ban($data){
-        $url = $this->config['leeonUrl'].'/manager/ban';
+        $url = $this->server_url.'/manager/ban';
         try{
             $result = $this->functions->http_request_code($url, 'POST',$data);
             if(!$result){
@@ -82,7 +90,7 @@ class GameApi extends BaseBussiness
     }
 
     public function getUserInfo($reqData){
-        $url = $this->config['leeonUrl'].'/manager/getuserinfo';
+        $url = $this->server_url.'/manager/getuserinfo';
         try{
             $result = $this->functions->http_request_code($url, 'POST',$reqData);
             if(!$result){
@@ -100,7 +108,7 @@ class GameApi extends BaseBussiness
     }
 
     public function talkban($data){
-        $url = $this->config['leeonUrl'].'/manager/talkban';
+        $url = $this->server_url.'/manager/talkban';
         try{
             $result = $this->functions->http_request_code($url, 'POST',$data);
             if(!$result){

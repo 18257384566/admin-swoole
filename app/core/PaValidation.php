@@ -154,6 +154,17 @@ class PaValidation extends Validation
         )));
     }
 
+    public function serverAdd(){
+        $this->add('server_name', new PresenceOf(array(
+            'exchange_code' => '请填写服务器名',
+            'cancelOnFail' => true
+        )));
+        $this->add('url', new PresenceOf(array(
+            'exchange_code' => '请填写url',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 

@@ -19,6 +19,13 @@
             <form action=""  onsubmit="return false" method="post" enctype="multipart/form-data">
                 <ul class="login-input">
                     <li>
+                        <select name="server" id="server">
+                            <?php foreach($data['server_list'] as $v){ ?>
+                                <option value ="<?php echo $v['url'].','.$v['server_name'] ?>"> <?php echo $v['server_name'] ?> </option>
+                            <?php } ?>
+                        </select>
+                    </li>
+                    <li>
                         <input type="text" placeholder="请输入账户名" name="name" id="name">
                     </li>
                     <li>

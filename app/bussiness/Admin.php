@@ -25,6 +25,7 @@ class Admin extends BaseBussiness
         //记录日志
         $sqlData['admin_no'] = $admin['admin_no'];
         $sqlData['admin_name'] = $reqData['name'];
+        $sqlData['server_name'] = $reqData['server_name'];
         $this->getModel('AdminLog')->addLog($sqlData);
 
 

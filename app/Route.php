@@ -34,6 +34,9 @@ class Route extends RouterGroup
         $this->add('/admin/add','admin::addView');              //添加用户（页面）
         $this->add('/admin/addAdmin','admin::addAdmin');        //添加用户
         $this->add('/admin/log','admin::adminLog');             //管理员日志
+        $this->add('/admin/server/list','admin::serverList');   //服务器列表
+        $this->add('/admin/server/add','admin::serverAdd');     //服务器添加
+        $this->add('/admin/server/del','admin::serverDel');     //服务器删除
 
 
         //兑换券管理

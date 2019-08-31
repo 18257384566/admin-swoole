@@ -92,6 +92,9 @@ class AclPlugin extends Injectable
                 'user::notalk',
                 'manager::noticeList',
                 'manager::noticeAdd',
+                'admin::serverList',
+                'admin::serverAdd',
+                'admin::serverDel',
             ),
 
             'developers' => array(

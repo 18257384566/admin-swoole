@@ -13,18 +13,30 @@ namespace App\Controllers;
 class UserController extends ControllerBase
 {
     public function dailyLoginAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $this->view->server_url = $admin['server_url'];
         $this->view->pick('user/dailyLogin');
     }
 
     public function retainAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $this->view->server_url = $admin['server_url'];
         $this->view->pick('user/retain');
     }
 
     public function loginCountAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $this->view->server_url = $admin['server_url'];
         $this->view->pick('user/loginCount');
     }
 
     public function onlineAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $this->view->server_url = $admin['server_url'];
         $this->view->pick('user/online');
     }
 

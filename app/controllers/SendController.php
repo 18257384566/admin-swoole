@@ -13,14 +13,16 @@ namespace App\Controllers;
 class SendController extends ControllerBase
 {
     public function propViewAction(){
-//        $admin = $this->dispatcher->getParam('admin');
-//        $this->view->adminName = $admin['account'];
-//
-//        $this->view->permission = '1';
+        $admin = $this->dispatcher->getParam('admin');
+
+        $this->view->server_url = $admin['server_url'];
         $this->view->pick('send/prop');
     }
 
     public function noticeViewAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $this->view->server_url = $admin['server_url'];
         $this->view->pick('send/notice');
     }
 

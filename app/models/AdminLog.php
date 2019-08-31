@@ -19,6 +19,7 @@ class AdminLog extends BaseModel
         $this->admin_no = $data['admin_no'];
         $this->ip = $_SERVER['REMOTE_ADDR'];
         $this->admin_name = $data['admin_name'];
+        $this->server_name = $data['server_name'];
         $this->created_at = $this->updated_at = time();
         if ($this->create() === false) {
             return false;

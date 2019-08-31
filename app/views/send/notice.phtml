@@ -89,6 +89,8 @@
               </div>
           </div>
       </div>
+
+              <div id="serverUrl" style="color: #E1E1EB"><?php echo $server_url; ?></div>
   </div>
 <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
@@ -102,6 +104,7 @@
 <script type="text/javascript">
               $(function(){
                   var zoneValList = [];
+                  var server_url = $('#serverUrl').text();
 
                   // submit
                   $(".send").click(function(){
@@ -111,7 +114,8 @@
                           layer.tips('亲，有必填参数未填写哦~', ".send");
                           return;
                       }
-                      url = "http://" + RemoteAddr + ":" + Port + "/manager/sendnotice";
+//                      url = "http://" + RemoteAddr + ":" + Port + "/manager/sendnotice";
+                      url = server_url + "/manager/sendnotice";
                       $.ajax({
                           url: url,
                           type: "POST",

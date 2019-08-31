@@ -130,6 +130,7 @@ function doLogin(){
 function requsetLogin(){
     var name = $('#name').val()
     var password = $('#password').val()
+    var server = $('#server').val();
 
     $.ajax({
         type:"post",
@@ -137,6 +138,7 @@ function requsetLogin(){
         data: {
             name: name,
             password: password,
+            server: server,
         },
         success:function(result){
             var res='';

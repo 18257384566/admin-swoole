@@ -14,6 +14,7 @@
                             <a href="/admin/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/list") !== false){echo 'active';}else{echo '';} ?>">管理员列表</li></a>
                             <a href="/admin/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/add") !== false){echo 'active';}else{echo '';} ?>">添加管理员</li></a>
                             <a href="/admin/log"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/log") !== false){echo 'active';}else{echo '';} ?>">日志管理</li></a>
+                            <a href="/admin/server/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/list") !== false){echo 'active';}else{echo '';} ?>">服务器管理</li></a>
                         </ul>
                     </li>
 
@@ -74,7 +75,8 @@
     <?php } ?>
     <div>
         <ul>
-            <li><i class="icon icon-home"></i><span><?php if(isset($adminName)) echo $adminName ?></span></li>
+            <li><?php $admin = $this->dispatcher->getParam('admin'); if(isset($admin)) echo $admin['server_name'] ?></li>
+            <li><i class="icon icon-home"></i><span><?php if(isset($admin)) echo $admin['account'] ?></span></li>
             <?php if(isset($EOSAddress)){ ?>
                 <li><span><a href="/<?php echo $pro_no; ?>/eosResourceManage">EOS资源管理</a></span</li>
             <?php } ?>

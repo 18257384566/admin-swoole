@@ -112,6 +112,8 @@
                   </div>
               </div>
           </div>
+
+              <div id="serverUrl" style="color: #E1E1EB"><?php echo $server_url; ?></div>
       </div>
   </div>
 <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
@@ -127,8 +129,10 @@
           jQuery.support.cors = true;
           $(function(){
               var zoneValList = [];
+              var server_url = $('#serverUrl').text()
 
-              url = "http://" + RemoteAddr + ":" + Port + "/gm/getitemlist";
+//              url = "http://" + RemoteAddr + ":" + Port + "/gm/getitemlist";
+              url = server_url + "/gm/getitemlist";
               var item;
               $.ajax({
                   url: url,
@@ -206,7 +210,8 @@
                       return;
                   }
 
-                  url = "http://" + RemoteAddr + ":" + Port +  "/manager/senditem";
+//                  url = "http://" + RemoteAddr + ":" + Port +  "/manager/senditem";
+                  url = server_url +  "/manager/senditem";
 
                   $.ajax({
                       url: url,

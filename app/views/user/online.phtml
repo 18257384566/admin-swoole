@@ -95,6 +95,8 @@
 
           </div>
       </div>
+
+              <div id="serverUrl" style="color: "><?php echo $server_url ?></div>
   </div>
 <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
@@ -109,6 +111,8 @@
               $(function(){
                   var zoneValList = [];
                   var chanValList = [];
+                  var serverUrl = $('#serverUrl').text();
+
                   // 默认日期
                   nowTime = new Date();
                   date = nowTime.getFullYear() + "-" + (nowTime.getMonth()+1) + "-" + nowTime.getDate();
@@ -124,7 +128,8 @@
                       }
                       // $(".tbody").empty();
 
-                      url = "http://" + RemoteAddr + ":" + Port + "/manager/analyze";
+//                      url = "http://" + RemoteAddr + ":" + Port + "/manager/analyze";
+                      url = serverUrl + "/manager/analyze";
                       $.ajax({
                           url: url,
                           type: "POST",
