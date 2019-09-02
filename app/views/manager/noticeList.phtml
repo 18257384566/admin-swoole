@@ -29,6 +29,7 @@
                               <div class="addadmin-right">
                                   <input type="radio" name="channel" value="ly" id="ly" checked><label for="ly">sdk融合</label> &nbsp;&nbsp;
                                   <input type="radio" name="channel" value="pt" id="pt"><label for="pt">PT</label> &nbsp;&nbsp;
+                                  <input type="radio" name="channel" value="ios" id="ios"><label for="ios">IOS</label> &nbsp;&nbsp;
                               </div>
                           </div>
                           <div class="addadmin-pwd">
@@ -69,8 +70,12 @@
                                                   echo 'sdk融合';
                                                   break;
 
-                                              case 'default':
+                                              case 'pt':
                                                   echo 'PT';
+                                                  break;
+
+                                              case 'ios':
+                                                  echo 'IOS';
                                                   break;
 
                                               default:
