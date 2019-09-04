@@ -71,6 +71,10 @@ class Route extends RouterGroup
         $this->add('/user/shipInfo','user::getShipInfoView');   //获取用户船队信息（页面）
 
 
+        //获取实时数据
+        $this->add('/data/update','data::update');              //更新redis数据
+
+
 
 
 

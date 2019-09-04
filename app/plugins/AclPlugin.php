@@ -95,6 +95,7 @@ class AclPlugin extends Injectable
                 'admin::serverList',
                 'admin::serverAdd',
                 'admin::serverDel',
+                'data::update',
             ),
 
             'developers' => array(

@@ -16,6 +16,7 @@ class ManagerController extends ControllerBase
     public function noticeListAction(){
         $limit = 10;
         $page = $this->request->get('page');
+        $channel = $this->request->get('channel');
         if(!$page){
             $page=1;
         }
@@ -28,7 +29,13 @@ class ManagerController extends ControllerBase
         $allcount = $allcount->fetch();
 
         //获取当页
-        $sql = "select id,notice,created_at,channel from $table order by created_at desc limit $page,$limit";
+        if(!isset($channel) || $channel == ''){
+            $sql = "select id,notice,created_at,channel,remark from $table order by created_at desc limit $page,$limit";
+        }else{
+            $sql = "select id,notice,created_at,channel,remark from $table where channel = '$channel' order by created_at desc limit $page,$limit";
+            var_dump($sql);
+        }
+
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();
@@ -47,6 +54,7 @@ class ManagerController extends ControllerBase
     public function noticeAddAction(){
         $reqData['channel'] = $this->request->getPost('channel');
         $reqData['notice'] = $this->request->getPost('notice');
+        $reqData['remark'] = $this->request->getPost('remark');
 
         //校验数据
         $validation = $this->paValidation;

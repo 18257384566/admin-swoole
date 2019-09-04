@@ -1,0 +1,33 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ww
+ * Date: 2018/10/29
+ * Time: 下午4:28
+ */
+
+namespace App\Controllers;
+
+class DataController extends ControllerBase
+{
+    public function updateAction(){
+        ini_set('max_execution_time', '0');
+
+        $server_url = $this->dispatcher->getParam('admin')['server_url'];
+        $server_url = trim(strrchr($server_url, '/'),'/');  //去掉http
+        $server_url = strstr($server_url,':',-1);   //去掉端口号
+
+        //获取aof路径
+        $route = $this->config->aof;
+
+        $cmd = "scp -r abin@$server_url:$route /usr/local/redis"; //var_dump($cmd);exit;
+        $result = shell_exec('cd /usr/local/redis;mkdir test');
+        if($result){
+            $this->functions->alert('更新成功');
+            exit;
+        }else{
+            $this->functions->alert('更新失败');
+            exit;
+        }
+    }
+}

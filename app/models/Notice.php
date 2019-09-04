@@ -17,6 +17,7 @@ class Notice extends BaseModel
     public function add($data){
         $this->channel = $data['channel'];
         $this->notice = $data['notice'];
+        $this->remark = $data['remark'];
         $this->created_at = $this->updated_at = time();
         if ($this->create() === false) {
             return false;
