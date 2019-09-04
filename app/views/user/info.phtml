@@ -61,7 +61,7 @@
 
                           <?php switch ($data['type']){
                               case "ship":
-
+                    //var_dump($data['list']);
                                   foreach ($data['list'] as $v){
                                       echo '昵称'.$data['nickname'].'&nbsp;&nbsp;';
                                       echo '船只ID:'.$v['Id'].'&nbsp;&nbsp;';
@@ -101,18 +101,18 @@
                                   break;
 
                               case "res":
-                                  echo '零件:'.$data['list']['Parts'].'&nbsp;&nbsp;';
-                                  echo '技能点:'.$data['list']['SkillPoint'].'&nbsp;&nbsp;';
-                                  echo '武器点:'.$data['list']['WeaponPoint'].'&nbsp;&nbsp;';
-                                  echo '配件强化点:'.$data['list']['AcsEvolutionPoint'].'&nbsp;&nbsp;';
-                                  echo '物资:'.$data['list']['Gold'].'&nbsp;&nbsp;';
-                                  echo '燃油:'.$data['list']['Fuel'].'&nbsp;&nbsp;';
-                                  echo '门票:'.$data['list']['Ticket'].'&nbsp;&nbsp;';
-                                  echo '军需券:'.$data['list']['ArmyTick'].'&nbsp;&nbsp;';
-                                  echo '钢材:'.$data['list']['Material'].'&nbsp;&nbsp;';
-                                  echo '钻石:'.$data['list']['Diamond'].'&nbsp;&nbsp;';
-                                  echo '友情点:'.$data['list']['Friendship'].'&nbsp;&nbsp;';
-                                  echo '活动积分:'.$data['list']['ActivePoints'].'&nbsp;&nbsp;';
+                                  echo '零件:'.isset($data['list']['Parts']).'&nbsp;&nbsp;<br>';
+                                  echo '技能点:'.$data['list']['SkillPoint'].'&nbsp;&nbsp;<br>';
+                                  echo '武器点:'.$data['list']['WeaponPoint'].'&nbsp;&nbsp;<br>';
+                                  echo '配件强化点:'.$data['list']['AcsEvolutionPoint'].'&nbsp;&nbsp;<br>';
+                                  echo '物资:'.$data['list']['Gold'].'&nbsp;&nbsp;<br>';
+                                  echo '燃油:'.$data['list']['Fuel'].'&nbsp;&nbsp;<br>';
+                                  echo '门票:'.$data['list']['Ticket'].'&nbsp;&nbsp;<br>';
+                                  echo '军需券:'.$data['list']['ArmyTick'].'&nbsp;&nbsp;<br>';
+                                  echo '钢材:'.$data['list']['Material'].'&nbsp;&nbsp;<br>';
+                                  echo '钻石:'.$data['list']['Diamond'].'&nbsp;&nbsp;<br>';
+                                  echo '友情点:'.$data['list']['Friendship'].'&nbsp;&nbsp;<br>';
+                                  echo '活动积分:'.$data['list']['ActivePoints'].'&nbsp;&nbsp;<br>';
 
                                   break;
 

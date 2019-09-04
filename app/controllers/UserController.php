@@ -164,10 +164,20 @@ class UserController extends ControllerBase
             $this->functions->alert($message);
         }
 
-        $userInfo = $this->getBussiness('GameApi')->getUserInfo($reqData);
-        if(!$userInfo){
-            $this->functions->alert('查询失败','/user/shipInfo');exit;
+        //从api获取
+//        $userInfo = $this->getBussiness('GameApi')->getUserInfo($reqData);
+//        if(!$userInfo){
+//            $this->functions->alert('查询失败','/user/shipInfo');exit;
+//        }
+
+        //从redis获取
+        $key = 'Game_Nickname';
+        $user_id = $this->redis->hGet($key,$reqData['nickname']);
+        if(!$user_id){
+            $this->functions->alert('该用户不存在');
+            exit;
         }
+        $userInfo = $this->getBussiness('User')->getUserInfo($user_id,$reqData);
 
         $data['type'] = $reqData['type'];
         $data['list'] = $userInfo;

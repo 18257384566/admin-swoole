@@ -20,8 +20,10 @@ class DataController extends ControllerBase
         //获取aof路径
         $route = $this->config->aof;
 
-        $cmd = "scp -r abin@$server_url:$route /usr/local/redis"; //var_dump($cmd);exit;
-        $result = shell_exec('cd /usr/local/redis;mkdir test');
+        $cmd = "scp -r abin@$server_url:$route /usr/local/redis"; var_dump($cmd);exit;
+        $cmd = 'cd /usr/local/redis;mkdir test';
+        $result = exec('cd /usr/local/redis;mkdir test');
+        var_dump($result);exit;
         if($result){
             $this->functions->alert('更新成功');
             exit;
