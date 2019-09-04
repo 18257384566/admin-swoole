@@ -33,7 +33,6 @@ class ManagerController extends ControllerBase
             $sql = "select id,notice,created_at,channel,remark from $table order by created_at desc limit $page,$limit";
         }else{
             $sql = "select id,notice,created_at,channel,remark from $table where channel = '$channel' order by created_at desc limit $page,$limit";
-            var_dump($sql);
         }
 
         $list=$this->db->query($sql);
@@ -44,7 +43,7 @@ class ManagerController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page']=$this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = '';
+        $data['search'] = 'channel='.$channel.'&';
 
         $this->view->list = $list;
         $this->view->data = $data;
