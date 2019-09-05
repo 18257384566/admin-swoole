@@ -59,6 +59,7 @@ class User extends BaseBussiness
 
                 break;
         }
+
         //echo '<pre>';var_dump($userInfo);exit;
         return $userInfo;
     }
