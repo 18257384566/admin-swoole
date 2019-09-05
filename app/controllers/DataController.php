@@ -11,8 +11,6 @@ namespace App\Controllers;
 class DataController extends ControllerBase
 {
     public function updateAction(){
-        ini_set('max_execution_time', '0');
-
         $server_url = $this->dispatcher->getParam('admin')['server_url'];
         $server_url = trim(strrchr($server_url, '/'),'/');  //去掉http
         $server_url = strstr($server_url,':',-1);   //去掉端口号
@@ -20,10 +18,10 @@ class DataController extends ControllerBase
         //获取aof路径
         $route = $this->config->aof;
 
-        $cmd = "scp -r abin@$server_url:$route /usr/local/redis"; var_dump($cmd);exit;
-        $cmd = 'cd /usr/local/redis;mkdir test';
-        $result = exec('cd /usr/local/redis;mkdir test');
-        var_dump($result);exit;
+        $cmd = "scp -r abin@$server_url:$route /usr/local/redis;./redis-cli -h 127.0.0.1 -p 6379 --pipe < appendonly.aof;rm appendonly.aof  && echo success";
+        //$cmd = 'cd /usr/local/redis;mkdir test && echo success';
+        //$cmd = 'whoami';
+        $result = shell_exec($cmd);
         if($result){
             $this->functions->alert('更新成功');
             exit;

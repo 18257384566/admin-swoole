@@ -18,7 +18,8 @@
           <div class="box">
               <div class="container">
 
-                  <a href="/data/update"><button class='btn btn-primary'> &nbsp 更新数据 &nbsp </button></a>
+<!--                  <a href="/data/update"><button class='btn btn-primary'> &nbsp 更新数据 &nbsp </button></a>-->
+                  <button class='btn btn-primary' id="dataUpdate"> &nbsp 更新数据 &nbsp </button>
 
               </div>
 
@@ -168,6 +169,13 @@
           $("#eye span").addClass("icon-yanjing_kai");
 
       }
+  });
+
+  $(document).ready(function(){
+      $("#dataUpdate").click(function(){
+          htmlobj=$.ajax({url:"/data/update",async:false});
+          alert('资源在五分钟内更新完成');
+      });
   });
 </script>
 </body>
