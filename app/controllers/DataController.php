@@ -20,7 +20,7 @@ class DataController extends ControllerBase
 
         $cmd = "scp -r abin@$server_url:$route /usr/local/redis;./redis-cli -h 127.0.0.1 -p 6379 --pipe < appendonly.aof;rm appendonly.aof  && echo success";
         //$cmd = 'cd /usr/local/redis;mkdir test && echo success';
-        //$cmd = 'whoami';
+        $cmd = 'whoami';
         $result = shell_exec($cmd);
         if($result){
             $this->functions->alert('更新成功');
