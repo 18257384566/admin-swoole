@@ -19,7 +19,7 @@ class DataController extends ControllerBase
         $route = $this->config->aof;
         $user = $this->config->user;
 
-        $cmd = "scp -r $user@$server_url:$route /usr/local/redis;./redis-cli -h 127.0.0.1 -p 6379 --pipe < appendonly.aof;rm appendonly.aof  && echo success";
+        $cmd = "scp -r $user@$server_url:$route /usr/local/redis;./redis-cli -h 127.0.0.1 -p 6379 --pipe < appendonly.aof && echo success";
         //$cmd = 'cd /usr/local/redis;mkdir test && echo success';
         //$cmd = 'whoami';
         $result = shell_exec($cmd); var_dump($cmd,$result);exit;
