@@ -22,7 +22,7 @@
                         <select name="server" id="server">
                             <?php if(isset($data['server_list'])){ ?>
                                 <?php foreach($data['server_list'] as $v){ ?>
-                                    <option value ="<?php echo $v['url'].','.$v['server_name'] ?>"> <?php echo $v['server_name'] ?> </option>
+                                    <option value ="<?php echo $v['url'].','.$v['server_name'].','.$v['id'] ?>"> <?php echo $v['server_name'] ?> </option>
                                 <?php } ?>
                             <?php } ?>
                         </select>

@@ -127,9 +127,11 @@ class AdminController extends ControllerBase
     }
 
 
+    //服务器
     public function serverListAction(){
         $limit = 10;
         $page = $this->request->get('page');
+        $search = $this->request->get('type');
         if(!$page){
             $page=1;
         }
@@ -142,7 +144,11 @@ class AdminController extends ControllerBase
         $allcount = $allcount->fetch();
 
         //获取当页
-        $sql = "select `id`,`server_name`,`url`,`created_at` from $table order by created_at desc limit $page,$limit";
+        if(!isset($search) || $search == ''){
+            $sql = "select `id`,`server_name`,`url`,`created_at`,`type` from $table order by created_at desc limit $page,$limit";
+        }else{
+            $sql = "select `id`,`server_name`,`url`,`created_at`,`type` from $table where `type`= $search order by created_at desc limit $page,$limit";
+        }
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();
@@ -151,7 +157,7 @@ class AdminController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = '';
+        $data['search'] = "type=$search?";
 
         $this->view->list = $list;
         $this->view->data = $data;
@@ -161,6 +167,7 @@ class AdminController extends ControllerBase
     public function serverAddAction(){
         $reqData['server_name'] = $this->request->getPost('server_name');
         $reqData['url'] = $this->request->getPost('url');
+        $reqData['type'] = $this->request->getPost('type');
 
         //校验数据
         $validation = $this->paValidation;
@@ -187,6 +194,115 @@ class AdminController extends ControllerBase
         }
 
         $this->functions->alert('删除成功');
+    }
+
+
+    //区服
+    public function diserverListAction(){
+        //获取区服列表
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->get('server_name');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_diserver';
+        //获取总条数
+        $allcount = $this->db->query("select count(id) as allcount from $table");
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `id`,`server_name`,`diserver_id`,`diserver_name`,`created_at` from $table order by created_at desc limit $page,$limit";
+        }else{
+            $sql = "select `id`,`server_name`,`diserver_id`,`diserver_name`,`created_at` from $table where `server_name` = '$search' order by created_at desc limit $page,$limit";
+        }
+
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page']=$this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = 'server_name='.$search.'&';
+
+        //获取服务器列表
+        $filed = 'id,server_name';
+        $data['server_list'] = $this->getModel('Server')->getList($filed);
+        if(!$data['server_list']){
+            $data['server_list'] = [];
+        }
+
+        $this->view->list = $list;
+        $this->view->data = $data;
+        $this->view->pick('admin/diServerList');
+    }
+
+    public function diserverAddAction(){
+        $reqData['server_id'] = $this->request->getPost('server_id');
+        $reqData['diserver_id'] = $this->request->getPost('diserver_id');
+        $reqData['diserver_name'] = $this->request->getPost('diserver_name');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->diserverAdd();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }
+
+        $add = $this->getBussiness('Server')->addDiserver($reqData);
+        $this->functions->alert($add['msg'],'/admin/diserver/list');
+    }
+
+    public function diserverDelAction(){
+        $reqData['id'] = $this->request->getQuery('id');
+        if(!isset($reqData['id']) || $reqData['id'] == ''){
+            $this->functions->alert('信息丢失，修改失败');
+        }
+
+        $del = $this->getModel('Diserver')->delDiserver($reqData['id']);
+        if(!$del){
+            $this->functions->alert('删除失败');
+        }
+
+        $this->functions->alert('删除成功');
+    }
+
+    public function getzonelistAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        //根据服务器id查找区服名
+        $filed = 'diserver_name,diserver_id';
+        $diserver = $this->getModel('Diserver')->getByServerId($admin['server_id'],$filed);
+        if(!$diserver){
+            $diserver = [];
+        }
+
+        $i = 1;
+        $zonelist = [];
+        foreach ($diserver as $v){
+            $zonelist[$i]['ServerName'] = $v['diserver_name'];
+            $zonelist[$i]['ServerStatus'] = (int)$v['diserver_id'];
+            $i ++;
+        }
+        $zonelist['success'] = true;
+
+        return json_encode($zonelist);
+    }
+
+
+    //渠道
+    public function channelListAction(){
+//        $this->view->list = $list;
+//        $this->view->data = $data;
+        $this->view->pick('admin/channelList');
     }
 
 }

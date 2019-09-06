@@ -15,37 +15,26 @@
           <div class="box">
 
               <div class="container">
-                  <div class="page-title">添加服务器</div>
+                  <div class="page-title">添加渠道</div>
                   <div class="addadmin">
 
-                      <form action="/admin/server/add"  method="post" enctype="multipart/form-data">
-                          <div class="addadmin-account">
-                              <div class="addadmin-left">
-                                  <span>*</span><span>服务器名</span>
-                              </div>
-                              <div class="addadmin-right">
-                                  <input type="text" name="server_name">
-                              </div>
-                          </div>
+                      <form action="/admin/diserver/add"  method="post" enctype="multipart/form-data">
+
                           <div class="addadmin-pwd">
                               <div class="addadmin-left">
-                                  <span>*</span><span>url</span>
+                                  <span>*</span><span>渠道名</span>
                               </div>
                               <div class="addadmin-right">
-                                  <input type="text" autocomplete="off" name="url" placeholder="请带上端口号">
+                                  <input type="text" autocomplete="off" name="channel">
                               </div>
                           </div>
-                          <div class="addadmin-root">
+
+                          <div class="addadmin-pwd">
                               <div class="addadmin-left">
-                                  <span>*</span><span>类型（大渠道）:</span>
+                                  <span>*</span><span>备注</span>
                               </div>
                               <div class="addadmin-right">
-
-                                      <input type="radio" name="type" value="1" id="1" checked><label for="1"> ios </label> &nbsp;&nbsp;
-                                      <input type="radio" name="type" value="2" id="2" ><label for="2"> 安卓 </label> &nbsp;&nbsp;
-                                      <input type="radio" name="type" value="3" id="3" ><label for="3"> 其他 </label> &nbsp;&nbsp;
-                                      <input type="radio" name="type" value="4" id="4" ><label for="4"> 海外 </label> &nbsp;&nbsp;
-
+                                  <input type="text" autocomplete="off" name="remark">
                               </div>
                           </div>
 
@@ -56,66 +45,48 @@
               </div>
 
               <div class="container">
-                  <div class="page-title">服务器列表</div>
-                  <br>
 
-                  <a href="/admin/server/list?type=1"><button class='btn btn-primary'> &nbsp ios &nbsp </button></a>
-                  <a href="/admin/server/list?type=2"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 安卓 &nbsp&nbsp&nbsp </button></a>
-                  <a href="/admin/server/list?type=3"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 其他 &nbsp&nbsp&nbsp </button></a>
-                  <a href="/admin/server/list?type=4"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 海外 &nbsp&nbsp&nbsp </button></a>
-                  <a href="/admin/server/list?type="><button class='btn btn-primary'> &nbsp&nbsp&nbsp 全部 &nbsp&nbsp&nbsp </button></a>
+                  <div class="search-ui">
+                      <form action="/admin/diserver/list" method="get">
 
+                          <div class="search-ui-input">
+                              <div>
+                                  <input type="text" class="input-primary" placeholder="服务器名称" name="server_name" value="">
+                              </div>
+                              <div>
+                                  <button class='btn btn-primary'>搜索</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+
+<!--                  <div class="page-title">服务器列表</div>-->
                   <div class="table">
                       <table>
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>类型（大渠道）</th>
                                 <th>服务器名</th>
-                                <th>url</th>
+                                <th>区服名</th>
+                                <th>区服id</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                        <?php foreach($list as $v){ ?>
-                                <tr>
-                                    <td><?php echo $v['id'];?></td>
-                                    <td><?php
-
-                                            switch ($v['type']){
-                                                case '1':
-                                                    echo 'ios';
-                                                    break;
-
-                                                case '2':
-                                                    echo '安卓';
-                                                    break;
-
-                                                case '3':
-                                                    echo '其他';
-                                                    break;
-
-                                                case '4':
-                                                    echo '海外';
-                                                    break;
-
-                                                default:
-                                                    echo '';
-                                                    break;
-                                            }
-
-                                        ?></td>
-                                    <td><?php echo $v['server_name'];?></td>
-                                    <td><?php echo $v['url'];?></td>
-                                    <td><?php echo date('Y-m-d H:i:s',$v['created_at']); ?><span>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/server/del?id=<?php echo $v['id']; ?>" onclick="javascript:return confirm('是否确认删除？');"><button class="action-btn disabled">删除</button></a>
-                                    </td>
-                                </tr>
-                        <?php } ?>
+<!--                        --><?php //foreach($list as $v){ ?>
+<!--                                <tr>-->
+<!--                                    <td>--><?php //echo $v['server_name'];?><!--</td>-->
+<!--                                    <td>--><?php //echo $v['diserver_id'];?><!--</td>-->
+<!--                                    <td>--><?php //echo $v['diserver_name'];?><!--</td>-->
+<!--                                    <td>--><?php //echo date('Y-m-d H:i:s',$v['created_at']); ?><!--<span>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <a href="/admin/diserver/del?id=--><?php //echo $v['id']; ?><!--" onclick="javascript:return confirm('是否确认删除？');"><button class="action-btn disabled">删除</button></a>-->
+<!--                                        <a href="/admin/channel/list?id=--><?php //echo $v['id']; ?><!--"><button class="action-btn noicon">渠道列表</button></a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                        --><?php //} ?>
 
                         
                         </tbody>

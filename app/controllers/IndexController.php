@@ -10,11 +10,12 @@ class IndexController extends ControllerBase
 
     public function loginAction(){
         //获取服务器列表
-        $filed = 'server_name,url';
+        $filed = 'server_name,url,id';
         $server_list = $this->getModel('Server')->getList($filed);
         if(!$server_list){
             $server_list[0]['url'] = 'http://47.96.81.238:8008';
             $server_list[0]['server_name'] = '47.96.81.238:8008';
+            $server_list[0]['id'] = 0;
         }
 
         $data['server_list'] = $server_list;
@@ -33,6 +34,9 @@ class IndexController extends ControllerBase
         $server = explode(',',$server);
         $reqData['server_url'] = $server[0];
         $reqData['server_name'] = $server[1];
+        $reqData['server_id'] = $server[2];
+
+        //根据服务器名查找
 
         //校验数据
         $validation = $this->paValidation;
@@ -61,6 +65,7 @@ class IndexController extends ControllerBase
             'ip' => $this->functions->get_client_ip(),
             'server_url' => $reqData['server_url'],
             'server_name' => $reqData['server_name'],
+            'server_id' => $reqData['server_id'],
         ];
         $this->session->set('backend',$data);
         $_SESSION['expiretime'] = time() + $this->config->lifetime['login'];

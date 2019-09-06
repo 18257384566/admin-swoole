@@ -16,19 +16,19 @@
   <div class="walletadmin-content">
       <div class="walletadmin-box">
           <div class="box">
+
               <div class="container">
-                  <div class="page-title">用户封号</div>
+                  <div class="page-title">用户禁言</div>
                   <div class="addadmin">
 
-                      <form action="/user/disable"  method="post" enctype="multipart/form-data">
+                      <form action="/user/notalk"  method="post" enctype="multipart/form-data">
                           <div class="addadmin-root">
-                            <div class="addadmin-left">
-                                <span>*</span><span>区服:</span>
-                            </div>
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服:</span>
+                              </div>
                               <div class="addadmin-right">
-
-                                  <?php foreach ($data['diserver_list'] as $v){ //var_dump($data['diserver_list'])  ?>
-                                      <input type="radio" name="zones" value="<?= $v['diserver_id'] ?>" id="<?= $v['diserver_id'] ?>" checked><label for="<?= $v['diserver_id'] ?>"> <?= $v['diserver_name'] ?> </label> &nbsp;&nbsp;
+                                  <?php foreach ($data['diserver_list'] as $v){  ?>
+                                      <input type="radio" name="zone" value="<?= $v['diserver_id'] ?>" id="<?= $v['diserver_id'] ?>" checked><label for="<?= $v['diserver_id'] ?>"> <?= $v['diserver_name'] ?> </label> &nbsp;&nbsp;
                                   <?php } ?>
                               </div>
                           </div>
@@ -37,23 +37,21 @@
                                   <span>*</span><span>昵称:</span>
                               </div>
                               <div class="addadmin-right">
-                                  <input type="text" autocomplete="off" name="user">
+                                  <input type="text" autocomplete="off" name="nickname">
                               </div>
                           </div>
                           <div class="addadmin-phone">
                               <div class="addadmin-left">
-                                <span>*</span><span>封禁结束时间:</span>
+                                  <span>*</span><span>禁言结束时间:</span>
                               </div>
                               <div class="addadmin-right">
                                   <input type="date" name="t">
                               </div>
                           </div>
 
-                          </div>
-                          <input type="submit" value="提交" class="w-btn">
-                      </form>
-
                   </div>
+                  <input type="submit" value="提交" class="w-btn">
+                  </form>
 
               </div>
               </div>

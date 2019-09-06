@@ -96,6 +96,12 @@ class AclPlugin extends Injectable
                 'admin::serverAdd',
                 'admin::serverDel',
                 'data::update',
+                'admin::diserverList',
+                'admin::diserverAdd',
+                'admin::diserverDel',
+                'admin::getzonelist',
+                'user::distalkView',
+                'admin::channelList'
             ),
 
             'developers' => array(

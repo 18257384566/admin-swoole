@@ -106,15 +106,29 @@ class UserController extends ControllerBase
     }
 
     public function disableViewAction(){
-        //查询服务器
-        $data = [];
-        $data['zonelist'] = $this->getBussiness('GameApi')->getZoneList();
-        if(!$data['zonelist']){
-            $data['zonelist'] = [];
+        $admin = $this->dispatcher->getParam('admin');
+        //根据服务器id查找区服名
+        $filed = 'diserver_name,diserver_id';
+        $data['diserver_list'] = $this->getModel('Diserver')->getByServerId($admin['server_id'],$filed);
+        if(!$data['diserver_list']){
+            $data['diserver_list'] = [];
         }
 
         $this->view->data = $data;
         $this->view->pick('user/disable');
+    }
+
+    public function distalkViewAction(){
+        $admin = $this->dispatcher->getParam('admin');
+        //根据服务器id查找区服名
+        $filed = 'diserver_name,diserver_id';
+        $data['diserver_list'] = $this->getModel('Diserver')->getByServerId($admin['server_id'],$filed);
+        if(!$data['diserver_list']){
+            $data['diserver_list'] = [];
+        }
+
+        $this->view->data = $data;
+        $this->view->pick('user/distalk');
     }
 
     public function disableAction(){

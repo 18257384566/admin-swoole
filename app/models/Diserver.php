@@ -3,10 +3,10 @@
 namespace App\Models;
 
 
-class Server extends BaseModel
+class Diserver extends BaseModel
 {
     //表名
-    public static $tableName = 'server';
+    public static $tableName = 'diserver';
 
     public function initialize()
     {
@@ -16,9 +16,10 @@ class Server extends BaseModel
 
 
     public function add($data){
+        $this->server_id = $data['server_id'];
         $this->server_name = $data['server_name'];
-        $this->url = $data['url'];
-        $this->type = $data['type'];
+        $this->diserver_id = $data['diserver_id'];
+        $this->diserver_name = $data['diserver_name'];
         $this->created_at = $this->updated_at = time();
         if ($this->create() === false) {
             return false;
@@ -41,7 +42,7 @@ class Server extends BaseModel
         return $result;
     }
 
-    public function delServer($id){
+    public function delDiserver($id){
         $result = $this->findFirst(
             [
                 'conditions' => 'id = ?1',
@@ -75,6 +76,21 @@ class Server extends BaseModel
             'conditions' => 'id = ?1',
             'bind' => array(
                 1 => $id,
+            ),
+
+        ]);
+        if($result){
+            return $result->toArray();
+        }
+        return $result;
+    }
+
+    public function getByServerId($server_id, $filed = '*'){
+        $result = $this->find([
+            'columns' => $filed,
+            'conditions' => 'server_id = ?1',
+            'bind' => array(
+                1 => $server_id,
             ),
 
         ]);
