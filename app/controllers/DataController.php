@@ -11,6 +11,10 @@ namespace App\Controllers;
 class DataController extends ControllerBase
 {
     public function updateAction(){
+
+        ignore_user_abort(true);    //关掉浏览器，PHP脚本也可以继续执行.
+        set_time_limit(0);          // 通过set_time_limit(0)可以让程序无限制的执行下去
+
         $server_url = $this->dispatcher->getParam('admin')['server_url'];
         $server_url = trim(strrchr($server_url, '/'),'/');  //去掉http
         $server_url = strstr($server_url,':',-1);   //去掉端口号
