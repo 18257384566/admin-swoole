@@ -240,7 +240,7 @@ class AdminController extends ControllerBase
 
         $this->view->list = $list;
         $this->view->data = $data;
-        $this->view->pick('admin/diServerList');
+        $this->view->pick('admin/diserverList');
     }
 
     public function diserverAddAction(){
