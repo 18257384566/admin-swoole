@@ -74,6 +74,9 @@ class UserController extends ControllerBase
 
     public function propListAction(){
         $propList = $this->getBussiness('GameApi')->getItemList();
+        if(!isset($propList) || $propList == ''){
+            $propList = [];
+        }
 
         $this->view->list = $propList;
         $this->view->data = [];
