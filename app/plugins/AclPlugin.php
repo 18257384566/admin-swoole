@@ -95,6 +95,8 @@ class AclPlugin extends Injectable
                 'admin::serverList',
                 'admin::serverAdd',
                 'admin::serverDel',
+                'admin::serverUpdateView',
+                'admin::serverUpdate',
                 'data::update',
                 'admin::diserverList',
                 'admin::diserverAdd',

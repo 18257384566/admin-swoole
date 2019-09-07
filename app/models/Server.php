@@ -83,4 +83,22 @@ class Server extends BaseModel
         }
         return $result;
     }
+
+    public function updateById($id,$data){
+        $result = $this->findFirst(
+            [
+                'conditions' => 'id = ?1',
+                'bind' => array(
+                    1 => $id,
+                ),
+            ]
+        );
+        if (!$result) {
+            return false;
+        }
+        if ($result->save($data) === false) {
+            return false;
+        }
+        return true;
+    }
 }

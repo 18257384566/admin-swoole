@@ -196,6 +196,54 @@ class AdminController extends ControllerBase
         $this->functions->alert('删除成功');
     }
 
+    public function serverUpdateViewAction(){
+        $id = $this->request->getQuery('id');
+        if(!isset($id) || $id == ''){
+            $this->function->alert('参数丢失');
+            exit;
+        }
+
+        $filed = 'server_name,url,type,id';
+        $server = $this->getModel('Server')->getById($id,$filed);
+        if(!$server){
+            $this->function->alert('该服务器不存在或已被删除');
+            exit;
+        }
+
+        $data['server'] = $server;
+        $this->view->data = $data;
+        $this->view->pick('admin/serverUpdate');
+    }
+
+    public function serverUpdateAction(){
+        $reqData['server_name'] = $this->request->getPost('server_name');
+        $reqData['url'] = $this->request->getPost('url');
+        $reqData['type'] = $this->request->getPost('type');
+        $id = $this->request->getPost('id');
+
+        if(!isset($id) || $id == ''){
+            $this->functions->alert('参数丢失','/admin/server/list');
+            exit;
+        }
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->serverAdd();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }
+
+        $update = $this->getModel('Server')->updateById($id,$reqData);
+        if(!$update){
+            $this->functions->alert('修改失败','/admin/server/list');
+            exit;
+        }
+        $this->functions->alert('修改成功','/admin/server/list');
+        exit;
+    }
+
 
     //区服
     public function diserverListAction(){

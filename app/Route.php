@@ -37,6 +37,8 @@ class Route extends RouterGroup
         $this->add('/admin/server/list','admin::serverList');   //服务器列表
         $this->add('/admin/server/add','admin::serverAdd');     //服务器添加
         $this->add('/admin/server/del','admin::serverDel');     //服务器删除
+        $this->add('/admin/server/updateView','admin::serverUpdateView'); //服务器修改（页面）
+        $this->add('/admin/server/update','admin::serverUpdate');   //服务器修改
         $this->add('/admin/diserver/list','admin::diserverList');   //区服列表
         $this->add('/admin/diserver/add','admin::diserverAdd');     //添加区服
         $this->add('/admin/diserver/del','admin::diserverDel');     //删除区服
