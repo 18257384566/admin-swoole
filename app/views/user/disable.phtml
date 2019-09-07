@@ -27,8 +27,8 @@
                             </div>
                               <div class="addadmin-right">
 
-                                  <?php foreach ($data['diserver_list'] as $v){ //var_dump($data['diserver_list'])  ?>
-                                      <input type="radio" name="zones" value="<?= $v['diserver_id'] ?>" id="<?= $v['diserver_id'] ?>" checked><label for="<?= $v['diserver_id'] ?>"> <?= $v['diserver_name'] ?> </label> &nbsp;&nbsp;
+                                  <?php foreach ($data['diserver_list'] as $k => $v){  ?>
+                                      <input type="radio" name="zones" value="<?= $v['diserver_id'] ?>" id="<?= $v['diserver_id'] ?>" <?php if($k == 0){echo 'checked';} ?> ><label for="<?= $v['diserver_id'] ?>"> <?= $v['diserver_name'] ?> </label> &nbsp;&nbsp;
                                   <?php } ?>
                               </div>
                           </div>

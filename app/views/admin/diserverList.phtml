@@ -25,8 +25,8 @@
                                   <span>*</span><span>服务器名</span>
                               </div>
                               <div class="addadmin-right">
-                                  <?php foreach ($data['server_list'] as $v){ ?>
-                                      <input type="radio" name="server_id" value="<?= $v['id'] ?>" id="<?= $v['id'] ?>" checked><label for="<?= $v['id'] ?>"><?= $v['server_name'] ?></label> &nbsp;
+                                  <?php foreach ($data['server_list'] as $k => $v){ ?>
+                                      <input type="radio" name="server_id" value="<?= $v['id'] ?>" id="<?= $v['id'] ?>" <?php if($k == 0){ echo 'checked'; } ?> ><label for="<?= $v['id'] ?>"><?= $v['server_name'] ?></label> &nbsp;
                                   <?php } ?>
                               </div>
                           </div>

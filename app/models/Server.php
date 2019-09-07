@@ -62,6 +62,7 @@ class Server extends BaseModel
     public function getList($filed = '*'){
         $result = $this->find([
             'columns' => $filed,
+            'order' => 'created_at desc',
         ]);
         if($result){
             return $result->toArray();
