@@ -112,9 +112,10 @@ class UserController extends ControllerBase
         $admin = $this->dispatcher->getParam('admin');
         //根据服务器id查找区服名
         $filed = 'diserver_name,diserver_id';
-        $data['diserver_list'] = $this->getModel('Diserver')->getByServerId($admin['server_id'],$filed);
-        if(!$data['diserver_list']){
-            $data['diserver_list'] = [];
+        $data['server'] = $this->getModel('Server')->getById($admin['server_id'],$filed);
+        if(!$data['server']){
+            $data['server']['diserver_name'] = '';
+            $data['server']['diserver_id'] = '';
         }
 
         $this->view->data = $data;
@@ -125,9 +126,10 @@ class UserController extends ControllerBase
         $admin = $this->dispatcher->getParam('admin');
         //根据服务器id查找区服名
         $filed = 'diserver_name,diserver_id';
-        $data['diserver_list'] = $this->getModel('Diserver')->getByServerId($admin['server_id'],$filed);
-        if(!$data['diserver_list']){
-            $data['diserver_list'] = [];
+        $data['server'] = $this->getModel('Server')->getById($admin['server_id'],$filed);
+        if(!$data['server']){
+            $data['server']['diserver_name'] = '';
+            $data['server']['diserver_id'] = '';
         }
 
         $this->view->data = $data;

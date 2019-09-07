@@ -35,6 +35,22 @@
                                   <input type="text" autocomplete="off" name="url" placeholder="请带上端口号">
                               </div>
                           </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服id</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="diserver_id" placeholder="">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服名</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="diserver_name" placeholder="">
+                              </div>
+                          </div>
                           <div class="addadmin-root">
                               <div class="addadmin-left">
                                   <span>*</span><span>类型（大渠道）:</span>
@@ -73,6 +89,8 @@
                                 <th>类型（大渠道）</th>
                                 <th>服务器名</th>
                                 <th>url</th>
+                                <th>区服id</th>
+                                <th>区服名</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
@@ -109,6 +127,8 @@
                                         ?></td>
                                     <td><?php echo $v['server_name'];?></td>
                                     <td><?php echo $v['url'];?></td>
+                                    <td><?php echo $v['diserver_id'];?></td>
+                                    <td><?php echo $v['diserver_name'];?></td>
                                     <td><?php echo date('Y-m-d H:i:s',$v['created_at']); ?><span>
                                     </td>
                                     <td>

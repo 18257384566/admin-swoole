@@ -167,6 +167,14 @@ class PaValidation extends Validation
             'exchange_code' => '请选择类型',
             'cancelOnFail' => true
         )));
+        $this->add('diserver_id', new PresenceOf(array(
+            'exchange_code' => '请填写区服id',
+            'cancelOnFail' => true
+        )));
+        $this->add('diserver_name', new PresenceOf(array(
+            'exchange_code' => '请填写区服名',
+            'cancelOnFail' => true
+        )));
     }
 
     public function diserverAdd(){

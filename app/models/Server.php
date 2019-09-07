@@ -19,6 +19,8 @@ class Server extends BaseModel
         $this->server_name = $data['server_name'];
         $this->url = $data['url'];
         $this->type = $data['type'];
+        $this->diserver_id = $data['diserver_id'];
+        $this->diserver_name = $data['diserver_name'];
         $this->created_at = $this->updated_at = time();
         if ($this->create() === false) {
             return false;

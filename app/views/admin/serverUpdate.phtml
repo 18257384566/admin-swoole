@@ -13,7 +13,7 @@
     <div class="walletadmin-content">
       <div class="walletadmin-box walletadmin-list">
           <div class="box">
-
+              <a href="/admin/server/list"><button class='btn btn-primary'> &nbsp&nbsp 返回 &nbsp&nbsp </button></a>
               <div class="container">
                   <div class="page-title">服务器修改</div>
                   <div class="addadmin">
@@ -33,6 +33,22 @@
                               </div>
                               <div class="addadmin-right">
                                   <input type="text" autocomplete="off" name="url" value="<?= $data['server']['url'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服id</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="diserver_id" value="<?= $data['server']['diserver_id'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服名</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="diserver_name" value="<?= $data['server']['diserver_name'] ?>">
                               </div>
                           </div>
                           <div class="addadmin-root">

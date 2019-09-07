@@ -145,9 +145,9 @@ class AdminController extends ControllerBase
 
         //获取当页
         if(!isset($search) || $search == ''){
-            $sql = "select `id`,`server_name`,`url`,`created_at`,`type` from $table order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`server_name`,`url`,`created_at`,`type`,`diserver_id`,`diserver_name` from $table order by created_at desc limit $page,$limit";
         }else{
-            $sql = "select `id`,`server_name`,`url`,`created_at`,`type` from $table where `type`= $search order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`server_name`,`url`,`created_at`,`type`,`diserver_id`,`diserver_name` from $table where `type`= $search order by created_at desc limit $page,$limit";
         }
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
@@ -168,6 +168,8 @@ class AdminController extends ControllerBase
         $reqData['server_name'] = $this->request->getPost('server_name');
         $reqData['url'] = $this->request->getPost('url');
         $reqData['type'] = $this->request->getPost('type');
+        $reqData['diserver_id'] = $this->request->getPost('diserver_id');
+        $reqData['diserver_name'] = $this->request->getPost('diserver_name');
 
         //校验数据
         $validation = $this->paValidation;
@@ -203,7 +205,7 @@ class AdminController extends ControllerBase
             exit;
         }
 
-        $filed = 'server_name,url,type,id';
+        $filed = 'server_name,url,type,id,diserver_id,diserver_name';
         $server = $this->getModel('Server')->getById($id,$filed);
         if(!$server){
             $this->function->alert('该服务器不存在或已被删除');
@@ -219,6 +221,8 @@ class AdminController extends ControllerBase
         $reqData['server_name'] = $this->request->getPost('server_name');
         $reqData['url'] = $this->request->getPost('url');
         $reqData['type'] = $this->request->getPost('type');
+        $reqData['diserver_id'] = $this->request->getPost('diserver_id');
+        $reqData['diserver_name'] = $this->request->getPost('diserver_name');
         $id = $this->request->getPost('id');
 
         if(!isset($id) || $id == ''){
@@ -328,18 +332,15 @@ class AdminController extends ControllerBase
 
         //根据服务器id查找区服名
         $filed = 'diserver_name,diserver_id';
-        $diserver = $this->getModel('Diserver')->getByServerId($admin['server_id'],$filed);
+        $diserver = $this->getModel('Server')->getById($admin['server_id'],$filed);
         if(!$diserver){
             $diserver = [];
         }
 
         $i = 1;
         $zonelist = [];
-        foreach ($diserver as $v){
-            $zonelist[$i]['ServerName'] = $v['diserver_name'];
-            $zonelist[$i]['ServerStatus'] = (int)$v['diserver_id'];
-            $i ++;
-        }
+        $zonelist[$i]['ServerName'] = $diserver['diserver_name'];
+        $zonelist[$i]['ServerStatus'] = (int)$diserver['diserver_id'];
         $zonelist['success'] = true;
 
         return json_encode($zonelist);
