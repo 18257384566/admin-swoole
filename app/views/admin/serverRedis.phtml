@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title></title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+</head>
+<body>
+    <?php $this->view->partial("nav");?>
+    <div class="walletadmin-content">
+      <div class="walletadmin-box walletadmin-list">
+          <div class="box">
+
+              <div class="container">
+                  <div class="page-title">服务器列表</div>
+                  <br>
+
+                  <a href="/admin/server/list?type=1"><button class='btn btn-primary'> &nbsp ios &nbsp </button></a>
+                  <a href="/admin/server/list?type=2"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 安卓 &nbsp&nbsp&nbsp </button></a>
+                  <a href="/admin/server/list?type=3"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 其他 &nbsp&nbsp&nbsp </button></a>
+                  <a href="/admin/server/list?type=4"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 海外 &nbsp&nbsp&nbsp </button></a>
+                  <a href="/admin/server/list?type="><button class='btn btn-primary'> &nbsp&nbsp&nbsp 全部 &nbsp&nbsp&nbsp </button></a>
+
+                  <div class="table">
+                      <table>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>类型（大渠道）</th>
+                                <th>服务器名</th>
+                                <th>url</th>
+                                <th>区服id</th>
+                                <th>区服名</th>
+                                <th>redis地址</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        <?php foreach($list as $v){ ?>
+                                <tr>
+                                    <td><?php echo $v['id'];?></td>
+                                    <td><?php
+
+                                            switch ($v['type']){
+                                                case '1':
+                                                    echo 'ios';
+                                                    break;
+
+                                                case '2':
+                                                    echo '安卓';
+                                                    break;
+
+                                                case '3':
+                                                    echo '其他';
+                                                    break;
+
+                                                case '4':
+                                                    echo '海外';
+                                                    break;
+
+                                                default:
+                                                    echo '';
+                                                    break;
+                                            }
+
+                                        ?></td>
+                                    <td><?php echo $v['server_name'];?></td>
+                                    <td><?php echo $v['url'];?></td>
+                                    <td><?php echo $v['diserver_id'];?></td>
+                                    <td><?php echo $v['diserver_name'];?></td>
+                                    <td><?php echo $v['redis_url'];?></td>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/server/del?id=<?php echo $v['id']; ?>" onclick="javascript:return confirm('是否确认删除？');"><button class="action-btn disabled">删除</button></a>
+                                        <a href="/admin/serveredis/updateView?id=<?php echo $v['id']; ?>"><button class="action-btn none">编辑</button></a>
+                                    </td>
+                                </tr>
+                        <?php } ?>
+
+                        
+                        </tbody>
+                      </table>
+                      <div class="pagination-box">
+
+                          <?php
+                          if($list){
+                              //存储页码字符串
+                              $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                              //当前页码数，默认当前页码为1
+                              $curPage = isset($_GET['page'])?$_GET['page']:1;
+                              if($curPage <=5){
+                                  $begin =1;
+                                  $end = $data['totalpage']>=10?10:$data['totalpage'];
+                              }else{
+                                  $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                                  $begin =$end -9<=1?1:$end -9;
+                              }
+                              //实现上一页
+                              $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                              //根据起始页与终止页将当前页面的页码显示出来
+                              for($i=$begin;$i<=$end;$i++){
+                                  //使用if实现高亮显示当前点击的页码
+                                  if($data['page'] == $i){
+                                      $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                  }else{
+                                      $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                  }
+                              }
+
+
+                              //实现下一页
+                              $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                              $pageNumString .='</div>';
+                              echo $pageNumString;
+                          }
+                          
+                          ?>
+                          
+                      </div>
+                          
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+</body>
+</html>

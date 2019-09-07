@@ -248,6 +248,93 @@ class AdminController extends ControllerBase
         exit;
     }
 
+    public function serverRedisViewAction(){
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->get('type');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_server';
+        //获取总条数
+        $allcount = $this->db->query("select count(id) as allcount from $table");
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `id`,`server_name`,`url`,`created_at`,`type`,`diserver_id`,`diserver_name`,`redis_url` from $table order by created_at desc limit $page,$limit";
+        }else{
+            $sql = "select `id`,`server_name`,`url`,`created_at`,`type`,`diserver_id`,`diserver_name`,`redis_url` from $table where `type`= $search order by created_at desc limit $page,$limit";
+        }
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page'] = $this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = "type=$search?";
+
+        $this->view->list = $list;
+        $this->view->data = $data;
+        $this->view->pick('admin/serverRedis');
+    }
+
+    public function serverRedisUpdateViewAction(){
+        $id = $this->request->getQuery('id');
+        if(!isset($id) || $id == ''){
+            $this->function->alert('参数丢失');
+            exit;
+        }
+
+        $filed = 'server_name,url,type,id,diserver_id,diserver_name,redis_url';
+        $server = $this->getModel('Server')->getById($id,$filed);
+        if(!$server){
+            $this->function->alert('该服务器不存在或已被删除');
+            exit;
+        }
+
+        $data['server'] = $server;
+        $this->view->data = $data;
+        $this->view->pick('admin/serverRedisUpdate');
+    }
+
+    public function serverRedisUpdateAction(){
+        $reqData['server_name'] = $this->request->getPost('server_name');
+        $reqData['url'] = $this->request->getPost('url');
+        $reqData['type'] = $this->request->getPost('type');
+        $reqData['diserver_id'] = $this->request->getPost('diserver_id');
+        $reqData['diserver_name'] = $this->request->getPost('diserver_name');
+        $reqData['redis_url'] = $this->request->getPost('redis_url');
+        $id = $this->request->getPost('id');
+
+        if(!isset($id) || $id == ''){
+            $this->functions->alert('参数丢失','/admin/server/list');
+            exit;
+        }
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->serverAdd();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }
+
+        $update = $this->getModel('Server')->updateById($id,$reqData);
+        if(!$update){
+            $this->functions->alert('修改失败','/admin/server/list');
+            exit;
+        }
+        $this->functions->alert('修改成功','/admin/server/redis');
+        exit;
+    }
+
 
     //区服
     public function diserverListAction(){
