@@ -189,14 +189,17 @@ class UserController extends ControllerBase
 //            $this->functions->alert('查询失败','/user/shipInfo');exit;
 //        }
 
-        //从redis获取
-        $key = 'Game_Nickname';
-        $user_id = $this->redis->hGet($key,$reqData['nickname']);
-        if(!$user_id){
-            $this->functions->alert('该用户不存在');
-            exit;
-        }
-        $userInfo = $this->getBussiness('User')->getUserInfo($user_id,$reqData);
+        //从redis获取1
+//        $key = 'Game_Nickname';
+//        $user_id = $this->redis->hGet($key,$reqData['nickname']);
+//        if(!$user_id){
+//            $this->functions->alert('该用户不存在');
+//            exit;
+//        }
+//        $userInfo = $this->getBussiness('User')->getUserInfo($user_id,$reqData);
+
+        //从redis获取2
+        $userInfo = $this->getBussiness('Redis')->getUserInfo($reqData['nickname'],$reqData['type']);
 
         $data['type'] = $reqData['type'];
         $data['list'] = $userInfo;
