@@ -17,7 +17,8 @@ $(function(){
             	// console.log(data);
                 // alert("Settings is Ok. The Machine is rebooting.");
                 $.each(data, function(idx,val){
-                	zoneStr += "<option value="+idx+">"+val.ServerName;
+                	//zoneStr += "<option value="+idx+">"+val.ServerName;
+                    zoneStr += "<option value="+val.ServerStatus+">"+val.ServerName;
                 	if (val.ServerStatus == 0) {
                 		zoneStr += " (维护中)";
                 	}
