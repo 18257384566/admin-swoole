@@ -192,6 +192,17 @@ class PaValidation extends Validation
         )));
     }
 
+    public function onlineQuery(){
+        $this->add('zones', new PresenceOf(array(
+            'exchange_code' => '请选择游戏区服',
+            'cancelOnFail' => true
+        )));
+        $this->add('t1', new PresenceOf(array(
+            'exchange_code' => '选择查询时间',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 

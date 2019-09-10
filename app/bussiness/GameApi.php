@@ -124,6 +124,23 @@ class GameApi extends BaseBussiness
         return $result;
     }
 
+    public function analyze($data){
+        $url = $this->server_url.'/manager/analyze';
+        try{
+            $result = $this->functions->http_request_code($url, 'POST',$data);
+            if(!$result){
+                return false;
+            }
+        }catch (\Exception $e){
+            return false;
+        }
+
+        if(!isset($result['success']) || $result['success'] != 'true'){
+            return false;
+        }
+        return $result['message'];
+    }
+
 
 
 }
