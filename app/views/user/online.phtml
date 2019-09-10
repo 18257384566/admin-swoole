@@ -47,7 +47,8 @@
                                       </div>
                                   </div>
                                   <div class="ibox-content">
-                                      <form class="form-horizontal m-t">
+<!--                                      <form class="form-horizontal m-t">-->
+                                      <form action="/user/online"  method="post" enctype="multipart/form-data" class="form-horizontal m-t">
                                           <div class="form-group">
                                               <label class="col-sm-1 control-label">游戏区服：</label>
                                               <div class="col-sm-2">
@@ -71,23 +72,23 @@
                                                   <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#start'});"></label>
                                               </div>
                                           </div>
-                                          <!-- <div class="form-group">
-                                              <label class="col-sm-1 control-label">结束日期：</label>
-                                              <div class="col-sm-10">
-                                                  <input readonly name="eDate" class="form-control layer-date" id="end" placeholder="请选择结束日期">
-                                                  <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#end'});"></label>
-                                              </div>
-                                          </div> -->
+<!--                                          <div class="form-group">-->
+<!--                                              <label class="col-sm-1 control-label">结束日期：</label>-->
+<!--                                              <div class="col-sm-10">-->
+<!--                                                  <input type="date" name="eDate" class="form-control layer-date" id="end" placeholder="请选择结束日期">-->
+<!--                                                  <label class="laydate-icon inline demoicon" onclick="laydate({elem: '#end'});"></label>-->
+<!--                                              </div>-->
+<!--                                          </div>-->
                                           <div class="form-group" style="text-align: right; margin-right: 15px;">
-                                              <button type="button" class="btn btn-w-m  w-btn">查询</button>
+                                              <button type="submit" class="btn btn-w-m  w-btn">查询</button>
                                           </div>
                                       </form>
 
-                                      <div class="table-responsive">
-                                          <div class="ibox-content">
-                                              <div class="echarts" id="echarts-line-chart"></div>
-                                          </div>
-                                      </div>
+<!--                                      <div class="table-responsive">-->
+<!--                                          <div class="ibox-content">-->
+<!--                                              <div class="echarts" id="echarts-line-chart"></div>-->
+<!--                                          </div>-->
+<!--                                      </div>-->
                                   </div>
                               </div>
                           </div>
@@ -96,7 +97,75 @@
           </div>
       </div>
 
-              <div id="serverUrl" style="color: "><?php echo $server_url ?></div>
+              <div class="container">
+                  <div class="page-title"></div>
+                  <div class="table">
+                      <table>
+                          <thead>
+                          <tr>
+                              <th style="text-align: center" width="15%">时间</th>
+                              <th style="text-align: center" width="15%">统计</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+
+                          <?php if(isset($data['onlineList'])){ foreach($data['onlineList'] as $v){ ?>
+                              <tr>
+                                  <td><?= $v['time'];?></td>
+                                  <td><?= $v['count'];?></td>
+                              </tr>
+                          <?php }} ?>
+
+
+                          </tbody>
+                      </table>
+                      <div class="pagination-box">
+
+<!--                          --><?php
+//                          if(isset($data['onlineList']) && $data['onlineList'] != ''){
+//                              //存储页码字符串
+//                              $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+//                              //当前页码数，默认当前页码为1
+//                              $curPage = isset($_GET['page'])?$_GET['page']:1;
+//                              if($curPage <=5){
+//                                  $begin =1;
+//                                  $end = $data['totalpage']>=10?10:$data['totalpage'];
+//                              }else{
+//                                  $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+//                                  $begin =$end -9<=1?1:$end -9;
+//                              }
+//                              //实现上一页
+//                              $prev = $data['page'] -1<=1?1:$data['page'] -1;
+//                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+//                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+//
+//                              //根据起始页与终止页将当前页面的页码显示出来
+//                              for($i=$begin;$i<=$end;$i++){
+//                                  //使用if实现高亮显示当前点击的页码
+//                                  if($data['page'] == $i){
+//                                      $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+//                                  }else{
+//                                      $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+//                                  }
+//                              }
+//
+//
+//                              //实现下一页
+//                              $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+//                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+//                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+//                              $pageNumString .='</div>';
+//                              echo $pageNumString;
+//                          }
+//
+//                          ?>
+
+                      </div>
+
+                  </div>
+              </div>
+
+              <div id="serverUrl" style="color:#E1E1EB "><?php echo $server_url ?></div>
   </div>
 <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
@@ -129,36 +198,36 @@
                       // $(".tbody").empty();
 
 //                      url = "http://" + RemoteAddr + ":" + Port + "/manager/analyze";
-                      url = serverUrl + "/manager/analyze";
-                      $.ajax({
-                          url: url,
-                          type: "POST",
-                          data: getParams(),
-                          dataType:"json",
-                          success: function(data){
-                              //On ajax success do this
-                              console.info("success.");
-                              if (data["success"]){
-                                  if (data.message != null){
-                                      linechart(data.message.TimeS, data.message.CountS);
-                                  }
-                              }else{
-                                  console.log("fail");
-                                  return;
-                              }
-                          },
-                          error: function(xhr, ajaxOptions, thrownError) {
-                              //On error do this
-                              console.info("error.");
-                              console.log(xhr);
-                              if (xhr.status == 200) {
-                                  alert(ajaxOptions);
-                              } else {
-                                  alert(xhr.status);
-                                  alert(thrownError);
-                              }
-                          }
-                      });
+//                      url = serverUrl + "/manager/analyze";
+//                      $.ajax({
+//                          url: url,
+//                          type: "POST",
+//                          data: getParams(),
+//                          dataType:"json",
+//                          success: function(data){
+//                              //On ajax success do this
+//                              console.info("success.");
+//                              if (data["success"]){
+//                                  if (data.message != null){
+//                                      linechart(data.message.TimeS, data.message.CountS);
+//                                  }
+//                              }else{
+//                                  console.log("fail");
+//                                  return;
+//                              }
+//                          },
+//                          error: function(xhr, ajaxOptions, thrownError) {
+//                              //On error do this
+//                              console.info("error.");
+//                              console.log(xhr);
+//                              if (xhr.status == 200) {
+////                                  alert(ajaxOptions);
+//                              } else {
+////                                  alert(xhr.status);
+////                                  alert(thrownError);
+//                              }
+//                          }
+//                      });
                   });
 
                   $(".zone").change(function(){

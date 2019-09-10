@@ -81,6 +81,7 @@ class AclPlugin extends Injectable
                 'user::retain',
                 'user::loginCount',
                 'user::online',
+                'user::onlineQuery',
                 'exchange::cardAddView',
                 'user::propList',
                 'user::propListExcel',

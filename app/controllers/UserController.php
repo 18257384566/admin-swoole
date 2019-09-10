@@ -40,6 +40,41 @@ class UserController extends ControllerBase
         $this->view->pick('user/online');
     }
 
+    public function onlineQueryAction(){
+        $reqData['zones'] = $this->request->getPost('zone');
+        $reqData['t1'] = $this->request->getPost('sDate');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->onlineQuery();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }
+
+        $reqData['t1'] = strtotime($reqData['t1']);
+        $reqData['t2'] = $reqData['t1'] + 86400;
+
+        //查询实时在线
+        $reqData['channels'] = '';
+        $reqData['type'] = 'UserOnline';
+        $online = $this->getBussiness('GameApi')->analyze($reqData);
+
+        $onlineList = [];
+        if(isset($online['TimeS']) && isset($online['CountS'])){
+            //拼接参数
+            foreach ($online['TimeS'] as $k => $v){
+                $onlineList[$k]['time'] = $v;
+                $onlineList[$k]['count'] = $online['CountS'][$k];
+            }
+        }
+
+        $data['onlineList'] = $onlineList;
+        $this->view->data = $data;
+        $this->view->pick('user/online');
+    }
+
     public function getShipInfoViewAction(){
         $this->view->pick('user/shipinfo');
     }

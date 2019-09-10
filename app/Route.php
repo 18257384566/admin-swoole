@@ -70,6 +70,7 @@ class Route extends RouterGroup
         $this->add('/user/retain','user::retain');              //每日留存（页面）
         $this->add('/user/login/count','user::loginCount');     //登录统计（页面）
         $this->add('/user/online','user::online');              //实时在线（页面）
+        $this->addPost('/user/online','user::onlineQuery');     //实时在线
         $this->addPost('/user/shipInfo','user::getShipInfo');   //获取用户船队信息
         $this->add('/prop/list','user::propList');              //发送道具（页面）
         $this->add('/prop/excel','user::propListExcel');        //导出道具列表
