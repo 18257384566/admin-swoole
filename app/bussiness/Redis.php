@@ -83,6 +83,34 @@ class redis extends BaseBussiness
                 }
 
                 break;
+
+            case 'order':
+
+                $key = 'User_Orders:'.$user_id;
+                $orderList = $this->redis->sMembers($key);
+                if(!$orderList){
+                    return [];
+                }
+
+                //遍历订单信息
+                $userInfo = [];
+                foreach ($orderList as $k => $order_no){
+                    $key = "User_Order:$order_no";
+                    $order_info = $this->redis->hgetall($key);
+                    if($order_info){
+                        $userInfo[] = $order_info;
+                    }
+                }
+
+                //获取道具表
+                $itemList = $this->getBussiness('GameApi')->getItemList();
+                foreach ($userInfo as &$v){ //var_dump($v);
+                    $ItemStr = json_decode($v['ItemStr'],true);
+                    $v['ItemName'] = $ItemStr[0]['ItemId'];
+                    $v['ItemQuantity'] = $ItemStr[0]['ItemQuantity'];
+                }
+
+                break;
         }
 
         //echo '<pre>';var_dump($userInfo);exit;
