@@ -104,4 +104,19 @@ class Server extends BaseModel
         }
         return true;
     }
+
+    public function getByDiserver($diserver_id, $filed = '*'){
+        $result = $this->findFirst([
+            'columns' => $filed,
+            'conditions' => 'diserver_id = ?1',
+            'bind' => array(
+                1 => $diserver_id,
+            ),
+
+        ]);
+        if($result){
+            return $result->toArray();
+        }
+        return $result;
+    }
 }

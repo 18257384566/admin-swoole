@@ -107,6 +107,9 @@ class AclPlugin extends Injectable
                 'admin::getzonelist',
                 'user::distalkView',
                 'admin::channelList',
+                'obonus::addView',
+                'obonus::addObonus',
+                'obonus::list',
             ),
 
             'developers' => array(

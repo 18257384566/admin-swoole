@@ -85,5 +85,10 @@ class Route extends RouterGroup
         //获取实时数据
         $this->add('/data/update','data::update');              //更新redis数据
 
+        //返还奖励
+        $this->add('/obonus/add','obonus::addView');                //添加返还奖励（页面）
+        $this->addPost('/obonus/addObonus','obonus::addObonus');    //添加返还奖励
+        $this->add('/obonus/list','obonus::list');                  //返还奖励列表
+
     }
 }

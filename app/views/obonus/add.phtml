@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+              <div class="container">
+                  <div class="page-title">添加返还奖励（导入csv格式）</div>
+                  <div class="addadmin">
+
+                      <form action="/obonus/addObonus"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-account">
+                            <div class="addadmin-left">
+                                <span>*</span><span>文件</span>
+                            </div>
+                              <input type="file" name="file">
+                          </div>
+
+                          </div>
+<!--                            <input type="submit" class="btn btn-primary" value="发放" onclick="javascript:return confirm('分发后，自动分发糖果，是否进行分发？');">-->
+                          <input type="submit" value="导入" class="w-btn">
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script type="text/javascript" src="/static/js/fenziofficial_admin.js"></script>
+<script>
+  $(document).ready(function(){
+    $.fn.adminAdd({})
+  });
+
+  $("#eye").click(function() {
+      if($(".password").attr("type") == "text") {
+          $(".password").attr("type", "password");
+          $("#eye span").removeClass("icon-yanjing_kai");
+          $("#eye span").addClass("icon-yanjing_bi");
+      } else {
+          $(".password").attr("type", "text");
+          $("#eye span").removeClass("icon-yanjing_bi");
+          $("#eye span").addClass("icon-yanjing_kai");
+
+      }
+  });
+</script>
+</body>
+</html>
