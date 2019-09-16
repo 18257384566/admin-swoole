@@ -60,10 +60,12 @@ class Route extends RouterGroup
         $this->add('/zone/list','zone::list');                  //区服列表（页面）
 
         //管理工具
-        $this->add('/manager/prop/send','send::propView');      //发送道具（页面）
-        $this->add('/manager/notice/send','send::noticeView');  //推送消息（页面）
-        $this->add('/manager/notice/list','manager::noticeList');   //公告列表（页面）
-        $this->add('/manager/notice/add','manager::noticeAdd');     //公告添加
+        $this->add('/manager/prop/send','send::propView');                  //发送道具（页面）
+        $this->add('/manager/prop/serverSend','send::propServerView');      //发送道具多服（页面）
+        $this->addPost('/manager/prop/serverSend','send::propServer');      //发送道具多服
+        $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）
+        $this->add('/manager/notice/list','manager::noticeList');           //公告列表（页面）
+        $this->add('/manager/notice/add','manager::noticeAdd');             //公告添加
 
         //用户管理
         $this->add('/user/daily/login','user::dailyLogin');     //每日登录（页面）
@@ -86,6 +88,11 @@ class Route extends RouterGroup
 
         //获取实时数据
         $this->add('/data/update','data::update');              //更新redis数据
+
+        //返还奖励
+        $this->add('/obonus/add','obonus::addView');                //添加返还奖励（页面）
+        $this->addPost('/obonus/addObonus','obonus::addObonus');    //添加返还奖励
+        $this->add('/obonus/list','obonus::list');                  //返还奖励列表
 
     }
 }

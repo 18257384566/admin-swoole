@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/datepicker.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+</head>
+<body>
+    <?php $this->view->partial("nav");?>
+    <div class="walletadmin-content">
+      <div class="walletadmin-box walletadmin-list">
+          <div class="box">
+              <div class="container">
+                  <div class="search-ui">
+                      <form action="/obonus/list" method="get">
+
+                          <div class="search-ui-input">
+                              <div>
+                                  <input type="text" class="input-primary" placeholder="账户编号" name="search" value="">
+                              </div>
+                              <div>
+                                  <button class='btn btn-primary'>搜索</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="page-title">奖励返还列表</div>
+                  <div class="table">
+                      <table>
+                        <thead>
+                            <tr>
+                                <th width="15%">ID</th>
+                                <th width="15%">账户编号</th>
+                                <th width="15%">数量</th>
+                                <th width="10%">是否使用</th>
+                                <th width="15%">用户昵称</th>
+                                <th width="15%">使用时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        <?php foreach($list as $v){ ?>
+                                <tr>
+                                    <td><?php echo $v['id'];?></td>
+                                    <td><?php echo $v['obonus_code'];?></td>
+                                    <td><?php echo $v['request_num'];?></td>
+                                    <td>
+                                        <span>
+                                            <?php
+                                            if($v['is_used'] == 0) {
+                                               echo  "未使用";
+                                            }elseif($v['is_used'] == 1){
+                                                echo "已使用";
+                                            }
+                                            ?>
+                                        <span>
+                                    </td>
+                                    <td><?php echo $v['user_name'];?></td>
+                                    <td><?php $v['used_time'] == 0 ? $time = '未使用' : $time = date('Y-m-d H:i:s',$v['used_time']); echo $time; ?></td>
+                                </tr>
+                        <?php } ?>
+
+                        
+                        </tbody>
+                      </table>
+                      <div class="pagination-box">
+
+                          <?php
+                          if($list){
+                              //存储页码字符串
+                              $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                              //当前页码数，默认当前页码为1
+                              $curPage = isset($_GET['page'])?$_GET['page']:1;
+                              if($curPage <=5){
+                                  $begin =1;
+                                  $end = $data['totalpage']>=10?10:$data['totalpage'];
+                              }else{
+                                  $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                                  $begin =$end -9<=1?1:$end -9;
+                              }
+                              //实现上一页
+                              $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                              //根据起始页与终止页将当前页面的页码显示出来
+                              for($i=$begin;$i<=$end;$i++){
+                                  //使用if实现高亮显示当前点击的页码
+                                  if($data['page'] == $i){
+                                      $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                  }else{
+                                      $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                  }
+                              }
+
+
+                              //实现下一页
+                              $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                              $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                              $pageNumString .='</div>';
+                              echo $pageNumString;
+                          }
+                          
+                          ?>
+                          
+                      </div>
+                          
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/moment.min.js"></script>
+    <script type="text/javascript" src="/static/js/datepicker.all.js"></script>
+    <script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+    <script>
+        $(document).ready(function(){
+            chooseTime()
+        })
+    </script>
+</body>
+</html>

@@ -31,6 +31,15 @@
                         </ul>
                     </li>
 
+                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/") !== false){echo 'active';}else{echo '';} ?>">
+                        <div><span>奖励返还管理</span></div>
+                        <ul>
+                            <a href="/obonus/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/list") !== false){echo 'active';}else{echo '';} ?>">奖励返还列表</li></a>
+                            <a href="/obonus/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/add") !== false){echo 'active';}else{echo '';} ?>">添加奖励返还</li></a>
+                            <!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
+                        </ul>
+                    </li>
+
 <!--                    <li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/zone/") !== false){echo 'active';}else{echo '';} ?><!--">-->
 <!--                        <div><span> 区服管理 </span></div>-->
 <!--                        <ul>-->
@@ -42,6 +51,7 @@
                         <div><span> 管理工具 </span></div>
                         <ul>
                             <a href="/manager/prop/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/send") !== false){echo 'active';}else{echo '';} ?>">发送道具</li></a>
+<!--                            <a href="/manager/prop/serverSend"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/serverSend") !== false){echo 'active';}else{echo '';} ?><!--">发送道具(多服)</li></a>-->
                             <a href="/manager/notice/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/send") !== false){echo 'active';}else{echo '';} ?>">推送消息</li></a>
                             <a href="/manager/notice/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/list") !== false){echo 'active';}else{echo '';} ?>">公告列表</li></a>
                         </ul>

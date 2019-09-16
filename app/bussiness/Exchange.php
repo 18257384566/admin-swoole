@@ -6,6 +6,15 @@ namespace App\Bussiness;
 class Exchange extends BaseBussiness
 {
     public function exchange($reqData){
+        //根据区服id查询url
+        $filed = 'url';
+        $server = $this->getModel('Server')->getByDiserver($reqData['zones'],$filed);
+        if(!$server){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '该区服id不存在';
+            return $this->result;
+        }
+
         //判断该编号是否存在
         $filed = 'card_no,is_used';
         $exchange_code = $this->getModel('Exchange')->getByExchangeCode($reqData['exchange_code'],$filed);
@@ -58,7 +67,7 @@ class Exchange extends BaseBussiness
         //发送礼包请求
         $times = 1;
         for ($i = 0; $i <= $times; $i++){
-            $send = $this->senditem($reqData,$card);
+            $send = $this->senditem($server['url'],$reqData,$card);
             if($send){
                 break;
             }{
@@ -76,7 +85,7 @@ class Exchange extends BaseBussiness
     }
 
     //发送礼包请求
-    public function senditem($reqData,$card){
+    public function senditem($server_url,$reqData,$card){
         //发送礼包请求
         $requestData = [];
         $requestData['zones'] = $reqData['zones'];
@@ -84,7 +93,7 @@ class Exchange extends BaseBussiness
         $requestData['itemstr'] = $card->item;
         $requestData['mailtitle'] = '您的礼包已经兑换成功';
         $requestData['mailcontent'] = '您的礼包已经兑换成功，请查收';
-        $url = $this->config['gameUrl'].'/manager/senditem';
+        $url = $server_url.'/manager/senditem';
         try{
             $senditem = $this->functions->http_request_code($url, 'POST',$requestData);
             if(!$senditem){

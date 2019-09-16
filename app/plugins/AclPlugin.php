@@ -76,6 +76,8 @@ class AclPlugin extends Injectable
                 'exchange::list',
                 'zone::list',
                 'send::propView',
+                'send::propServerView',
+                'send::propServer',
                 'send::noticeView',
                 'user::dailyLogin',
                 'user::retain',
@@ -108,7 +110,10 @@ class AclPlugin extends Injectable
                 'admin::diserverDel',
                 'admin::getzonelist',
                 'user::distalkView',
-                'admin::channelList'
+                'admin::channelList',
+                'obonus::addView',
+                'obonus::addObonus',
+                'obonus::list',
             ),
 
             'developers' => array(
