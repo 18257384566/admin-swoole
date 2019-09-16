@@ -141,6 +141,23 @@ class GameApi extends BaseBussiness
         return $result['message'];
     }
 
+    public function sendItem($server_url,$data){
+        $url = $server_url.'/manager/senditem';
+        try{
+            $result = $this->functions->http_request_code($url, 'POST',$data);
+            if(!$result){
+                return false;
+            }
+        }catch (\Exception $e){
+            return false;
+        }
+
+        if(!isset($result['success']) || $result['success'] != 'true'){
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
