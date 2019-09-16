@@ -110,6 +110,7 @@ class AclPlugin extends Injectable
                 'obonus::addView',
                 'obonus::addObonus',
                 'obonus::list',
+                'obonus::use',
             ),
 
             'developers' => array(

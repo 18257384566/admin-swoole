@@ -115,4 +115,23 @@ class ObonusController extends ControllerBase
         $this->view->pick('obonus/list');
     }
 
+    public function useAction(){
+        $reqData['obonus_code'] = $this->request->getPost('obonus_code');
+        $reqData['zones'] = $this->request->getPost('zones');
+        $reqData['user_name'] = $this->request->getPost('nickname');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->exchange();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $this->result['status'] = -1;
+            $this->result['msg'] = $message = $messages[0]->getMessage();
+            return json_encode($this->result);
+        }
+
+        $obonusUse = $this->getBussiness('Obonus')->obonusUse($reqData);
+        return json_encode($obonusUse);
+    }
+
 }
