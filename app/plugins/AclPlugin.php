@@ -76,6 +76,7 @@ class AclPlugin extends Injectable
                 'exchange::list',
                 'zone::list',
                 'send::propView',
+                'send::prop',
                 'send::propServerView',
                 'send::propServer',
                 'send::noticeView',

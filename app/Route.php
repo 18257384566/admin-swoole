@@ -57,6 +57,7 @@ class Route extends RouterGroup
 
         //管理工具
         $this->add('/manager/prop/send','send::propView');                  //发送道具（页面）
+        $this->addPost('/manager/prop/send','send::prop');                  //发送道具
         $this->add('/manager/prop/serverSend','send::propServerView');      //发送道具多服（页面）
         $this->addPost('/manager/prop/serverSend','send::propServer');      //发送道具多服
         $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）

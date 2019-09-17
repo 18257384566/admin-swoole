@@ -51,5 +51,47 @@ class Send extends BaseBussiness
         }
     }
 
+    public function propSend($admin,$reqData){
+        //整理要发送的内容
+        $send = [];
+        $send['zones'] = $reqData['zones'];
+        $send['nickname'] = $reqData['nickname'];
+        $send['mailtitle'] = $reqData['mailtitle'];
+        $send['mailcontent'] = $reqData['mailcontent'];
+        $send['itemstr'] = '';
+
+        foreach ($reqData['itemSelected'] as $v){
+            $send['itemstr'] .= $v.';';
+        }
+        $send['itemstr'] = rtrim($send['itemstr'],';');
+
+        //发送道具
+        $sendItem = $this->getBussiness('GameApi')->sendItem($admin['server_url'],$send);
+
+        //添加发送道具日志
+        $log = [];
+        $log['admin_name'] = $admin['account'];
+        $log['admin_no'] = $admin['admin_no'];
+        $log['nickname'] = $reqData['nickname'];
+        $log['item'] = $send['itemstr'];
+        $log['server_name'] = $admin['server_name'];
+        $log['diserver_id'] = $reqData['zones'];
+        $log['server_url'] = $admin['server_url'];
+        if(!$sendItem){
+            $log['is_success'] = 0;
+            $this->getModel('SenditemLog')->addLog($log);
+            $this->result['status'] = -1;
+            $this->result['msg'] = '发送失败';
+            return $this->result;
+        }
+
+        $log['is_success'] = 1;
+        $this->getModel('SenditemSplitLog')->addLog($log);
+        $this->result['status'] = -1;
+        $this->result['msg'] = '发送成功';
+        return $this->result;
+
+    }
+
 
 }
