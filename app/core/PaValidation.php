@@ -237,6 +237,25 @@ class PaValidation extends Validation
         )));
     }
 
+    public function propSend(){
+        $this->add('zones', new PresenceOf(array(
+            'exchange_code' => '请选择区服',
+            'cancelOnFail' => true
+        )));
+        $this->add('mailtitle', new PresenceOf(array(
+            'exchange_code' => '请填写邮箱标题',
+            'cancelOnFail' => true
+        )));
+        $this->add('mailcontent', new PresenceOf(array(
+            'exchange_code' => '请填写邮箱内容',
+            'cancelOnFail' => true
+        )));
+        $this->add('itemSelected', new PresenceOf(array(
+            'exchange_code' => '请选择要发送的道具',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 }

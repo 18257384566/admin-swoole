@@ -25,7 +25,7 @@ class AclPlugin extends Injectable
         $resource = $controller."::".$action;
 
         //过滤api接口
-        if ($resource == 'manager::noticeApi' || $resource == 'obonus::use' || $resource == 'exchange::exchange'){
+        if ($resource == 'manager::noticeApi' || $resource == 'obonus::use' || $resource == 'exchange::exchange' || $resource == 'transfer::transfeStation'){
             return true;
         }
 
@@ -76,6 +76,7 @@ class AclPlugin extends Injectable
                 'exchange::list',
                 'zone::list',
                 'send::propView',
+                'send::prop',
                 'send::propServerView',
                 'send::propServer',
                 'send::noticeView',

@@ -16,8 +16,9 @@ class Route extends RouterGroup
         ]);
 
         //api
-        $this->addPost('/exchange/exchange','exchange::exchange');  //兑换券（兑换）
+        $this->addPost('/exchange/exchange','exchange::exchange');      //兑换券（兑换）
         $this->add('/api/notice/get','manager::noticeApi');             //获取公告
+        $this->add('/api/transfer','transfer::transfeStation');         //中转站(回调地址)
 
 
 
@@ -61,6 +62,7 @@ class Route extends RouterGroup
 
         //管理工具
         $this->add('/manager/prop/send','send::propView');                  //发送道具（页面）
+        $this->addPost('/manager/prop/send','send::prop');                  //发送道具
         $this->add('/manager/prop/serverSend','send::propServerView');      //发送道具多服（页面）
         $this->addPost('/manager/prop/serverSend','send::propServer');      //发送道具多服
         $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）
@@ -94,7 +96,7 @@ class Route extends RouterGroup
         $this->addPost('/obonus/addObonus','obonus::addObonus');    //添加返还奖励
         $this->add('/obonus/list','obonus::list');                  //返还奖励列表
         $this->addPost('/api/obonus/use','obonus::use');            //返还奖励使用
-        $this->add('/api/obonus/use','obonus::use');            //返还奖励使用
+        $this->add('/api/obonus/use','obonus::use');                //返还奖励使用
 
     }
 }
