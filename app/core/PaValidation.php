@@ -222,6 +222,21 @@ class PaValidation extends Validation
         )));
     }
 
+    public function obonusUse(){
+        $this->add('obonus_code', new PresenceOf(array(
+            'exchange_code' => '请输入用户编号',
+            'cancelOnFail' => true
+        )));
+        $this->add('zones', new PresenceOf(array(
+            'exchange_code' => '请输入区服id',
+            'cancelOnFail' => true
+        )));
+        $this->add('user_name', new PresenceOf(array(
+            'exchange_code' => '请输入用户编号',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 }

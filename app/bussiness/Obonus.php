@@ -30,6 +30,15 @@ class Obonus extends BaseBussiness
             return $this->result;
         }
 
+        //判断同一用户是否多次领取
+        $filed = 'id';
+        $is_used = $this->getModel('Obonus')->getByUserName($reqData['user_name'],$filed);
+        if($is_used){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '亲，奖励返还每人只能使用一次';
+            return $this->result;
+        }
+
         //记录
         $data = [];
         $data['user_name'] = $reqData['user_name'];
@@ -43,7 +52,7 @@ class Obonus extends BaseBussiness
         }
 
         //发送奖励返还
-        $num = $obonus * 2;
+        $num = $obonus['request_num'] * 2;
         $requestData = [];
         $requestData['zones'] = $reqData['zones'];
         $requestData['nickname'] = $reqData['user_name'];

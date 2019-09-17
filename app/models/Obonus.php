@@ -18,7 +18,7 @@ class Obonus extends BaseModel
     public function getByExchangeCode($exchange_code,$filed='*'){
         $result = $this->findFirst([
             'columns' => $filed,
-            'conditions' => 'exchange_code = ?1',
+            'conditions' => 'obonus_code = ?1',
             'bind' => array(
                 1 => $exchange_code,
             ),
@@ -48,6 +48,21 @@ class Obonus extends BaseModel
             return false;
         }
         return true;
+    }
+
+    public function getByUserName($user_name,$filed='*'){
+        $result = $this->findFirst([
+            'columns' => $filed,
+            'conditions' => 'user_name = ?1',
+            'bind' => array(
+                1 => $user_name,
+            ),
+
+        ]);
+        if($result){
+            return $result->toArray();
+        }
+        return $result;
     }
 
 

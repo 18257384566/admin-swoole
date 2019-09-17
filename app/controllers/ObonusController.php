@@ -122,7 +122,7 @@ class ObonusController extends ControllerBase
 
         //校验数据
         $validation = $this->paValidation;
-        $validation->exchange();
+        $validation->obonusUse();
         $messages = $validation->validate($reqData);
         if(count($messages)){
             $this->result['status'] = -1;
