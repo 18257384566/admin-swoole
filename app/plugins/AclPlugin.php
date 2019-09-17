@@ -81,6 +81,7 @@ class AclPlugin extends Injectable
                 'send::propServer',
                 'send::noticeView',
                 'send::tableSendView',
+                'send::sendTableExcel',
                 'send::tableSend',
                 'send::tableAddView',
                 'send::tableAdd',
