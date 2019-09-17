@@ -177,7 +177,7 @@ class SendController extends ControllerBase
         $allcount = $allcount->fetch();
 
         //获取当页
-        $sql = "select `type`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`created_at` from $table order by created_at desc limit $page,$limit";
+        $sql = "select `no`,`type`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`created_at` from $table order by created_at,no desc limit $page,$limit";
         $list = $this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();
@@ -265,8 +265,9 @@ class SendController extends ControllerBase
         //遍历表格数据
         $time = time();
         for ($i = 0; $i < $len_result; $i++) { //循环获取各字段值
-            $reqData['nickname'] = iconv('gb2312', 'utf-8', $result[$i][0]); //中文转
-            $reqData['item'] = iconv('gb2312', 'utf-8', $result[$i][1]);
+            $reqData['no'] = iconv('gb2312', 'utf-8', $result[$i][0]); //中文转
+            $reqData['nickname'] = iconv('gb2312', 'utf-8', $result[$i][1]);
+            $reqData['item'] = iconv('gb2312', 'utf-8', $result[$i][2]);
 
             //判断数据是否为空
             if(!isset($reqData['nickname']) || !isset($reqData['item']) || $reqData['nickname'] == '' || $reqData['item'] == ''){
@@ -274,8 +275,9 @@ class SendController extends ControllerBase
             }
 
             //存入数据库
-            $sql = "insert into homepage_table_senditem_log (`type`,`nickname`,`item`,`created_at`,`updated_at`) VALUES (?,?,?,?,?)";
+            $sql = "insert into homepage_table_senditem_log (`no`,`type`,`nickname`,`item`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?)";
             $params = array(
+                $reqData['no'],
                 $reqData['type'],
                 $reqData['nickname'],
                 $reqData['item'],
@@ -286,6 +288,40 @@ class SendController extends ControllerBase
         }
 
         $this->functions->alert('导入成功','/manager/prop/tableSendAdd');
+    }
+
+    public function sendTableExcelAction(){
+        $type = $this->request->getQuery('type');
+        $table = 'homepage_table_senditem_log';
+        $sql = "select `no`,`nickname`,`item`,`is_send` from $table where `type` = '$type' order by created_at,no asc";
+        $list = $this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll(); //var_dump($list);exit;
+        if(!$list){
+            $this->functions->alert('暂无数据');
+            exit;
+        }
+        //var_dump($list);exit;
+
+        //导表
+        header('Content-Type: application/vnd.ms-excel'); //设置文件类型   也可以将 vnd.ms-excel' 改成xml（导出xml文件）
+        header('Content-Disposition: attachment;filename="道具表-'.time().'.xls"'); //设置导出的excel的名字
+        header('Cache-Control: max-age=0');
+        set_time_limit (0);
+
+        echo iconv("utf-8","gb2312","下标\t昵称\t道具\t是否成功\n");  //  \t是制表符 \n是换行符
+        foreach ($list as $v){   //$arr 是所要导出的数
+            if($v['is_send'] == 0){
+                $is_send = '未发送';
+            }
+
+            $v['no'] = (string)$v['no'];
+            $v['nickname'] = (string)$v['nickname'];
+            $v['item'] = (string)$v['item'];
+
+            echo iconv("utf-8","gb2312","{$v['no']}\t{$v['nickname']}\t{$v['item']}\t{$is_send}\n");
+        }
+        exit;
     }
 
 }

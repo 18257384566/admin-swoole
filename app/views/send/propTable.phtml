@@ -67,10 +67,32 @@
 
             <div class="container">
                 <div class="page-title">发送记录</div>
+
+                <div class="search-ui">
+                    <form action="/prop/sendTable/excel" method="get">
+
+                        <div class="addadmin-account">
+                            <div class="addadmin-left">
+                                <span>*</span><span>标识</span>
+                            </div>
+                            <div class="addadmin-right">
+                                <input type="text" name="type">
+                            </div>
+                        </div>
+
+                        <div class="search-ui-input">
+                            <div>
+                                <button  class='btn btn-primary'>导出</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="table">
                     <table>
                         <thead>
                         <tr>
+                            <th width="15%" style="text-align: center">下标</th>
                             <th width="15%" style="text-align: center">标识</th>
                             <th width="15%" style="text-align: center">用户名</th>
                             <th width="15%" style="text-align: center">道具</th>
@@ -83,6 +105,7 @@
 
                         <?php foreach($data['senditem_log'] as $v){ ?>
                             <tr>
+                                <td><?php echo $v['no'];?></td>
                                 <td><?php echo $v['type'];?></td>
                                 <td>
                                         <span>

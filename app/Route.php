@@ -69,6 +69,7 @@ class Route extends RouterGroup
         $this->addPost('/manager/prop/tableSend','send::tableSend');            //发送道具导表
         $this->add('/manager/prop/tableSendAdd','send::tableAddView');      //添加道具导表（页面）
         $this->addPost('/manager/prop/tableSendAdd','send::tableAdd');      //添加道具导表
+        $this->add('/prop/sendTable/excel','send::sendTableExcel');         //道具导表（导出表格）
         $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）
         $this->add('/manager/notice/list','manager::noticeList');           //公告列表（页面）
         $this->add('/manager/notice/add','manager::noticeAdd');             //公告添加
