@@ -93,5 +93,67 @@ class Send extends BaseBussiness
 
     }
 
+    public function tableSend($admin,$reqData){
+        //判断该服务器是否存在
+        $filed = 'url,server_name,diserver_id';
+        $server = $this->getModel('Server')->getById($reqData['server_id'],$filed);
+        if(!$server){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '该服务器不存在';
+            return $this->result;
+        }
+
+        //获取该标识下的记录
+        $filed = 'id,nickname,item,is_send';
+        $tables = $this->getModel('SenditemTableLog')->getListByType($reqData['type'],$filed);
+        if(!$tables){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '该标下没有记录';
+            return $this->result;
+        }
+
+        $send = [];
+        $send['zones'] = $server['diserver_id'];
+        $send['mailtitle'] = $reqData['mailtitle'];
+        $send['mailcontent'] = $reqData['mailcontent'];
+        //遍历表，发奖励
+        foreach ($tables as $v){
+            $send['nickname'] = $v['nickname'];
+            $send['itemstr'] = $v['item'];
+
+            //判断昵称是否为空
+            if($v['nickname'] == ''){
+                continue;
+            }
+
+            //判断该条记录是否已经发送成功
+            if($v['is_send'] == 1){
+                continue;
+            }
+
+            //发送奖励
+            $sendItem = $this->getBussiness('GameApi')->sendItem($server['url'],$send);
+
+            //记录日志
+            $log = [];
+            $log['admin_name'] = $admin['account'];
+            $log['admin_no'] = $admin['admin_no'];
+            $log['nickname'] = $v['nickname'];
+            $log['item'] = $send['itemstr'];
+            $log['server_name'] = $server['server_name'];
+            $log['diserver_id'] = $server['diserver_id'];
+            $log['server_url'] = $server['url'];
+            if($sendItem){
+                $log['is_send'] = 1;
+            }
+
+            $this->getModel('SenditemTableLog')->updateById($v['id'],$log);
+        }
+
+        $this->result['status'] = 1;
+        $this->result['msg'] = '发放完成';
+        return $this->result;
+    }
+
 
 }

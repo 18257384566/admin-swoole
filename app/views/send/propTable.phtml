@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title></title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+<div class="walletadmin-content">
+    <div class="walletadmin-box walletadmin-list">
+        <div class="box">
+
+            <div class="container">
+                <div class="page-title">导表发道具</div>
+                <div class="addadmin">
+
+                    <form action="/manager/prop/tableSend"  method="post" enctype="multipart/form-data">
+
+                        <div class="addadmin-root">
+                            <div class="addadmin-left">
+                                <span>*</span><span><b>服务器：</b></span>
+                            </div>
+                            <div class="addadmin-right">
+                                <?php foreach ($data['server_list'] as $v){ ?>
+                                    <input type="radio" name="server_id" value="<?= $v['id'] ?>" id="<?= $v['id'] ?>" ><label for="<?= $v['id'] ?>"><?= $v['server_name'] ?> 【 <?= $v['url'] ?> 】</label> &nbsp;
+                                    <br>
+                                <?php }  ?>
+                            </div>
+                        </div>
+
+                        <div class="addadmin-account">
+                            <div class="addadmin-left">
+                                <span>*</span><span>标识</span>
+                            </div>
+                            <div class="addadmin-right">
+                                <input type="text" name="type">
+                            </div>
+                        </div>
+
+                        <div class="addadmin-account">
+                            <div class="addadmin-left">
+                                <span>*</span><span>邮件标题</span>
+                            </div>
+                            <div class="addadmin-right">
+                                <input type="text" name="mailtitle">
+                            </div>
+                        </div>
+
+                        <div class="addadmin-account">
+                            <div class="addadmin-left">
+                                <span>*</span><span>邮件内容</span>
+                            </div>
+                            <div class="addadmin-right">
+                                <textarea rows="8" cols="60" class="form-control notice" name="mailcontent"></textarea>
+                            </div>
+                        </div>
+
+                </div>
+                <input type="submit" value="发放道具" class="w-btn">
+                </form>
+
+            </div>
+
+            <div class="container">
+                <div class="page-title">发送记录</div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th width="15%" style="text-align: center">标识</th>
+                            <th width="15%" style="text-align: center">用户名</th>
+                            <th width="15%" style="text-align: center">道具</th>
+                            <th width="15%" style="text-align: center">服务器</th>
+                            <th width="15%" style="text-align: center">管理员</th>
+                            <th width="15%" style="text-align: center">是否发送</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <?php foreach($data['senditem_log'] as $v){ ?>
+                            <tr>
+                                <td><?php echo $v['type'];?></td>
+                                <td>
+                                        <span>
+                                            <?php
+                                            if($v['nickname'] == '') {
+                                                echo  "全部";
+                                            }else{
+                                                echo $v['nickname'];
+                                            }
+                                            ?>
+                                            <span>
+                                </td>
+                                <td><?php echo $v['item'];?></td>
+                                <td><?php echo $v['server_name'];?></td>
+                                <td><?php echo $v['admin_name'];?></td>
+                                <td>
+                                        <span>
+                                            <?php
+                                            if($v['is_send'] == 0) {
+                                                echo  '未发送';
+                                            }elseif($v['is_send'] == 1){
+                                                echo '已发送';
+                                            }
+                                            ?>
+                                            <span>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+
+                        </tbody>
+                    </table>
+                    <div class="pagination-box">
+
+                        <?php
+                        if(isset($data['senditem_log']) && $data['senditem_log'] != ''){
+                            //存储页码字符串
+                            $pageNumString = "<div style='margin-top: 10px' class='pagination'>";
+                            //当前页码数，默认当前页码为1
+                            $curPage = isset($_GET['page'])?$_GET['page']:1;
+                            if($curPage <=5){
+                                $begin =1;
+                                $end = $data['totalpage']>=10?10:$data['totalpage'];
+                            }else{
+                                $end = $curPage +5>$data['totalpage']?$data['totalpage']:$curPage +5;
+                                $begin =$end -9<=1?1:$end -9;
+                            }
+                            //实现上一页
+                            $prev = $data['page'] -1<=1?1:$data['page'] -1;
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page=1">首页</a></li>';
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.($prev).'">&laquo;</a></li>';
+
+                            //根据起始页与终止页将当前页面的页码显示出来
+                            for($i=$begin;$i<=$end;$i++){
+                                //使用if实现高亮显示当前点击的页码
+                                if($data['page'] == $i){
+                                    $pageNumString .= '<li  class="active" style="float: left;"><a  href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                }else{
+                                    $pageNumString .= '<li style="float: left;"><a href="?'.$data['search'].'page='.$i.'">'.$i.'</a></li>';
+                                }
+                            }
+
+
+                            //实现下一页
+                            $next = $data['page'] +1 >=$data['totalpage']?$data['totalpage']:$data['page'] +1;
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$next.'">&raquo;</a></li>';
+                            $pageNumString .='<li style="float: left;"><a href="?'.$data['search'].'page='.$data['totalpage'].'">尾页</a></li>';
+                            $pageNumString .='</div>';
+                            echo $pageNumString;
+                        }
+
+                        ?>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+</body>
+</html>

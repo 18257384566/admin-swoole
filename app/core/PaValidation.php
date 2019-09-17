@@ -256,6 +256,25 @@ class PaValidation extends Validation
         )));
     }
 
+    public function tableSend(){
+        $this->add('server_id', new PresenceOf(array(
+            'exchange_code' => '请选择区服',
+            'cancelOnFail' => true
+        )));
+        $this->add('type', new PresenceOf(array(
+            'exchange_code' => '请填写标识',
+            'cancelOnFail' => true
+        )));
+        $this->add('mailtitle', new PresenceOf(array(
+            'exchange_code' => '请填写邮件标题',
+            'cancelOnFail' => true
+        )));
+        $this->add('mailcontent', new PresenceOf(array(
+            'exchange_code' => '请填写邮件内容',
+            'cancelOnFail' => true
+        )));
+    }
+
 
 
 }
