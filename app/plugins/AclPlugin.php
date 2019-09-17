@@ -25,7 +25,7 @@ class AclPlugin extends Injectable
         $resource = $controller."::".$action;
 
         //过滤api接口
-        if ($resource == 'manager::noticeApi'){
+        if ($resource == 'manager::noticeApi' || $resource == 'obonus::use' || $resource == 'exchange::exchange'){
             return true;
         }
 
@@ -114,6 +114,7 @@ class AclPlugin extends Injectable
                 'obonus::addView',
                 'obonus::addObonus',
                 'obonus::list',
+                'obonus::use',
             ),
 
             'developers' => array(
