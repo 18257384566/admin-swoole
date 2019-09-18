@@ -73,7 +73,7 @@ class Exchange extends BaseBussiness
             }{
                 if(!$send && $i == $times){ echo '记日志';
                     //记录日志
-                    $str = "zones:".$reqData['zones'].";nickname:".$reqData['user_name'].";itemstr.".$card->item.','.$card->num;
+                    $str = "zones:".$reqData['zones'].";nickname:".$reqData['user_name'].";card_no.".$exchange_code['card_no'];
                     $this->getDI()->get('logger')->log($str, "info", 'senditem');
                 }
             }
