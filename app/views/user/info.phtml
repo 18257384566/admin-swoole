@@ -16,12 +16,6 @@
   <div class="walletadmin-content">
       <div class="walletadmin-box">
           <div class="box">
-<!--              <div class="container">-->
-<!---->
-<!--<!--                  <a href="/data/update"><button class='btn btn-primary'> &nbsp 更新数据 &nbsp </button></a>-->
-<!--                  <button class='btn btn-primary' id="dataUpdate"> &nbsp 更新数据 &nbsp </button>-->
-<!---->
-<!--              </div>-->
 
               <div class="container">
                   <div class="page-title">用户信息</div>
@@ -148,6 +142,20 @@
                                       echo '创建时间:'.date('Y-m-d H:i:s',$v['CreateTime']).'&nbsp;&nbsp;';
 
                                       echo '<hr><br>';
+                                  }
+
+                                  break;
+
+                              case "logininfo":
+                                  echo '昵称:'.$data['nickname'].'&nbsp;&nbsp;<br>';
+                                  echo '用户id:'.$data['id'].'&nbsp;&nbsp;<br>';
+                                  echo '渠道:'.$data['Channel'].'&nbsp;&nbsp;<br>';
+                                  echo '最近登录时间:'.date('Y-m-d H:i:s',$data['LastLoginTime']).'&nbsp;&nbsp;<br>';
+                                  echo '创角时间:'.date('Y-m-d H:i:s',$data['CreateTime']).'&nbsp;&nbsp;<br>';
+                                  if($data['Ban'] == 0){
+                                      echo '禁用结束时间: 未禁用'.'&nbsp;&nbsp;<br>';
+                                  }else{
+                                      echo '禁用结束时间:'.date('Y-m-d H:i:s',$data['Ban']).'&nbsp;&nbsp;<br>';
                                   }
 
                                   break;

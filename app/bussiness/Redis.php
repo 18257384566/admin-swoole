@@ -16,11 +16,11 @@ class redis extends BaseBussiness
     public function __construct()
     {
         //获取连接ip
-        $server_url = $this->dispatcher->getParam('admin')['server_url'];
-        $server_url = trim(strrchr($server_url, '/'),'/');  //去掉http
-        $server_url = strstr($server_url,':',-1);   //去掉端口号
+        $server_id= $this->dispatcher->getParam('admin')['server_id'];
+        $filed = 'redis_url';
+        $server = $this->getModel('Server')->getById($server_id,$filed);
 
-        $this->config->redis->host = $server_url;
+        $this->config->redis->host = $server['redis_url'];
 
     }
 
@@ -113,8 +113,9 @@ class redis extends BaseBussiness
                 break;
 
             case 'logininfo':
-                $key = 'User_Account'.$user_id;
+                $key = 'User_Account:'.$user_id;
                 $userInfo = $this->redis->hgetall($key);
+
                 break;
         }
 

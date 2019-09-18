@@ -7,7 +7,7 @@
 
             <div class="sidebar-nav">
                 <ul class="nav" id="sidebarnav">
-
+                <?php $admin = $this->dispatcher->getParam('admin'); ?>
                     <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/") !== false){echo 'active';}else{echo '';} ?>">
                         <div><!-- <i class="icon icon-admin"></i><span> -->管理员管理</span></div>
                         <ul>
@@ -16,6 +16,9 @@
                             <a href="/admin/log"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/log") !== false){echo 'active';}else{echo '';} ?>">日志管理</li></a>
                             <a href="/admin/server/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/list") !== false){echo 'active';}else{echo '';} ?>">服务器管理</li></a>
 <!--                            <a href="/admin/diserver/list"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/admin/diserver/list") !== false){echo 'active';}else{echo '';} ?><!--">区服管理</li></a>-->
+                            <?php if(isset($admin) && $admin['account'] == 'xsy'){ ?>
+                                <a href="/admin/server/redis"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/redis") !== false){echo 'active';}else{echo '';} ?>">服务器redis管理</li></a>
+                            <?php } ?>
                         </ul>
                     </li>
 
@@ -89,7 +92,7 @@
     <?php } ?>
     <div>
         <ul>
-            <li><?php $admin = $this->dispatcher->getParam('admin'); if(isset($admin)) echo $admin['server_name'] ?></li>
+            <li><?php if(isset($admin)) echo $admin['server_name'] ?></li>
             <li><i class="icon icon-home"></i><span><?php if(isset($admin)) echo $admin['account'] ?></span></li>
             <?php if(isset($EOSAddress)){ ?>
                 <li><span><a href="/<?php echo $pro_no; ?>/eosResourceManage">EOS资源管理</a></span</li>

@@ -313,6 +313,8 @@ class SendController extends ControllerBase
         foreach ($list as $v){   //$arr 是所要导出的数
             if($v['is_send'] == 0){
                 $is_send = '未发送';
+            }else{
+                $is_send = '已发送';
             }
 
             $v['no'] = (string)$v['no'];

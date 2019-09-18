@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title></title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+</head>
+<body>
+    <?php $this->view->partial("nav");?>
+    <div class="walletadmin-content">
+      <div class="walletadmin-box walletadmin-list">
+          <div class="box">
+              <a href="/admin/server/list"><button class='btn btn-primary'> &nbsp&nbsp 返回 &nbsp&nbsp </button></a>
+              <div class="container">
+                  <div class="page-title">服务器修改</div>
+                  <div class="addadmin">
+
+                      <form action="/admin/serveredis/update"  method="post" enctype="multipart/form-data">
+                          <div class="addadmin-account">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>服务器名</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" name="server_name" value="<?= $data['server']['server_name'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>url</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="url" value="<?= $data['server']['url'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服id</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="diserver_id" value="<?= $data['server']['diserver_id'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>区服名</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="diserver_name" value="<?= $data['server']['diserver_name'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>redis地址</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" autocomplete="off" name="redis_url" value="<?= $data['server']['redis_url'] ?>">
+                              </div>
+                          </div>
+                          <div class="addadmin-root">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>类型（大渠道）:</span>
+                              </div>
+                              <div class="addadmin-right">
+
+                                      <input type="radio" name="type" value="1" id="1" <?php if($data['server']['type'] == 1){echo 'checked';} ?> ><label for="1"> ios </label> &nbsp;&nbsp;
+                                      <input type="radio" name="type" value="2" id="2" <?php if($data['server']['type'] == 2){echo 'checked';} ?> ><label for="2"> 安卓 </label> &nbsp;&nbsp;
+                                      <input type="radio" name="type" value="3" id="3" <?php if($data['server']['type'] == 3){echo 'checked';} ?> ><label for="3"> 其他 </label> &nbsp;&nbsp;
+                                      <input type="radio" name="type" value="4" id="4" <?php if($data['server']['type'] == 4){echo 'checked';} ?> ><label for="4"> 海外 </label> &nbsp;&nbsp;
+
+                              </div>
+                          </div>
+
+                  </div>
+                  <input type="hidden" autocomplete="off" name="id" value="<?= $data['server']['id'] ?>">
+                  <input type="submit" value="提交" class="w-btn">
+                  </form>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+</body>
+</html>
