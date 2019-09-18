@@ -148,14 +148,14 @@
 
                               case "logininfo":
                                   echo '昵称:'.$data['nickname'].'&nbsp;&nbsp;<br>';
-                                  echo '用户id:'.$data['id'].'&nbsp;&nbsp;<br>';
-                                  echo '渠道:'.$data['Channel'].'&nbsp;&nbsp;<br>';
-                                  echo '最近登录时间:'.date('Y-m-d H:i:s',$data['LastLoginTime']).'&nbsp;&nbsp;<br>';
-                                  echo '创角时间:'.date('Y-m-d H:i:s',$data['CreateTime']).'&nbsp;&nbsp;<br>';
-                                  if($data['Ban'] == 0){
+                                  echo '用户id:'.$data['list']['Id'].'&nbsp;&nbsp;<br>';
+                                  echo '渠道:'.$data['list']['Channel'].'&nbsp;&nbsp;<br>';
+                                  echo '最近登录时间:'.date('Y-m-d H:i:s',$data['list']['LastLoginTime']).'&nbsp;&nbsp;<br>';
+                                  echo '创角时间:'.date('Y-m-d H:i:s',$data['list']['CreateTime']).'&nbsp;&nbsp;<br>';
+                                  if($data['list']['Ban'] == 0){
                                       echo '禁用结束时间: 未禁用'.'&nbsp;&nbsp;<br>';
                                   }else{
-                                      echo '禁用结束时间:'.date('Y-m-d H:i:s',$data['Ban']).'&nbsp;&nbsp;<br>';
+                                      echo '禁用结束时间:'.date('Y-m-d H:i:s',$data['list']['Ban']).'&nbsp;&nbsp;<br>';
                                   }
 
                                   break;
