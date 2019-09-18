@@ -111,6 +111,11 @@ class redis extends BaseBussiness
                 }
 
                 break;
+
+            case 'logininfo':
+                $key = 'User_Account'.$user_id;
+                $userInfo = $this->redis->hgetall($key);
+                break;
         }
 
         //echo '<pre>';var_dump($userInfo);exit;
