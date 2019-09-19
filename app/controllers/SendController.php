@@ -269,7 +269,7 @@ class SendController extends ControllerBase
 //            $reqData['nickname'] = iconv('GBK', 'utf-8', $result[$i][1]);
 //            $reqData['item'] = iconv('GBK', 'utf-8', $result[$i][2]);
 
-            $reqData['no'] = mb_convert_encoding($result[$i][0], "UTF-8", "auto");
+            $reqData['no'] = (int)mb_convert_encoding($result[$i][0], "UTF-8", "auto");
             $reqData['nickname'] = mb_convert_encoding($result[$i][1], "UTF-8", "auto");
             $reqData['item'] = mb_convert_encoding($result[$i][2], "UTF-8", "auto");
 
