@@ -110,6 +110,7 @@ class AclPlugin extends Injectable
                 'admin::serverRedisView',
                 'admin::serverRedisUpdateView',
                 'admin::serverRedisUpdate',
+                'admin::summary',
                 'data::update',
                 'admin::diserverList',
                 'admin::diserverAdd',

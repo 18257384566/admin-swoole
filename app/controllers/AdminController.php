@@ -441,4 +441,18 @@ class AdminController extends ControllerBase
         $this->view->pick('admin/channelList');
     }
 
+    public function summaryAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        //获取创角色统计
+        $user_count = $this->getBussiness('Redis')->userCount();
+
+        $data['user_count'] = $user_count;
+        $data['admin'] = $admin;
+
+        $this->view->data = $data;
+        $this->view->pick('admin/summary');
+
+    }
+
 }

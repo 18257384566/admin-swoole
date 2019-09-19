@@ -122,4 +122,14 @@ class redis extends BaseBussiness
         //echo '<pre>';var_dump($userInfo);exit;
         return $userInfo;
     }
+
+    public function userCount(){
+        $key = 'Game_Nickname';
+        $total = $this->redis->Hlen($key);
+        if(!isset($total)){
+            $total = 0;
+            return $total;
+        }
+        return $total;
+    }
 }
