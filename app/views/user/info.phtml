@@ -38,7 +38,7 @@
                                   <input type="radio" name="type" value="ship" id="ship" checked><label for="ship">船信息</label> &nbsp;&nbsp;
                                   <input type="radio" name="type" value="res" id="res"><label for="res">资源</label> &nbsp;&nbsp;
                                   <input type="radio" name="type" value="construction" id="construction"  ><label for="construction">建筑</label> &nbsp;&nbsp;
-                                  <input type="radio" name="type" value="order" id="order"  ><label for="order">点券查询</label> &nbsp;&nbsp;
+                                  <input type="radio" name="type" value="order" id="order"  ><label for="order">订单查询</label> &nbsp;&nbsp;
                                   <input type="radio" name="type" value="logininfo" id="logininfo"  ><label for="logininfo">登录详情</label> &nbsp;&nbsp;
                               </div>
                           </div>
@@ -130,9 +130,9 @@
                                       echo '订单编号:'.$v['Id'].'&nbsp;&nbsp;';
                                       echo '渠道:'.$v['Channel'].'&nbsp;&nbsp;';
                                       if($v['Complete'] == 1){
-                                          echo '订单已经发货完成';
+                                          echo '订单发货完成';
                                       }else{
-                                          echo '订单已经未发货';
+                                          echo '订单未发货';
                                       }
                                       echo '&nbsp;&nbsp;';
                                       echo 'GoodsId:'.$v['GoodsId'].'&nbsp;&nbsp;';
