@@ -265,11 +265,13 @@ class SendController extends ControllerBase
         //遍历表格数据
         $time = time();
         for ($i = 0; $i < $len_result; $i++) { //循环获取各字段值
-            $reqData['no'] = 0;
-            $reqData['no'] = iconv('GBK', 'utf-8', $result[$i][0]); //中文转
+//            $reqData['no'] = iconv('GBK', 'utf-8', $result[$i][0]); //中文转
 //            $reqData['nickname'] = iconv('GBK', 'utf-8', $result[$i][1]);
+//            $reqData['item'] = iconv('GBK', 'utf-8', $result[$i][2]);
+
+            $reqData['no'] = mb_convert_encoding($result[$i][0], "UTF-8", "auto");
             $reqData['nickname'] = mb_convert_encoding($result[$i][1], "UTF-8", "auto");
-            $reqData['item'] = iconv('GBK', 'utf-8', $result[$i][2]);
+            $reqData['item'] = mb_convert_encoding($result[$i][2], "UTF-8", "auto");
 
             //判断数据是否为空
             if(!isset($reqData['nickname']) || !isset($reqData['item']) || $reqData['nickname'] == '' || $reqData['item'] == ''){
@@ -322,7 +324,7 @@ class SendController extends ControllerBase
             $v['no'] = (string)$v['no'];
             $v['nickname'] = (string)$v['nickname'];
             $v['item'] = (string)$v['item'];
-            
+
             echo iconv("utf-8","gb2312","{$v['no']}\t{$v['nickname']}\t{$v['item']}\t{$is_send}\n");
         }
         exit;
