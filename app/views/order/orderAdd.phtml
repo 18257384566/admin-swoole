@@ -18,10 +18,10 @@
           <div class="box">
               <div class="container">
 
-                  <div class="page-title">添加订单（导入csv格式）【最近更新时间: <?= $data['order']['created_at'] ?>】</div>
+                  <div class="page-title">添加订单（导入csv/tsv格式）【最近更新时间: <?= $data['order']['created_at'] ?>】</div>
                   <div class="addadmin">
 
-                      <form action="/admin/orderAdd"  method="post" enctype="multipart/form-data">
+                      <form action="/order/orderAdd"  method="post" enctype="multipart/form-data">
                           <div class="addadmin-account">
                             <div class="addadmin-left">
                                 <span>*</span><span>文件</span>
@@ -37,7 +37,7 @@
 
               <div class="container">
                   <div class="search-ui">
-                      <form action="/admin/orderadd/excle" method="get">
+                      <form action="/order/orderadd/excle" method="get">
 
                           <div class="search-ui-input">
                               <div>

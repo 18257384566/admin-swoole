@@ -50,8 +50,7 @@ class Route extends RouterGroup
         $this->add('/admin/getzonelist','admin::getzonelist');
         $this->add('/admin/channel/list','admin::channelList');     //渠道列表
         $this->add('/admin/info/summary','admin::summary');         //信息统计
-        $this->add('/admin/orderadd/excle','admin::orderAddView');  //订单导入
-        $this->addPost('/admin/orderAdd','admin::orderAdd');        //订单导入
+
 
 
         //兑换券管理
@@ -105,6 +104,10 @@ class Route extends RouterGroup
         $this->add('/obonus/list','obonus::list');                  //返还奖励列表
         $this->addPost('/api/obonus/use','obonus::use');            //返还奖励使用
         $this->add('/api/obonus/use','obonus::use');                //返还奖励使用
+
+        //订单管理
+        $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入
+        $this->addPost('/order/orderAdd','order::orderAdd');        //订单导入
 
     }
 }
