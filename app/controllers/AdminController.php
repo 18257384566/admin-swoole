@@ -505,8 +505,8 @@ class AdminController extends ControllerBase
         //判断上传文件是否合法
         $filename = $_FILES['file']['tmp_name'];
         $name = strstr( $_FILES['file']['name'], '.');
-        if($name != '.csv'){
-            $this->functions->alert('导入文件格式只能为csv');
+        if($name != '.csv' && $name != '.tsv'){
+            $this->functions->alert('导入文件格式只能为csv或者tsv');
         }
         if (empty ($filename)) {
             $this->functions->alert('请选择要导入的CSV文件');
