@@ -68,6 +68,10 @@ class SendController extends ControllerBase
             exit;
         }
 
+        if($reqData['nickname'] == '@all'){
+            $reqData['nickname'] = '';
+        }
+
         $propSend = $this->getBussiness('Send')->propSend($admin,$reqData);
 
         $this->functions->alert($propSend['msg']);
@@ -140,10 +144,14 @@ class SendController extends ControllerBase
         $validation = $this->paValidation;
         $validation->propServer();
         $messages = $validation->validate($reqData);
-        if(count($messages)){
+        if(count($messages)){ var_dump($messages[0]);exit;
             $message = $messages[0]->getMessage();
-            $this->functions->alert($message);
+            $this->functions->alert($this->messages->_($message));
             exit;
+        }
+
+        if($reqData['nickname'] == '@all'){
+            $reqData['nickname'] = '';
         }
 
         $propServer = $this->getBussiness('Send')->propServer($admin,$reqData);

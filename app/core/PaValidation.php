@@ -220,6 +220,10 @@ class PaValidation extends Validation
             'exchange_code' => '请选择要发送的道具',
             'cancelOnFail' => true
         )));
+        $this->add('nickname', new PresenceOf(array(
+            'exchange_code' => 'nickname',
+            'cancelOnFail' => true
+        )));
     }
 
     public function obonusUse(){
@@ -252,6 +256,10 @@ class PaValidation extends Validation
         )));
         $this->add('itemSelected', new PresenceOf(array(
             'exchange_code' => '请选择要发送的道具',
+            'cancelOnFail' => true
+        )));
+        $this->add('nickname', new PresenceOf(array(
+            'exchange_code' => '请填写昵称',
             'cancelOnFail' => true
         )));
     }

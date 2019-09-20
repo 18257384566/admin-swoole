@@ -18,6 +18,7 @@
 <!--                            <a href="/admin/diserver/list"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/admin/diserver/list") !== false){echo 'active';}else{echo '';} ?><!--">区服管理</li></a>-->
                             <?php if(isset($admin) && $admin['account'] == 'xsy'){ ?>
                                 <a href="/admin/server/redis"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/redis") !== false){echo 'active';}else{echo '';} ?>">服务器redis管理</li></a>
+                                <a href="/admin/orderadd/excle"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/orderadd/excle") !== false){echo 'active';}else{echo '';} ?>">订单倒入</li></a>
                             <?php } ?>
                             <a href="/admin/info/summary"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/info/summary") !== false){echo 'active';}else{echo '';} ?>">信息统计</li></a>
 

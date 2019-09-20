@@ -50,6 +50,8 @@ class Route extends RouterGroup
         $this->add('/admin/getzonelist','admin::getzonelist');
         $this->add('/admin/channel/list','admin::channelList');     //渠道列表
         $this->add('/admin/info/summary','admin::summary');         //信息统计
+        $this->add('/admin/orderadd/excle','admin::orderAddView');  //订单导入
+        $this->addPost('/admin/orderAdd','admin::orderAdd');        //订单导入
 
 
         //兑换券管理

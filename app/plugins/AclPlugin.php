@@ -122,6 +122,9 @@ class AclPlugin extends Injectable
                 'obonus::addObonus',
                 'obonus::list',
                 'obonus::use',
+                'admin::orderAddView',
+                'admin::orderAdd',
+
             ),
 
             'developers' => array(

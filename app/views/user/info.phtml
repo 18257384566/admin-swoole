@@ -129,15 +129,10 @@
                                       echo '昵称:'.$data['nickname'].'&nbsp;&nbsp;';
                                       echo '订单编号:'.$v['Id'].'&nbsp;&nbsp;';
                                       echo '渠道:'.$v['Channel'].'&nbsp;&nbsp;';
-                                      if($v['Complete'] == 1){
-                                          echo '订单发货完成';
-                                      }else{
-                                          echo '订单未发货';
-                                      }
-                                      echo '&nbsp;&nbsp;';
+                                      echo '订单发货完成';
                                       echo 'GoodsId:'.$v['GoodsId'].'&nbsp;&nbsp;';
                                       echo '数量:'.$v['Amount'].'&nbsp;&nbsp;';
-                                      echo '道具:'.$v['ItemName'].'&nbsp;&nbsp;';
+                                      echo '道具:'.$v['Items'].'&nbsp;&nbsp;';
                                       echo '道具数量:'.$v['ItemQuantity'].'&nbsp;&nbsp;';
                                       echo '创建时间:'.date('Y-m-d H:i:s',$v['CreateTime']).'&nbsp;&nbsp;';
 
