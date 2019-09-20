@@ -144,9 +144,9 @@ class SendController extends ControllerBase
         $validation = $this->paValidation;
         $validation->propServer();
         $messages = $validation->validate($reqData);
-        if(count($messages)){ var_dump($messages[0]);exit;
+        if(count($messages)){
             $message = $messages[0]->getMessage();
-            $this->functions->alert($this->messages->_($message));
+            $this->functions->alert($message);
             exit;
         }
 

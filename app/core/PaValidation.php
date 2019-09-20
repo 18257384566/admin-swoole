@@ -75,7 +75,7 @@ class PaValidation extends Validation
 
     public function exchange(){
         $this->add('exchange_code', new PresenceOf(array(
-            'exchange_code' => '兑换券编号不能唯空',
+            'message' => '兑换券编号不能唯空',
             'cancelOnFail' => true
         )));
         $this->add('zones', new PresenceOf(array(
@@ -90,195 +90,195 @@ class PaValidation extends Validation
 
     public function getShipInfo(){
         $this->add('nickname', new PresenceOf(array(
-            'exchange_code' => '请输入昵称',
+            'message' => '请输入昵称',
             'cancelOnFail' => true
         )));
     }
 
     public function disable(){
         $this->add('zones', new PresenceOf(array(
-            'exchange_code' => '请选择区服',
+            'message' => '请选择区服',
             'cancelOnFail' => true
         )));
         $this->add('user', new PresenceOf(array(
-            'exchange_code' => '请填写昵称',
+            'message' => '请填写昵称',
             'cancelOnFail' => true
         )));
         $this->add('t', new PresenceOf(array(
-            'exchange_code' => '请选择封禁结束时间',
+            'message' => '请选择封禁结束时间',
             'cancelOnFail' => true
         )));
     }
 
     public function userInfo(){
         $this->add('nickname', new PresenceOf(array(
-            'exchange_code' => '请输入昵称',
+            'message' => '请输入昵称',
             'cancelOnFail' => true
         )));
         $this->add('type', new PresenceOf(array(
-            'exchange_code' => '请选择查询类型',
+            'message' => '请选择查询类型',
             'cancelOnFail' => true
         )));
     }
 
     public function notalk(){
         $this->add('zone', new PresenceOf(array(
-            'exchange_code' => '请选择区服',
+            'message' => '请选择区服',
             'cancelOnFail' => true
         )));
         $this->add('nickname', new PresenceOf(array(
-            'exchange_code' => '请填写昵称',
+            'message' => '请填写昵称',
             'cancelOnFail' => true
         )));
         $this->add('t', new PresenceOf(array(
-            'exchange_code' => '请选择封禁结束时间',
+            'message' => '请选择封禁结束时间',
             'cancelOnFail' => true
         )));
     }
 
     public function noticeAdd(){
         $this->add('channel', new PresenceOf(array(
-            'exchange_code' => '请选择渠道',
+            'message' => '请选择渠道',
             'cancelOnFail' => true
         )));
         $this->add('notice', new PresenceOf(array(
-            'exchange_code' => '请填写公告',
+            'message' => '请填写公告',
             'cancelOnFail' => true
         )));
     }
 
     public function noticeApi(){
         $this->add('channel', new PresenceOf(array(
-            'exchange_code' => '请选择渠道',
+            'message' => '请选择渠道',
             'cancelOnFail' => true
         )));
     }
 
     public function serverAdd(){
         $this->add('server_name', new PresenceOf(array(
-            'exchange_code' => '请填写服务器名',
+            'message' => '请填写服务器名',
             'cancelOnFail' => true
         )));
         $this->add('url', new PresenceOf(array(
-            'exchange_code' => '请填写url',
+            'message' => '请填写url',
             'cancelOnFail' => true
         )));
         $this->add('type', new PresenceOf(array(
-            'exchange_code' => '请选择类型',
+            'message' => '请选择类型',
             'cancelOnFail' => true
         )));
         $this->add('diserver_id', new PresenceOf(array(
-            'exchange_code' => '请填写区服id',
+            'message' => '请填写区服id',
             'cancelOnFail' => true
         )));
         $this->add('diserver_name', new PresenceOf(array(
-            'exchange_code' => '请填写区服名',
+            'message' => '请填写区服名',
             'cancelOnFail' => true
         )));
     }
 
     public function diserverAdd(){
         $this->add('server_id', new PresenceOf(array(
-            'exchange_code' => '请选择服务器',
+            'message' => '请选择服务器',
             'cancelOnFail' => true
         )));
         $this->add('diserver_id', new PresenceOf(array(
-            'exchange_code' => '请填写区服id',
+            'message' => '请填写区服id',
             'cancelOnFail' => true
         )));
         $this->add('diserver_name', new PresenceOf(array(
-            'exchange_code' => '请填写区服名',
+            'message' => '请填写区服名',
             'cancelOnFail' => true
         )));
     }
 
     public function onlineQuery(){
         $this->add('zones', new PresenceOf(array(
-            'exchange_code' => '请选择游戏区服',
+            'message' => '请选择游戏区服',
             'cancelOnFail' => true
         )));
         $this->add('t1', new PresenceOf(array(
-            'exchange_code' => '选择查询时间',
+            'message' => '选择查询时间',
             'cancelOnFail' => true
         )));
     }
 
     public function propServer(){
         $this->add('server_id', new PresenceOf(array(
-            'exchange_code' => '请选择服务器',
+            'message' => '请选择服务器',
             'cancelOnFail' => true
         )));
         $this->add('mailtitle', new PresenceOf(array(
-            'exchange_code' => '请填写邮箱标题',
+            'message' => '请填写邮箱标题',
             'cancelOnFail' => true
         )));
         $this->add('mailcontent', new PresenceOf(array(
-            'exchange_code' => '请填写邮箱内容',
+            'message' => '请填写邮箱内容',
             'cancelOnFail' => true
         )));
         $this->add('itemSelected', new PresenceOf(array(
-            'exchange_code' => '请选择要发送的道具',
+            'message' => '请选择要发送的道具',
             'cancelOnFail' => true
         )));
         $this->add('nickname', new PresenceOf(array(
-            'exchange_code' => 'nickname',
+            'message' => 'nickname',
             'cancelOnFail' => true
         )));
     }
 
     public function obonusUse(){
         $this->add('obonus_code', new PresenceOf(array(
-            'exchange_code' => '请输入用户编号',
+            'message' => '请输入用户编号',
             'cancelOnFail' => true
         )));
         $this->add('zones', new PresenceOf(array(
-            'exchange_code' => '请输入区服id',
+            'message' => '请输入区服id',
             'cancelOnFail' => true
         )));
         $this->add('user_name', new PresenceOf(array(
-            'exchange_code' => '请输入用户编号',
+            'message' => '请输入用户编号',
             'cancelOnFail' => true
         )));
     }
 
     public function propSend(){
         $this->add('zones', new PresenceOf(array(
-            'exchange_code' => '请选择区服',
+            'message' => '请选择区服',
             'cancelOnFail' => true
         )));
         $this->add('mailtitle', new PresenceOf(array(
-            'exchange_code' => '请填写邮箱标题',
+            'message' => '请填写邮箱标题',
             'cancelOnFail' => true
         )));
         $this->add('mailcontent', new PresenceOf(array(
-            'exchange_code' => '请填写邮箱内容',
+            'message' => '请填写邮箱内容',
             'cancelOnFail' => true
         )));
         $this->add('itemSelected', new PresenceOf(array(
-            'exchange_code' => '请选择要发送的道具',
+            'message' => '请选择要发送的道具',
             'cancelOnFail' => true
         )));
         $this->add('nickname', new PresenceOf(array(
-            'exchange_code' => '请填写昵称',
+            'message' => '请填写昵称',
             'cancelOnFail' => true
         )));
     }
 
     public function tableSend(){
         $this->add('server_id', new PresenceOf(array(
-            'exchange_code' => '请选择区服',
+            'message' => '请选择区服',
             'cancelOnFail' => true
         )));
         $this->add('type', new PresenceOf(array(
-            'exchange_code' => '请填写标识',
+            'message' => '请填写标识',
             'cancelOnFail' => true
         )));
         $this->add('mailtitle', new PresenceOf(array(
-            'exchange_code' => '请填写邮件标题',
+            'message' => '请填写邮件标题',
             'cancelOnFail' => true
         )));
         $this->add('mailcontent', new PresenceOf(array(
-            'exchange_code' => '请填写邮件内容',
+            'message' => '请填写邮件内容',
             'cancelOnFail' => true
         )));
     }
