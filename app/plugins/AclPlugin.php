@@ -126,6 +126,8 @@ class AclPlugin extends Injectable
                 'order::orderAdd',
                 'send::propRequestView',
                 'send::propRequest',
+                'send::propDealView',
+                'send::propDeal',
 
             ),
 

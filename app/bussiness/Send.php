@@ -173,6 +173,8 @@ class Send extends BaseBussiness
         $log['server_url'] = $admin['server_url'];
         $log['is_send'] = 0;    //1:成功 0:请求中 2:拒绝请求 -1:发送失败
         $log['remark'] = $reqData['remark'];
+        $log['mailcontent'] = $reqData['mailcontent'];
+        $log['mailtitle'] = $reqData['mailtitle'];
 
         $add = $this->getModel('SenditemReqLog')->addLog($log);
         if(!$add){
@@ -184,6 +186,89 @@ class Send extends BaseBussiness
         $this->result['status'] = 1;
         $this->result['msg'] = '发送成功';
         return $this->result;
+    }
+
+    public function propDeal($admin,$reqData){
+        //查询该数据
+        $filed = 'is_send,nickname,item,mailtitle,mailcontent,diserver_id,server_url';
+        $log = $this->getModel('SenditemReqLog')->getById($reqData['id'],$filed);
+        if(!$log){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '该数据不存在';
+            return $this->result;
+        }
+
+        switch ($reqData['is_send']){   //1:成功 0:请求中 2:拒绝请求 -1:发送失败
+            case '2':
+                //判断是否已经操作
+                if($log['is_send'] == 2){
+                    $this->result['status'] = -1;
+                    $this->result['msg'] = '已拒绝该请求';
+                    return $this->result;
+                }
+
+                //修改数据
+                $data['is_send'] = $reqData['is_send'];
+                $data['deal_admin_name'] = $admin['account'];
+                $data['deal_admin_no'] = $admin['admin_no'];
+                $update = $this->getModel('SenditemReqLog')->updateById($reqData['id'],$data);
+                if (!$update){
+                    $this->result['status'] = -1;
+                    $this->result['msg'] = '拒绝失败';
+                    return $this->result;
+                }
+
+                $this->result['status'] = 1;
+                $this->result['msg'] = '拒绝成功';
+                return $this->result;
+                break;
+
+            case '1':
+                //判断是否已经操作
+                if($log['is_send'] == 1){
+                    $this->result['status'] = -1;
+                    $this->result['msg'] = '已通过该请求';
+                    return $this->result;
+                }
+
+                //发送道具
+                $send = [];
+                $send['nickname'] = $log['nickname'];
+                $send['mailtitle'] = $log['mailtitle'];
+                $send['mailcontent'] = $log['mailcontent'];
+                $send['itemstr'] = $log['item'];
+                $send['zones'] = $log['diserver_id'];
+                $sendItem = $this->getBussiness('GameApi')->sendItem($log['server_url'],$send);
+
+                if(!$sendItem){
+                    $data['is_send'] = -1;
+
+                    $this->result['status'] = -1;
+                    $this->result['msg'] = '发送失败';
+                }else{
+                    $data['is_send'] = 1;
+
+                    $this->result['status'] = 1;
+                    $this->result['msg'] = '发送成功';
+                }
+
+                //修改记录
+                $data['deal_admin_name'] = $admin['account'];
+                $data['deal_admin_no'] = $admin['admin_no'];
+                $update = $this->getModel('SenditemReqLog')->updateById($reqData['id'],$data);
+                if(!$update){
+                    $this->getModel('SenditemReqLog')->updateById($reqData['id'],$data);
+                }
+
+                return $this->result;
+                break;
+
+            default:
+                $this->result['status'] = -1;
+                $this->result['msg'] = '暂无此操作';
+                return $this->result;
+                break;
+        }
     }
 
 

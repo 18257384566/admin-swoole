@@ -338,6 +338,8 @@ class SendController extends ControllerBase
         exit;
     }
 
+
+    //道具请求
     public function propRequestViewAction(){
         $admin = $this->dispatcher->getParam('admin');
         $server_url = $admin['server_url'];
@@ -357,7 +359,7 @@ class SendController extends ControllerBase
         }else{
             $arr = [-1,0,1,2];
             if(in_array($search,$arr)){
-                $allcount = $this->db->query("select count(id) as allcount from $table where `is_success`= $search");
+                $allcount = $this->db->query("select count(id) as allcount from $table where `is_send`= $search");
             }else{
                 $allcount = $this->db->query("select count(id) as allcount from $table `nickname`= $search");
             }
@@ -368,13 +370,13 @@ class SendController extends ControllerBase
 
         //获取当页
         if(!isset($search) || $search == ''){
-            $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send`,`mailcontent`,`mailtitle` from $table order by created_at desc limit $page,$limit";
         }else{
             $arr = [-1,0,1,2];
             if(in_array($search,$arr)){
-                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `is_success`= $search order by created_at desc limit $page,$limit";
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send`,`mailcontent`,`mailtitle` from $table where `is_send`= $search order by created_at desc limit $page,$limit";
             }else{
-                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `nickname`= $search order by created_at desc limit $page,$limit";
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send`,`mailcontent`,`mailtitle` from $table where `nickname`= $search order by created_at desc limit $page,$limit";
             }
         }
         $list=$this->db->query($sql);
@@ -423,6 +425,81 @@ class SendController extends ControllerBase
         return $this->dispatcher->forward(array(
             "controller" => "send",
             "action" => "propRequestView",
+        ));
+    }
+
+    public function propDealViewAction(){
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->get('search');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_request_senditem_log';
+        //获取总条数
+        if(!isset($search) || $search == ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }else{
+            $arr = [-1,0,1,2];
+            if(in_array($search,$arr)){
+                $allcount = $this->db->query("select count(id) as allcount from $table where `is_send`= $search");
+            }else{
+                $allcount = $this->db->query("select count(id) as allcount from $table `nickname`= $search");
+            }
+        }
+
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table order by created_at desc limit $page,$limit";
+        }else{
+            $arr = [-1,0,1,2];
+            if(in_array($search,$arr)){
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `is_send`= $search order by created_at desc limit $page,$limit";
+            }else{
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `nickname`= $search order by created_at desc limit $page,$limit";
+            }
+        }
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page'] = $this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = "search=$search?";
+
+        $this->view->list = $list;
+        $this->view->data = $data;
+        $this->view->pick('send/propDeal');
+    }
+
+    public function propDealAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $reqData['id'] = $this->request->getQuery('id');
+        $reqData['is_send'] = $this->request->getQuery('is_send');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->propDeal();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+            exit;
+        }
+
+        $send = $this->getBussiness('Send')->propDeal($admin,$reqData);//exit;
+        $this->functions->alert($send['msg']);
+        return $this->dispatcher->forward(array(
+            "controller" => "send",
+            "action" => "propDealView",
         ));
     }
 

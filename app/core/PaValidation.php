@@ -283,6 +283,15 @@ class PaValidation extends Validation
         )));
     }
 
-
+    public function propDeal(){
+        $this->add('id', new PresenceOf(array(
+            'message' => '数据传输错误',
+            'cancelOnFail' => true
+        )));
+        $this->add('is_send', new PresenceOf(array(
+            'message' => '数据传输错误',
+            'cancelOnFail' => true
+        )));
+    }
 
 }
