@@ -68,10 +68,14 @@ class Route extends RouterGroup
         $this->add('/manager/prop/serverSend','send::propServerView');      //发送道具多服（页面）
         $this->addPost('/manager/prop/serverSend','send::propServer');      //发送道具多服
         $this->add('/manager/prop/tableSend','send::tableSendView');        //发送道具导表（页面）
-        $this->addPost('/manager/prop/tableSend','send::tableSend');            //发送道具导表
+        $this->addPost('/manager/prop/tableSend','send::tableSend');        //发送道具导表
         $this->add('/manager/prop/tableSendAdd','send::tableAddView');      //添加道具导表（页面）
         $this->addPost('/manager/prop/tableSendAdd','send::tableAdd');      //添加道具导表
         $this->add('/prop/sendTable/excel','send::sendTableExcel');         //道具导表（导出表格）
+        $this->add('/manager/prop/request','send::propRequestView');        //发送道具请求（页面）
+        $this->addPost('/manager/prop/request','send::propRequest');        //发送道具请求
+        $this->add('/manager/prop/deal','send::propDealView');              //处理道具请求（页面）
+        $this->addPost('/manager/prop/deal','send::propDeal');              //处理道具请求
         $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）
         $this->add('/manager/notice/list','manager::noticeList');           //公告列表（页面）
         $this->add('/manager/notice/add','manager::noticeAdd');             //公告添加

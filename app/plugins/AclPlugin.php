@@ -124,6 +124,8 @@ class AclPlugin extends Injectable
                 'obonus::use',
                 'order::orderAddView',
                 'order::orderAdd',
+                'send::propRequestView',
+                'send::propRequest',
 
             ),
 

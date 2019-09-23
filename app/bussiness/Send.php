@@ -155,5 +155,36 @@ class Send extends BaseBussiness
         return $this->result;
     }
 
+    public function propRequest($admin,$reqData){
+        $item = '';
+        foreach ($reqData['itemSelected'] as $v){
+            $item .= $v.';';
+        }
+        $item = rtrim($item,';');
+
+        //添加发送道具日志
+        $log = [];
+        $log['req_admin_name'] = $admin['account'];
+        $log['req_admin_no'] = $admin['admin_no'];
+        $log['nickname'] = $reqData['nickname'];
+        $log['item'] = $item;
+        $log['server_name'] = $admin['server_name'];
+        $log['diserver_id'] = $reqData['zones'];
+        $log['server_url'] = $admin['server_url'];
+        $log['is_send'] = 0;    //1:成功 0:请求中 2:拒绝请求 -1:发送失败
+        $log['remark'] = $reqData['remark'];
+
+        $add = $this->getModel('SenditemReqLog')->addLog($log);
+        if(!$add){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '发送失败';
+            return $this->result;
+        }
+
+        $this->result['status'] = 1;
+        $this->result['msg'] = '发送成功';
+        return $this->result;
+    }
+
 
 }

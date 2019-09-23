@@ -338,4 +338,92 @@ class SendController extends ControllerBase
         exit;
     }
 
+    public function propRequestViewAction(){
+        $admin = $this->dispatcher->getParam('admin');
+        $server_url = $admin['server_url'];
+
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->get('search');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_request_senditem_log';
+        //获取总条数
+        if(!isset($search) || $search == ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }else{
+            $arr = [-1,0,1,2];
+            if(in_array($search,$arr)){
+                $allcount = $this->db->query("select count(id) as allcount from $table where `is_success`= $search");
+            }else{
+                $allcount = $this->db->query("select count(id) as allcount from $table `nickname`= $search");
+            }
+        }
+
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table order by created_at desc limit $page,$limit";
+        }else{
+            $arr = [-1,0,1,2];
+            if(in_array($search,$arr)){
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `is_success`= $search order by created_at desc limit $page,$limit";
+            }else{
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `nickname`= $search order by created_at desc limit $page,$limit";
+            }
+        }
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page'] = $this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = "search=$search?";
+
+        $this->view->server_url = $admin['server_url'];
+        $this->view->list = $list;
+        $this->view->data = $data;
+        $this->view->pick('send/propReq');
+    }
+
+    public function propRequestAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $reqData['zones'] = $this->request->getPost('zone');
+        $reqData['nickname'] = $this->request->getPost('nickname');
+        $reqData['mailtitle'] = $this->request->getPost('mailtitle');
+        $reqData['mailcontent'] = $this->request->getPost('mailcontent');
+        $reqData['itemSelected'] = $this->request->getPost('itemSelected');
+        $reqData['remark'] = $this->request->getPost('remark');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->propSend();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+            exit;
+        }
+
+        if($reqData['nickname'] == '@all'){
+            $reqData['nickname'] = '';
+        }
+
+        $propSend = $this->getBussiness('Send')->propRequest($admin,$reqData);
+
+        $this->functions->alert($propSend['msg']);
+        return $this->dispatcher->forward(array(
+            "controller" => "send",
+            "action" => "propRequestView",
+        ));
+    }
+
 }
