@@ -30,8 +30,8 @@ class Route extends RouterGroup
 
 
         //管理员列表
-        $this->add('/admin/list','admin::getList');
-        $this->add('/admin/updateStatus','admin::updateStatus');
+        $this->add('/admin/list','admin::getList');             //管理员列表
+        $this->add('/admin/updateStatus','admin::updateStatus');//管理员禁用/启用
         $this->add('/admin/add','admin::addView');              //添加用户（页面）
         $this->add('/admin/addAdmin','admin::addAdmin');        //添加用户
         $this->add('/admin/log','admin::adminLog');             //管理员日志
@@ -54,13 +54,13 @@ class Route extends RouterGroup
 
 
         //兑换券管理
-        $this->add('/exchange/add','exchange::addView');        //添加兑换券（页面）
-        $this->addPost('/exchange/addExchange','exchange::addExchange');  //添加兑换券
-        $this->add('/exchange/list','exchange::list');          //兑换券列表
-        $this->add('/exchange/card/add','exchange::cardAddView');  //添加道具批次号（页面）
+        $this->add('/exchange/add','exchange::addView');                    //添加兑换券（页面）
+        $this->addPost('/exchange/addExchange','exchange::addExchange');    //添加兑换券
+        $this->add('/exchange/list','exchange::list');                      //兑换券列表
+        $this->add('/exchange/card/add','exchange::cardAddView');           //倒入道具批次号（页面）
 
         //区服管理
-        $this->add('/zone/list','zone::list');                  //区服列表（页面）
+        $this->add('/zone/list','zone::list');                              //区服列表（页面）
 
         //管理工具
         $this->add('/manager/prop/send','send::propView');                  //发送道具（页面）
@@ -87,7 +87,7 @@ class Route extends RouterGroup
         $this->add('/user/online','user::online');              //实时在线（页面）
         $this->addPost('/user/online','user::onlineQuery');     //实时在线
         $this->addPost('/user/shipInfo','user::getShipInfo');   //获取用户船队信息
-        $this->add('/prop/list','user::propList');              //发送道具（页面）
+        $this->add('/prop/list','user::propList');              //道具列表（页面）
         $this->add('/prop/excel','user::propListExcel');        //导出道具列表
         $this->add('/user/disableView','user::disableView');    //用户封号（页面）
         $this->add('/user/distalkView','user::distalkView');    //用户禁言（页面）
@@ -95,7 +95,7 @@ class Route extends RouterGroup
         $this->addPost('/user/notalk','user::notalk');          //用户禁言
         $this->add('/user/info','user::infoView');              //获取用户信息（页面）
         $this->addPost('/user/info','user::info');              //获取用户信息
-//        $this->add('/user/shipInfo','user::getShipInfo');       //获取用户船队信息
+//        $this->add('/user/shipInfo','user::getShipInfo');     //获取用户船队信息
         $this->add('/user/shipInfo','user::getShipInfoView');   //获取用户船队信息（页面）
 
 
@@ -110,7 +110,7 @@ class Route extends RouterGroup
         $this->add('/api/obonus/use','obonus::use');                //返还奖励使用
 
         //订单管理
-        $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入
+        $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入（页面）
         $this->addPost('/order/orderAdd','order::orderAdd');        //订单导入
 
     }

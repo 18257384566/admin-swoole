@@ -39,6 +39,14 @@ class ManagerController extends ControllerBase
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();
 
+        foreach ($list as &$v){
+            $v['notice'] = str_replace('\\r\\n', '<br>', $v['notice']);
+            $v['notice'] = str_replace('\\n', '<br>', $v['notice']);
+            $v['notice'] = str_replace('\\r', '<p>', $v['notice']);
+
+
+        }
+
         //返回数据
         $data['allcount']=$allcount['allcount'];
         $data['page']=$this->request->get('page');

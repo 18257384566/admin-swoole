@@ -101,7 +101,7 @@ class ExchangeController extends ControllerBase
         $data['allcount'] = $allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = '';
+        $data['search'] = "search=$search&";
 
         $this->view->list = $list;
         $this->view->data = $data;

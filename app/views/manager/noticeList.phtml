@@ -67,7 +67,7 @@
                       <a href="/manager/notice/list?channel=cmgeios"><button class='btn btn-primary'> &nbsp&nbsp&nbsp CMGEIOS &nbsp&nbsp&nbsp </button></a>
                       <a href="/manager/notice/list"><button class='btn btn-primary'> &nbsp&nbsp&nbsp 全部 &nbsp&nbsp&nbsp </button></a>
 
-                      <div class="table">
+                      <div class="table" style="white-space: pre-line;">
                           <table>
                               <thead>
                               <tr>
@@ -81,7 +81,7 @@
                               <tbody>
                               <?php foreach($list as $v){ ?>
                                   <tr>
-                                      <td><?php echo $v['id'];?></td>
+                                      <td><?= $v['id'];?></td>
                                       <td><?php
                                           switch ($v['channel']){
                                               case 'ly':
@@ -101,9 +101,10 @@
                                                   break;
                                           }
                                           ?></td>
-                                      <td><?php echo $v['notice'];?></td>
-                                      <td><?php echo $v['remark'];?></td>
-                                      <td><?php echo date('Y-m-d H:i:s',$v['created_at'])?></td>
+                                      <td style="text-align: left" ><?= $v['notice'] ?></td>
+<!--                                      <td  style="white-space: pre-line;" >倍返还充值。\\r\\n\\r\\n本次</td>-->
+                                      <td><?= $v['remark'];?></td>
+                                      <td><?= date('Y-m-d H:i:s',$v['created_at'])?></td>
                                   </tr>
                               <?php } ?>
                               </tbody>
