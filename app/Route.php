@@ -106,8 +106,8 @@ class Route extends RouterGroup
         $this->add('/obonus/add','obonus::addView');                //添加返还奖励（页面）
         $this->addPost('/obonus/addObonus','obonus::addObonus');    //添加返还奖励
         $this->add('/obonus/list','obonus::list');                  //返还奖励列表
-        $this->addPost('/api/obonus/use','obonus::use');            //返还奖励使用
-        $this->add('/api/obonus/use','obonus::use');                //返还奖励使用
+//        $this->addPost('/api/obonus/use','obonus::use');            //返还奖励使用
+//        $this->add('/api/obonus/use','obonus::use');                //返还奖励使用
 
         //订单管理
         $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入（页面）
