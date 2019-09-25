@@ -16,9 +16,9 @@ class Route extends RouterGroup
         ]);
 
         //api
-        $this->addPost('/exchange/exchange','exchange::exchange');      //兑换券（兑换）
-        $this->add('/api/notice/get','manager::noticeApi');             //获取公告
-        $this->add('/api/transfer','transfer::transfeStation');         //中转站(回调地址)
+//        $this->addPost('/exchange/exchange','exchange::exchange');      //兑换券（兑换）
+//        $this->add('/api/notice/get','manager::noticeApi');             //获取公告
+//        $this->add('/api/transfer','transfer::transfeStation');         //中转站(回调地址)
 
 
 

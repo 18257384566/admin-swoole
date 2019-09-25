@@ -8,83 +8,202 @@
             <div class="sidebar-nav">
                 <ul class="nav" id="sidebarnav">
                 <?php $admin = $this->dispatcher->getParam('admin'); ?>
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><!-- <i class="icon icon-admin"></i><span> -->管理员管理</span></div>
-                        <ul>
-                            <a href="/admin/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/list") !== false){echo 'active';}else{echo '';} ?>">管理员列表</li></a>
-                            <a href="/admin/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/add") !== false){echo 'active';}else{echo '';} ?>">添加管理员</li></a>
-                            <a href="/admin/log"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/log") !== false){echo 'active';}else{echo '';} ?>">日志管理</li></a>
-                            <a href="/admin/server/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/list") !== false){echo 'active';}else{echo '';} ?>">服务器管理</li></a>
-<!--                            <a href="/admin/diserver/list"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/admin/diserver/list") !== false){echo 'active';}else{echo '';} ?><!--">区服管理</li></a>-->
-                            <?php if(isset($admin) && $admin['account'] == 'xsy'){ ?>
-                                <a href="/admin/server/redis"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/redis") !== false){echo 'active';}else{echo '';} ?>">服务器redis管理</li></a>
-                            <?php } ?>
-                            <a href="/admin/info/summary"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/info/summary") !== false){echo 'active';}else{echo '';} ?>">信息统计</li></a>
 
-                        </ul>
-                    </li>
+                    <?php switch ($admin['role']){
+                        case 'supper':
+                    ?>
 
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span>兑换券管理</span></div>
-                        <ul>
-                            <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表</li></a>
-                            <a href="/exchange/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/add") !== false){echo 'active';}else{echo '';} ?>">添加兑换券</li></a>
-<!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
-                        </ul>
-                    </li>
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><!-- <i class="icon icon-admin"></i><span> -->管理员管理</span></div>
+                                <ul>
+                                    <a href="/admin/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/list") !== false){echo 'active';}else{echo '';} ?>">管理员列表</li></a>
+                                    <a href="/admin/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/add") !== false){echo 'active';}else{echo '';} ?>">添加管理员</li></a>
+                                    <a href="/admin/log"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/log") !== false){echo 'active';}else{echo '';} ?>">日志管理</li></a>
+                                    <a href="/admin/server/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/list") !== false){echo 'active';}else{echo '';} ?>">服务器管理</li></a>
+                                    <!--                            <a href="/admin/diserver/list"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/admin/diserver/list") !== false){echo 'active';}else{echo '';} ?><!--">区服管理</li></a>-->
+                                    <?php if(isset($admin) && $admin['account'] == 'xsy'){ ?>
+                                        <a href="/admin/server/redis"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/redis") !== false){echo 'active';}else{echo '';} ?>">服务器redis管理</li></a>
+                                    <?php } ?>
+                                    <a href="/admin/info/summary"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/info/summary") !== false){echo 'active';}else{echo '';} ?>">信息统计</li></a>
 
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span>奖励返还管理</span></div>
-                        <ul>
-                            <a href="/obonus/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/list") !== false){echo 'active';}else{echo '';} ?>">奖励返还列表</li></a>
-                            <a href="/obonus/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/add") !== false){echo 'active';}else{echo '';} ?>">添加奖励返还</li></a>
-                            <!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
-                        </ul>
-                    </li>
+                                </ul>
+                            </li>
 
-<!--                    <li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/zone/") !== false){echo 'active';}else{echo '';} ?><!--">-->
-<!--                        <div><span> 区服管理 </span></div>-->
-<!--                        <ul>-->
-<!--                            <a href="/zone/list"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/zone/list") !== false){echo 'active';}else{echo '';} ?><!--">区服列表</li></a>-->
-<!--                        </ul>-->
-<!--                    </li>-->
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>兑换券管理</span></div>
+                                <ul>
+                                    <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表</li></a>
+                                    <a href="/exchange/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/add") !== false){echo 'active';}else{echo '';} ?>">添加兑换券</li></a>
+                                    <!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
+                                </ul>
+                            </li>
 
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span> 管理工具 </span></div>
-                        <ul>
-                            <a href="/manager/prop/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/send") !== false){echo 'active';}else{echo '';} ?>">发送道具</li></a>
-                            <a href="/manager/prop/serverSend"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/serverSend") !== false){echo 'active';}else{echo '';} ?>">发送道具(多服)</li></a>
-                            <a href="/manager/prop/tableSendAdd"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/tableSendAdd") !== false){echo 'active';}else{echo '';} ?>">添加发道具(导表)</li></a>
-                            <a href="/manager/prop/tableSend"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/tableSend") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(导表) </li></a>
-                            <a href="/manager/prop/request"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/request") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(请求) </li></a>
-                            <a href="/manager/prop/dealView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/dealView") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(处理) </li></a>
-                            <a href="/manager/notice/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/send") !== false){echo 'active';}else{echo '';} ?>">推送消息</li></a>
-                            <a href="/manager/notice/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/list") !== false){echo 'active';}else{echo '';} ?>">公告列表</li></a>
-                        </ul>
-                    </li>
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>奖励返还管理</span></div>
+                                <ul>
+                                    <a href="/obonus/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/list") !== false){echo 'active';}else{echo '';} ?>">奖励返还列表</li></a>
+                                    <a href="/obonus/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/add") !== false){echo 'active';}else{echo '';} ?>">添加奖励返还</li></a>
+                                    <!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
+                                </ul>
+                            </li>
 
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span> 用户管理 </span></div>
-                        <ul>
-                            <a href="/user/daily/login"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/daily/login") !== false){echo 'active';}else{echo '';} ?>">每日登录</li></a>
-                            <a href="/user/retain"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/retain") !== false){echo 'active';}else{echo '';} ?>">玩家留存</li></a>
-                            <a href="/user/login/count"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/login/count") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
-                            <a href="/user/online"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/online") !== false){echo 'active';}else{echo '';} ?>">实时在线</li></a>
-<!--                            <a href="/user/shipInfo"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/user/shipInfo") !== false){echo 'active';}else{echo '';} ?><!--">船舰详情</li></a>-->
-                            <a href="/prop/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">道具列表</li></a>
-                            <a href="/user/disableView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/disableView") !== false){echo 'active';}else{echo '';} ?>">用户封号</li></a>
-                            <a href="/user/distalkView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/distalkView") !== false){echo 'active';}else{echo '';} ?>">用户禁言</li></a>
-                            <a href="/user/info"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">用户信息</li></a>
-                        </ul>
-                    </li>
+                            <!--                    <li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/zone/") !== false){echo 'active';}else{echo '';} ?><!--">-->
+                            <!--                        <div><span> 区服管理 </span></div>-->
+                            <!--                        <ul>-->
+                            <!--                            <a href="/zone/list"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/zone/list") !== false){echo 'active';}else{echo '';} ?><!--">区服列表</li></a>-->
+                            <!--                        </ul>-->
+                            <!--                    </li>-->
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span> 管理工具 </span></div>
+                                <ul>
+                                    <a href="/manager/prop/request"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/request") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(请求) </li></a>
+                                    <a href="/manager/prop/dealView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/dealView") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(处理) </li></a>
+                                    <a href="/manager/prop/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/send") !== false){echo 'active';}else{echo '';} ?>">发送道具</li></a>
+                                    <a href="/manager/prop/serverSend"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/serverSend") !== false){echo 'active';}else{echo '';} ?>">发送道具(多服)</li></a>
+                                    <a href="/manager/prop/tableSendAdd"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/tableSendAdd") !== false){echo 'active';}else{echo '';} ?>">添加发道具(导表)</li></a>
+                                    <a href="/manager/prop/tableSend"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/tableSend") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(导表) </li></a>
+                                    <a href="/manager/notice/send"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/send") !== false){echo 'active';}else{echo '';} ?>">推送消息</li></a>
+                                    <a href="/manager/notice/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/list") !== false){echo 'active';}else{echo '';} ?>">公告列表</li></a>
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span> 用户管理 </span></div>
+                                <ul>
+                                    <a href="/user/daily/login"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/daily/login") !== false){echo 'active';}else{echo '';} ?>">每日登录</li></a>
+                                    <a href="/user/retain"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/retain") !== false){echo 'active';}else{echo '';} ?>">玩家留存</li></a>
+                                    <a href="/user/login/count"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/login/count") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
+                                    <a href="/user/online"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/online") !== false){echo 'active';}else{echo '';} ?>">实时在线</li></a>
+                                    <!--                            <a href="/user/shipInfo"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/user/shipInfo") !== false){echo 'active';}else{echo '';} ?><!--">船舰详情</li></a>-->
+                                    <a href="/prop/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">道具列表</li></a>
+                                    <a href="/user/disableView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/disableView") !== false){echo 'active';}else{echo '';} ?>">用户封号</li></a>
+                                    <a href="/user/distalkView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/distalkView") !== false){echo 'active';}else{echo '';} ?>">用户禁言</li></a>
+                                    <a href="/user/info"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">用户信息</li></a>
+                                </ul>
+                            </li>
 
 
-                    <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/") !== false){echo 'active';}else{echo '';} ?>">
-                        <div><span>  订单工具 </span></div>
-                        <ul>
-                            <a href="/order/orderadd/excle"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/orderadd/excle") !== false){echo 'active';}else{echo '';} ?>">订单倒入</li></a>
-                        </ul>
-                    </li>
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>  订单工具 </span></div>
+                                <ul>
+                                    <a href="/order/orderadd/excle"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/orderadd/excle") !== false){echo 'active';}else{echo '';} ?>">订单倒入</li></a>
+                                </ul>
+                            </li>
+
+
+                        <?php break;
+
+                        case 'operators':   //运维
+
+                        ?>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>管理员管理</span></div>
+                                <ul>
+
+                                    <a href="/admin/server/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/list") !== false){echo 'active';}else{echo '';} ?>">服务器管理</li></a>
+                                    <?php if(isset($admin) && $admin['account'] == 'xsy'){ ?>
+                                        <a href="/admin/server/redis"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/redis") !== false){echo 'active';}else{echo '';} ?>">服务器redis管理</li></a>
+                                    <?php } ?>
+                                    <a href="/admin/info/summary"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/info/summary") !== false){echo 'active';}else{echo '';} ?>">信息统计</li></a>
+
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>兑换券管理</span></div>
+                                <ul>
+                                    <a href="/exchange/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/list") !== false){echo 'active';}else{echo '';} ?>">兑换券列表</li></a>
+                                    <a href="/exchange/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/exchange/add") !== false){echo 'active';}else{echo '';} ?>">添加兑换券</li></a>
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span> 管理工具 </span></div>
+                                <ul>
+                                    <a href="/manager/prop/request"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/request") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(请求) </li></a>
+                                    <a href="/manager/notice/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/list") !== false){echo 'active';}else{echo '';} ?>">公告列表</li></a>
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>奖励返还管理</span></div>
+                                <ul>
+                                    <a href="/obonus/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/list") !== false){echo 'active';}else{echo '';} ?>">奖励返还列表</li></a>
+                                    <a href="/obonus/add"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/obonus/add") !== false){echo 'active';}else{echo '';} ?>">添加奖励返还</li></a>
+                                    <!--                            <a href="/exchange/card/add"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/exchange/card/add") !== false){echo 'active';}else{echo '';} ?><!--">添加批次道具</li></a>-->
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span> 用户管理 </span></div>
+                                <ul>
+                                    <a href="/user/daily/login"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/daily/login") !== false){echo 'active';}else{echo '';} ?>">每日登录</li></a>
+                                    <a href="/user/retain"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/retain") !== false){echo 'active';}else{echo '';} ?>">玩家留存</li></a>
+                                    <a href="/user/login/count"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/login/count") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
+                                    <a href="/user/online"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/online") !== false){echo 'active';}else{echo '';} ?>">实时在线</li></a>
+                                    <!--                            <a href="/user/shipInfo"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/user/shipInfo") !== false){echo 'active';}else{echo '';} ?><!--">船舰详情</li></a>-->
+                                    <a href="/prop/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">道具列表</li></a>
+                                    <a href="/user/disableView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/disableView") !== false){echo 'active';}else{echo '';} ?>">用户封号</li></a>
+                                    <a href="/user/distalkView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/distalkView") !== false){echo 'active';}else{echo '';} ?>">用户禁言</li></a>
+                                    <a href="/user/info"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">用户信息</li></a>
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span>  订单工具 </span></div>
+                                <ul>
+                                    <a href="/order/orderadd/excle"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/orderadd/excle") !== false){echo 'active';}else{echo '';} ?>">订单倒入</li></a>
+                                </ul>
+                            </li>
+
+
+                        <?php break;
+
+                        case 'service':     //普通账户
+                            ?>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span> 管理工具 </span></div>
+                                <ul>
+                                    <a href="/manager/prop/request"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/prop/request") !== false){echo 'active';}else{echo '';} ?>"> 发送道具(请求) </li></a>
+                                    <a href="/manager/notice/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/manager/notice/list") !== false){echo 'active';}else{echo '';} ?>">公告列表</li></a>
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><span> 用户管理 </span></div>
+                                <ul>
+                                    <a href="/user/daily/login"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/daily/login") !== false){echo 'active';}else{echo '';} ?>">每日登录</li></a>
+                                    <a href="/user/retain"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/retain") !== false){echo 'active';}else{echo '';} ?>">玩家留存</li></a>
+                                    <a href="/user/login/count"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/login/count") !== false){echo 'active';}else{echo '';} ?>">登录统计</li></a>
+                                    <a href="/user/online"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/online") !== false){echo 'active';}else{echo '';} ?>">实时在线</li></a>
+                                    <!--                            <a href="/user/shipInfo"><li class="--><?php //if(strpos($_SERVER['REQUEST_URI'],"/user/shipInfo") !== false){echo 'active';}else{echo '';} ?><!--">船舰详情</li></a>-->
+                                    <a href="/prop/list"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">道具列表</li></a>
+                                    <a href="/user/disableView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/disableView") !== false){echo 'active';}else{echo '';} ?>">用户封号</li></a>
+                                    <a href="/user/distalkView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/distalkView") !== false){echo 'active';}else{echo '';} ?>">用户禁言</li></a>
+                                    <a href="/user/info"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">用户信息</li></a>
+                                </ul>
+                            </li>
+
+                            <?php break;
+
+                        case 'commissioner'://专员
+
+                            ?>
+
+                            <?php break;
+
+                        case 'developers':  //开发商
+
+                            ?>
+
+
+
+                        <?php } ?>
+
+
 
 
 
