@@ -50,6 +50,15 @@
                               </div>
                           </div>
 
+                          <div class="addadmin-pwd">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>发布时间:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="text" name="start_time"> [格式： 2019-09-24 17:00:00]
+                              </div>
+                          </div>
+
                   </div>
                   <input type="submit" value="提交" class="w-btn">
                   </form>
@@ -75,6 +84,7 @@
                                   <th>渠道</th>
                                   <th style="width: 50%">公告内容</th>
                                   <th>备注</th>
+                                  <th>预发布时间</th>
                                   <th>创建时间</th>
                               </tr>
                               </thead>
@@ -104,6 +114,7 @@
                                       <td style="text-align: left" ><?= $v['notice'] ?></td>
 <!--                                      <td  style="white-space: pre-line;" >倍返还充值。\\r\\n\\r\\n本次</td>-->
                                       <td><?= $v['remark'];?></td>
+                                      <td><?= date('Y-m-d H:i:s',$v['start_time'])?></td>
                                       <td><?= date('Y-m-d H:i:s',$v['created_at'])?></td>
                                   </tr>
                               <?php } ?>

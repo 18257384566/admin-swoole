@@ -145,6 +145,10 @@ class PaValidation extends Validation
             'message' => '请填写公告',
             'cancelOnFail' => true
         )));
+        $this->add('start_time', new PresenceOf(array(
+            'message' => '请填写开始时间',
+            'cancelOnFail' => true
+        )));
     }
 
     public function noticeApi(){

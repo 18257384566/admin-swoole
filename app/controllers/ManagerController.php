@@ -30,9 +30,9 @@ class ManagerController extends ControllerBase
 
         //获取当页
         if(!isset($channel) || $channel == ''){
-            $sql = "select id,notice,created_at,channel,remark from $table order by created_at desc limit $page,$limit";
+            $sql = "select id,notice,created_at,channel,remark,start_time from $table order by created_at desc limit $page,$limit";
         }else{
-            $sql = "select id,notice,created_at,channel,remark from $table where channel = '$channel' order by created_at desc limit $page,$limit";
+            $sql = "select id,notice,created_at,channel,remark,start_time from $table where channel = '$channel' order by created_at desc limit $page,$limit";
         }
 
         $list=$this->db->query($sql);
@@ -62,6 +62,7 @@ class ManagerController extends ControllerBase
         $reqData['channel'] = $this->request->getPost('channel');
         $reqData['notice'] = $this->request->getPost('notice');
         $reqData['remark'] = $this->request->getPost('remark');
+        $reqData['start_time'] = $this->request->getPost('start_time');
 
         //校验数据
         $validation = $this->paValidation;
@@ -71,6 +72,8 @@ class ManagerController extends ControllerBase
             $message = $messages[0]->getMessage();
             $this->functions->alert($message);
         }
+
+        $reqData['start_time'] = strtotime($reqData['start_time']);
 
         $add = $this->getModel('Notice')->add($reqData);
         if(!$add){
