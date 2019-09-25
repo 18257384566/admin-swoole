@@ -144,6 +144,8 @@
                               case "logininfo":
                                   echo '昵称:'.$data['nickname'].'&nbsp;&nbsp;<br>';
                                   echo '用户id:'.$data['list']['Id'].'&nbsp;&nbsp;<br>';
+                                  echo '平台用户名:'.$data['list']['PlatformUserName'].'&nbsp;&nbsp;<br>';
+                                  echo '平台id:'.$data['list']['PlatformId'].'&nbsp;&nbsp;<br>';
                                   echo '渠道:'.$data['list']['Channel'].'&nbsp;&nbsp;<br>';
                                   echo '最近登录时间:'.date('Y-m-d H:i:s',$data['list']['LastLoginTime']).'&nbsp;&nbsp;<br>';
                                   echo '创角时间:'.date('Y-m-d H:i:s',$data['list']['CreateTime']).'&nbsp;&nbsp;<br>';
