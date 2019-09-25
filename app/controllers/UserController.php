@@ -202,7 +202,42 @@ class UserController extends ControllerBase
             $data['server']['diserver_id'] = '';
         }
 
+        $diserver_id = $data['server']['diserver_id'];
+
+        //查询记录
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->get('search');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_distalk_log';
+        //获取总条数
+        $allcount = $this->db->query("select count(id) as allcount from $table");
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `id`,`admin_name`,`nickname`,`server_name`,`end_time` from $table where `diserver_id` = $diserver_id order by created_at desc limit $page,$limit";
+        }else{
+            $sql = "select `id`,`admin_name`,`nickname`,`server_name`,`end_time` from $table where `diserver_id` = $diserver_id order by created_at desc limit $page,$limit";
+        }
+
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page']=$this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = 'server_name='.$search.'&';
+
         $this->view->data = $data;
+        $this->view->list = $list;
         $this->view->pick('user/distalk');
     }
 
@@ -309,9 +344,12 @@ class UserController extends ControllerBase
     }
 
     public function notalkAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
         $reqData['zone'] = $this->request->getPost('zone');
         $reqData['nickname'] = $this->request->getPost('nickname');
         $reqData['t'] = $this->request->getPost('t');
+        $reqData['end_time'] = $this->request->getPost('t');
 
         //校验数据
         $validation = $this->paValidation;
@@ -329,6 +367,17 @@ class UserController extends ControllerBase
         if(!$disable){
             $this->functions->alert('禁言失败');
         }
+
+        //添加封禁记录
+        $log = [];
+        $log['admin_name'] = $admin['account'];
+        $log['admin_no'] = $admin['admin_no'];
+        $log['nickname'] = $reqData['nickname'];
+        $log['server_name'] = $admin['server_name'];
+        $log['diserver_id'] = $reqData['zone'];
+        $log['server_url'] = $admin['server_url'];
+        $log['end_time'] = $reqData['end_time'];
+        $this->getModel('Distalk')->add($log);
 
         $this->functions->alert('禁言成功');
 
