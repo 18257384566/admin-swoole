@@ -24,6 +24,8 @@ use Phalcon\Di\FactoryDefault\Cli as CliDI;
 //    $di = new FactoryDefault();
 //}
 
+use App\Core\AppBaseLogger;
+
 
 
 $di = new CliDI();
@@ -98,6 +100,11 @@ $di->setShared('redis',function(){
         $redis->auth( $configRedis['password'] );
     }
     return $redis;
+});
+
+//注册日志
+$di->setShared('logger',function(){
+    return AppBaseLogger::getInstance();
 });
 
 

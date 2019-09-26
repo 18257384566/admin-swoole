@@ -567,8 +567,8 @@ class SendController extends ControllerBase
             exit;
         }
 
-        if($reqData['item'] == '@all'){
-            $reqData['item'] = '';
+        if($reqData['nickname'] == '@all'){
+            $reqData['nickname'] = '';
         }
 
         $propCrontab = $this->getBussiness('Send')->propCrontab($admin,$reqData);

@@ -18,8 +18,8 @@ class SenditemCrontab extends BaseModel
     public function addLog($data){
         $this->admin_no = $data['admin_no'];
         $this->admin_name = $data['admin_name'];
-        $this->nickname = $data['mailtitle'];
-        $this->nickname = $data['mailcontent'];
+        $this->mailtitle = $data['mailtitle'];
+        $this->mailcontent = $data['mailcontent'];
         $this->nickname = $data['nickname'];
         $this->item = $data['item'];
         $this->server_name = $data['server_name'];
@@ -43,6 +43,26 @@ class SenditemCrontab extends BaseModel
             return $result->toArray();
         }
         return $result;
+    }
+
+    public function updateById($id,$data)
+    {
+        $data['update'] = time();
+        $result = $this->findFirst(
+            [
+                'conditions' => 'id = ?1',
+                'bind' => array(
+                    1 => $id,
+                ),
+            ]
+        );
+        if (!$result) {
+            return false;
+        }
+        if ($result->save($data) === false) {
+            return false;
+        }
+        return true;
     }
 
 

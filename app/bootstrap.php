@@ -15,14 +15,13 @@ $config = include APP_PATH . '/config/config.php';
 /**
  * Include Services
  */
-include APP_PATH . '/config/services.php';
-include APP_PATH . '/libs/SensorsAnalytics.php';
-
+include APP_PATH . '/config/servicesCli.php';
 
 
 /**
  * Include Autoloader
  */
+
 include APP_PATH . '/config/loader.php';
 
 /**
@@ -68,5 +67,7 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage() . PHP_EOL;
     echo $e->getTraceAsString() . PHP_EOL;
+    echo $e->getFile();
+    echo $e->getCode();
     exit(255);
 }
