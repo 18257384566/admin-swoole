@@ -3,7 +3,7 @@
 class PropSendTask extends \App\Core\AppBaseTask
 {
 
-    public function senditemAction()
+    public function handleAction()
     {
         //查询发送道具列表(今日)
         $date = date('Y-m-d',time());
