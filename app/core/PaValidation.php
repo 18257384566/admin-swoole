@@ -298,4 +298,31 @@ class PaValidation extends Validation
         )));
     }
 
+    public function propCrontab(){
+        $this->add('server_id', new PresenceOf(array(
+            'message' => '请选择服务器',
+            'cancelOnFail' => true
+        )));
+        $this->add('nickname', new PresenceOf(array(
+            'message' => '请填写昵称',
+            'cancelOnFail' => true
+        )));
+        $this->add('mailtitle', new PresenceOf(array(
+            'message' => '请填写邮件标题',
+            'cancelOnFail' => true
+        )));
+        $this->add('mailcontent', new PresenceOf(array(
+            'message' => '请填写邮件内容',
+            'cancelOnFail' => true
+        )));
+        $this->add('item', new PresenceOf(array(
+            'message' => '请填写道具',
+            'cancelOnFail' => true
+        )));
+        $this->add('send_time', new PresenceOf(array(
+            'message' => '发送时间',
+            'cancelOnFail' => true
+        )));
+    }
+
 }

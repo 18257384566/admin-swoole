@@ -128,6 +128,8 @@ class AclPlugin extends Injectable
                 'send::propRequest',
                 'send::propDealView',
                 'send::propDeal',
+                'send::propCrontabView',
+                'send::propCrontab',
 
             ),
 

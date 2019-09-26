@@ -1,6 +1,6 @@
 <?php
 
-//use Phalcon\Di\FactoryDefault\Cli as CliDi;
+use Phalcon\Di\FactoryDefault\Cli as CliDi;
 use Phalcon\Cli\Console as ConsoleApp;
 
 date_default_timezone_set('UTC');
@@ -11,11 +11,12 @@ define('APP_PATH', BASE_PATH . '/app');
  * Get config service for use in inline setup below
  */
 $config = include APP_PATH . '/config/config.php';
+
 /**
  * Include Services
  */
-include APP_PATH . '/config/servicescli.php';
-//include APP_PATH . '/libs/SensorsAnalytics.php';
+include APP_PATH . '/config/services.php';
+include APP_PATH . '/libs/SensorsAnalytics.php';
 
 
 
@@ -32,19 +33,8 @@ $console = new ConsoleApp($di);
 /**
  * Process the console arguments
  */
-//$arguments = [];
-//
-//foreach ($argv as $k => $arg) {
-//    if ($k == 1) {
-//        $arguments['task'] = $arg;
-//    } elseif ($k == 2) {
-//        $arguments['action'] = $arg;
-//    } elseif ($k >= 3) {
-//        $arguments['params'][] = $arg;
-//    }
-//}
-
 $arguments = [];
+
 foreach ($argv as $k => $arg) {
     if ($k == 1) {
         $arguments['task'] = $arg;
@@ -54,11 +44,6 @@ foreach ($argv as $k => $arg) {
         $arguments['params'][] = $arg;
     }
 }
-
-// 定义全局的参数， 设定当前任务及动作
-define('CURRENT_TASK',   (isset($argv[1]) ? $argv[1] : null));
-define('CURRENT_ACTION', (isset($argv[2]) ? $argv[2] : null));
-
 
 try {
 

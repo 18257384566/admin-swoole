@@ -271,5 +271,51 @@ class Send extends BaseBussiness
         }
     }
 
+    public function propCrontab($admin,$reqData){
+        $server_name = '';
+        $url = '';
+        $diserver_id = '';
+
+        //根据server_id查询服务器
+        $filed = 'server_name,url,diserver_id';
+        foreach ($reqData['server_id'] as $k => $server_id){
+            $server = $this->getModel('Server')->getById($server_id,$filed);
+            if($server){
+                $server_name .= $server['server_name'].',';
+                $url .= $server['url'].',';
+                $diserver_id .= $server['diserver_id'].',';
+            }
+        }
+
+        $server_name = rtrim($server_name,',');
+        $url = rtrim($url,',');
+        $diserver_id = rtrim($diserver_id,',');
+
+        //添加记录
+        $crontab = [];
+        $crontab['admin_name'] = $admin['account'];
+        $crontab['admin_no'] = $admin['admin_no'];
+        $crontab['mailtitle'] = $reqData['mailtitle'];
+        $crontab['mailcontent'] = $reqData['mailcontent'];
+        $crontab['nickname'] = $reqData['nickname'];
+        $crontab['item'] = $reqData['item'];
+        $crontab['server_name'] = $server_name;
+        $crontab['server_url'] = $url;
+        $crontab['diserver_id'] = $diserver_id;
+        $crontab['is_send'] = 0;
+        $crontab['send_time'] = $reqData['send_time'];
+
+        $addCrontab = $this->getModel('SenditemCrontab')->addLog($crontab);
+        if(!$addCrontab){
+            $this->result['status'] = -1;
+            $this->result['msg'] = '添加失败';
+            return $this->result;
+        }
+
+        $this->result['status'] = 1;
+        $this->result['msg'] = '添加成功';
+        return $this->result;
+    }
+
 
 }
