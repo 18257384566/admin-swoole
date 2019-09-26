@@ -201,6 +201,7 @@ $di->setShared('dispatcher',function(){
     $eventsManager->attach('dispatch:beforeExecuteRoute', new AclPlugin);
     $dispatcher = new MvcDispatcher();
     $dispatcher->setDefaultNamespace('App\Controllers');
+    $dispatcher->setDefaultNamespace('App\tasks');
     $dispatcher->setEventsManager($eventsManager);
     return $dispatcher;
 });
