@@ -387,7 +387,7 @@ class SendController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = "search=$search?";
+        $data['search'] = "search=$search&";
 
         $this->view->server_url = $admin['server_url'];
         $this->view->list = $list;
@@ -472,7 +472,7 @@ class SendController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = "search=$search?";
+        $data['search'] = "search=$search&";
 
         $this->view->list = $list;
         $this->view->data = $data;

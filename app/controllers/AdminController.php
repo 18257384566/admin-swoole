@@ -157,7 +157,7 @@ class AdminController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = "type=$search?";
+        $data['search'] = "type=$search&";
 
         $this->view->list = $list;
         $this->view->data = $data;
@@ -277,7 +277,7 @@ class AdminController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = "type=$search?";
+        $data['search'] = "type=$search&";
 
         $this->view->list = $list;
         $this->view->data = $data;
