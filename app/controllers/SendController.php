@@ -525,7 +525,7 @@ class SendController extends ControllerBase
         $table = 'homepage_senditem_crontab';
         //获取总条数
         if(isset($diserver_id) && $diserver_id != ''){
-            $allcount = $this->db->query("select count(id) as allcount from $table where diserver = $diserver_id");
+            $allcount = $this->db->query("select count(id) as allcount from $table where diserver_id = $diserver_id");
         }else{
             $allcount = $this->db->query("select count(id) as allcount from $table");
         }
@@ -534,7 +534,7 @@ class SendController extends ControllerBase
 
         //获取当页
         if(isset($diserver_id) && $diserver_id != ''){
-            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table where diserver = $diserver_id order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table where diserver_id = $diserver_id order by created_at desc limit $page,$limit";
         }else{
             $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table order by created_at desc limit $page,$limit";
         }
