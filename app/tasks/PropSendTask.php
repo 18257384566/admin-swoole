@@ -14,7 +14,7 @@ class PropSendTask extends \App\Core\AppBaseTask
         $senditems = $senditems->fetchAll();
 
         if(true){
-            //无数据
+            var_dump('无数据');
             exit;
         }
 
