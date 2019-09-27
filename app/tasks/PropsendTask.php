@@ -3,18 +3,18 @@
 class PropsendTask extends \App\Core\AppBaseTask
 {
 
-    public function handleAction()
+    public function senditemAction()
     {
         //查询发送道具列表(今日)
-        $date = date('Y-m-d',time());
+        $date = date('Y-m-d',time()); var_dump(date('y-m-d H:i:s',time()));
         $filed = 'id,mailtitle,mailcontent,nickname,item,server_url,diserver_id,is_send,server_name';
         $sql = "select $filed from homepage_senditem_crontab where send_time = '$date'";
         $senditems = $this->db->query($sql);
         $senditems->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $senditems = $senditems->fetchAll();
 
-        if(true){
-            var_dump('无数据');
+        if(!$senditems){
+            echo '暂无数据';
             exit;
         }
 
@@ -40,7 +40,7 @@ class PropsendTask extends \App\Core\AppBaseTask
                 }
             }else{
                 //发送失败
-                $this->logger('发送失败:'.json_encode($send), "info", 'itemsend');
+                $this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", 'itemcrontab');
             }
 
         }
