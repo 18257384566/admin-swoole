@@ -1,6 +1,6 @@
 <?php
 
-class PropSendTask extends \App\Core\AppBaseTask
+class PropsendTask extends \App\Core\AppBaseTask
 {
 
     public function handleAction()
