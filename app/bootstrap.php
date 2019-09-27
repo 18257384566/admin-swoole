@@ -3,7 +3,7 @@
 //use Phalcon\Di\FactoryDefault\Cli as CliDi;
 use Phalcon\Cli\Console as ConsoleApp;
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('PRC');
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 

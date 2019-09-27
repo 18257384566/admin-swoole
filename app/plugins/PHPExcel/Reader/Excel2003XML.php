@@ -310,7 +310,7 @@ class PHPExcel_Reader_Excel2003XML extends PHPExcel_Reader_Abstract implements P
         );
 
         $timezoneObj = new DateTimeZone('Europe/London');
-        $GMT = new DateTimeZone('UTC');
+        $GMT = new DateTimeZone('PRC');
 
         // Check if file exists
         if (!file_exists($pFilename)) {

@@ -42,7 +42,7 @@ class PHPExcel_Shared_TimeZone
      * @private
      * @var    string
      */
-    protected static $timezone    = 'UTC';
+    protected static $timezone    = 'PRC';
 
     /**
      * Validate a Timezone name
