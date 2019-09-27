@@ -325,4 +325,15 @@ class PaValidation extends Validation
         )));
     }
 
+    public function propCrontabDeal(){
+        $this->add('id', new PresenceOf(array(
+            'message' => '数据参数传入缺失',
+            'cancelOnFail' => true
+        )));
+        $this->add('status', new PresenceOf(array(
+            'message' => '数据参数传入缺失',
+            'cancelOnFail' => true
+        )));
+    }
+
 }

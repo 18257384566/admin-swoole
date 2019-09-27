@@ -506,6 +506,7 @@ class SendController extends ControllerBase
     //定时发送道具
     public function propCrontabViewAction(){
         $admin = $this->dispatcher->getParam('admin');
+        $diserver_id = $this->request->getPost('diserver_id');
 
         //查询服务器列表
         $server_list = $this->getModel('Server')->getList();
@@ -523,12 +524,20 @@ class SendController extends ControllerBase
 
         $table = 'homepage_senditem_crontab';
         //获取总条数
-        $allcount = $this->db->query("select count(id) as allcount from $table");
+        if(isset($diserver_id) && $diserver_id != ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table where diserver = $diserver_id");
+        }else{
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }
         $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $allcount = $allcount->fetch();
 
         //获取当页
-        $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table order by created_at desc limit $page,$limit";
+        if(isset($diserver_id) && $diserver_id != ''){
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table where diserver = $diserver_id order by created_at desc limit $page,$limit";
+        }else{
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table order by created_at desc limit $page,$limit";
+        }
         $list = $this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();
@@ -574,6 +583,43 @@ class SendController extends ControllerBase
         $propCrontab = $this->getBussiness('Send')->propCrontab($admin,$reqData);
 
         $this->functions->alert($propCrontab['msg'],'/manager/prop/crontab');
+    }
+
+    public function propCrontabDealAction(){
+        $reqData['id'] = $this->request->getQuery('id');
+        $reqData['status'] = $this->request->getQuery('status');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->propCrontabDeal();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+            exit;
+        }
+
+        switch ($reqData['status']){
+            case '-1':  //删除
+                //查询该数据是否存在
+                $filed = 'id';
+                $propCrontab = $this->getModel('SenditemCrontab')->getById($reqData['id'],$filed);
+                if(!$propCrontab){
+                    $this->functions->alert('已删除');exit;
+                }
+
+                //删除数据
+                $del = $this->getModel('SenditemCrontab')->delById($reqData['id']);
+                if(!$del){
+                    $this->functions->alert('删除失败');exit;
+                }
+                $this->functions->alert('删除成功');exit;
+                break;
+
+            default:
+                $this->functions->alert('数据参数传入缺失');exit;
+                break;
+        }
     }
 
 }

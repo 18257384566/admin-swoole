@@ -77,7 +77,8 @@ class Route extends RouterGroup
         $this->add('/manager/prop/dealView','send::propDealView');          //处理道具请求（页面）
         $this->add('/manager/prop/deal','send::propDeal');                  //处理道具请求
         $this->add('/manager/prop/crontab','send::propCrontabView');        //定时发送道具（页面）
-        $this->addPost('/manager/prop/crontab','send::propCrontab');            //定时发送道具
+        $this->addPost('/manager/prop/crontab','send::propCrontab');        //定时发送道具
+        $this->add('/manager/propCrontable/deal','send::propCrontabDeal');  //定时发送道具（处理）
         $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）
         $this->add('/manager/notice/list','manager::noticeList');           //公告列表（页面）
         $this->add('/manager/notice/add','manager::noticeAdd');             //公告添加

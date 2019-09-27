@@ -83,7 +83,7 @@
                                 <td><?php echo $v['req_admin_name'];?></td>
                                 <td><?php echo $v['deal_admin_name'];?></td>
                                 <td>
-                                    <?php if($v['is_send'] != 1){ ?>
+                                    <?php if($v['is_send'] != 1 || $v['is_send'] != 2){ ?>
                                         <a href="/manager/prop/deal?id=<?php echo $v['id']; ?>&is_send=2" onclick="javascript:return confirm('是否确认拒绝？');"><button class="action-btn disabled">拒绝</button></a>
                                         <a href="/manager/prop/deal?id=<?php echo $v['id']; ?>&is_send=1" onclick="javascript:return confirm('是否确认发送？');"><button class="action-btn ">通过</button></a>
                                     <?php } ?>

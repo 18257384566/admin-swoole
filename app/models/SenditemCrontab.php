@@ -65,6 +65,39 @@ class SenditemCrontab extends BaseModel
         return true;
     }
 
+    public function getById($id,$filed='*'){
+        $result = $this->findFirst([
+            'columns' => $filed,
+            'conditions' => 'id = ?1',
+            'bind' => array(
+                1 => $id,
+            ),
+
+        ]);
+        if($result){
+            return $result->toArray();
+        }
+        return $result;
+    }
+
+    public function delById($id){
+        $result = $this->findFirst(
+            [
+                'conditions' => 'id = ?1',
+                'bind' => array(
+                    1 => $id,
+                ),
+            ]
+        );
+        if (!$result) {
+            return false;
+        }
+        if ($result->delete() === false) {
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
