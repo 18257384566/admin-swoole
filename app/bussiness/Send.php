@@ -278,7 +278,7 @@ class Send extends BaseBussiness
             $server = $this->getModel('Server')->getById($server_id,$filed);
             if($server){
                 $server_name = $server['server_name'];
-                $url = $server['url'].',';
+                $url = $server['url'];
                 $diserver_id = $server['diserver_id'];
 
                 //添加记录

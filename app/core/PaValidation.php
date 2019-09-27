@@ -320,7 +320,7 @@ class PaValidation extends Validation
             'cancelOnFail' => true
         )));
         $this->add('send_time', new PresenceOf(array(
-            'message' => '发送时间',
+            'message' => '请填写发送时间',
             'cancelOnFail' => true
         )));
     }
