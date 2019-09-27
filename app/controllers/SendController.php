@@ -534,9 +534,9 @@ class SendController extends ControllerBase
 
         //获取当页
         if(isset($diserver_id) && $diserver_id != ''){
-            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table where diserver_id = $diserver_id order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table where diserver_id = $diserver_id order by id desc limit $page,$limit";
         }else{
-            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table order by id desc limit $page,$limit";
         }
         $list = $this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
