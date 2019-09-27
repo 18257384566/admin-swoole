@@ -548,7 +548,7 @@ class SendController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page'] = $this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = '';
+        $data['search'] = "diserver_id=$diserver_id&";
 
         $this->view->server_url = $admin['server_url'];
         $this->view->data = $data;
