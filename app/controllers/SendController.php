@@ -506,7 +506,7 @@ class SendController extends ControllerBase
     //定时发送道具
     public function propCrontabViewAction(){
         $admin = $this->dispatcher->getParam('admin');
-        $diserver_id = $this->request->getPost('diserver_id');
+        $diserver_id = $this->request->getQuery('diserver_id');
 
         //查询服务器列表
         $server_list = $this->getModel('Server')->getList();
