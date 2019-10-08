@@ -47,6 +47,7 @@ class SenditemReqLog extends BaseModel
 
     public function updateById($id,$data)
     {
+        $data['updated_at'] = time();
         $result = $this->findFirst(
             [
                 'conditions' => 'id = ?1',

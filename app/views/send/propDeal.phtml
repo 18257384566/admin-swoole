@@ -44,6 +44,7 @@
                             <th style="text-align: center">请求人</th>
                             <th style="text-align: center">处理人</th>
                             <th style="text-align: center">处理</th>
+                            <th style="text-align: center">处理时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -87,6 +88,11 @@
                                         <a href="/manager/prop/deal?id=<?php echo $v['id']; ?>&is_send=2" onclick="javascript:return confirm('是否确认拒绝？');"><button class="action-btn disabled">拒绝</button></a>
                                         <a href="/manager/prop/deal?id=<?php echo $v['id']; ?>&is_send=1" onclick="javascript:return confirm('是否确认发送？');"><button class="action-btn ">通过</button></a>
                                     <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if($v['created_at'] != $v['updated_at']){
+                                        echo date('Y-m-d H:i:s',$v['updated_at']);
+                                    } ?>
                                 </td>
 
                             </tr>

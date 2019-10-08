@@ -455,13 +455,13 @@ class SendController extends ControllerBase
 
         //获取当页
         if(!isset($search) || $search == ''){
-            $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table order by created_at desc limit $page,$limit";
+            $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send`,`created_at`,`updated_at` from $table order by created_at desc limit $page,$limit";
         }else{
             $arr = [-1,0,1,2];
             if(in_array($search,$arr)){
-                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `is_send`= $search order by created_at desc limit $page,$limit";
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send`,`created_at`,`updated_at` from $table where `is_send`= $search order by created_at desc limit $page,$limit";
             }else{
-                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send` from $table where `nickname`= $search order by created_at desc limit $page,$limit";
+                $sql = "select `id`,`req_admin_name`,`deal_admin_name`,`nickname`,`item`,`server_name`,`diserver_id`,`remark`,`is_send`,`created_at`,`updated_at` from $table where `nickname`= $search order by created_at desc limit $page,$limit";
             }
         }
         $list=$this->db->query($sql);
