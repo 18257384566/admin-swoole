@@ -32,6 +32,8 @@ class Route extends RouterGroup
         //管理员列表
         $this->add('/admin/list','admin::getList');             //管理员列表
         $this->add('/admin/updateStatus','admin::updateStatus');//管理员禁用/启用
+        $this->add('/admin/update','admin::updateView');        //管理员编辑(页面)
+        $this->addPost('/admin/update','admin::update');        //管理员编辑
         $this->add('/admin/add','admin::addView');              //添加用户（页面）
         $this->add('/admin/addAdmin','admin::addAdmin');        //添加用户
         $this->add('/admin/log','admin::adminLog');             //管理员日志

@@ -73,6 +73,45 @@ class PaValidation extends Validation
         )));
     }
 
+    public function updateAdmin(){
+        $this->add('id', new PresenceOf(array(
+            'message' => '数据传输错误',
+            'cancelOnFail' => true
+        )));
+        $this->add('admin_name', new PresenceOf(array(
+            'message' => '请填写账户名',
+            'cancelOnFail' => true
+        )));
+        $this->add('admin_name', new StringLength(array(
+            'max' => 20,
+            'messageMaximum' => '账户名不超过20个字',
+            'cancelOnFail' => true
+        )));
+        $this->add('real_name', new PresenceOf(array(
+            'message' => '请填写真实姓名',
+            'cancelOnFail' => true
+        )));
+        $this->add('real_name', new StringLength(array(
+            'max' => 20,
+            'messageMaximum' => '真实姓名不超过20个字',
+            'cancelOnFail' => true
+        )));
+        $this->add('phone', new PresenceOf(array(
+            'message' => '请填写手机号',
+            'cancelOnFail' => true
+        )));
+        $this->add('phone', new Regex(array(
+            //以非0打头的正整数
+            'pattern' => '/^1[3456789]\d{9}$/',
+            'message' => '手机号格式不正确',                 //手机号非法
+            'cancelOnFail' => true
+        )));
+        $this->add('role', new PresenceOf(array(
+            'message' => '请选择角色',
+            'cancelOnFail' => true
+        )));
+    }
+
     public function exchange(){
         $this->add('exchange_code', new PresenceOf(array(
             'message' => '兑换券编号不能唯空',

@@ -66,6 +66,8 @@ class AclPlugin extends Injectable
                 'index::index',
                 'admin::getList',
                 'admin::updateStatus',
+                'admin::update',
+                'admin::updateView',
                 'admin::add',
                 'admin::addView',
                 'index::signOut',

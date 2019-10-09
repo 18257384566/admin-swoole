@@ -30,37 +30,12 @@ class Admin extends BaseModel
         return $result;
     }
 
-
-
-
-
-
-
-
-
     public function getById($id,$filed='*'){
         $result = $this->findFirst([
             'columns' => $filed,
             'conditions' => 'id = ?1',
             'bind' => array(
                 1 => $id,
-            ),
-
-        ]);
-        if($result){
-            return $result->toArray();
-        }
-        return $result;
-    }
-
-    public function getSuper($pro_no,$filed='*'){
-        $result = $this->findFirst([
-            'columns' => $filed,
-            'conditions' => 'pro_no = ?1 and is_super = ?2 and status = ?3',
-            'bind' => array(
-                1 => $pro_no,
-                2 => 1,
-                3 => 1,
             ),
 
         ]);
@@ -89,7 +64,6 @@ class Admin extends BaseModel
         }
         return true;
     }
-
 
     public function getPhone($phone,$filed='*'){
         $result = $this->findFirst([
@@ -122,6 +96,38 @@ class Admin extends BaseModel
         }
         return $this->id;
     }
+
+
+
+
+
+
+
+
+
+
+
+//    public function getSuper($pro_no,$filed='*'){
+//        $result = $this->findFirst([
+//            'columns' => $filed,
+//            'conditions' => 'pro_no = ?1 and is_super = ?2 and status = ?3',
+//            'bind' => array(
+//                1 => $pro_no,
+//                2 => 1,
+//                3 => 1,
+//            ),
+//
+//        ]);
+//        if($result){
+//            return $result->toArray();
+//        }
+//        return $result;
+//    }
+
+
+
+
+
 
 
 

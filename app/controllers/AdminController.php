@@ -126,6 +126,51 @@ class AdminController extends ControllerBase
         $this->view->pick('admin/log');
     }
 
+    public function updateViewAction(){
+        $reqData['id'] = $this->request->get('id');
+        if(!isset($reqData['id']) || $reqData['id'] == ''){
+            $this->functions->alert('数据传输失败');
+            exit;
+        }
+
+        $filed = 'id,admin_name,real_name,phone,status,role';
+        $admin = $this->getModel('Admin')->getById($reqData['id'],$filed);
+        if(!$admin){
+            $this->functions->alert('该账户不存在');
+            exit;
+        }
+
+        $data['admin'] = $admin;
+
+        $this->view->data = $data;
+        $this->view->pick('admin/update');
+    }
+
+    public function updateAction(){
+        $reqData['id'] = $this->request->getPost('id');
+        $reqData['admin_name'] = $this->request->getPost('admin_name');
+        $reqData['real_name'] = $this->request->getPost('real_name');
+        $reqData['phone'] = $this->request->getPost('phone');
+        $reqData['role'] = $this->request->getPost('role');
+        $password = $this->request->getPost('password');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->updateAdmin();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+        }
+
+        if(isset($password) && $password != ''){
+            $reqData['password'] = md5($password);
+        }
+
+        $update = $this->getBussiness('Admin')->updateAdmin($reqData['id'],$reqData);
+        $this->functions->alert($update['msg'],'/admin/list');
+    }
+
 
     //服务器
     public function serverListAction(){
