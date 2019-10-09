@@ -153,7 +153,7 @@ class GameApi extends BaseBussiness
         }
 
         if(!isset($result['success']) || $result['success'] != 'true'){
-            var_dump($result);exit;
+//            var_dump($result);exit;
             return false;
         }
         return true;
