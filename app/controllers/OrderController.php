@@ -32,7 +32,11 @@ class OrderController extends ControllerBase
 
         $table = 'homepage_order';
         //获取总条数
-        $allcount = $this->db->query("select count(id) as allcount from $table");
+        if(!isset($search) || $search == ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }else{
+            $allcount = $this->db->query("select count(id) as allcount from $table where `orderId` = '$search' or `NickName` = '$search'");
+        }
         $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $allcount = $allcount->fetch();
 
