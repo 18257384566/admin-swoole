@@ -24,7 +24,11 @@ class ManagerController extends ControllerBase
 
         $table = 'homepage_notice';
         //获取总条数
-        $allcount = $this->db->query("select count(id) as allcount from $table");
+        if(!isset($channel) || $channel == ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }else{
+            $allcount = $this->db->query("select count(id) as allcount from $table where channel = '$channel'");
+        }
         $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $allcount = $allcount->fetch();
 
