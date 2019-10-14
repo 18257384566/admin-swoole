@@ -133,6 +133,9 @@ class AclPlugin extends Injectable
                 'send::propCrontabView',
                 'send::propCrontab',
                 'send::propCrontabDeal',
+                'send::propPlanView',
+                'send::propPlan',
+                'send::planDeal',
 
             ),
 

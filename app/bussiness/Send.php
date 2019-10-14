@@ -304,5 +304,36 @@ class Send extends BaseBussiness
         return $this->result;
     }
 
+    public function propPlan($admin,$reqData){
+        //根据server_id查询服务器
+        $filed = 'server_name,url,diserver_id';
+        foreach ($reqData['server_id'] as $k => $server_id){
+            $server = $this->getModel('Server')->getById($server_id,$filed);
+            if($server){
+                $server_name = $server['server_name'];
+                $url = $server['url'];
+                $diserver_id = $server['diserver_id'];
 
+                //添加记录
+                $plan = [];
+                $plan['admin_name'] = $admin['account'];
+                $plan['admin_no'] = $admin['admin_no'];
+                $plan['mailtitle'] = $reqData['mailtitle'];
+                $plan['mailcontent'] = $reqData['mailcontent'];
+                $plan['nickname'] = $reqData['nickname'];
+                $plan['item'] = $reqData['item'];
+                $plan['server_name'] = $server_name;
+                $plan['server_url'] = $url;
+                $plan['diserver_id'] = $diserver_id;
+                $plan['is_send'] = 0;
+                $plan['send_time'] = strtotime($reqData['send_time']);
+
+                $this->getModel('SenditemPlan')->addLog($plan);
+            }
+        }
+
+        $this->result['status'] = 1;
+        $this->result['msg'] = '操作成功';
+        return $this->result;
+    }
 }

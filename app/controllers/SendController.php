@@ -622,4 +622,122 @@ class SendController extends ControllerBase
         }
     }
 
+    public function propPlanViewAction(){
+        $admin = $this->dispatcher->getParam('admin');
+        $diserver_id = $this->request->getQuery('diserver_id');
+
+        //查询服务器列表
+        $server_list = $this->getModel('Server')->getList();
+        if(!$server_list){
+            $server_list = [];
+        }
+
+        //查询发送道具的记录
+        $limit = 10;
+        $page = $this->request->get('page');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_senditem_plan';
+        //获取总条数
+        if(isset($diserver_id) && $diserver_id != ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table where diserver_id = $diserver_id");
+        }else{
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(isset($diserver_id) && $diserver_id != ''){
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table where diserver_id = $diserver_id order by id desc limit $page,$limit";
+        }else{
+            $sql = "select `id`,`admin_name`,`nickname`,`item`,`server_name`,`is_send`,`send_time`,`created_at` from $table order by id desc limit $page,$limit";
+        }
+        $list = $this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        $data['admin'] = $admin;
+        $data['server_list'] = $server_list;
+
+        $data['allcount']=$allcount['allcount'];
+        $data['page'] = $this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = "diserver_id=$diserver_id&";
+
+        $this->view->server_url = $admin['server_url'];
+        $this->view->data = $data;
+        $this->view->list = $list;
+        $this->view->pick('send/propPlan');
+    }
+
+    public function propPlanAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
+        $reqData['server_id'] = $this->request->getPost('server_id');
+        $reqData['nickname'] = $this->request->getPost('nickname');
+        $reqData['mailtitle'] = $this->request->getPost('mailtitle');
+        $reqData['mailcontent'] = $this->request->getPost('mailcontent');
+        $reqData['item'] = $this->request->getPost('item');
+        $reqData['send_time'] = $this->request->getPost('send_time');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->propCrontab();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+            exit;
+        }
+
+        if($reqData['nickname'] == '@all'){
+            $reqData['nickname'] = '';
+        }
+
+        $propCrontab = $this->getBussiness('Send')->propPlan($admin,$reqData);
+
+        $this->functions->alert($propCrontab['msg'],'/manager/prop/plan');
+    }
+
+    public function planDealAction(){
+        $reqData['id'] = $this->request->getQuery('id');
+        $reqData['status'] = $this->request->getQuery('status');
+
+        //校验数据
+        $validation = $this->paValidation;
+        $validation->propCrontabDeal();
+        $messages = $validation->validate($reqData);
+        if(count($messages)){
+            $message = $messages[0]->getMessage();
+            $this->functions->alert($message);
+            exit;
+        }
+
+        switch ($reqData['status']){
+            case '-1':  //删除
+                //查询该数据是否存在
+                $filed = 'id';
+                $propCrontab = $this->getModel('SenditemPlan')->getById($reqData['id'],$filed);
+                if(!$propCrontab){
+                    $this->functions->alert('已删除');exit;
+                }
+
+                //删除数据
+                $del = $this->getModel('SenditemPlan')->delById($reqData['id']);
+                if(!$del){
+                    $this->functions->alert('删除失败');exit;
+                }
+                $this->functions->alert('删除成功');exit;
+                break;
+
+            default:
+                $this->functions->alert('数据参数传入缺失');exit;
+                break;
+        }
+    }
+
 }

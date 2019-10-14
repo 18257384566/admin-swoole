@@ -21,7 +21,7 @@ class Mysqlreconnect extends BaseBussiness
             //重连mysql
             $this->getDI()->getShared('db')->close();
             $this->getDI()->remove('db');
-            $mysqlConfig = $this->getDI()->get('config')['database'];
+            $mysqlConfig = (array)$this->getDI()->get('config')['database'];
             $this->getDI()->setShared('db',function() use($mysqlConfig){
                 return new \Phalcon\Db\Adapter\Pdo\Mysql($mysqlConfig);
             });
