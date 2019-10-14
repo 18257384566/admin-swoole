@@ -8,13 +8,15 @@
 
 namespace App\Core;
 
+
+use App\Bussiness\BussinessFactory;
 use App\Models\ModelFactory;
 use Phalcon\Cli\Task;
-use App\Business\BusinessFactory;
+
 
 class AppBaseTask extends Task{
     protected function getBusiness($businessName){
-        return BusinessFactory::getBusiness($businessName);
+        return BussinessFactory::getBussiness($businessName);
     }
 
     protected function getModel($modelName){

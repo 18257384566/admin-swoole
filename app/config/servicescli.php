@@ -62,6 +62,19 @@ $di->setShared('db', function () {
     return $connection;
 });
 
+//注册redis
+$di->setShared('redis',function(){
+    $config = $this->getConfig();
+    $configRedis = $config['redis'];
+    $redis =  new \Redis();
+    $redis->connect( $configRedis['host'] , $configRedis['port']);
+    if (!empty( $configRedis['password'] )){
+        $redis->auth( $configRedis['password'] );
+    }
+    return $redis;
+});
+
+
 
 /**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
