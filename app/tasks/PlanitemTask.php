@@ -16,41 +16,40 @@ class PlanitemTask extends \App\Core\AppBaseTask
             $senditems->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
             $senditems = $senditems->fetchAll();
 
-            if(!$senditems){
-                echo '暂无数据';
-                exit;
-            }
-
-            //遍历发送道具
-            foreach ($senditems as $v){
-                if($v['is_send'] != 0){
-                    continue;
-                }
-                //发送道具
-                $send = [];
-                $send['nickname'] = $v['nickname'];
-                $send['mailtitle'] = $v['mailtitle'];
-                $send['mailcontent'] = $v['mailcontent'];
-                $send['itemstr'] = $v['item'];
-                $send['zones'] = $v['diserver_id'];
-                $sendItem = $this->sendItem($v['server_url'],$send);
-                if($sendItem){
-                    //发送成功
-                    $update['is_send'] = 1;
-                    $updateCrontab = $this->getModel('SenditemPlan')->updateById($v['id'],$update);
-                    if(!$updateCrontab){
-                        $this->getModel('SenditemPlan')->updateById($v['id'],$update);
+            if($senditems){
+                //遍历发送道具
+                foreach ($senditems as $v){
+                    if($v['is_send'] != 0){
+                        continue;
                     }
-                }else{
-                    //发送失败
-                    $update['is_send'] = -1;
-                    $this->getModel('SenditemPlan')->updateById($v['id'],$update);
-                    $this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", '/cache/itemplan');
-                }
+                    //发送道具
+                    $send = [];
+                    $send['nickname'] = $v['nickname'];
+                    $send['mailtitle'] = $v['mailtitle'];
+                    $send['mailcontent'] = $v['mailcontent'];
+                    $send['itemstr'] = $v['item'];
+                    $send['zones'] = $v['diserver_id'];
+                    $sendItem = $this->sendItem($v['server_url'],$send);
+                    if($sendItem){
+                        //发送成功
+                        $update['is_send'] = 1;
+                        $updateCrontab = $this->getModel('SenditemPlan')->updateById($v['id'],$update);
+                        if(!$updateCrontab){
+                            $this->getModel('SenditemPlan')->updateById($v['id'],$update);
+                        }
+                    }else{
+                        //发送失败
+                        $update['is_send'] = -1;
+                        $this->getModel('SenditemPlan')->updateById($v['id'],$update);
+                        $this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", '/cache/itemplan');
+                    }
 
+                }
             }
-            var_dump('success');
-            sleep(10);
+
+
+            //var_dump('success');
+            sleep(60);
         }
     }
 

@@ -175,6 +175,8 @@
                                                 echo  '未发送';
                                             }elseif($v['is_send'] == 1){
                                                 echo '已发送';
+                                            }elseif($v['is_send'] == -1){
+                                                echo '<p style="color: red">发送失败</p>';
                                             }
                                             ?>
                                             <span>
