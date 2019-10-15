@@ -40,7 +40,7 @@ class PropsendTask extends \App\Core\AppBaseTask
                 }
             }else{
                 //发送失败
-                $this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", 'itemcrontab');
+                $this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", '/cache/itemcrontab');
             }
 
         }
