@@ -163,7 +163,7 @@ nav{width: 200px;height: 100vh;position:fixed;left: 0px;top: 0px;background: #2A
  .sidebar-nav .nav li span{vertical-align: middle;}
    .sidebar-nav .nav li ul{display: none;}
    .sidebar-nav .nav li>div{height: 46px;line-height: 46px;padding-left: 29px;}
-   .sidebar-nav .nav li li{padding-left:50px;height: 46px;line-height: 46px;}
+   .sidebar-nav .nav li li{padding-left:50px;height: 46px;line-height: 46px;} 
    /*激活样式*/
    .sidebar-nav .nav li.active ul{display: block;}
    .sidebar-nav .nav li.active>div{background: #3B3E4D;}
