@@ -7,7 +7,7 @@ class PlanitemTask extends \App\Core\AppBaseTask
     {
         while (true){
             //检测重连机制
-            $this->getBusiness('Mysqlreconnect')->reconnect('planitem');
+            //$this->getBusiness('Mysqlreconnect')->reconnect('planitem');
 
             $time = time();
             $filed = 'id,mailtitle,mailcontent,nickname,item,server_url,diserver_id,is_send,server_name';
@@ -41,7 +41,7 @@ class PlanitemTask extends \App\Core\AppBaseTask
                         //发送失败
                         $update['is_send'] = -1;
                         $this->getModel('SenditemPlan')->updateById($v['id'],$update);
-                        $this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", '/cache/itemplan');
+                        //$this->getDI()->get('logger')->log('发送失败:'.json_encode($send), "info", '/cache/itemplan');
                     }
 
                 }
