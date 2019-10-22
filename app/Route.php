@@ -119,7 +119,8 @@ class Route extends RouterGroup
 
         //订单管理
         $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入（页面）
-        $this->addPost('/order/orderAdd','order::orderAdd');        //订单导入
+        $this->addPost('/order/orderAdd','order::orderAdd');        //订单导入(csv/tsv)
+        $this->addPost('/order/orderLogAdd','order::orderLogAdd');  //订单导入(log)
 
     }
 }

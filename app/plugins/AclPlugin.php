@@ -136,7 +136,7 @@ class AclPlugin extends Injectable
                 'send::propPlanView',
                 'send::propPlan',
                 'send::planDeal',
-
+                'order::orderLogAdd',
             ),
 
             'developers' => array(  //开发商
