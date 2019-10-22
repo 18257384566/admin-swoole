@@ -7,7 +7,7 @@ class PlanitemTask extends \App\Core\AppBaseTask
     {
         while (true){
             //检测重连机制
-            //$this->getBusiness('Mysqlreconnect')->reconnect('planitem');
+            $this->getBusiness('Mysqlreconnect')->reconnect('planitem');
 
             $time = time();
             $filed = 'id,mailtitle,mailcontent,nickname,item,server_url,diserver_id,is_send,server_name';
