@@ -28,12 +28,12 @@ class AdminController extends ControllerBase
 
         $table = 'homepage_admin';
         //获取总条数
-        $allcount = $this->db->query("select count(id) as allcount from $table");
+        $allcount = $this->db->query("select count(id) as allcount from $table where status != -1");
         $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $allcount = $allcount->fetch();
 
         //获取当页
-        $sql = "select id,admin_name,real_name,phone,status,created_at,updated_at,role from $table order by created_at desc limit $page,$limit";
+        $sql = "select id,admin_name,real_name,phone,status,created_at,updated_at,role from $table where status != -1 order by created_at desc limit $page,$limit";
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $list = $list->fetchAll();

@@ -73,6 +73,7 @@
                                         <a href="/admin/updateStatus?id=<?php echo $v['id']; ?>&status=0" onclick="javascript:return confirm('是否禁用？');"><button class="action-btn disabled">禁用</button></a>
                                         <a href="/admin/updateStatus?id=<?php echo $v['id']; ?>&status=1" onclick="javascript:return confirm('是否启用？');"><button class="action-btn open">启用</button></a>
                                         <a href="/admin/update?id=<?php echo $v['id']; ?>&status=1"><button class="action-btn">编辑</button></a>
+                                        <a href="/admin/updateStatus?id=<?php echo $v['id']; ?>&status=-1"><button class="action-btn disabled">删除</button></a>
                                     </td>
                                 </tr>
                         <?php } ?>

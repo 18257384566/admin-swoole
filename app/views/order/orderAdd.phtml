@@ -71,6 +71,22 @@
               </div>
 
               <div class="container">
+                  <div class="search-ui">
+                      <form action="/order/orderadd/excle" method="get">
+
+                          <div class="search-ui-input">
+                              <div>
+                                  <input type="text" class="input-primary" placeholder="根据用户名搜索用户id" name="search" value="">
+                              </div>
+                              <div>
+                                  <button class='btn btn-primary'>搜索</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+
+              <div class="container">
                   <div class="page-title">全服订单列表【总订单量：<?= $data['allcount'] ?>】</div>
                   <div class="table">
                       <table>

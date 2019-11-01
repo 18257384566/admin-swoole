@@ -46,7 +46,7 @@ class Admin extends BaseBussiness
 
     public function updateStatus($reqData){
         //判断管理员是否存在
-        $filed = 'is_super';
+        $filed = 'is_super,status';
         $admin = $this->getModel('Admin')->getById($reqData['id'],$filed);
         if(!$admin){
             $this->result['status'] = -1;
@@ -54,10 +54,21 @@ class Admin extends BaseBussiness
             return $this->result;
         }
 
-        //判断用户是否是超级管理
-        if($reqData['status'] == 0 && $admin['is_super'] == 1){
+        if($reqData['status'] == $admin['status']){
+            switch ($reqData['status']) {
+                case '1':
+                    $this->result['msg'] = '该账户已启用';
+                    break;
+
+                case '-1':
+                    $this->result['msg'] = '该账户已删除';
+                    break;
+
+                case '0':
+                    $this->result['msg'] = '该账户已禁用';
+                    break;
+            }
             $this->result['status'] = -1;
-            $this->result['msg'] = '不可禁用超级管理员';
             return $this->result;
         }
 
