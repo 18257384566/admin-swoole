@@ -34,9 +34,9 @@ class ManagerController extends ControllerBase
 
         //获取当页
         if(!isset($channel) || $channel == ''){
-            $sql = "select id,notice,created_at,channel,remark,start_time from $table order by created_at desc limit $page,$limit";
+            $sql = "select id,notice,created_at,channel,remark,start_time,admin_name from $table order by created_at desc limit $page,$limit";
         }else{
-            $sql = "select id,notice,created_at,channel,remark,start_time from $table where channel = '$channel' order by created_at desc limit $page,$limit";
+            $sql = "select id,notice,created_at,channel,remark,start_time,admin_name from $table where channel = '$channel' order by created_at desc limit $page,$limit";
         }
 
         $list=$this->db->query($sql);
@@ -63,6 +63,8 @@ class ManagerController extends ControllerBase
     }
 
     public function noticeAddAction(){
+        $admin = $this->dispatcher->getParam('admin');
+
         $reqData['channel'] = $this->request->getPost('channel');
         $reqData['notice'] = $this->request->getPost('notice');
         $reqData['remark'] = $this->request->getPost('remark');
@@ -79,12 +81,45 @@ class ManagerController extends ControllerBase
 
         $reqData['start_time'] = strtotime($reqData['start_time']);
 
+        $reqData['admin_no'] = $admin['admin_no'];
+        $reqData['admin_name'] = $admin['account'];
         $add = $this->getModel('Notice')->add($reqData);
         if(!$add){
             $this->functions->alert('添加失败');
         }
 
         $this->functions->alert('添加成功');
+    }
+
+    public function noticeDealAction(){
+        $reqData['status'] = $this->request->getQuery('status');
+        $id = $this->request->getQuery('id');
+        if(!isset($reqData['status']) || !isset($id)){
+            $this->functions->alert('参数传输错误');
+        }
+
+        $update = $this->getModel('Notice')->updateById($id,$reqData);
+        if(!$update){
+
+            $msg = '修改失败';
+            switch ($reqData['status']){
+                case '-1':
+                    $msg = '删除失败';
+                    break;
+            }
+
+        }else{
+
+            $msg = '修改成功';
+            switch ($reqData['status']){
+                case '-1':
+                    $msg = '删除成功';
+                    break;
+            }
+
+        }
+
+        $this->functions->alert($msg);
     }
 
     public function noticeApiAction(){

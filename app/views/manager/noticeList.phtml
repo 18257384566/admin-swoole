@@ -86,6 +86,8 @@
                                   <th>备注</th>
                                   <th>预发布时间</th>
                                   <th>创建时间</th>
+                                  <th>管理员</th>
+<!--                                  <th>操作</th>-->
                               </tr>
                               </thead>
                               <tbody>
@@ -116,6 +118,10 @@
                                       <td><?= $v['remark'];?></td>
                                       <td><?= date('Y-m-d H:i:s',$v['start_time'])?></td>
                                       <td><?= date('Y-m-d H:i:s',$v['created_at'])?></td>
+                                      <td><?= $v['admin_name'] ?></td>
+<!--                                      <td>-->
+<!--                                          <a href="/manager/notice/deal?id=--><?php //echo $v['id']; ?><!--&status=-1"><button class="action-btn disabled">删除</button></a>-->
+<!--                                      </td>-->
                                   </tr>
                               <?php } ?>
                               </tbody>

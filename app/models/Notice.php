@@ -15,6 +15,8 @@ class Notice extends BaseModel
     }
 
     public function add($data){
+        $this->admin_no = $data['admin_no'];
+        $this->admin_name = $data['admin_name'];
         $this->channel = $data['channel'];
         $this->notice = $data['notice'];
         $this->remark = $data['remark'];
@@ -43,6 +45,25 @@ class Notice extends BaseModel
 
     }
 
+    public function updateById($id,$data)
+    {
+        $data['update'] = time();
+        $result = $this->findFirst(
+            [
+                'conditions' => 'id = ?1',
+                'bind' => array(
+                    1 => $id,
+                ),
+            ]
+        );
+        if (!$result) {
+            return false;
+        }
+        if ($result->save($data) === false) {
+            return false;
+        }
+        return true;
+    }
 
 
 }

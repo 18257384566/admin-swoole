@@ -87,6 +87,7 @@ class Route extends RouterGroup
         $this->add('/manager/notice/send','send::noticeView');              //推送消息（页面）
         $this->add('/manager/notice/list','manager::noticeList');           //公告列表（页面）
         $this->add('/manager/notice/add','manager::noticeAdd');             //公告添加
+        $this->add('/manager/notice/deal','manager::noticeDeal');           //公告处理(删除)
 
         //用户管理
         $this->add('/user/daily/login','user::dailyLogin');     //每日登录（页面）
