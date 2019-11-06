@@ -27,6 +27,24 @@ class AdminLog extends BaseModel
         return $this->id;
     }
 
+    public function delByTime($time){
+        $result = $this->find(
+            [
+                'conditions' => 'created_at < ?1',
+                'bind' => array(
+                    1 => $time,
+                ),
+            ]
+        );
+        if (!$result) {
+            return false;
+        }
+        if ($result->delete() === false) {
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
