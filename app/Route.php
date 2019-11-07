@@ -122,6 +122,8 @@ class Route extends RouterGroup
         $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入（页面）
         $this->addPost('/order/orderAdd','order::orderAdd');        //订单导入(csv/tsv)
         $this->addPost('/order/orderLogAdd','order::orderLogAdd');  //订单导入(log)
+        $this->add('/order/recharge/view','order::rechargeView');   //充值查询(页面)
+        $this->addPost('/order/recharge/import','order::rechargeImport');//充值导入
 
     }
 }
