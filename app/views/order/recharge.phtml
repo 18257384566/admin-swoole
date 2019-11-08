@@ -64,11 +64,13 @@
 
 
               <div class="container">
-                  <div class="page-title">【充值总量：<?= $data['allcount'] ?>】</div>
+                  <div class="page-title">【充值金额：<?= $data['money_total'] ?>】</div>
+                  <div class="page-title">【数据条数：<?= $data['allcount'] ?>】</div>
                   <br>
                   <?php foreach ($data['server'] as $v){ ?>
                       <a href="?<?=$data['search']?>search=<?= $v['diserver_id'] ?>"><button class='btn btn-primary'> &nbsp&nbsp&nbsp <?= $v['server_name'] ?> &nbsp&nbsp&nbsp </button></a>
                   <?php } ?>
+                  <a href="?<?=$data['search']?>search="><button class='btn btn-primary'> &nbsp&nbsp&nbsp 全部 &nbsp&nbsp&nbsp </button></a>
 
                   <div class="table">
                       <table>
@@ -79,7 +81,7 @@
                               <th width="15%">货币单位</th>
                               <th width="15%">服务器id</th>
                               <th width="15%">渠道</th>
-                              <th width="15%">下单时间</th>
+                              <th width="15%">充值时间</th>
                               <th width="15%">是否成功</th>
                           </tr>
                           </thead>
@@ -88,7 +90,7 @@
                           <?php foreach($list as $v){ ?>
                               <tr>
                                   <td><?= $v['user_id'];?></td>
-                                  <td><?= $v['money'];?></td>
+                                  <td><?= $v['money'] * 10000 / 10000;?></td>
                                   <td><?= $v['money_type'];?></td>
                                   <td><?= $v['server_id'];?></td>
                                   <td><?= $v['channel'];?></td>

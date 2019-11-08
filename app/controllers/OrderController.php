@@ -213,6 +213,13 @@ class OrderController extends ControllerBase
 
 
     //充值
+    public function fetch($sql){
+        $result=$this->db->query($sql);
+        $result->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $result = $result->fetchAll();
+        return $result;
+    }
+
     public function rechargeViewAction(){
         $start_time = $this->request->getQuery('start_time');
         $end_time = $this->request->getQuery('end_time');
@@ -243,9 +250,11 @@ class OrderController extends ControllerBase
         //获取总条数
         if(!isset($search) || $search == ''){
             $sql = "select count(id) as allcount from $table where `date` >= $start_time and `date` < $end_time";
+            $money_sum = "select sum(`money`) as money_total from $table where `date` >= $start_time and `date` < $end_time";
         }else{
             $server_id = 'zone'.$search;
             $sql = "select count(id) as allcount from $table where `date` >= $start_time and `date` < $end_time and `server_id` = '$server_id'";
+            $money_sum = "select sum(`money`) as allcount from $table where `date` >= $start_time and `date` < $end_time and `server_id` = '$server_id'";
         }
         $allcount=$this->db->query($sql);
         $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
@@ -268,6 +277,13 @@ class OrderController extends ControllerBase
         $server=$this->db->query($sql);
         $server->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
         $server = $server->fetchAll();
+
+        $money_fetch = $this->fetch($money_sum);
+        if(isset($money_fetch[0]['money_total'])){
+            $data['money_total'] = $money_fetch[0]['money_total'];
+        }else{
+            $data['money_total'] = 0;
+        }
 
         $data['server'] = $server;
         $data['allcount']=$allcount['allcount'];
@@ -314,10 +330,10 @@ class OrderController extends ControllerBase
             }
 
             //判断该订单是否已经存在
-//            $isset = $this->getModel('Order')->getByOrderId($data['Id'],$filed='id');
-//            if($isset){
-//                continue;
-//            }
+            $isset = $this->getModel('Recharge')->getByGameOrderId($data['properties']['game_order_id'],$filed='id');
+            if($isset){
+                continue;
+            }
 
             $date = strtotime($data['#time']);
 

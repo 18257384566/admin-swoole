@@ -26,10 +26,10 @@ class Recharge extends BaseModel
         return $result;
     }
 
-    public function getByOrderId($order_id,$filed='*'){
+    public function getByGameOrderId($order_id,$filed='*'){
         $result = $this->findFirst([
             'columns' => $filed,
-            'conditions' => 'orderId = ?1',
+            'conditions' => 'game_order_id = ?1',
             'bind' => array(
                 1 => $order_id,
             ),
