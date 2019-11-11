@@ -337,6 +337,9 @@ class OrderController extends ControllerBase
 
             $date = strtotime($data['#time']);
 
+            if(!isset($data['properties']['device_id'])){
+                $data['properties']['device_id'] = 0;
+            }
             //存入数据库
             $sql = "insert into homepage_recharge(`user_id`,`account_id`,`device_id`,`channel`,`server_id`,`vip_level`,`level`,`money`,`game_order_id`,`SDK_order_id`,`pay_order_id`,`money_type`,`payway`,`is_success`,`type`,`time`,`date`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $params = array(
