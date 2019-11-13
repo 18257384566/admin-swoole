@@ -362,9 +362,8 @@ class OrderController extends ControllerBase
                 $time,
                 $date,
             );
-
-            var_dump($sql);
-            $this->db->query($sql, $params); exit;
+            
+            $this->db->query($sql, $params);
         }
 
         $this->functions->alert('导入成功','/order/recharge/view');
