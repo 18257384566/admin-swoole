@@ -249,12 +249,12 @@ class OrderController extends ControllerBase
         $table = 'homepage_recharge';
         //获取总条数
         if(!isset($search) || $search == ''){
-            $sql = "select count(id) as allcount from $table where `date` >= $start_time and `date` < $end_time";
-            $money_sum = "select sum(`money`) as money_total from $table where `date` >= $start_time and `date` < $end_time";
+            $sql = "select count(id) as allcount from $table where `time` >= $start_time and `time` < $end_time";
+            $money_sum = "select sum(`money`) as money_total from $table where `time` >= $start_time and `time` < $end_time";
         }else{
             $server_id = 'zone'.$search;
-            $sql = "select count(id) as allcount from $table where `date` >= $start_time and `date` < $end_time and `server_id` = '$server_id'";
-            $money_sum = "select sum(`money`) as allcount from $table where `date` >= $start_time and `date` < $end_time and `server_id` = '$server_id'";
+            $sql = "select count(id) as allcount from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id'";
+            $money_sum = "select sum(`money`) as allcount from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id'";
         }
         $allcount=$this->db->query($sql);
         $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
@@ -262,10 +262,10 @@ class OrderController extends ControllerBase
 
         //获取当页
         if(!isset($search) || $search == ''){
-            $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `date` >= $start_time and `date` < $end_time order by `date` desc limit $page,$limit";
+            $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `time` >= $start_time and `time` < $end_time order by `date` desc limit $page,$limit";
         }else{
             $server_id = 'zone'.$search;
-            $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `date` >= $start_time and `date` < $end_time and `server_id` = '$server_id' order by `date` desc limit $page,$limit";
+            $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id' order by `date` desc limit $page,$limit";
         }
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
@@ -363,8 +363,8 @@ class OrderController extends ControllerBase
                 $date,
             );
 
-//            var_dump($sql);
-            $this->db->query($sql, $params);
+            var_dump($sql);
+            $this->db->query($sql, $params); exit;
         }
 
         $this->functions->alert('导入成功','/order/recharge/view');
