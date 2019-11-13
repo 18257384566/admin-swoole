@@ -101,6 +101,8 @@ class AclPlugin extends Injectable
                 'user::info',
                 'user::getShipInfoView',
                 'user::notalk',
+                'user::registerView',
+                'user::registerImport',
                 'manager::noticeList',
                 'manager::noticeAdd',
                 'manager::noticeDeal',

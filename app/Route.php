@@ -106,6 +106,8 @@ class Route extends RouterGroup
         $this->addPost('/user/info','user::info');              //获取用户信息
 //        $this->add('/user/shipInfo','user::getShipInfo');     //获取用户船队信息
         $this->add('/user/shipInfo','user::getShipInfoView');   //获取用户船队信息（页面）
+        $this->add('/user/registerView','user::registerView');  //注册信息（页面）
+        $this->addPost('/user/register/import','user::registerImport');//导入注册用户
 
 
         //获取实时数据

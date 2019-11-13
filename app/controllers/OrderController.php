@@ -335,7 +335,8 @@ class OrderController extends ControllerBase
                 continue;
             }
 
-            $date = strtotime($data['#time']);
+            $time = strtotime($data['#time']);
+            $date = date('Y-m-d',$time);
 
             if(!isset($data['properties']['device_id'])){
                 $data['properties']['device_id'] = 0;
@@ -358,7 +359,7 @@ class OrderController extends ControllerBase
                 $data['properties']['payway'],
                 $data['properties']['is_success'],
                 $data['#type'],
-                $data['#time'],
+                $time,
                 $date,
             );
 

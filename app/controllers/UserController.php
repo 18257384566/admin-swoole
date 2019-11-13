@@ -387,4 +387,138 @@ class UserController extends ControllerBase
         ));
     }
 
+    //注册信息
+    public function registerViewAction(){
+        $start_time = $this->request->getQuery('start_time');
+        $end_time = $this->request->getQuery('end_time');
+
+        if(empty($start_time)){
+            $start_time = '1997-01-01';
+        }
+
+        if(empty($end_time)){
+            $end_time = date('Y-m-d',time());
+        }
+
+        $start_time = strtotime($start_time);
+        $end_time = strtotime($end_time);
+
+        //获取订单列表
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->getQuery('search');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_user';
+        //获取总条数
+        if(!isset($search) || $search == ''){
+            $sql = "select count(id) as allcount from $table where `time` >= $start_time and `time` < $end_time";
+        }else{
+            $server_id = 'zone'.$search;
+            $sql = "select count(id) as allcount from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id'";
+        }
+        $allcount=$this->db->query($sql);
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `time`,`user_id`,`channel`,`server_id`,`register_ip`,`country_code` from $table where `time` >= $start_time and `time` < $end_time order by `date` desc limit $page,$limit";
+        }else{
+            $server_id = 'zone'.$search;
+            $sql = "select `time`,`user_id`,`channel`,`server_id`,`register_ip`,`country_code` from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id' order by `date` desc limit $page,$limit";
+        }
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+
+        //获取服务器
+        $sql = "select `server_name`,`diserver_id`,`diserver_name` from homepage_server order by created_at desc limit $page,$limit";
+        $server=$this->db->query($sql);
+        $server->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $server = $server->fetchAll();
+
+        $data['server'] = $server;
+        $data['allcount']=$allcount['allcount'];
+        $data['page']=$this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = "search=$search&start_time=".date('Y-m-d',$start_time)."&end_time=".date('Y-m-d',$end_time)."&";
+
+        $this->view->data = $data;
+        $this->view->list = $list;
+        $this->view->pick('user/register');
+    }
+
+    public function registerImportAction(){
+        //判断上传文件是否合法
+        $filename = $_FILES['file']['tmp_name'];
+        $name = strstr( $_FILES['file']['name'], '.');
+        if($name != '.csv' && $name != '.tsv'){
+            $this->functions->alert('导入文件格式只能为csv或者tsv');
+        }
+        if (empty ($filename)) {
+            $this->functions->alert('请选择要导入的CSV文件');
+        }
+
+        //打开上传文件
+        $handle = fopen($filename, 'r');
+        $result = $this->functions->input_csv($handle); //解析csv
+        $len_result = count($result);
+        if($len_result == 0){
+            $this->functions->alert('没有任何数据');
+        }
+
+        //遍历表格数据
+        for ($i = 0; $i < $len_result; $i++) { //循环获取各字段值
+            $json = mb_convert_encoding($result[$i][0], "UTF-8", "auto");
+
+            //判断数据是否为空
+            if(!isset($json) || $json == ''){
+                continue;
+            }
+
+            $data = json_decode($json,true);
+            if(!isset($data['properties'])){
+                continue;
+            }
+
+            //判断该订单是否已经存在
+            $isset = $this->getModel('User')->getByUserId($data['properties']['user_id'],$filed='id');
+            if($isset){
+                continue;
+            }
+
+            $time = strtotime($data['#time']);
+            $date = date('Y-m-d',$time);
+
+            if(!isset($data['properties']['device_id'])){
+                $data['properties']['device_id'] = 0;
+            }
+            //存入数据库
+            $sql = "insert into homepage_user(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`register_ip`,`idfa_imei`,`phone_os`,`country_code`,`cmgeSDK_id`,`extend_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $params = array(
+                $data['properties']['account_id'],
+                $time,
+                $date,
+                $data['properties']['user_id'],
+                $data['properties']['device_id'],
+                $data['properties']['channel'],
+                $data['properties']['server_id'],
+                $data['properties']['register_ip'],
+                $data['properties']['idfa_imei'],
+                $data['properties']['phone_os'],
+                $data['properties']['country_code'],
+                $data['properties']['cmgeSDK_id'],
+                $data['properties']['extend_id'],
+            );
+            $this->db->query($sql, $params);
+        }
+
+        $this->functions->alert('导入成功','/user/registerView');
+    }
+
 }
