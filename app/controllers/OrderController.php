@@ -362,7 +362,7 @@ class OrderController extends ControllerBase
                 $time,
                 $date,
             );
-            
+
             $this->db->query($sql, $params);
         }
 
