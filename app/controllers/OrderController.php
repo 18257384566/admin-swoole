@@ -265,7 +265,7 @@ class OrderController extends ControllerBase
             $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `time` >= $start_time and `time` < $end_time order by `date` desc limit $page,$limit";
         }else{
             $server_id = 'zone'.$search;
-            $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id' order by `date` desc limit $page,$limit";
+            $sql = "select `user_id`,`money`,`money_type`,`server_id`,`channel`,`time`,`is_success` from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id' order by `time` desc limit $page,$limit";
         }
         $list=$this->db->query($sql);
         $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
