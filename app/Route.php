@@ -90,24 +90,26 @@ class Route extends RouterGroup
         $this->add('/manager/notice/deal','manager::noticeDeal');           //公告处理(删除)
 
         //用户管理
-        $this->add('/user/daily/login','user::dailyLogin');     //每日登录（页面）
-        $this->add('/user/retain','user::retain');              //每日留存（页面）
-        $this->add('/user/login/count','user::loginCount');     //登录统计（页面）
-        $this->add('/user/online','user::online');              //实时在线（页面）
-        $this->addPost('/user/online','user::onlineQuery');     //实时在线
-        $this->addPost('/user/shipInfo','user::getShipInfo');   //获取用户船队信息
-        $this->add('/prop/list','user::propList');              //道具列表（页面）
-        $this->add('/prop/excel','user::propListExcel');        //导出道具列表
-        $this->add('/user/disableView','user::disableView');    //用户封号（页面）
-        $this->add('/user/distalkView','user::distalkView');    //用户禁言（页面）
-        $this->addPost('/user/disable','user::disable');        //用户封号
-        $this->addPost('/user/notalk','user::notalk');          //用户禁言
-        $this->add('/user/info','user::infoView');              //获取用户信息（页面）
-        $this->addPost('/user/info','user::info');              //获取用户信息
-//        $this->add('/user/shipInfo','user::getShipInfo');     //获取用户船队信息
-        $this->add('/user/shipInfo','user::getShipInfoView');   //获取用户船队信息（页面）
-        $this->add('/user/registerView','user::registerView');  //注册信息（页面）
+        $this->add('/user/daily/login','user::dailyLogin');         //每日登录（页面）
+        $this->add('/user/retain','user::retain');                  //每日留存（页面）
+        $this->add('/user/login/count','user::loginCount');         //登录统计（页面）
+        $this->add('/user/online','user::online');                  //实时在线（页面）
+        $this->addPost('/user/online','user::onlineQuery');         //实时在线
+        $this->addPost('/user/shipInfo','user::getShipInfo');       //获取用户船队信息
+        $this->add('/prop/list','user::propList');                  //道具列表（页面）
+        $this->add('/prop/excel','user::propListExcel');            //导出道具列表
+        $this->add('/user/disableView','user::disableView');        //用户封号（页面）
+        $this->add('/user/distalkView','user::distalkView');        //用户禁言（页面）
+        $this->addPost('/user/disable','user::disable');            //用户封号
+        $this->addPost('/user/notalk','user::notalk');              //用户禁言
+        $this->add('/user/info','user::infoView');                  //获取用户信息（页面）
+        $this->addPost('/user/info','user::info');                  //获取用户信息
+//        $this->add('/user/shipInfo','user::getShipInfo');         //获取用户船队信息
+        $this->add('/user/shipInfo','user::getShipInfoView');       //获取用户船队信息（页面）
+        $this->add('/user/registerView','user::registerView');      //注册信息（页面）
         $this->addPost('/user/register/import','user::registerImport');//导入注册用户
+        $this->add('/user/loginView','user::loginView');      //登陆记录（页面）
+        $this->addPost('/user/login/import','user::loginImport'); //登陆记录（页面）
 
 
         //获取实时数据

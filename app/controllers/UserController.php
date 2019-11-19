@@ -387,7 +387,7 @@ class UserController extends ControllerBase
         ));
     }
 
-    //注册信息
+    //注册记录
     public function registerViewAction(){
         $start_time = $this->request->getQuery('start_time');
         $end_time = $this->request->getQuery('end_time');
@@ -453,7 +453,7 @@ class UserController extends ControllerBase
         $this->view->pick('user/register');
     }
 
-    public function registerImportAction(){
+    public function loginImportAction(){
         //判断上传文件是否合法
         $filename = $_FILES['file']['tmp_name'];
         $name = strstr( $_FILES['file']['name'], '.');
@@ -487,7 +487,7 @@ class UserController extends ControllerBase
             }
 
             //判断该订单是否已经存在
-            $isset = $this->getModel('User')->getByUserId($data['properties']['user_id'],$filed='id');
+            $isset = $this->getModel('LoginLog')->getByUserId($data['properties']['user_id'],$filed='id');
             if($isset){
                 continue;
             }
@@ -499,7 +499,7 @@ class UserController extends ControllerBase
                 $data['properties']['device_id'] = 0;
             }
             //存入数据库
-            $sql = "insert into homepage_user(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`register_ip`,`idfa_imei`,`phone_os`,`country_code`,`cmgeSDK_id`,`extend_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "insert into homepage_login_log(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level`) VALUES (?,?,?,?,?,?,?,?,?,?)";
             $params = array(
                 $data['properties']['account_id'],
                 $time,
@@ -508,17 +508,80 @@ class UserController extends ControllerBase
                 $data['properties']['device_id'],
                 $data['properties']['channel'],
                 $data['properties']['server_id'],
-                $data['properties']['register_ip'],
-                $data['properties']['idfa_imei'],
-                $data['properties']['phone_os'],
-                $data['properties']['country_code'],
-                $data['properties']['cmgeSDK_id'],
-                $data['properties']['extend_id'],
+                $data['properties']['login_ip'],
+                $data['properties']['vip_level'],
+                $data['properties']['level'],
             );
             $this->db->query($sql, $params);
         }
 
         $this->functions->alert('导入成功','/user/registerView');
+    }
+
+    //登陆记录
+    public function loginViewAction(){
+        $start_time = $this->request->getQuery('start_time');
+        $end_time = $this->request->getQuery('end_time');
+
+        if(empty($start_time)){
+            $start_time = '1997-01-01';
+        }
+
+        if(empty($end_time)){
+            $end_time = date('Y-m-d',time());
+        }
+
+        $start_time = strtotime($start_time);
+        $end_time = strtotime($end_time);
+
+        //获取订单列表
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->getQuery('search');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_login_log';
+        //获取总条数
+        if(!isset($search) || $search == ''){
+            $sql = "select count(id) as allcount from $table where `time` >= $start_time and `time` < $end_time";
+        }else{
+            $server_id = 'zone'.$search;
+            $sql = "select count(id) as allcount from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id'";
+        }
+        $allcount=$this->db->query($sql);
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `time`,`user_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level` from $table where `time` >= $start_time and `time` < $end_time order by `date` desc limit $page,$limit";
+        }else{
+            $server_id = 'zone'.$search;
+            $sql = "select `time`,`user_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level` from $table where `time` >= $start_time and `time` < $end_time and `server_id` = '$server_id' order by `date` desc limit $page,$limit";
+        }
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+
+        //获取服务器
+        $sql = "select `server_name`,`diserver_id`,`diserver_name` from homepage_server order by created_at desc limit $page,$limit";
+        $server=$this->db->query($sql);
+        $server->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $server = $server->fetchAll();
+
+        $data['server'] = $server;
+        $data['allcount']=$allcount['allcount'];
+        $data['page']=$this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = "search=$search&start_time=".date('Y-m-d',$start_time)."&end_time=".date('Y-m-d',$end_time)."&";
+
+        $this->view->data = $data;
+        $this->view->list = $list;
+        $this->view->pick('user/loginLog');
     }
 
 }
