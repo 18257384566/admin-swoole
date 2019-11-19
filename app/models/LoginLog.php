@@ -14,12 +14,13 @@ class LoginLog extends BaseModel
         $this->setTableName(self::$tableName);
     }
 
-    public function getByUserId($user_id,$filed='*'){
+    public function getByUserIdDate($user_id,$date,$filed='*'){
         $result = $this->find([
             'columns' => $filed,
-            'conditions' => 'user_id = ?1',
+            'conditions' => "user_id = ?1 and date = ?2",
             'bind' => array(
                 1 => $user_id,
+                2 => $date,
             ),
 
         ]);

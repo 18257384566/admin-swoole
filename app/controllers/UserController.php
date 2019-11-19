@@ -453,7 +453,7 @@ class UserController extends ControllerBase
         $this->view->pick('user/register');
     }
 
-    public function loginImportAction(){
+    public function registerImportAction(){
         //判断上传文件是否合法
         $filename = $_FILES['file']['tmp_name'];
         $name = strstr( $_FILES['file']['name'], '.');
@@ -486,20 +486,20 @@ class UserController extends ControllerBase
                 continue;
             }
 
-            $time = strtotime($data['#time']);
-            $date = date('Y-m-d',$time);
-
-            //判断用户当天是否存在登陆记录
-            $isset = $this->getModel('LoginLog')->getByUserIdDate($data['properties']['user_id'],$date,$filed='id');
+            //判断该订单是否已经存在
+            $isset = $this->getModel('User')->getByUserId($data['properties']['user_id'],$filed='id');
             if($isset){
                 continue;
             }
+
+            $time = strtotime($data['#time']);
+            $date = date('Y-m-d',$time);
 
             if(!isset($data['properties']['device_id'])){
                 $data['properties']['device_id'] = 0;
             }
             //存入数据库
-            $sql = "insert into homepage_login_log(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $sql = "insert into homepage_user(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`register_ip`,`idfa_imei`,`phone_os`,`country_code`,`cmgeSDK_id`,`extend_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $params = array(
                 $data['properties']['account_id'],
                 $time,
@@ -508,14 +508,17 @@ class UserController extends ControllerBase
                 $data['properties']['device_id'],
                 $data['properties']['channel'],
                 $data['properties']['server_id'],
-                $data['properties']['login_ip'],
-                $data['properties']['vip_level'],
-                $data['properties']['level'],
+                $data['properties']['register_ip'],
+                $data['properties']['idfa_imei'],
+                $data['properties']['phone_os'],
+                $data['properties']['country_code'],
+                $data['properties']['cmgeSDK_id'],
+                $data['properties']['extend_id'],
             );
             $this->db->query($sql, $params);
         }
 
-        $this->functions->alert('导入成功','/user/loginView');
+        $this->functions->alert('导入成功','/user/registerView');
     }
 
     //登陆记录
@@ -582,6 +585,71 @@ class UserController extends ControllerBase
         $this->view->data = $data;
         $this->view->list = $list;
         $this->view->pick('user/loginLog');
+    }
+
+    public function loginImportAction(){
+        //判断上传文件是否合法
+        $filename = $_FILES['file']['tmp_name'];
+        $name = strstr( $_FILES['file']['name'], '.');
+        if($name != '.csv' && $name != '.tsv'){
+            $this->functions->alert('导入文件格式只能为csv或者tsv');
+        }
+        if (empty ($filename)) {
+            $this->functions->alert('请选择要导入的CSV文件');
+        }
+
+        //打开上传文件
+        $handle = fopen($filename, 'r');
+        $result = $this->functions->input_csv($handle); //解析csv
+        $len_result = count($result);
+        if($len_result == 0){
+            $this->functions->alert('没有任何数据');
+        }
+
+        //遍历表格数据
+        for ($i = 0; $i < $len_result; $i++) { //循环获取各字段值
+            $json = mb_convert_encoding($result[$i][0], "UTF-8", "auto");
+
+            //判断数据是否为空
+            if(!isset($json) || $json == ''){
+                continue;
+            }
+
+            $data = json_decode($json,true);
+            if(!isset($data['properties'])){
+                continue;
+            }
+
+            $time = strtotime($data['#time']);
+            $date = date('Y-m-d',$time);
+
+            //判断用户当天是否存在登陆记录
+            $isset = $this->getModel('LoginLog')->getByUserIdDate($data['properties']['user_id'],$date,$filed='id');
+            if($isset){
+                continue;
+            }
+
+            if(!isset($data['properties']['device_id'])){
+                $data['properties']['device_id'] = 0;
+            }
+            //存入数据库
+            $sql = "insert into homepage_login_log(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $params = array(
+                $data['properties']['account_id'],
+                $time,
+                $date,
+                $data['properties']['user_id'],
+                $data['properties']['device_id'],
+                $data['properties']['channel'],
+                $data['properties']['server_id'],
+                $data['properties']['login_ip'],
+                $data['properties']['vip_level'],
+                $data['properties']['level'],
+            );
+            $this->db->query($sql, $params);
+        }
+
+        $this->functions->alert('导入成功','/user/loginView');
     }
 
 }
