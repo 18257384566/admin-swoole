@@ -486,14 +486,14 @@ class UserController extends ControllerBase
                 continue;
             }
 
-            //判断该订单是否已经存在
-            $isset = $this->getModel('LoginLog')->getByUserId($data['properties']['user_id'],$filed='id');
+            $time = strtotime($data['#time']);
+            $date = date('Y-m-d',$time);
+
+            //判断用户当天是否存在登陆记录
+            $isset = $this->getModel('LoginLog')->getByUserIdDate($data['properties']['user_id'],$date,$filed='id');
             if($isset){
                 continue;
             }
-
-            $time = strtotime($data['#time']);
-            $date = date('Y-m-d',$time);
 
             if(!isset($data['properties']['device_id'])){
                 $data['properties']['device_id'] = 0;
@@ -515,7 +515,7 @@ class UserController extends ControllerBase
             $this->db->query($sql, $params);
         }
 
-        $this->functions->alert('导入成功','/user/registerView');
+        $this->functions->alert('导入成功','/user/loginView');
     }
 
     //登陆记录
