@@ -623,8 +623,8 @@ class UserController extends ControllerBase
             $time = strtotime($data['#time']);
             $date = date('Y-m-d',$time);
 
-            //判断用户当天是否存在登陆记录
-            $isset = $this->getModel('LoginLog')->getByUserIdDate($data['properties']['user_id'],$date,$filed='id');
+            //判断该记录是否存在
+            $isset = $this->getModel('LoginLog')->getByUserIdTime($data['properties']['user_id'],$time,$filed='id');
             if($isset){
                 continue;
             }
