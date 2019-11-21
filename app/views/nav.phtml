@@ -83,9 +83,7 @@
                                     <a href="/user/distalkView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/distalkView") !== false){echo 'active';}else{echo '';} ?>">用户禁言</li></a>
                                     <a href="/user/info"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/info") !== false){echo 'active';}else{echo '';} ?>">用户信息</li></a>
                                     <a href="/user/registerView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/registerView") !== false){echo 'active';}else{echo '';} ?>">注册记录</li></a>
-                                    <?php if(isset($admin) && $admin['account'] == 'xsy1'){ ?>
-                                        <a href="/user/loginView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/loginView") !== false){echo 'active';}else{echo '';} ?>">登陆记录</li></a>
-                                    <?php } ?>
+                                    <a href="/user/loginView"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/user/loginView") !== false){echo 'active';}else{echo '';} ?>">登陆记录</li></a>
                                 </ul>
                             </li>
 
