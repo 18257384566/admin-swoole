@@ -402,7 +402,7 @@ class OrderController extends ControllerBase
         if(!isset($search) || $search == ''){
             $sql = "select `time`,`user_id`,`channel`,`server_id`,`user_name`,`item_id`,`item_quantity` from $table order by `time` desc limit $page,$limit";
         }else{
-            $sql = "select `time`,`user_id`,channel`,`server_id`,`user_name`,`item_id`,`item_quantity` from $table where `user_id` = '$search' or `user_name` = '$search' order by `time` desc limit $page,$limit";
+            $sql = "select `time`,`user_id`,`channel`,`server_id`,`user_name`,`item_id`,`item_quantity` from $table where `user_id` = '$search' or `user_name` = '$search' order by `time` desc limit $page,$limit";
         }
 
         $list=$this->db->query($sql);
@@ -413,7 +413,7 @@ class OrderController extends ControllerBase
         $data['allcount']=$allcount['allcount'];
         $data['page']=$this->request->get('page');
         $data['totalpage'] = ceil($data['allcount']/$limit);
-        $data['search'] = 'server_name='.$search.'&';
+        $data['search'] = 'search='.$search.'&';
 
         $this->view->data = $data;
         $this->view->list = $list;
