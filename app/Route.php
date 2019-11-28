@@ -16,42 +16,42 @@ class Route extends RouterGroup
         ]);
 
         //api
-//        $this->addPost('/exchange/exchange','exchange::exchange');      //兑换券（兑换）
-//        $this->add('/api/notice/get','manager::noticeApi');             //获取公告
-//        $this->add('/api/transfer','transfer::transfeStation');         //中转站(回调地址)
+//        $this->addPost('/exchange/exchange','exchange::exchange');            //兑换券（兑换）
+//        $this->add('/api/notice/get','manager::noticeApi');                   //获取公告
+//        $this->add('/api/transfer','transfer::transfeStation');               //中转站(回调地址)
 
 
 
         //登陆
         $this->add('/','index::login');
-        $this->addPost('/admin/doLogin','index::doLogin');      //登录
-        $this->add('/admin/signOut','index::signOut');          //退出登录
-        $this->add('/admin/index','index::index');              //首页
+        $this->addPost('/admin/doLogin','index::doLogin');                      //登录
+        $this->add('/admin/signOut','index::signOut');                          //退出登录
+        $this->add('/admin/index','index::index');                              //首页
 
 
         //管理员列表
-        $this->add('/admin/list','admin::getList');             //管理员列表
-        $this->add('/admin/updateStatus','admin::updateStatus');//管理员禁用/启用
-        $this->add('/admin/update','admin::updateView');        //管理员编辑(页面)
-        $this->addPost('/admin/update','admin::update');        //管理员编辑
-        $this->add('/admin/add','admin::addView');              //添加用户（页面）
-        $this->add('/admin/addAdmin','admin::addAdmin');        //添加用户
-        $this->add('/admin/log','admin::adminLog');             //管理员日志
-        $this->add('/admin/server/list','admin::serverList');   //服务器列表
-        $this->add('/admin/server/add','admin::serverAdd');     //服务器添加
-        $this->add('/admin/server/del','admin::serverDel');     //服务器删除
-        $this->add('/admin/server/updateView','admin::serverUpdateView'); //服务器修改（页面）
-        $this->add('/admin/server/update','admin::serverUpdate');   //服务器修改
-        $this->add('/admin/server/redis','admin::serverRedisView'); //服务器redis
-        $this->addPost('/admin/server/redis','admin::serverRedis'); //服务器redis
+        $this->add('/admin/list','admin::getList');                             //管理员列表
+        $this->add('/admin/updateStatus','admin::updateStatus');                //管理员禁用/启用
+        $this->add('/admin/update','admin::updateView');                        //管理员编辑(页面)
+        $this->addPost('/admin/update','admin::update');                        //管理员编辑
+        $this->add('/admin/add','admin::addView');                              //添加用户（页面）
+        $this->add('/admin/addAdmin','admin::addAdmin');                        //添加用户
+        $this->add('/admin/log','admin::adminLog');                             //管理员日志
+        $this->add('/admin/server/list','admin::serverList');                   //服务器列表
+        $this->add('/admin/server/add','admin::serverAdd');                     //服务器添加
+        $this->add('/admin/server/del','admin::serverDel');                     //服务器删除
+        $this->add('/admin/server/updateView','admin::serverUpdateView');       //服务器修改（页面）
+        $this->add('/admin/server/update','admin::serverUpdate');               //服务器修改
+        $this->add('/admin/server/redis','admin::serverRedisView');             //服务器redis
+        $this->addPost('/admin/server/redis','admin::serverRedis');             //服务器redis
         $this->add('/admin/serveredis/updateView','admin::serverRedisUpdateView'); //服务器redis
         $this->addPost('/admin/serveredis/update','admin::serverRedisUpdate'); //服务器redis
-        $this->add('/admin/diserver/list','admin::diserverList');   //区服列表
-        $this->add('/admin/diserver/add','admin::diserverAdd');     //添加区服
-        $this->add('/admin/diserver/del','admin::diserverDel');     //删除区服
+        $this->add('/admin/diserver/list','admin::diserverList');               //区服列表
+        $this->add('/admin/diserver/add','admin::diserverAdd');                 //添加区服
+        $this->add('/admin/diserver/del','admin::diserverDel');                 //删除区服
         $this->add('/admin/getzonelist','admin::getzonelist');
-        $this->add('/admin/channel/list','admin::channelList');     //渠道列表
-        $this->add('/admin/info/summary','admin::summary');         //信息统计
+        $this->add('/admin/channel/list','admin::channelList');                 //渠道列表
+        $this->add('/admin/info/summary','admin::summary');                     //信息统计
 
 
 
@@ -90,44 +90,47 @@ class Route extends RouterGroup
         $this->add('/manager/notice/deal','manager::noticeDeal');           //公告处理(删除)
 
         //用户管理
-        $this->add('/user/daily/login','user::dailyLogin');         //每日登录（页面）
-        $this->add('/user/retain','user::retain');                  //每日留存（页面）
-        $this->add('/user/login/count','user::loginCount');         //登录统计（页面）
-        $this->add('/user/online','user::online');                  //实时在线（页面）
-        $this->addPost('/user/online','user::onlineQuery');         //实时在线
-        $this->addPost('/user/shipInfo','user::getShipInfo');       //获取用户船队信息
-        $this->add('/prop/list','user::propList');                  //道具列表（页面）
-        $this->add('/prop/excel','user::propListExcel');            //导出道具列表
-        $this->add('/user/disableView','user::disableView');        //用户封号（页面）
-        $this->add('/user/distalkView','user::distalkView');        //用户禁言（页面）
-        $this->addPost('/user/disable','user::disable');            //用户封号
-        $this->addPost('/user/notalk','user::notalk');              //用户禁言
-        $this->add('/user/info','user::infoView');                  //获取用户信息（页面）
-        $this->addPost('/user/info','user::info');                  //获取用户信息
-//        $this->add('/user/shipInfo','user::getShipInfo');         //获取用户船队信息
-        $this->add('/user/shipInfo','user::getShipInfoView');       //获取用户船队信息（页面）
-        $this->add('/user/registerView','user::registerView');      //注册信息（页面）
-        $this->addPost('/user/register/import','user::registerImport');//导入注册用户
-        $this->add('/user/loginView','user::loginView');      //登陆记录（页面）
-        $this->addPost('/user/login/import','user::loginImport'); //登陆记录（页面）
+        $this->add('/user/daily/login','user::dailyLogin');                 //每日登录（页面）
+        $this->add('/user/retain','user::retain');                          //每日留存（页面）
+        $this->add('/user/login/count','user::loginCount');                 //登录统计（页面）
+        $this->add('/user/online','user::online');                          //实时在线（页面）
+        $this->addPost('/user/online','user::onlineQuery');                 //实时在线
+        $this->addPost('/user/shipInfo','user::getShipInfo');               //获取用户船队信息
+        $this->add('/prop/list','user::propList');                          //道具列表（页面）
+        $this->add('/prop/excel','user::propListExcel');                    //导出道具列表
+        $this->add('/user/disableView','user::disableView');                //用户封号（页面）
+        $this->add('/user/distalkView','user::distalkView');                //用户禁言（页面）
+        $this->addPost('/user/disable','user::disable');                    //用户封号
+        $this->addPost('/user/notalk','user::notalk');                      //用户禁言
+        $this->add('/user/info','user::infoView');                          //获取用户信息（页面）
+        $this->addPost('/user/info','user::info');                          //获取用户信息
+//        $this->add('/user/shipInfo','user::getShipInfo');                 //获取用户船队信息
+        $this->add('/user/shipInfo','user::getShipInfoView');               //获取用户船队信息（页面）
+        $this->add('/user/registerView','user::registerView');              //注册信息（页面）
+        $this->addPost('/user/register/import','user::registerImport');     //导入注册用户
+        $this->add('/user/loginView','user::loginView');                    //登陆记录（页面）
+        $this->addPost('/user/login/import','user::loginImport');           //登陆记录（页面）
 
 
         //获取实时数据
-        $this->add('/data/update','data::update');              //更新redis数据
+        $this->add('/data/update','data::update');                          //更新redis数据
 
         //返还奖励
-        $this->add('/obonus/add','obonus::addView');                //添加返还奖励（页面）
-        $this->addPost('/obonus/addObonus','obonus::addObonus');    //添加返还奖励
-        $this->add('/obonus/list','obonus::list');                  //返还奖励列表
-//        $this->addPost('/api/obonus/use','obonus::use');            //返还奖励使用
-//        $this->add('/api/obonus/use','obonus::use');                //返还奖励使用
+        $this->add('/obonus/add','obonus::addView');                        //添加返还奖励（页面）
+        $this->addPost('/obonus/addObonus','obonus::addObonus');            //添加返还奖励
+        $this->add('/obonus/list','obonus::list');                          //返还奖励列表
+//        $this->addPost('/api/obonus/use','obonus::use');                  //返还奖励使用
+//        $this->add('/api/obonus/use','obonus::use');                      //返还奖励使用
 
         //订单管理
-        $this->add('/order/orderadd/excle','order::orderAddView');  //订单导入（页面）
-        $this->addPost('/order/orderAdd','order::orderAdd');        //订单导入(csv/tsv)
-        $this->addPost('/order/orderLogAdd','order::orderLogAdd');  //订单导入(log)
-        $this->add('/order/recharge/view','order::rechargeView');   //充值查询(页面)
-        $this->addPost('/order/recharge/import','order::rechargeImport');//充值导入
+        $this->add('/order/orderadd/excle','order::orderAddView');          //订单导入（页面）
+        $this->addPost('/order/orderAdd','order::orderAdd');                //订单导入(csv/tsv)
+        $this->addPost('/order/orderLogAdd','order::orderLogAdd');          //订单导入(log)
+        $this->add('/order/recharge/view','order::rechargeView');           //充值查询(页面)
+        $this->addPost('/order/recharge/import','order::rechargeImport');   //充值导入
+        $this->add('/order/additem/diamond','order::additemDiamondView');   //钻石消耗
+        $this->addPost('/order/diamond/add','order::additemDiamondAdd');    //钻石消耗
+
 
     }
 }

@@ -369,4 +369,125 @@ class OrderController extends ControllerBase
         $this->functions->alert('导入成功','/order/recharge/view');
     }
 
+
+    //钻石消耗
+    public function additemDiamondViewAction(){
+        //查询最新插入数据的时间
+        $filed = 'created_at';
+        $order = $this->getModel('Order')->getLast($filed);
+        if(!$order){
+            $order['created_at'] = 0;
+        }
+
+        //获取订单列表
+        $limit = 10;
+        $page = $this->request->get('page');
+        $search = $this->request->get('search');
+        if(!$page){
+            $page=1;
+        }
+        $page = ($page - 1) * $limit;
+
+        $table = 'homepage_additem_diamond';
+        //获取总条数
+        if(!isset($search) || $search == ''){
+            $allcount = $this->db->query("select count(id) as allcount from $table");
+        }else{
+            $allcount = $this->db->query("select count(id) as allcount from $table where `user_id` = '$search' or `user_name` = '$search'");
+        }
+        $allcount->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $allcount = $allcount->fetch();
+
+        //获取当页
+        if(!isset($search) || $search == ''){
+            $sql = "select `time`,`user_id`,`channel`,`server_id`,`user_name`,`item_id`,`item_quantity` from $table order by `time` desc limit $page,$limit";
+        }else{
+            $sql = "select `time`,`user_id`,channel`,`server_id`,`user_name`,`item_id`,`item_quantity` from $table where `user_id` = '$search' or `user_name` = '$search' order by `time` desc limit $page,$limit";
+        }
+
+        $list=$this->db->query($sql);
+        $list->setFetchMode(\Phalcon\Db::FETCH_ASSOC);
+        $list = $list->fetchAll();
+
+        //返回数据
+        $data['allcount']=$allcount['allcount'];
+        $data['page']=$this->request->get('page');
+        $data['totalpage'] = ceil($data['allcount']/$limit);
+        $data['search'] = 'server_name='.$search.'&';
+
+        $this->view->data = $data;
+        $this->view->list = $list;
+        $this->view->pick('order/additemDiamond');
+    }
+
+    public function additemDiamondAddAction(){
+        //判断上传文件是否合法
+        $filename = $_FILES['file']['tmp_name'];
+        $name = strstr( $_FILES['file']['name'], '.');
+        if($name != '.csv' && $name != '.tsv'){
+            $this->functions->alert('导入文件格式只能为csv或者tsv');
+        }
+        if (empty ($filename)) {
+            $this->functions->alert('请选择要导入的CSV文件');
+        }
+
+        //打开上传文件
+        $handle = fopen($filename, 'r');
+        $result = $this->functions->input_csv($handle); //解析csv
+        $len_result = count($result);
+        if($len_result == 0){
+            $this->functions->alert('没有任何数据');
+        }
+
+        //遍历表格数据
+        for ($i = 0; $i < $len_result; $i++) { //循环获取各字段值
+            $json = mb_convert_encoding($result[$i][0], "UTF-8", "auto");
+
+            //判断数据是否为空
+            if(!isset($json) || $json == ''){
+                continue;
+            }
+
+            $data = json_decode($json,true);
+            if(!isset($data['properties'])){
+                continue;
+            }
+
+            $time = strtotime($data['#time']);
+            $date = date('Y-m-d',$time);
+
+            //判断该记录是否存在
+            $isset = $this->getModel('AdditemDiamond')->getByUserIdTime($data['properties']['user_id'],$time,$filed='id');
+            if($isset){
+                continue;
+            }
+
+            if(isset($data['properties']['items']) && $data['properties']['items'] != ''){
+                foreach ($data['properties']['items'] as $v){
+                    //存入数据库
+                    if(isset($v['ItemId']) && isset($v['ItemQuantity'])){
+                        $sql = "insert into homepage_additem_diamond(`account_id`,`type`,`date`,`time`,`device_id`,`user_id`,`channel`,`server_id`,`user_name`,`item_id`,`item_quantity`,`logInfo`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                        $params = array(
+                            $data['properties']['account_id'],
+                            $data['#type'],
+                            $date,
+                            $time,
+                            $data['properties']['device_id'],
+                            $data['properties']['user_id'],
+                            $data['properties']['channel'],
+                            $data['properties']['server_id'],
+                            $data['properties']['user_name'],
+                            $v['ItemId'],
+                            $v['ItemQuantity'],
+                            $data['properties']['logInfo'],
+                        );
+                        $this->db->query($sql, $params);
+                    }
+                }
+            }
+        }
+
+        $this->functions->alert('导入成功','/order/additem/diamond');
+    }
+
 }

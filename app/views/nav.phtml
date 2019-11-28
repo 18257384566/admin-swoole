@@ -96,10 +96,18 @@
                                 <ul>
                                     <a href="/order/recharge/view"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/recharge/view") !== false){echo 'active';}else{echo '';} ?>">充值查询</li></a>
                                 </ul>
+                                <ul>
+                                    <a href="/order/additem/diamond"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/order/additem/diamond") !== false){echo 'active';}else{echo '';} ?>">钻石消耗记录</li></a>
+                                </ul>
+
                             </li>
 
 
                         <?php break;
+
+
+
+
 
                         case 'operators':   //运维
 
@@ -167,6 +175,10 @@
 
 
                         <?php break;
+
+
+
+
 
                         case 'service':     //普通账户
                             ?>
