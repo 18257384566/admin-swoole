@@ -462,6 +462,10 @@ class OrderController extends ControllerBase
                 continue;
             }
 
+            if(!isset($data['properties']['device_id'])){
+                $data['properties']['device_id'] = 0;
+            }
+
             if(isset($data['properties']['items']) && $data['properties']['items'] != ''){
                 foreach ($data['properties']['items'] as $v){
                     //存入数据库
