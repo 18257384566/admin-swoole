@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/newpay_favicon.ico" type="image/x-icon" rel="shortcut icon" /><title>我的战舰养成计划</title>
+    <link rel="stylesheet" href="/static/css/inexwalletadmin.css">
+    <link rel="stylesheet" href="/static/css/theme-wallet.css">
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+
+    <style>
+/*        default*/
+
+        @font-face {
+            font-family: 'icomoon';
+            src:url('../fonts/icomoon.eot?rretjt');
+            src:url('../fonts/icomoon.eot?#iefixrretjt') format('embedded-opentype'),
+            url('../fonts/icomoon.woff?rretjt') format('woff'),
+            url('../fonts/icomoon.ttf?rretjt') format('truetype'),
+            url('../fonts/icomoon.svg?rretjt#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        [class^="icon-"], [class*=" icon-"] {
+            font-family: 'icomoon';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+        /* Reset */
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+        body{
+            background: #f9f7f6;
+            color: #404d5b;
+            font-weight: 500;
+            font-size: 1.05em;
+            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+        }
+        a{color: #2fa0ec;text-decoration: none;outline: none;}
+        a:hover,a:focus{color:#74777b;}
+
+        .htmleaf-container{
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .htmleaf-content {
+            font-size: 150%;
+            padding: 1em 0;
+        }
+
+        .htmleaf-content h2 {
+            margin: 0 0 2em;
+            opacity: 0.1;
+        }
+
+        .htmleaf-content p {
+            margin: 1em 0;
+            padding: 5em 0 0 0;
+            font-size: 0.65em;
+        }
+        .bgcolor-1 { background: #f0efee; }
+        .bgcolor-2 { background: #f9f9f9; }
+        .bgcolor-3 { background: #e8e8e8; }/*light grey*/
+        .bgcolor-4 { background: #2f3238; color: #fff; }/*Dark grey*/
+        .bgcolor-5 { background: #df6659; color: #521e18; }/*pink1*/
+        .bgcolor-6 { background: #2fa8ec; }/*sky blue*/
+        .bgcolor-7 { background: #d0d6d6; }/*White tea*/
+        .bgcolor-8 { background: #3d4444; color: #fff; }/*Dark grey2*/
+        .bgcolor-9 { background: #ef3f52; color: #fff;}/*pink2*/
+        .bgcolor-10{ background: #64448f; color: #fff;}/*Violet*/
+        .bgcolor-11{ background: #3755ad; color: #fff;}/*dark blue*/
+        .bgcolor-12{ background: #3498DB; color: #fff;}/*light blue*/
+        /* Header */
+        .htmleaf-header{
+            padding: 1em 190px 1em;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        .htmleaf-header h1 {
+            font-weight: 600;
+            font-size: 2em;
+            line-height: 1;
+            margin-bottom: 0;
+            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+        }
+        .htmleaf-header h1 span {
+            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+            display: block;
+            font-size: 60%;
+            font-weight: 400;
+            padding: 0.8em 0 0.5em 0;
+            color: #c3c8cd;
+        }
+        /*nav*/
+        .htmleaf-demo a{color: #1d7db1;text-decoration: none;}
+        .htmleaf-demo{width: 100%;padding-bottom: 1.2em;}
+        .htmleaf-demo a{display: inline-block;margin: 0.5em;padding: 0.6em 1em;border: 3px solid #1d7db1;font-weight: 700;}
+        .htmleaf-demo a:hover{opacity: 0.6;}
+        .htmleaf-demo a.current{background:#1d7db1;color: #fff; }
+        /* Top Navigation Style */
+        .htmleaf-links {
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .htmleaf-links::after {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: -1px;
+            width: 2px;
+            height: 100%;
+            background: #dbdbdb;
+            content: '';
+            -webkit-transform: rotate3d(0,0,1,22.5deg);
+            transform: rotate3d(0,0,1,22.5deg);
+        }
+
+        .htmleaf-icon {
+            display: inline-block;
+            margin: 0.5em;
+            padding: 0em 0;
+            width: 1.5em;
+            text-decoration: none;
+        }
+
+        .htmleaf-icon span {
+            display: none;
+        }
+
+        .htmleaf-icon:before {
+            margin: 0 5px;
+            text-transform: none;
+            font-weight: normal;
+            font-style: normal;
+            font-variant: normal;
+            font-family: 'icomoon';
+            line-height: 1;
+            speak: none;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* footer */
+        .htmleaf-footer{width: 100%;padding-top: 10px;}
+        .htmleaf-small{font-size: 0.8em;}
+        .center{text-align: center;}
+        /****/
+        .related {
+            margin-top: 25px;
+            color: #fff;
+            background: #333;
+            text-align: center;
+            font-size: 1.25em;
+            padding: 0.5em 0;
+            overflow: hidden;
+        }
+
+        .related > a {
+            vertical-align: top;
+            width: calc(100% - 20px);
+            max-width: 340px;
+            display: inline-block;
+            text-align: center;
+            margin: 20px 10px;
+            padding: 25px;
+            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+        }
+        .related a {
+            display: inline-block;
+            text-align: left;
+            margin: 20px auto;
+            padding: 10px 20px;
+            opacity: 0.8;
+            -webkit-transition: opacity 0.3s;
+            transition: opacity 0.3s;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .related a:hover,
+        .related a:active {
+            opacity: 1;
+        }
+
+        .related a img {
+            max-width: 100%;
+            opacity: 0.8;
+            border-radius: 4px;
+        }
+        .related a:hover img,
+        .related a:active img {
+            opacity: 1;
+        }
+        .related h3{font-family: "Microsoft YaHei", sans-serif;}
+        .related a h3 {
+            font-weight: 300;
+            margin-top: 0.15em;
+            color: #fff;
+        }
+        /* icomoon */
+        .icon-htmleaf-home-outline:before {
+            content: "\e5000";
+        }
+
+        .icon-htmleaf-arrow-forward-outline:before {
+            content: "\e5001";
+        }
+
+        @media screen and (max-width: 50em) {
+            .htmleaf-header {
+                padding: 3em 10% 4em;
+            }
+            .htmleaf-header h1 {
+                font-size:2em;
+            }
+        }
+
+
+        @media screen and (max-width: 40em) {
+            .htmleaf-header h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media screen and (max-width: 30em) {
+            .htmleaf-header h1 {
+                font-size:1.2em;
+            }
+        }
+
+
+
+
+        /*//main*/
+        body{background-color:#1b1b1b;}.jq22{text-align:center;color:#dcdcdc}.jq22 a{padding:10px;color:#f0f8ff;border:1px solid #878787;margin:10px}
+        .chart-container {
+            position: relative;
+            display: inline-block;
+            height: 100%;
+            padding-top: 15px;
+            padding-bottom: 25px;
+        }
+        .chart {
+            float: left;
+            z-index:1;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border-left: thin solid #cccccc;
+            border-bottom: thin solid #cccccc;
+        }
+        .chart-row {
+            height: 25px;
+        }
+        .bar {
+            position: relative;
+            background-color: #6b9bd6;
+            height: 19px;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            border-radius: 0 2px 2px 0;
+        }
+        .bar:hover {
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+            border-right: 2px solid black;
+        }
+        .legend-left {
+            clear: both;
+            display: inline-block;
+            position: relative;
+            margin-top: 17px;
+            float: left;
+        }
+        .heading {
+            font-size: 8pt;
+            font-weight: bold;
+            color: #aaaaaa;
+            height: 19px;
+        }
+        .heading-left {
+            text-align: right;
+            line-height: 5px;
+            position: relative;
+            max-width: 200px;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            margin-right: 7px;
+        }
+        .data-point {
+            height: 25px;
+            width: 25px;
+            position: relative;
+            float: left;
+            margin-left: -13px;
+        }
+        .legend-bottom {
+            position: absolute;
+            bottom: -10px;
+        }
+        .chart-label {
+            font-size: 7pt;
+            font-weight: bold;
+            color: #aaaaaa;
+            position: absolute;
+            bottom: -10px;
+            z-index:0;
+            float: left;
+        }
+        .chart-label-hr {
+            position: absolute;
+            bottom: 0;
+            z-index:-1;
+            background-color: #cccccc;
+            width: 1px;
+            height: 4px;
+        }
+        .chart-title {
+            text-align: center;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        .chart-x-label {
+            display: block;
+            text-align: center;
+            top: 30px;
+            position: relative;
+            font-size: 10pt;
+            font-weight: bold;
+            color: #aaaaaa;
+        }
+    </style>
+
+</head>
+<body>
+<?php $this->view->partial("nav");?>
+
+  <div class="walletadmin-content">
+      <div class="walletadmin-box">
+          <div class="box">
+
+              <div class="container">
+
+                  <div class="page-title">查询每月/每年的</div>
+                  <div class="addadmin">
+
+                      <form action="/analy/register/query"  method="get" enctype="multipart/form-data">
+                          <div class="addadmin-root">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>查询方式:</span>
+                              </div>
+                              <div class="addadmin-right">
+                                  <input type="radio" name="type" value="day" id="day" checked><label for="day">日</label> &nbsp;&nbsp;
+                                  <input type="radio" name="type" value="month" id="month"><label for="month">月</label> &nbsp;&nbsp;
+                              </div>
+                          </div>
+
+                          <div class="addadmin-account">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>开始时间</span>
+                              </div>
+                              <input type="date" name="start_time">
+                          </div>
+
+                          <div class="addadmin-account">
+                              <div class="addadmin-left">
+                                  <span>*</span><span>结束时间</span>
+                              </div>
+                              <input type="date" name="end_time">
+                          </div>
+
+                  </div>
+                  <!--                            <input type="submit" class="btn btn-primary" value="发放" onclick="javascript:return confirm('分发后，自动分发糖果，是否进行分发？');">-->
+                  <input type="submit" value="查询" class="w-btn">
+                  </form>
+              </div>
+
+              <?php if(!empty($data)){ ?>
+                  <div class="container">
+                      <div id="population_chart" data-sort="false" data-width="800" class="jChart chart-lg" name="North American Regional Population Loss 2014">
+
+                          <?php foreach ($data['analy'] as $v){?>
+                              <div class="define-chart-row" data-color="#00A9FF" title="<?= $v['date'] ?>"> <?= $v['count'] ?> </div>
+                          <?php } ?>
+
+
+                          <div class="define-chart-footer"><?= $data['long'] ?></div>
+                          <div class="define-chart-footer"><?= $data['long'] * 2 ?></div>
+                          <div class="define-chart-footer"><?= $data['long'] * 3 ?></div>
+                          <div class="define-chart-footer"><?= $data['long'] * 4 ?></div>
+                          <div class="define-chart-footer"><?= $data['long'] * 5 ?></div>
+                      </div>
+                  </div>
+
+              <?php }else{ ?>
+
+                  <div class="container">
+                      <div id="population_chart" data-sort="false" data-width="800" class="jChart chart-lg" name="North American Regional Population Loss 2014">
+                          <div class="define-chart-row" data-color="#00A9FF" title="3">0</div>
+                          <div class="define-chart-row" data-color="#008DD3" title="4">0</div>
+                          <div class="define-chart-row" data-color="#0074AA" title="5">0</div>
+                          <div class="define-chart-row" data-color="#005882" title="6">0</div>
+
+
+                          <div class="define-chart-footer">100000</div>
+                          <div class="define-chart-footer">200000</div>
+                          <div class="define-chart-footer">300000</div>
+                          <div class="define-chart-footer">400000</div>
+                          <div class="define-chart-footer">500000</div>
+                      </div>
+                  </div>
+
+              <?php } ?>
+
+
+
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
+<!--<script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>-->
+<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>
+<script type="text/javascript" src="/static/js/fenziofficial_admin.js"></script>
+<script type="text/javascript" src="/static/js/jchart.js"></script>
+<!--<script type="text/javascript" src="https://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>-->
+<script>
+    (function( $ ) {
+
+        $.fn.jChart = function(options) {
+            var selector = $(this);
+            var default_color = "#6b9bd6";
+            var bar_height = 19;
+
+            var settings = $.extend({
+                width: 750,
+                name: null,
+                type: "bar",
+                headers: null,
+                values: null,
+                footers: Array(),
+                sort: false,
+                sort_colors: false,
+                colors: Array(),
+                x_label: null
+            }, options);
+
+            //Initialize some settings that can be set via HTML
+            if(settings.name==null) {
+                settings.name = $(this).attr("name");
+            }
+            if($(this).data("sort")==true) {
+                settings.sort = true;
+            }
+            if($(this).data("width")!=null) {
+                settings.width = parseInt($(this).data("width"));
+            }
+            if($(this).data("x_label")!=null) {
+                settings.x_label = $(this).data("x_label");
+            }
+
+            var chart_width=settings.width;
+            if($(this).hasClass("chart-sm")) {
+                bar_height = 17;
+            }
+            else if($(this).hasClass("chart-lg")) {
+                bar_height = 25;
+            }
+            else if(settings.width!=null) {
+                chart_width=parseInt(settings.width);
+            }
+
+            checkForHTMLSettings();
+
+            //Clear the data in the jChart div
+            $(this).html("");
+
+            //Create the html containers for the chart
+            var chart_title =
+                $("<div>", {
+                    class: "chart-title",
+                    html: settings.name
+                });
+            var legend_left =
+                $("<div>", {
+                    class: "legend legend-left"
+                });
+            var x_label =
+                $("<span>", {
+                    class: "chart-x-label",
+                    html: settings.x_label,
+                    width: settings.width
+                });
+
+            //Calculate what the chart width should be
+            var max_data = Math.max.apply(Math,settings.values);
+            var max_footer = Math.max.apply(Math,settings.footers);
+            var maxes = [max_data,max_footer];
+            var chart_max = Math.max.apply(Math,maxes);
+            var container_width = chart_width + 250;
+
+            var chart_container =
+                $("<div>", {
+                    class: "chart-container",
+                    width: container_width + "px"
+                });
+            var chart =
+                $("<div>", {
+                    class: "chart",
+                    width: chart_width + "px"
+                });
+            var legend_bottom =
+                $("<div>", {
+                    class: "legend-bottom"
+                });
+
+            //Place the containers into the target element
+            $(this).append(chart_container);
+            chart_container.append(chart_title);
+            chart_container.append(legend_left);
+            chart_container.append(chart);
+
+            //Sort the data if the setting is enabled (Insertion sort)
+            if(settings.sort) {
+                for(var i=1;i<settings.values.length;i++) {
+                    var j = i;
+                    while(j>0 && settings.values[j-1] < settings.values[j]) {
+                        var temp = settings.values[j];
+                        var head_temp = settings.headers[j];
+                        settings.values[j] = settings.values[j-1];
+                        settings.values[j-1] = temp;
+
+                        //Sort headings
+                        settings.headers[j] = settings.headers[j-1];
+                        settings.headers[j-1] = head_temp;
+
+                        //Sort colors
+                        if(settings.sort_colors) {
+                            var color_temp = settings.colors[j];
+                            settings.colors[j] = settings.colors[j-1];
+                            settings.colors[j-1] = color_temp;
+                        }
+                        j--;
+                    }
+                }
+            }
+
+            //Loop through headings and create/place them and their corresponding value bars
+            for(var i=0;i<settings.headers.length;i++) {
+                var heading =
+                    $("<div>", {
+                        class: "heading heading-left",
+                        style: "height: "+bar_height+"px;font-size: 10pt;",
+                        html: settings.headers[i]
+                    });
+                var bar_width = (settings.values[i]/chart_max) * chart_width;
+                var bar =
+                    $("<div>", {
+                        class: "bar",
+                        "data-placement": "right",
+                        "data-toggle": "tooltip",
+                        title: commaSeparateNumber(settings.values[i]),
+                        style: "height:"+bar_height+"px;background-color:"+settings.colors[i%settings.colors.length],
+                        width: bar_width
+                    });
+                legend_left.append(heading);
+                chart.append(bar);
+            }
+            chart.append(legend_bottom);
+            for(var i=0;i<settings.footers.length;i++) {
+                var margin = "margin-left:"+((settings.footers[i]/chart_max)*chart_width-9).toString() + "px;";
+                var chart_label_bottom =
+                    $("<div>", {
+                        class: "chart-label chart-label-bottom",
+                        style: margin,
+                        html: commaSeparateNumber(settings.footers[i])
+                    });
+                var margin = "margin-left:"+((settings.footers[i]/chart_max)*chart_width-2).toString() + "px;";
+                var chart_label_hr =
+                    $("<div>", {
+                        class: "chart-label-hr",
+                        style: margin
+
+                    });
+                legend_bottom.append(chart_label_bottom);
+                chart.append(chart_label_hr);
+                legend_bottom.append(x_label);
+            }
+
+            //Enable hover details
+            $(".bar").tooltip();
+
+            return this;
+
+            /**
+             * Checks for settings defined in the HTML
+             * like chart-define-row and chart-define-footer classes
+             */
+            function checkForHTMLSettings(){
+                //Check for HTML defined bar chart data
+                if(selector.find(".define-chart-row").length>0) {
+                    settings.headers = Array();
+                    settings.values = Array();
+                    selector.find(".define-chart-row").each(function() {
+                        settings.headers.push($(this).attr("title"));
+                        var value = $(this).html();
+                        if(value==null || value=="") {
+                            settings.values.push(0);
+                        }
+                        else {
+                            settings.values.push(parseInt(value));
+                        }
+                        var color = $(this).data("color");
+                        if(color!=null) {
+                            settings.sort_colors = true;
+                            settings.colors.push(color);
+                        }
+                        else {
+                            settings.colors.push(default_color);
+                        }
+                    });
+                }
+                else {
+                    settings.colors.push(default_color);
+                }
+                //Check for HTML defined footers
+                if(selector.find(".define-chart-footer").length>0) {
+                    settings.footers = Array();
+                    selector.find(".define-chart-footer").each(function() {
+                        var footer = $(this).html();
+                        if(footer!=null && footer!="") {
+                            settings.footers.push(parseInt(footer));
+                        }
+                    });
+                }
+            }
+
+            /**
+             * Converts a number into a comma separated string
+             */
+            function commaSeparateNumber(val){
+                while (/(\d+)(\d{3})/.test(val.toString())){
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+                }
+                return val;
+            }
+        };
+    })( jQuery );
+
+
+  $("#population_chart").jChart({
+      name: "注册分析",
+      headers: ["Arizona","Michigan","Ontario","British Columbia","Texas"],
+//      values: [1,1,1,1,1],
+      footers: [100000,200000,300000,400000,600000],
+      colors: ["#bed742","#b2d235","#a3cf62","#abc88b","#7fb80e","#78a355","#74905d","#cde6c7","#77ac98","#007d65","#65c294","#73b9a2","#00ae9d","#508a88","#70a19f","#50b7c1","#00a6ac","#78cdd1","#94d6da","#76becc"]
+  });
+
+</script>
+</body>
+</html>

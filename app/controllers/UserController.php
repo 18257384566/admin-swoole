@@ -494,16 +494,18 @@ class UserController extends ControllerBase
 
             $time = strtotime($data['#time']);
             $date = date('Y-m-d',$time);
+            $month = date('Y-m',$time);
 
             if(!isset($data['properties']['device_id'])){
                 $data['properties']['device_id'] = 0;
             }
             //存入数据库
-            $sql = "insert into homepage_user(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`register_ip`,`idfa_imei`,`phone_os`,`country_code`,`cmgeSDK_id`,`extend_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "insert into homepage_user(`account_id`,`time`,`date`,`month`,`user_id`,`device_id`,`channel`,`server_id`,`register_ip`,`idfa_imei`,`phone_os`,`country_code`,`cmgeSDK_id`,`extend_id`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $params = array(
                 $data['properties']['account_id'],
                 $time,
                 $date,
+                $month,
                 $data['properties']['user_id'],
                 $data['properties']['device_id'],
                 $data['properties']['channel'],
@@ -520,6 +522,7 @@ class UserController extends ControllerBase
 
         $this->functions->alert('导入成功','/user/registerView');
     }
+
 
     //登陆记录
     public function loginViewAction(){

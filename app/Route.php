@@ -54,6 +54,10 @@ class Route extends RouterGroup
         $this->add('/admin/info/summary','admin::summary');                     //信息统计
 
 
+        //数据分析
+        $this->add('/analy/register/view','analy::registerView');                     //注册分析
+        $this->add('/analy/register/query','analy::registerQuery');                   //注册分析
+
 
         //兑换券管理
         $this->add('/exchange/add','exchange::addView');                    //添加兑换券（页面）

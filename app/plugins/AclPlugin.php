@@ -146,6 +146,8 @@ class AclPlugin extends Injectable
                 'order::rechargeImport',
                 'order::additemDiamondView',
                 'order::additemDiamondAdd',
+                'analy::registerView',
+                'analy::registerQuery'
             ),
 
             'developers' => array(  //开发商

@@ -24,7 +24,15 @@
                                     <?php if(isset($admin) && $admin['account'] == 'xsy'){ ?>
                                         <a href="/admin/server/redis"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/server/redis") !== false){echo 'active';}else{echo '';} ?>">服务器redis管理</li></a>
                                     <?php } ?>
-                                    <a href="/admin/info/summary"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/info/summary") !== false){echo 'active';}else{echo '';} ?>">信息统计</li></a>
+                                    <a href="/admin/info/summary"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/admin/info/summary") !== false){echo 'active';}else{echo '';} ?>">人数统计</li></a>
+
+                                </ul>
+                            </li>
+
+                            <li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/analy/") !== false){echo 'active';}else{echo '';} ?>">
+                                <div><!-- <i class="icon icon-admin"></i><span> -->数据分析</span></div>
+                                <ul>
+                                    <a href="/analy/register/view"><li class="<?php if(strpos($_SERVER['REQUEST_URI'],"/analy/register/view") !== false){echo 'active';}else{echo '';} ?>">注册分析</li></a>
 
                                 </ul>
                             </li>
