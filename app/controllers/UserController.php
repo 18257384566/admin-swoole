@@ -625,6 +625,7 @@ class UserController extends ControllerBase
 
             $time = strtotime($data['#time']);
             $date = date('Y-m-d',$time);
+            $month = date('Y-m',$time);
 
             //判断该记录是否存在
             $isset = $this->getModel('LoginLog')->getByUserIdTime($data['properties']['user_id'],$time,$filed='id');
@@ -636,11 +637,12 @@ class UserController extends ControllerBase
                 $data['properties']['device_id'] = 0;
             }
             //存入数据库
-            $sql = "insert into homepage_login_log(`account_id`,`time`,`date`,`user_id`,`device_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $sql = "insert into homepage_login_log(`account_id`,`time`,`date`,`month`,`user_id`,`device_id`,`channel`,`server_id`,`login_ip`,`vip_level`,`level`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             $params = array(
                 $data['properties']['account_id'],
                 $time,
                 $date,
+                $month,
                 $data['properties']['user_id'],
                 $data['properties']['device_id'],
                 $data['properties']['channel'],
