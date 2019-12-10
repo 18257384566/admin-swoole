@@ -55,8 +55,10 @@ class Route extends RouterGroup
 
 
         //数据分析
-        $this->add('/analy/register/view','analy::registerView');                     //注册分析
-        $this->add('/analy/register/query','analy::registerQuery');                   //注册分析
+        $this->add('/analy/register/view','analy::registerView');                       //注册分析（view）
+        $this->add('/analy/register/query','analy::registerQuery');                     //注册分析
+        $this->add('/analy/login/view','analy::loginView');                             //登陆分析（view）
+        $this->add('/analy/login/query','analy::loginQuery');                           //登陆分析
 
 
         //兑换券管理
