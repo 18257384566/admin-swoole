@@ -68,5 +68,7 @@ class AnalyController extends ControllerBase
 
     }
 
-
+    public function loginViewAction(){
+        $this->view->pick('analy/login');
+    }
 }
