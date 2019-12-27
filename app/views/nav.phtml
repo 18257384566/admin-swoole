@@ -254,7 +254,7 @@
     <?php } ?>
     <div>
         <ul>
-            <li><?php if(isset($admin)) echo $admin['server_name'] ?></li>
+            <li><?php if(isset($admin)) echo $admin['server_name']; ?></li>
             <li><i class="icon icon-home"></i><span><?php if(isset($admin)) echo $admin['account'] ?></span></li>
             <?php if(isset($EOSAddress)){ ?>
                 <li><span><a href="/<?php echo $pro_no; ?>/eosResourceManage">EOS资源管理</a></span</li>

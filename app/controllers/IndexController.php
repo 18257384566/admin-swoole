@@ -66,7 +66,7 @@ class IndexController extends ControllerBase
             'server_url' => $reqData['server_url'],
             'server_name' => $reqData['server_name'],
             'server_id' => $reqData['server_id'],
-        ];
+        ];//var_dump($data);exit;
         $this->session->set('backend',$data);
         $_SESSION['expiretime'] = time() + $this->config->lifetime['login'];
 
