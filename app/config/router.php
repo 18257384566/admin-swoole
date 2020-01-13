@@ -4,4 +4,4 @@ $router = $di->getRouter();
 
 // Define your routes here
 
-$router->handle();
+var_dump($router->handle());
