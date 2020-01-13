@@ -38,7 +38,7 @@ try {
     /**
      * Handle routes
      */
-//    include APP_PATH . '/config/router.php';
+    include APP_PATH . '/config/router.php';
 
     /**
      * Read services
