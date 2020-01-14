@@ -25,7 +25,7 @@ header('Access-Control-Expose-Headers:token,lang,tokenpassword');
 
 //ini_set('session.gc_maxlifetime', 86400);
 try {
-echo phpinfo();exit;
+//echo phpinfo();exit;
     /**
      * The FactoryDefault Dependency Injector automatically registers
      * the services that provide a full stack framework.
