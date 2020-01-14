@@ -25,7 +25,7 @@ header('Access-Control-Expose-Headers:token,lang,tokenpassword');
 
 //ini_set('session.gc_maxlifetime', 86400);
 try {
-
+echo phpinfo();exit;
     /**
      * The FactoryDefault Dependency Injector automatically registers
      * the services that provide a full stack framework.
@@ -61,18 +61,18 @@ try {
     /**
      * Handle the request 3.4
      */
-//    $application = new \Phalcon\Mvc\Application($di);
+    $application = new \Phalcon\Mvc\Application($di);
 
-    //echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
+//    echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
 
-//    echo $application->handle()->getContent();
+    echo $application->handle()->getContent();
 
     /**
      * Handle the request 4.4
      */
-    $request = new Phalcon\Http\Request();
-    $response = $application->handle($request->getURI());
-    $response->send();
+//    $request = new Phalcon\Http\Request();
+//    $response = $application->handle($request->getURI());
+//    $response->send();
 
 } catch (\Exception $e) {
     if($__APP_IN_DEBUG){
