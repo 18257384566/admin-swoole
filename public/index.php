@@ -57,14 +57,22 @@ try {
     //引入以太坊开发工具包
     //include APP_PATH . '/../vendor/autoload.php';
 
+
     /**
-     * Handle the request
+     * Handle the request 3.4
      */
-    $application = new \Phalcon\Mvc\Application($di);
+//    $application = new \Phalcon\Mvc\Application($di);
 
     //echo str_replace(["\n","\r","\t"], '', $application->handle()->getContent());
 
-    echo $application->handle()->getContent();
+//    echo $application->handle()->getContent();
+
+    /**
+     * Handle the request 4.4
+     */
+    $request = new Phalcon\Http\Request();
+    $response = $application->handle($request->getURI());
+    $response->send();
 
 } catch (\Exception $e) {
     if($__APP_IN_DEBUG){
