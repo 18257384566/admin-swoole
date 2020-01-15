@@ -122,7 +122,7 @@ class Ws{
     //监听ws连接事件
     public function onOpen($ws, $request){
 
-        $admin = $request->session;
+        $admin = $request->redis;
         var_dump($admin);
         //将fd放入redis有序集合
         var_dump('fd='.$request->fd);
