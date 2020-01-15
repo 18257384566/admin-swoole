@@ -120,12 +120,12 @@ class Ws{
     }
 
     //监听ws连接事件
-    public function onOpen($ws, $requst){
+    public function onOpen($ws, $request){
 
-        $admin = $this->session->get('backend');
+        $admin = $request->server;
         var_dump($admin);
         //将fd放入redis有序集合
-        var_dump('fd='.$requst->fd);
+        var_dump('fd='.$request->fd);
     }
 
     //监听ws消息事件
