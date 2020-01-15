@@ -17,6 +17,7 @@ class SwooleController extends ControllerBase
         //权限
         $admin = $this->dispatcher->getParam('admin');
 
+        $this->view->admin = $admin;
         $this->view->pick('admin/chat');
     }
 

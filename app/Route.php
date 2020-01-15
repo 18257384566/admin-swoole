@@ -31,6 +31,7 @@ class Route extends RouterGroup
 
         //swoole
         $this->add('/admin/chat','swoole::chat');                                //交谈
+        $this->add('/admin/chat/send','swoole::chatSend');                       //发送消息
 
 
         //管理员列表

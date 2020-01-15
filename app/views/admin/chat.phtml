@@ -134,12 +134,14 @@
                           </div>
                           <div class="col-xs-9 no-padding">
                               <div class="chat-list">
+
                               </div>
-                              <div class="message">
+                              <div class="message" id="send">
+<!--                                  <input id="send" type="text" placeholder="别憋着，说点啥~~ 回车既发射"></input>-->
                                   <div class="text">
                                       <textarea></textarea>
                                   </div>
-                                  <div class="send">
+                                  <div class="send" >
                                       发送
                                   </div>
                               </div>
@@ -155,9 +157,60 @@
 <script type="text/javascript" src="/static/js/jquery-1.11.3.min.js"></script>
 <!--<script type="text/javascript" src="/static/js/inexwalletadmin.js"></script>-->
 <!--<script type="text/javascript" src="/static/js/fenziofficial_admin.js"></script>-->
+<script type="text/javascript" src="/static/js/chat-push.js"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
+<!--<script type="text/javascript" src="/static/js/webim.js"></script>-->
+<script type="text/javascript" src="/static/js/chart-jquery.min.js"></script>
 <script>
+    $(function(){
 
+        $(".message .send").click(function(){
+            var url = '/admin/chat/send';
+            var data = {'content':text, 'game_id':1};
+
+            $.post(url,data,function(result){
+                //todo
+                $(this).val('');
+            },'json');
+
+
+
+            var text = $(".message .text textarea");
+            var msg = text.val();
+            var account = "<?= $admin['account'] ?>";
+
+            if ($.trim(msg) == '') {
+                this.layerErrorMsg('请输入消息内容');
+                return false;
+            }
+
+            // this.data.wsServer.send(msg);
+
+            var html = '<div class="col-xs-10 col-xs-offset-2 msg-item ">'
+                +'<div class="col-xs-1 no-padding pull-right">'
+                +'<div class="avatar">'
+                +'<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1579087727938&di=7154a64b5e4a93fd9b47ec538bbea201&imgtype=0&src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20180803%2F23%2F1533308847-sJINRfclxg.jpeg" width="50" height="50" class="img-circle">'
+                +'</div>'
+                +'</div>'
+
+                +'<div class="col-xs-11">'
+                +'<div class="col-xs-12">'
+                +'<div class="username pull-right">'+account+'</div>'
+                +'<div>'
+                +'<div class="col-xs-12 no-padding">'
+                +'<div class="msg pull-right">'+msg+'</div>'
+                +'</div>'
+                +'</div>';
+
+            $('.chat-list').append(html);
+
+//            this.appendUser(this.data.info.name, this.data.info.avatr, this.data.info.fd);
+//            this.scrollBottom();
+
+            text.val('');
+        });
+
+    });
 </script>
 </body>
 </html>
