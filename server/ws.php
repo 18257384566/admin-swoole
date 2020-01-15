@@ -5,8 +5,11 @@
  * Date: 2019/8/23
  * Time: 1:49 PM
  */
+namespace Server;
 
-class Ws{
+use App\Bussiness\BaseBussiness;
+
+class Ws extends BaseBussiness {
 
     const HOST = '0.0.0.0';
     const PORT = 8811;
@@ -121,9 +124,7 @@ class Ws{
 
     //监听ws连接事件
     public function onOpen($ws, $request){
-        session_start();
-        $admin = $_SESSION['backend'];
-        var_dump($admin);
+        var_dump($this->redis->get('backend'));
         //将fd放入redis有序集合
         var_dump('fd='.$request->fd);
     }
