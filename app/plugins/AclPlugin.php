@@ -265,7 +265,8 @@ class AclPlugin extends Injectable
 
         $adminSession = $this->session->get('backend');
         $this->dispatcher->setParam('admin',$adminSession);
-        $GLOBALS['backend'] = $adminSession;
+        session_start();
+        $_SESSION['backend'] = $adminSession;
         return $adminSession;
 
     }
