@@ -41,7 +41,7 @@ class Ws{
         swoole_set_process_name('chat_swoole');
     }
 
-    //
+
 //    public function onWorkerStart($server,$worker_id){
 //        //定义应用目录
 //        define('APP_PATH',__DIR__.'/../application/');
@@ -122,7 +122,7 @@ class Ws{
     //监听ws连接事件
     public function onOpen($ws, $request){
 
-        $admin = $request->redis;
+        $admin = $_SESSION['backend'];
         var_dump($admin);
         //将fd放入redis有序集合
         var_dump('fd='.$request->fd);
