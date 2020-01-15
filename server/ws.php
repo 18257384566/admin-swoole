@@ -5,11 +5,9 @@
  * Date: 2019/8/23
  * Time: 1:49 PM
  */
-namespace Server;
 
-use App\Bussiness\BaseBussiness;
 
-class Ws extends BaseBussiness {
+class Ws {
 
     const HOST = '0.0.0.0';
     const PORT = 8811;
@@ -31,7 +29,7 @@ class Ws extends BaseBussiness {
         $this->ws->on("start", [$this, 'onStart']);
         $this->ws->on("open", [$this, 'onOpen']);
         $this->ws->on("message", [$this, 'onMessage']);
-//        $this->ws->on("workerstart", [$this, 'onWorkerStart']);
+        $this->ws->on("workerstart", [$this, 'onWorkerStart']);
         $this->ws->on("request", [$this, 'onRequest']);
         $this->ws->on("task", [$this, 'onTask']);
         $this->ws->on("finish", [$this, 'onFinish']);
@@ -45,13 +43,9 @@ class Ws extends BaseBussiness {
     }
 
 
-//    public function onWorkerStart($server,$worker_id){
-//        //定义应用目录
-//        define('APP_PATH',__DIR__.'/../application/');
-//        //加载框架里面的文件
-////        require __DIR__.'/../thinkphp/start.php';
-//        require __DIR__ . '/../thinkphp/base.php';
-//    }
+    public function onWorkerStart($server,$worker_id){
+        include './swooleBootstrap.php';
+    }
 
     public function onRequest(\Swoole\Http\Request $request, \Swoole\Http\Response $response){
 //        var_dump('test');
