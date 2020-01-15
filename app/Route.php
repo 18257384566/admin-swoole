@@ -29,6 +29,10 @@ class Route extends RouterGroup
         $this->add('/admin/index','index::index');                              //首页
 
 
+        //swoole
+        $this->add('/admin/chat','swoole::chat');                                //交谈
+
+
         //管理员列表
         $this->add('/admin/list','admin::getList');                             //管理员列表
         $this->add('/admin/updateStatus','admin::updateStatus');                //管理员禁用/启用

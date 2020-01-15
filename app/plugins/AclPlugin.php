@@ -149,7 +149,8 @@ class AclPlugin extends Injectable
                 'analy::registerView',
                 'analy::registerQuery',
                 'analy::loginView',
-                'analy::loginQuery'
+                'analy::loginQuery',
+                'swoole::chat'
             ),
 
             'developers' => array(  //开发商
