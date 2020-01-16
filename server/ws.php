@@ -29,7 +29,7 @@ class Ws {
         $this->ws->on("start", [$this, 'onStart']);
         $this->ws->on("open", [$this, 'onOpen']);
         $this->ws->on("message", [$this, 'onMessage']);
-        $this->ws->on("workerstart", [$this, 'onWorkerStart']);
+//        $this->ws->on("workerstart", [$this, 'onWorkerStart']);
         $this->ws->on("request", [$this, 'onRequest']);
         $this->ws->on("task", [$this, 'onTask']);
         $this->ws->on("finish", [$this, 'onFinish']);
@@ -43,9 +43,9 @@ class Ws {
     }
 
 
-    public function onWorkerStart($server,$worker_id){
-        include './swooleBootstrap.php';
-    }
+//    public function onWorkerStart($server,$worker_id){
+//        include './swooleBootstrap.php';
+//    }
 
     public function onRequest(\Swoole\Http\Request $request, \Swoole\Http\Response $response){
 //        var_dump('test');
@@ -101,7 +101,8 @@ class Ws {
         }
 
         $_POST['http_server'] = $this->ws;
-//        var_dump($_POST['http_server']);
+        echo 'nnnn';
+        var_dump($_POST['http_server']);
 
         ob_start();
         try{
