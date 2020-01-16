@@ -27,10 +27,11 @@ class SwooleController extends ControllerBase
         $data['content'] = 'hi';
         echo '<pre>';
         var_dump($_POST['http_server']);
-        foreach ($_POST['http_server']->ports->connections as $fd){
-//            var_dump($fd);
-            $_POST['http_server']->push($fd, json_encode($data));
-        }
+        $_POST['http_server']->push(2,'push-xsy');
+//        foreach ($_POST['http_server']->ports->connections as $fd){
+////            var_dump($fd);
+//            $_POST['http_server']->push($fd, json_encode($data));
+//        }
 
         $this->result['status'] = 1;
         $this->result['msg'] = 'ok';
