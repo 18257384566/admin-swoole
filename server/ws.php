@@ -104,6 +104,10 @@ class Ws {
         echo 'nnnn';
         var_dump($_POST['http_server']);
 
+        var_dump($this->ws->connections);
+        var_dump($this->ws->ports[0]->connections);
+        var_dump($this->ws->ports[1]->connections);
+
 //        ob_start();
 //        try{
 //            \think\App::run()->send();
