@@ -25,7 +25,9 @@ class SwooleController extends ControllerBase
         //推送消息
         $data['name'] = '小明';
         $data['content'] = 'hi';
-        foreach ($_POST['http_server']->ports[1]->connections as $fd){
+        echo '<pre>';
+        var_dump($_POST['http_server']);
+        foreach ($_POST['http_server']->ports->connections as $fd){
 //            var_dump($fd);
             $_POST['http_server']->push($fd, json_encode($data));
         }
