@@ -119,7 +119,7 @@ class Ws {
 
     //监听ws连接事件
     public function onOpen($ws, $request){
-        var_dump($this->redis->get('backend'));
+//        var_dump($this->redis->get('backend'));
         //将fd放入redis有序集合
         var_dump('fd='.$request->fd);
     }
