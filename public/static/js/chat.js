@@ -55,7 +55,7 @@ function push(data){
     // html += '</div>';
     // $('#comments').append(html);
 
-    data = JSON.parse(data);
+    // data = JSON.parse(data);
     html = "<div class='col-xs-10 col-xs-offset-2 msg-item '><div class='col-xs-1 no-padding pull-right'><div class='avatar'><img src='undefined' width='50' height='50' class='img-circle'></div></div><div class=\"col-xs-11\"><div class=\"col-xs-12\"><div class='username pull-right'>undefined</div><div><div class='col-xs-12 no-padding'><div class='msg pull-right'>33</div></div></div></div></div></div>";
 }
 
