@@ -104,7 +104,7 @@ class Ws{
         }
 
         $_POST['http_server'] = $this->ws;
-//        var_dump($_POST['http_server']);
+        var_dump($_POST['http_server']);
 
         ob_start();
         try{
