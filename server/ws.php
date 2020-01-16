@@ -53,18 +53,18 @@ class Ws {
         $response->header('Access-Control-Allow-Origin', '*');
         $response->header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, PATCH, OPTIONS');
         $response->header('Access-Control-Allow-Headers', 'Authorization, User-Agent, Keep-Alive, Content-Type, X-Requested-With');
-        if ($request->server['request_method'] == 'OPTIONS') {
-            $response->status(http_response_code());
-            $response->end();
-            return;
-        }
+//        if ($request->server['request_method'] == 'OPTIONS') {
+//            $response->status(http_response_code());
+//            $response->end();
+//            return;
+//        }
 
         //过滤多余的请求
-        if ($request->server['request_uri'] == '/favicon.ico'){
-            $response->status(200);
-            $response->end();
-            return;
-        }
+//        if ($request->server['request_uri'] == '/favicon.ico'){
+//            $response->status(200);
+//            $response->end();
+//            return;
+//        }
 
 
         $_SERVER = [];
@@ -104,16 +104,16 @@ class Ws {
         echo 'nnnn';
         var_dump($_POST['http_server']);
 
-        ob_start();
-        try{
-            \think\App::run()->send();
-        }catch (\Exception $e){
-            // todo
-        }
-        $res = ob_get_contents();
-        ob_end_clean();
-
-        $response->end($res);
+//        ob_start();
+//        try{
+//            \think\App::run()->send();
+//        }catch (\Exception $e){
+//            // todo
+//        }
+//        $res = ob_get_contents();
+//        ob_end_clean();
+//
+//        $response->end($res);
 
     }
 
