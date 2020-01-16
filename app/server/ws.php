@@ -28,7 +28,7 @@ class Ws{
         $this->ws->on("start", [$this, 'onStart']);
         $this->ws->on("open", [$this, 'onOpen']);
         $this->ws->on("message", [$this, 'onMessage']);
-        $this->ws->on("workerstart", [$this, 'onWorkerStart']);
+//        $this->ws->on("workerstart", [$this, 'onWorkerStart']);
         $this->ws->on("request", [$this, 'onRequest']);
         $this->ws->on("task", [$this, 'onTask']);
         $this->ws->on("finish", [$this, 'onFinish']);
@@ -51,7 +51,7 @@ class Ws{
     }
 
     public function onRequest(\Swoole\Http\Request $request, \Swoole\Http\Response $response){
-//        var_dump('test');
+        var_dump('test');
         // 跨域OPTIONS返回
         $response->header('Access-Control-Allow-Origin', '*');
         $response->header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, PATCH, OPTIONS');
