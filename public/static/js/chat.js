@@ -7,7 +7,7 @@ websocket.onopen = function(evt){
     websocket.send('send:hello');
     console.log("conected-swoole-success");
 
-    alert('连接成功')
+    // alert('连接成功')
 
 }
 
@@ -16,29 +16,29 @@ websocket.onmessage = function(evt){
     push(evt.data);
     console.log("web-server-return-data:" + evt.data);
 
-    var data = jQuery.parseJSON(evt.data);
-    switch (data.type) {
-        case 'open':
-            webim.appendUser(data.user.name, data.user.avatar, data.user.fd);
-            webim.notice(data.message);
-            break;
-        case 'close':
-            webim.removeUser(data.user.fd);
-            webim.notice(data.message);
-            break;
-        case 'openSuccess':
-            webim.data.info = data.user;
-            webim.showAllUser(data.all);
-            break;
-        case 'message':
-            webim.newMessage(data);
-            break;
-    }
+    // var data = jQuery.parseJSON(evt.data);
+    // switch (data.type) {
+    //     case 'open':
+    //         webim.appendUser(data.user.name, data.user.avatar, data.user.fd);
+    //         webim.notice(data.message);
+    //         break;
+    //     case 'close':
+    //         webim.removeUser(data.user.fd);
+    //         webim.notice(data.message);
+    //         break;
+    //     case 'openSuccess':
+    //         webim.data.info = data.user;
+    //         webim.showAllUser(data.all);
+    //         break;
+    //     case 'message':
+    //         webim.newMessage(data);
+    //         break;
+    // }
 }
 
 websocket.onclose = function(evt){
     console.log("close");
-    alert('不妙，链接断开了1');
+    // alert('不妙，链接断开了1');
 }
 
 websocket.onerror = function(evt, e){
