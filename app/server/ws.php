@@ -18,12 +18,12 @@ class Ws{
 
         $this->ws = new swoole_websocket_server(self::HOST,self::PORT);
 
-//        $this->ws->set([
-//            'enable_static_handler' => true,
-//            'document_root' => '/www/swoole/thinkphp/public/static',
-//            'worker_num' => 4,
-//            'task_worker_num' => 4,
-//        ]);
+        $this->ws->set([
+            'enable_static_handler' => true,
+            'document_root' => '/www/admin-swoole/public/',
+            'worker_num' => 4,
+            'task_worker_num' => 4,
+        ]);
 
         $this->ws->on("start", [$this, 'onStart']);
         $this->ws->on("open", [$this, 'onOpen']);
