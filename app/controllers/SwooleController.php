@@ -21,4 +21,18 @@ class SwooleController extends ControllerBase
         $this->view->pick('admin/chat');
     }
 
+    public function chatSendAction(){
+        //推送消息
+        $data['name'] = '小明';
+        $data['content'] = 'hi';
+        foreach ($_POST['http_server']->ports[1]->connections as $fd){
+//            var_dump($fd);
+            $_POST['http_server']->push($fd, json_encode($data));
+        }
+
+        $this->result['status'] = 1;
+        $this->result['msg'] = 'ok';
+        return json_encode($this->result);
+    }
+
 }
