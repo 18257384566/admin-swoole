@@ -109,7 +109,7 @@ class Ws {
 
         ob_start();
         try{
-            $di = new FactoryDefault();FactoryDeF
+            $di = new FactoryDefault();
             $application = new \Phalcon\Mvc\Application($di);
 
             echo $application->handle()->getContent();
