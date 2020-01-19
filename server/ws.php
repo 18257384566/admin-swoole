@@ -103,20 +103,23 @@ class Ws {
         $_POST['http_server'] = $this->ws;
         echo 'nnnn';
         var_dump($_POST['http_server']);
-
-        var_dump($this->ws->connections);
-        var_dump($this->ws->ports[0]->connections);
-
-//        ob_start();
-//        try{
-//            \think\App::run()->send();
-//        }catch (\Exception $e){
-//            // todo
-//        }
-//        $res = ob_get_contents();
-//        ob_end_clean();
 //
-//        $response->end($res);
+//        var_dump($this->ws->connections);
+//        var_dump($this->ws->ports[0]->connections);
+
+        ob_start();
+        try{
+            $di = new FactoryDefault();FactoryDeF
+            $application = new \Phalcon\Mvc\Application($di);
+
+            echo $application->handle()->getContent();
+        }catch (\Exception $e){
+            // todo
+        }
+        $res = ob_get_contents();
+        ob_end_clean();
+
+        $response->end($res);
 
     }
 
